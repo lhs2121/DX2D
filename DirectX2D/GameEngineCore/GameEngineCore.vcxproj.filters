@@ -20,6 +20,18 @@
     <ClCompile Include="GameEngineTransform.cpp">
       <Filter>Object\Transform</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineDevice.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTexture.cpp">
+      <Filter>Resources\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineResources.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRenderTarget.cpp">
+      <Filter>Resources\Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineCore.h" />
@@ -41,6 +53,18 @@
     <ClInclude Include="GameEngineTransform.h">
       <Filter>Object\Transform</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineDevice.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineTexture.h">
+      <Filter>Resources\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineResources.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineRenderTarget.h">
+      <Filter>Resources\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -51,6 +75,15 @@
     </Filter>
     <Filter Include="Object\Transform">
       <UniqueIdentifier>{162b19dd-14a1-41f5-ba42-76f7cea40365}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Device">
+      <UniqueIdentifier>{50c3965a-6f12-435d-942c-415f26bb2041}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{c43f535e-83cf-41a6-85d0-1a9e3754f783}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Texture">
+      <UniqueIdentifier>{4b71f953-f09e-4635-b2b5-0e9fa65c6b7e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
