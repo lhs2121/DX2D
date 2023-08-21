@@ -26,7 +26,11 @@ public:
 class float4
 {
 public:
+	static const float4 ONE;
+	static const float4 ONENULL;
+
 	static const float4 ZERO;
+	static const float4 ZERONULL;
 	static const float4 LEFT;
 	static const float4 RIGHT;
 	static const float4 UP;
@@ -34,11 +38,16 @@ public:
 	static const float4 FORWARD;
 	static const float4 BACKWARD;
 
-	union
+	static const float4 RED;
+	static const float4 GREEN;
+	static const float4 BLUE;
+
+	union 
 	{
 		float Arr1D[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
 
-		struct
+		struct 
+
 		{
 			float X;
 			float Y;
@@ -151,7 +160,7 @@ public:
 
 	float4 operator/(const float _Value) const
 	{
-		float4 OtherVecter = { _Value , _Value , _Value , 1.0f };
+		float4 OtherVecter = { _Value , _Value , _Value , 1.0f};
 		float4 ReturnValue = DirectX::XMVectorDivide(DirectXVector, OtherVecter.DirectXVector);
 		ReturnValue.W = W;
 
@@ -512,9 +521,14 @@ public:
 		return *this;
 	}
 
-	float4x4()
+	float4x4() 
 	{
 		Identity();
+	}
+
+	float4x4(const float4x4& _Matrix)
+		: DirectXMatrix(_Matrix.DirectXMatrix)
+	{
 	}
 
 	float4x4(const DirectX::FXMMATRIX& _Matrix)
@@ -522,7 +536,7 @@ public:
 	{
 	}
 
-	void Identity()
+	void Identity() 
 	{
 		DirectXMatrix = DirectX::XMMatrixIdentity();
 		return;
@@ -538,9 +552,26 @@ public:
 		DirectXMatrix = DirectX::XMMatrixScalingFromVector(_Value.DirectXVector);
 	}
 
+	void RotationDeg(const float4& _Value)
+	{
+		RotationRad(_Value * GameEngineMath::D2R);
+	}
+	
+	void RotationRad(const float4& _Value)
+	{
+		float4x4 X;
+		float4x4 Y;
+		float4x4 Z;
+
+		X.RotationXRad(_Value.X);
+		Y.RotationYRad(_Value.Y);
+		Z.RotationZRad(_Value.Z);
+
+		DirectXMatrix = (X * Y * Z).DirectXMatrix;
+	}
 
 
-	void RotationXDegs(const float _Value)
+	void RotationXDeg(const float _Value)
 	{
 		RotationXRad(_Value * GameEngineMath::D2R);
 	}
@@ -560,7 +591,7 @@ public:
 		//Arr2D[2][2] = CosValue;
 	}
 
-	void RotationYDegs(const float _Value)
+	void RotationYDeg(const float _Value)
 	{
 		RotationYRad(_Value * GameEngineMath::D2R);
 	}
@@ -580,7 +611,7 @@ public:
 		//Arr2D[2][2] = CosValue;
 	}
 
-	void RotationZDegs(const float _Value)
+	void RotationZDeg(const float _Value)
 	{
 		RotationZRad(_Value * GameEngineMath::D2R);
 	}
@@ -604,11 +635,11 @@ public:
 		//					    [20][21][22][23]
 		//					    [30][31][32][33]
 		// [x][y][z][w]        = rx  ry  rz  rw
-
+		
 		// [x]*[00] + [y] *[10] + [z] * [20] + [w] * [30]
 
 		//float4 Rot * 행렬;
-
+		
 		//Rot.X = _Value.X * cosf(_Rad) - _Value.Y * sinf(_Rad);
 		//Rot.Y = _Value.X * sinf(_Rad) + _Value.Y * cosf(_Rad);
 		//Rot.Z = _Value.Z;
@@ -618,7 +649,7 @@ public:
 
 	}
 
-	void Pos(const float4& _Value)
+	void Position(const float4& _Value)
 	{
 
 		DirectXMatrix = DirectX::XMMatrixTranslationFromVector(_Value.DirectXVector);
@@ -712,14 +743,14 @@ public:
 
 	//      60도를 본다.                    200              100
 	// 수직
-	void PerspectiveFovLH(float _FovAngle, float _Width, float _Height, float _Near, float _Far)
+	void PerspectiveFovLHDeg(float _FovAngle, float _Width, float _Height, float _Near, float _Far)
 	{
-		PerspectiveFovLH(_FovAngle, _Width / _Height, _Near, _Far);
+		PerspectiveFovLHRad(_FovAngle * GameEngineMath::D2R, _Width / _Height, _Near, _Far);
 	}
 
 	// 수직 시야각 
 	// 1000.0f 0.1f
-	void PerspectiveFovLH(float _FovAngle, float _AspectRatio, float _Near, float _Far)
+	void PerspectiveFovLHRad(float _FovAngle, float _AspectRatio, float _Near, float _Far)
 	{
 		DirectXMatrix = DirectX::XMMatrixPerspectiveFovLH(_FovAngle, _AspectRatio, _Near, _Far);
 
