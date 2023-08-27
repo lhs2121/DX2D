@@ -171,6 +171,7 @@
     <ClCompile Include="GameEngineCoreObject.cpp" />
     <ClCompile Include="GameEngineDevice.cpp" />
     <ClCompile Include="GameEngineDevice_Resources.cpp" />
+    <ClCompile Include="GameEngineDirectBuffer.cpp" />
     <ClCompile Include="GameEngineIndexBuffer.cpp" />
     <ClCompile Include="GameEngineInputLayOut.cpp" />
     <ClCompile Include="GameEngineLevel.cpp" />
