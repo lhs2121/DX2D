@@ -192,6 +192,16 @@
     <ClInclude Include="GameEngineTexture.h" />
     <ClInclude Include="GameEngineTransform.h" />
     <ClInclude Include="PreCompile.h" />
+    <ClInclude Include="ThirdParty\DirectXTex\inc\DirectXTex.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ThirdParty\DirectXTex\inc\DirectXTex.inl" />
+    <None Include="ThirdParty\DirectXTex\lib\Debug\DirectXTex.pdb" />
+    <None Include="ThirdParty\DirectXTex\lib\Release\DirectXTex.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="ThirdParty\DirectXTex\lib\Debug\DirectXTex.lib" />
+    <Library Include="ThirdParty\DirectXTex\lib\Release\DirectXTex.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
