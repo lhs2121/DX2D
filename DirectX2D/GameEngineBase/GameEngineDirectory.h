@@ -7,7 +7,7 @@ class GameEngineDirectory : public GameEnginePath
 public:
 	// constrcuter destructer
 	GameEngineDirectory();
-	GameEngineDirectory(const std::string_view& _path);
+	GameEngineDirectory(std::string_view _path);
 	~GameEngineDirectory();
 
 	// delete Function
@@ -16,7 +16,7 @@ public:
 	GameEngineDirectory& operator=(const GameEngineDirectory& _Other) = delete;
 	GameEngineDirectory& operator=(GameEngineDirectory&& _Other) noexcept = delete;
 
-	std::vector<class GameEngineFile> GetAllFile(std::vector<std::string> _Ext);
+	std::vector<class GameEngineFile> GetAllFile(std::vector<std::string> _Ext = std::vector<std::string>());
 
 protected:
 
