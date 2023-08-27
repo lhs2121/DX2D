@@ -168,7 +168,9 @@
     <ClCompile Include="GameEngineComponent.cpp" />
     <ClCompile Include="GameEngineConstantBuffer.cpp" />
     <ClCompile Include="GameEngineCore.cpp" />
+    <ClCompile Include="GameEngineCoreObject.cpp" />
     <ClCompile Include="GameEngineDevice.cpp" />
+    <ClCompile Include="GameEngineDevice_Resources.cpp" />
     <ClCompile Include="GameEngineIndexBuffer.cpp" />
     <ClCompile Include="GameEngineInputLayOut.cpp" />
     <ClCompile Include="GameEngineLevel.cpp" />
@@ -200,6 +202,7 @@
     <ClInclude Include="GameEngineComponent.h" />
     <ClInclude Include="GameEngineConstantBuffer.h" />
     <ClInclude Include="GameEngineCore.h" />
+    <ClInclude Include="GameEngineCoreObject.h" />
     <ClInclude Include="GameEngineDevice.h" />
     <ClInclude Include="GameEngineDirectBuffer.h" />
     <ClInclude Include="GameEngineIndexBuffer.h" />
