@@ -32,6 +32,15 @@
     <ClCompile Include="GameEngineRenderTarget.cpp">
       <Filter>Resources\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineConstantBuffer.cpp">
+      <Filter>Resources\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineIndexBuffer.cpp">
+      <Filter>Resources\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineVertexBuffer.cpp">
+      <Filter>Resources\Buffer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineCore.h" />
@@ -68,6 +77,18 @@
     <ClInclude Include="ThirdParty\DirectXTex\inc\DirectXTex.h">
       <Filter>ThirdParty\inc</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineConstantBuffer.h">
+      <Filter>Resources\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineDirectBuffer.h">
+      <Filter>Resources\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineIndexBuffer.h">
+      <Filter>Resources\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineVertexBuffer.h">
+      <Filter>Resources\Buffer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -100,16 +121,19 @@
     <Filter Include="ThirdParty\Release">
       <UniqueIdentifier>{03da1c3e-cd8f-49f8-b52a-f0c62aa70d84}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Buffer">
+      <UniqueIdentifier>{0af6eff6-a902-4f54-a9a1-03a3013561a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\RenderingSetting">
+      <UniqueIdentifier>{1646e8a2-ab50-434e-8dd6-9f16c820c88b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shader">
+      <UniqueIdentifier>{4afc3150-c42b-4973-912e-8bf05608f0fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ThirdParty\DirectXTex\inc\DirectXTex.inl">
       <Filter>ThirdParty\inc</Filter>
-    </None>
-    <None Include="ThirdParty\DirectXTex\lib\Debug\DirectXTex.pdb">
-      <Filter>ThirdParty\Debug</Filter>
-    </None>
-    <None Include="ThirdParty\DirectXTex\lib\Release\DirectXTex.pdb">
-      <Filter>ThirdParty\Release</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +142,12 @@
     </Library>
     <Library Include="ThirdParty\DirectXTex\lib\Release\DirectXTex.lib">
       <Filter>ThirdParty\Release</Filter>
+    </Library>
+    <Library Include="ThirdParty\DirectXTex\lib\Release\DirectXTex.pdb">
+      <Filter>ThirdParty\Release</Filter>
+    </Library>
+    <Library Include="ThirdParty\DirectXTex\lib\Debug\DirectXTex.pdb">
+      <Filter>ThirdParty\Debug</Filter>
     </Library>
   </ItemGroup>
 </Project>
