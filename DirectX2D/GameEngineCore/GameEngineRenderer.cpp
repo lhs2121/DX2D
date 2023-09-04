@@ -48,7 +48,7 @@ void GameEngineRenderer::SetViewCameraSelect(int _Order)
 		return;
 	}
 
-	Camera->Renderers[_Order].push_back(GetDynamic_Cast_This<GameEngineRenderer>());
+	Camera->Renderers[GetOrder()].push_back(GetDynamic_Cast_This<GameEngineRenderer>());
 	ViewInfo[Camera.get()] = _Order;
 }
 
@@ -62,7 +62,7 @@ void GameEngineRenderer::ResSetting()
 {
 
 	{
-		float4x4 WorldViewProjection = Transform.GetWorldViewPorjectionMatrix();
+		float4x4 WorldViewProjection = Transform.GetWorldViewProjectionMatrix();
 
 		// 인풋어셈블러1 버텍스 버퍼 세팅
 		std::shared_ptr<GameEngineVertexBuffer> VertexBuffer = GameEngineVertexBuffer::Find("Rect");
@@ -72,7 +72,7 @@ void GameEngineRenderer::ResSetting()
 		}
 
 
-		std::shared_ptr<GameEngineVertexShader> VertexShader = GameEngineVertexShader::Find("ColorShader_VS");
+		std::shared_ptr<GameEngineVertexShader> VertexShader = GameEngineVertexShader::Find("TextureShader_VS");
 
 		if (nullptr != VertexShader && nullptr != VertexBuffer && nullptr == LayOut)
 		{
@@ -80,13 +80,13 @@ void GameEngineRenderer::ResSetting()
 			LayOut->ResCreate(VertexBuffer, VertexShader);
 		}
 
-		std::shared_ptr<GameEngineConstantBuffer> Buffer = GameEngineConstantBuffer::CreateAndFind(sizeof(TransformData), "TransformData");
+		std::shared_ptr<GameEngineConstantBuffer> Buffer = GameEngineConstantBuffer::CreateAndFind(sizeof(TransformData), "TransformData", ShaderType::Vertex);
 
 		if (nullptr != Buffer)
 		{
 			const TransformData& Data = Transform.GetConstTransformDataRef();
 			Buffer->ChangeData(Data);
-			Buffer->Setting();
+			Buffer->Setting(0);
 		}
 
 

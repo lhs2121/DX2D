@@ -28,7 +28,8 @@ public:
 	virtual void Start() {}
 	virtual void Update(float _Delta) {}
 	virtual void Release() {}
-
+	virtual void LevelStart(class GameEngineLevel* _NextLevel) {}
+	virtual void LevelEnd(class GameEngineLevel* _NextLevel) {}
 
 	virtual void On()
 	{
@@ -47,15 +48,15 @@ public:
 
 	virtual bool IsUpdate()
 	{
-		return Parent == nullptr ? true == IsUpdateValue && false == IsDeathValue : Parent->IsUpdate() && true == IsUpdateValue && false == IsDeathValue;
+		return Parent == nullptr ? true == IsUpdateValue && false == IsDeathValue : Parent->IsUpdate() && true == IsUpdateValue && false == IsDeath();
 	}
 
 	virtual bool IsDeath()
 	{
-		return Parent == nullptr ? IsDeathValue : Parent->IsDeathValue && IsDeathValue;
+		return Parent == nullptr ? IsDeathValue : Parent->IsDeath() || IsDeathValue;
 	}
 
-	int GetUpdateOrder()
+	int GetOrder()
 	{
 		return UpdateOrder;
 	}
@@ -63,10 +64,10 @@ public:
 	template<typename EnumType>
 	void SetOrder(EnumType _Order)
 	{
-		SetUpdateOrder(static_cast<int>(_Order));
+		SetOrder(static_cast<int>(_Order));
 	}
 
-	virtual void SetUpdateOrder(int _Order)
+	virtual void SetOrder(int _Order)
 	{
 		UpdateOrder = _Order;
 	}
@@ -91,6 +92,9 @@ public:
 		return Name;
 	}
 
+	void AllLevelStart(class GameEngineLevel* _PrevLevel);
+	void AllLevelEnd(class GameEngineLevel* _NextLevel);
+	virtual void AllReleaseCheck();
 	virtual void AllUpdate(float _Delta);
 
 	void SetParent(GameEngineObject* _Parent, int _Order)
@@ -132,6 +136,30 @@ public:
 		}
 
 		return CameraPtr;
+	}
+
+
+	template<typename ObjectType>
+	std::list<std::shared_ptr<ObjectType>> GetObjectGroupConvert(int _GroupIndex)
+	{
+		std::list<std::shared_ptr<ObjectType>> Result;
+		std::list<std::shared_ptr<class GameEngineObject>>& Group = Childs[_GroupIndex];
+
+		for (std::shared_ptr<class GameEngineObject> Obejct : Group)
+		{
+			// 컴파일타임어써션을 통해서 애초에 이게 가능한 일인지 알수 있는데
+			// 빠르게 만들어야 하니까.
+			std::shared_ptr<ObjectType> Ptr = Obejct->GetDynamic_Cast_This<ObjectType>();
+
+			if (nullptr == Ptr)
+			{
+				continue;
+			}
+
+			Result.push_back(Ptr);
+		}
+
+		return Result;
 	}
 
 protected:

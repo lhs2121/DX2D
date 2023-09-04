@@ -20,7 +20,10 @@ protected:
 
 	void Update(float _Delta) override;
 
-private:
+	void LevelStart(GameEngineLevel* _PrevLevel) override;
+	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
+private:
+	std::shared_ptr<class PlayMap> Map;
 };
 

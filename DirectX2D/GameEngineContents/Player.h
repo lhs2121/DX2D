@@ -15,11 +15,14 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
+	void TestEvent(GameEngineRenderer* _Renderer);
+
 protected:
-	void Start();
-	void Update(float _Delta);
+	void Start() override;
+	void Update(float _Delta) override;
 
 private:
-	std::shared_ptr<class GameEngineSpriteRenderer> Renderer0;
+	std::shared_ptr<class GameEngineSpriteRenderer> MainSpriteRenderer;
+	float4 GrivityForce = {0.0f, 0.0f, 0.0f, 1.0f};
 };
 
