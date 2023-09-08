@@ -83,6 +83,12 @@
     <ClCompile Include="GameEngineDirectBuffer.cpp">
       <Filter>Resources\Buffer</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineCollisionGroup.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineCollision.cpp">
+      <Filter>Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineCore.h" />
@@ -167,6 +173,12 @@
     <ClInclude Include="GameEngineCoreObject.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineCollisionGroup.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineCollision.h">
+      <Filter>Collision</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -213,6 +225,9 @@
     </Filter>
     <Filter Include="Rendering">
       <UniqueIdentifier>{b2a0091b-5b0e-43c6-ad3f-ade0b92a3c38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Collision">
+      <UniqueIdentifier>{338e68df-eb6e-4c8c-a0d2-a9a09bc5cb6a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

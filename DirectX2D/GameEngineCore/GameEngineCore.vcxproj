@@ -165,6 +165,8 @@
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp" />
     <ClCompile Include="GameEngineCamera.cpp" />
+    <ClCompile Include="GameEngineCollision.cpp" />
+    <ClCompile Include="GameEngineCollisionGroup.cpp" />
     <ClCompile Include="GameEngineComponent.cpp" />
     <ClCompile Include="GameEngineConstantBuffer.cpp" />
     <ClCompile Include="GameEngineCore.cpp" />
@@ -200,6 +202,8 @@
   <ItemGroup>
     <ClInclude Include="GameEngineActor.h" />
     <ClInclude Include="GameEngineCamera.h" />
+    <ClInclude Include="GameEngineCollision.h" />
+    <ClInclude Include="GameEngineCollisionGroup.h" />
     <ClInclude Include="GameEngineComponent.h" />
     <ClInclude Include="GameEngineConstantBuffer.h" />
     <ClInclude Include="GameEngineCore.h" />
