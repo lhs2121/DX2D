@@ -31,6 +31,7 @@ void PlayLevel::Start()
 
 	{
 		std::shared_ptr<Player> Object = CreateActor<Player>(ContentsObjectType::Player);
+
 	}
 }
 
