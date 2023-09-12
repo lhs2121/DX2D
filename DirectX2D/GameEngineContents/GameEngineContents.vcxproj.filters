@@ -37,6 +37,9 @@
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="PreCompile.cpp" />
+    <ClCompile Include="BackGround.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
