@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "PlayLevel.h"
 #include "Player.h"
-#include "PlayMap.h"
 #include "Monster.h"
 #include "BackGround.h"
 
@@ -46,7 +45,7 @@ void PlayLevel::Start()
 
 	{
 		std::shared_ptr<Player> Object = CreateActor<Player>(ContentsObjectType::Player);
-		std::shared_ptr<BackGround> BackGroundObject = CreateActor<BackGround>(ContentsObjectType::BackGround);
+		CurMap = CreateActor<BackGround>(ContentsObjectType::BackGround);
 
 	}
 }

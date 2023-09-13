@@ -44,7 +44,7 @@ void Player::Start()
 
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
-	Transform.SetLocalPosition({ 0, 0, 0.0f });
+	Transform.SetLocalPosition({ 500, -800, 0.0f });
 
 }
 
@@ -53,10 +53,10 @@ void Player::Start()
 void Player::StateCheck()
 {
 	if
-		(
-			(GameEngineInput::IsFree(VK_UP) && GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsFree(VK_DOWN) && GameEngineInput::IsFree(VK_RIGHT)) ||
-			(GameEngineInput::IsPress(VK_LEFT) && GameEngineInput::IsPress(VK_RIGHT))
-			)
+	(
+		(GameEngineInput::IsFree(VK_UP) && GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsFree(VK_DOWN) && GameEngineInput::IsFree(VK_RIGHT)) ||
+		(GameEngineInput::IsPress(VK_LEFT) && GameEngineInput::IsPress(VK_RIGHT))
+	)
 	{
 		ChangeState(PlayerState::IDLE);
 	}
@@ -86,6 +86,22 @@ void Player::DirUpdate()
 	}
 }
 
+void Player::ApplyGravity(float _Delta)
+{
+	float4 BottomPos = Transform.GetWorldPosition() + float4(0, -43);
+	GameEngineColor Color = BackGround::MainMap->GetColor(BottomPos, GameEngineColor::RED);
+
+	if (GameEngineColor::RED != Color)
+	{
+		GrivityForce.Y -= _Delta * 100.0f;
+		Transform.AddLocalPosition(GrivityForce * _Delta);
+	}
+	else if(GameEngineColor::RED == Color)
+	{
+		GrivityForce = 0.0f;
+	}
+}
+
 
 void Player::CameraFocus()
 {
@@ -95,7 +111,7 @@ void Player::CameraFocus()
 void Player::Update(float _Delta)
 {
 	StateCheck();
-
+	ApplyGravity(_Delta);
 	switch (CurState)
 	{
 	case PlayerState::IDLE:
@@ -123,47 +139,14 @@ void Player::Update(float _Delta)
 	CameraFocus();
 }
 
-
-void Player::IdleUpdate(float _Delta)
-{
-	MainSpriteRenderer->ChangeAnimation("idle");
-}
-
-void Player::RunUpdate(float _Delta)
-{
-	MainSpriteRenderer->ChangeAnimation("walk");
-
-	DirUpdate();
-
-	if (GameEngineInput::IsPress(VK_UP))
-	{
-		Transform.AddLocalPosition({ 0, speed * _Delta, 0 });
-	}
-	if (GameEngineInput::IsPress(VK_LEFT))
-	{
-		Transform.AddLocalPosition({ -speed * _Delta, 0, 0 });
-	}
-	if (GameEngineInput::IsPress(VK_DOWN))
-	{
-		Transform.AddLocalPosition({ 0, -speed * _Delta, 0 });
-	}
-	if (GameEngineInput::IsPress(VK_RIGHT))
-	{
-		Transform.AddLocalPosition({ speed * _Delta, 0, 0 });
-	}
-}
-
-void Player::RopeUpdate(float _Delta)
+void Player::LevelStart(GameEngineLevel* _NextLevel)
 {
 }
 
-void Player::DownUpdate(float _Delta)
+void Player::LevelEnd(GameEngineLevel* _NextLevel)
 {
 }
 
-void Player::JumpUpdate(float _Delta)
-{
-}
 
 void Player::FlipRenderer()
 {

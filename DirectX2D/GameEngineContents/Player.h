@@ -35,16 +35,19 @@ public:
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
+	void LevelStart(class GameEngineLevel* _NextLevel) override;
+	void LevelEnd(class GameEngineLevel* _NextLevel) override;
 
 private:
 	std::shared_ptr<class GameEngineSpriteRenderer> MainSpriteRenderer;
-	float4 GrivityForce = {0.0f, 0.0f, 0.0f, 1.0f};
-	float speed = 500;
+	float4 GrivityForce = {0.0f, -10.0f, 0.0f, 1.0f};
+	float speed = 200;
 
 	PlayerState CurState;
 	PlayerDirState CurDirState = PlayerDirState::LEFT;
 
 	void StateCheck();
+
 	void ChangeState(PlayerState _State)
 	{
 		CurState = _State;
@@ -53,9 +56,12 @@ private:
 	{
 		CurDirState = _State;
 	}
+	
 	void FlipRenderer();
 	void CameraFocus();
 	void DirUpdate();
+
+	void ApplyGravity(float _Delta);
 	void IdleUpdate(float _Delta);
 	void RunUpdate(float _Delta);
 	void RopeUpdate(float _Delta);

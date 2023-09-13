@@ -15,6 +15,10 @@ public:
 	PlayLevel& operator=(const PlayLevel& _Other) = delete;
 	PlayLevel& operator=(PlayLevel&& _Other) noexcept = delete;
 
+	std::shared_ptr<class BackGround> GetCurMap()
+	{
+		return CurMap;
+	}
 protected:
 	void Start() override;
 
@@ -24,6 +28,6 @@ protected:
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 private:
-	std::shared_ptr<class PlayMap> Map;
+	std::shared_ptr<class BackGround> CurMap;
 };
 
