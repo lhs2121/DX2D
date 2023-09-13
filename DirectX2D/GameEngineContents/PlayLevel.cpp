@@ -21,8 +21,13 @@ void PlayLevel::Start()
 		Dir.MoveParentToExistsChild("Assets");
 		Dir.MoveChild("Assets");
 		Dir.MoveChild("Character");
-		Dir.MoveChild("walk1");
-		GameEngineSprite::CreateFolder(Dir.GetStringPath());
+
+		std::vector<GameEngineDirectory> DirGroup = Dir.GetAllDirectory();
+
+		for (int i = 0; i < DirGroup.size(); i++)
+		{
+			GameEngineSprite::CreateFolder(DirGroup[i].GetStringPath());
+		}
 	}
 
 	{
@@ -36,7 +41,7 @@ void PlayLevel::Start()
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 
-	GetMainCamera()->Transform.SetLocalPosition({ HalfWindowScale.X, -HalfWindowScale.Y, -500.0f});
+	GetMainCamera()->Transform.SetLocalPosition({ 0, 0, -500.0f});
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
 
 	{
