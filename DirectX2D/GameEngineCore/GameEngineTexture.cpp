@@ -9,6 +9,9 @@
 #endif
 
 const GameEngineColor GameEngineColor::RED = {255, 0, 0, 255 };
+const GameEngineColor GameEngineColor::GREEN = { 0, 255, 0, 255 };
+const GameEngineColor GameEngineColor::BLUE = { 0, 0, 255, 255 };
+
 
 GameEngineTexture::GameEngineTexture() 
 {
@@ -168,7 +171,6 @@ GameEngineColor GameEngineTexture::GetColor(unsigned int _X, unsigned int _Y, Ga
 	case DXGI_FORMAT_R8G8B8A8_UINT:
 	case DXGI_FORMAT_R8G8B8A8_SNORM:
 	case DXGI_FORMAT_R8G8B8A8_SINT:
-	case DXGI_FORMAT_B8G8R8A8_UNORM_SRGB:
 	{
 		GameEngineColor ResultColor;
 		Ptr += ((_Y * GetScale().iX()) + _X) * 4;

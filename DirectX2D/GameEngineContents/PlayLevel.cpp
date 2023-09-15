@@ -21,6 +21,11 @@ void PlayLevel::Start()
 		Dir.MoveChild("Assets");
 		Dir.MoveChild("Character");
 
+		GameEngineDirectory Dir2;
+		Dir2 = Dir;
+		Dir2.MoveChild("etc");
+		GameEngineSprite::CreateFolder(Dir2.GetStringPath());
+
 		std::vector<GameEngineDirectory> DirGroup = Dir.GetAllDirectory();
 
 		for (int i = 0; i < DirGroup.size(); i++)
@@ -52,7 +57,14 @@ void PlayLevel::Start()
 
 void PlayLevel::Update(float _Delta)
 {
-
+	if (GameEngineInput::IsPress('Q'))
+	{
+		GetMainCamera()->Transform.AddLocalPosition({ 0,0,500 * _Delta });
+	}
+	if (GameEngineInput::IsPress('E'))
+	{
+		GetMainCamera()->Transform.AddLocalPosition({ 0,0,-500 * _Delta });
+	}
 }
 
 void PlayLevel::LevelStart(GameEngineLevel* _PrevLevel)

@@ -109,6 +109,12 @@ LRESULT CALLBACK GameEngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wPara
 {
 	switch (message)
 	{
+	case WM_SYSKEYDOWN:
+	case WM_SYSKEYUP:
+		// Alt 키 조합을 무시
+		if (wParam == VK_MENU)
+			return 0; // 처리되지 않음
+		break;
 	case WM_SETFOCUS:
 	{
 		IsFocusValue = true;

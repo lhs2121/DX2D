@@ -155,17 +155,15 @@ bool GameEngineCollisionGroup::CollisionEvent(std::shared_ptr<GameEngineCollisio
 			continue;
 		}
 
-		GameEngineCollision* Other = Collsion.get();
-
 		// 애는 충돌을 나랑 안했네.
-		if (true == _Collision->Others.contains(Other))
+		if (true == _Collision->Others.contains(Collsion))
 		{
 			if (_Event.Exit)
 			{
-				_Event.Exit(Other);
-				Other->Others.erase(_Collision.get());
-				_Collision->Others.erase(Other);
+				_Event.Exit(_Collision.get(), Collsion.get());
 			}
+
+			_Collision->Others.erase(Collsion);
 		}
 	}
 
@@ -175,21 +173,21 @@ bool GameEngineCollisionGroup::CollisionEvent(std::shared_ptr<GameEngineCollisio
 		
 		for (size_t i = 0; i < ResultCollision.size(); i++)
 		{
-			GameEngineCollision* Other = ResultCollision[i].get();
+			std::shared_ptr<GameEngineCollision> Other = ResultCollision[i];
 			if (false == _Collision->Others.contains(Other))
 			{
 				if (_Event.Enter)
 				{
-					_Event.Enter(Other);
-					Other->Others.insert(_Collision.get());
-					_Collision->Others.insert(Other);
+					_Event.Enter(_Collision.get(), Other.get());
 				}
+
+				_Collision->Others.insert(Other);
 			}
 			else 
 			{
 				if (_Event.Stay)
 				{
-					_Event.Stay(Other);
+					_Event.Stay(_Collision.get(), Other.get());
 				}
 			}
 		}

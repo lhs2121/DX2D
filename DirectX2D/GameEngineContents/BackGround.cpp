@@ -41,7 +41,7 @@ void BackGround::Start()
 
 	{
 		Renderer2 = CreateComponent<GameEngineSpriteRenderer>(2);
-		Renderer2->SetSamplerState(SamplerOption::LINEAR);
+		Renderer2->SetSamplerState(SamplerOption::POINT);
 		Renderer2->SetSprite("kerningcity", 2);
 		//Renderer2->Off();
 	}

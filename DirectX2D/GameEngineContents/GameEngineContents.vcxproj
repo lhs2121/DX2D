@@ -174,6 +174,8 @@
     <ClInclude Include="PlayLevel.h" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="TitleLevel.h" />
+    <ClInclude Include="GlobalValue.h" />
+    <ClInclude Include="PhysicsActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
@@ -187,7 +189,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp" />
-    <ClCompile Include="StateUpdate.cpp" />
+    <ClCompile Include="Player_State.cpp" />
+    <ClCompile Include="GlobalValue.cpp" />
+    <ClCompile Include="PhysicsActor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
