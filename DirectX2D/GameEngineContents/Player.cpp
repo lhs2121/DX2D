@@ -22,6 +22,7 @@ void Player::Start()
 	{
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
 		MainSpriteRenderer->SetSprite("idle");
+		MainSpriteRenderer->SetSamplerState(SamplerOption::POINT);
 
 		{
 			GameEngineDirectory Dir;
@@ -56,6 +57,7 @@ void Player::Start()
 		DebugRenderer1->Transform.SetLocalPosition(FootPos2);
 	}
 
+	SetFootPos(FootPos1, FootPos2);
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	MainSpriteRenderer->SetPivotType(PivotType::Center);
 	MainSpriteRenderer->AutoSpriteSizeOn();
@@ -64,6 +66,10 @@ void Player::Start()
 
 void Player::Update(float _Delta)
 {
+	if (GameEngineInput::IsDown('R'))
+	{
+		Transform.AddLocalPosition({ 0,300 });
+	}
 	DirUpdate();
 	GravityUpdate(_Delta);
 	CameraFocus();
@@ -95,72 +101,9 @@ void Player::Update(float _Delta)
 
 void Player::GravityUpdate(float _Delta)
 {
-	float4 Pos = Transform.GetWorldPosition() + FootPos1;
-	GameEngineColor Color = BackGround::MainMap->GetColor(Pos, GameEngineColor::RED);
-
-	if (GameEngineColor::RED != Color)
-	{
-		Transform.AddLocalPosition(GravityForce * _Delta);
-
-		if (GravityForce.Y > -GlobalValue::MaxGravity)
-		{
-			GravityForce.Y -= 1000.0f * _Delta;
-		}
-	}
-	//공중
-	else if (GameEngineColor::RED == Color)
-	{
-		GravityForce.Y = 0;
-
-		while (true)
-		{
-			float4 Pos2 = Transform.GetWorldPosition() + FootPos2;
-			GameEngineColor Color2 = BackGround::MainMap->GetColor(Pos2, GameEngineColor::RED);
-
-			if (GameEngineColor::RED != Color2)
-			{
-				break;
-			}
-			else if (GameEngineColor::RED == Color2)
-			{
-				Transform.AddLocalPosition(float4::UP);
-			}
-		}
-	}
-	//지면
-
-	if (GameEngineColor::BLUE == Color)
-	{
-		while (true)
-		{
-			float4 Pos3 = Transform.GetWorldPosition() + FootPos2;
-			GameEngineColor Color3 = BackGround::MainMap->GetColor(Pos3, GameEngineColor::RED);
-
-			if (GameEngineColor::RED != Color3)
-			{
-				Transform.AddLocalPosition(float4::DOWN);
-			}
-			else if (GameEngineColor::RED == Color3)
-			{
-				break;
-			}
-		}
-		while (true)
-		{
-			float4 Pos4 = Transform.GetWorldPosition() + FootPos2;
-			GameEngineColor Color2 = BackGround::MainMap->GetColor(Pos4, GameEngineColor::RED);
-
-			if (GameEngineColor::BLUE != Color2)
-			{
-				Transform.AddLocalPosition(float4::UP);
-			}
-			else if (GameEngineColor::BLUE == Color2)
-			{
-				break;
-			}
-		}
-	}
-
+	Gravity(_Delta);
+	BluePixelSnap();
+	RedPixelSnap();
 }
 void Player::DirUpdate()
 {

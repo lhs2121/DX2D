@@ -22,7 +22,7 @@
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsActor.h">
-      <Filter>Global</Filter>
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -47,7 +47,7 @@
       <Filter>Global</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsActor.cpp">
-      <Filter>Global</Filter>
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

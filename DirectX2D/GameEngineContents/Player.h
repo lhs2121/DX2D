@@ -1,5 +1,5 @@
 #pragma once
-#include <GameEngineCore/GameEngineActor.h>
+#include "PhysicsActor.h"
 
 enum class PlayerState
 {
@@ -19,7 +19,7 @@ enum class PlayerDirState
 };
 
 // Ό³Έν :
-class Player : public GameEngineActor
+class Player : public PhysicsActor
 {
 public:
 	// constrcuter destructer
@@ -33,7 +33,6 @@ public:
 	Player& operator=(Player&& _Other) noexcept = delete;
 
 private:
-	float4 GravityForce = {0.0f, 0.0f, 0.0f, 1.0f};
 	float4 FootPos1 = { 0 , -43.5f };
 	float4 FootPos2 = { 0 , -42.5f };
 
