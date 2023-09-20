@@ -9,8 +9,15 @@
 
 void Player::IdleUpdate(float _Delta)
 {
-	MainSpriteRenderer->ChangeAnimation("idle");
-
+	if (GravityForce.Y != 0)
+	{
+		MainSpriteRenderer->ChangeAnimation("jump");
+	}
+	else
+	{
+		MainSpriteRenderer->ChangeAnimation("idle");
+	}
+	
 	if (GameEngineInput::IsDown(VK_LEFT) || GameEngineInput::IsDown(VK_RIGHT))
 	{
 		ChangeState(PlayerState::RUN);
@@ -19,7 +26,14 @@ void Player::IdleUpdate(float _Delta)
 
 void Player::RunUpdate(float _Delta)
 {
-	MainSpriteRenderer->ChangeAnimation("walk");
+	if (GravityForce.Y != 0)
+	{
+		MainSpriteRenderer->ChangeAnimation("jump");
+	}
+	else
+	{
+		MainSpriteRenderer->ChangeAnimation("walk");
+	}
 
 	if (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsFree(VK_RIGHT))
 	{
@@ -52,34 +66,12 @@ void Player::RunUpdate(float _Delta)
 
 void Player::RopeUpdate(float _Delta)
 {
-	MainSpriteRenderer->ChangeAnimation("walk");
+	MainSpriteRenderer->ChangeAnimation("rope");
 }
 
 void Player::DownUpdate(float _Delta)
 {
 	MainSpriteRenderer->ChangeAnimation("down");
-}
-
-void Player::JumpUpdate(float _Delta)
-{
-	//GrivityForce.Y = 100.0f;
-
-	/*if (CanJump == false)
-	{
-		if (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsFree(VK_RIGHT))
-		{
-			ChangeState(PlayerState::IDLE);
-		}
-		else if (GameEngineInput::IsDown(VK_LEFT) || GameEngineInput::IsDown(VK_RIGHT))
-		{
-			ChangeState(PlayerState::RUN);
-		}
-	}
-	else
-	{
-		MainSpriteRenderer->ChangeAnimation("jump");
-	}*/
-	
 }
 
 void Player::AttackUpdate(float _Delta)

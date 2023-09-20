@@ -20,12 +20,20 @@ protected:
 	float4 GravityForce = { 0.0f, 0.0f, 0.0f, 1.0f };
 	float4 Pos1;
 	float4 Pos2;
+	float MaxGravity = 300.0f;
+	float JumpForce = 300.0f;
 
-	void Gravity(float _Delta);
+	bool IsJumping;
+	bool IsGrounded;
+
+	bool IsFall();
 	void RedPixelSnap();
 	void BluePixelSnap();
-
-private:
+	void GroundCheck();
+	void JumpCheck();
+	void Jump();
+	void Gravity(float _Delta);
+	void Update(float _Delta) override;
 
 };
 

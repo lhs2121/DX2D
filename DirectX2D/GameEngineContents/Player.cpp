@@ -10,7 +10,8 @@
 
 Player::Player()
 {
-
+	CurState = PlayerState::IDLE;
+	CurDirState = PlayerDirState::LEFT;
 }
 
 Player::~Player()
@@ -66,13 +67,9 @@ void Player::Start()
 
 void Player::Update(float _Delta)
 {
-	if (GameEngineInput::IsDown('R'))
-	{
-		Transform.AddLocalPosition({ 0,300 });
-	}
 	DirUpdate();
-	GravityUpdate(_Delta);
 	CameraFocus();
+	PhysicsActor::Update(_Delta);
 
 	switch (CurState)
 	{
@@ -88,23 +85,19 @@ void Player::Update(float _Delta)
 	case PlayerState::DOWN:
 		DownUpdate(_Delta);
 		break;
-	case PlayerState::JUMP:
-		JumpUpdate(_Delta);
-		break;
 	case PlayerState::ATTACK:
 		AttackUpdate(_Delta);
 		break;
 	default:
 		break;
+	}	
+
+	if (GameEngineInput::IsDown(VK_MENU) && IsGrounded == true)
+	{
+		Jump();
 	}
 }
 
-void Player::GravityUpdate(float _Delta)
-{
-	Gravity(_Delta);
-	BluePixelSnap();
-	RedPixelSnap();
-}
 void Player::DirUpdate()
 {
 	if ((GameEngineInput::IsFree(VK_RIGHT) && GameEngineInput::IsDown(VK_LEFT)) || (GameEngineInput::IsFree(VK_RIGHT) && GameEngineInput::IsPress(VK_LEFT)))

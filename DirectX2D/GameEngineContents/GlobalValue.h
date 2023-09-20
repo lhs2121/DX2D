@@ -11,7 +11,6 @@ class GlobalValue
 	GlobalValue& operator=(const GlobalValue& _Other) = delete;
 	GlobalValue& operator=(GlobalValue&& _Other) noexcept = delete;
 public:
-	static float MaxGravity;
 	static float CurMapScale;
 };
 
