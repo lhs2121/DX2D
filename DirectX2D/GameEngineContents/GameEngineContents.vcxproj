@@ -176,6 +176,7 @@
     <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="GlobalValue.h" />
     <ClInclude Include="PhysicsActor.h" />
+    <ClInclude Include="Portal.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
@@ -192,6 +193,7 @@
     <ClCompile Include="Player_State.cpp" />
     <ClCompile Include="GlobalValue.cpp" />
     <ClCompile Include="PhysicsActor.cpp" />
+    <ClCompile Include="Portal.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

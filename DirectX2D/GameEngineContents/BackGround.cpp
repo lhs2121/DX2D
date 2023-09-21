@@ -43,7 +43,7 @@ void BackGround::Start()
 		Renderer2 = CreateComponent<GameEngineSpriteRenderer>(2);
 		Renderer2->SetSamplerState(SamplerOption::POINT);
 		Renderer2->SetSprite("kerningcity", 2);
-		//Renderer2->Off();
+		Renderer2->Off();
 	}
 
 	mapScale = Renderer0->GetSprite()->GetSpriteData(1).GetScale();

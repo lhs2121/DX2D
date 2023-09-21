@@ -112,7 +112,7 @@ void PhysicsActor::BluePixelSnap()
 
 void PhysicsActor::JumpCheck()
 {
-	if (GravityForce.Y < 0)
+	if (GravityForce.Y <= 0)
 	{
 		IsJumping = false;
 	}

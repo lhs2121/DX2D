@@ -24,6 +24,9 @@
     <ClInclude Include="PhysicsActor.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -47,6 +50,9 @@
       <Filter>Global</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsActor.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
       <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>

@@ -43,6 +43,15 @@ void PlayLevel::Start()
 		GameEngineSprite::CreateFolder(Dir.GetStringPath());
 	}
 
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExistsChild("Assets");
+		Dir.MoveChild("Assets");
+		Dir.MoveChild("Maps");
+		Dir.MoveChild("portal");
+		GameEngineSprite::CreateFolder(Dir.GetStringPath());
+	}
+
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 
 	GetMainCamera()->Transform.SetLocalPosition({ 0, 0, -500.0f});
