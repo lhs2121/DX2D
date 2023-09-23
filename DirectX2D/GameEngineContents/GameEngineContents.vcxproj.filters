@@ -5,9 +5,6 @@
     <ClInclude Include="Player.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="PlayLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -15,9 +12,6 @@
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="PreCompile.h" />
-    <ClInclude Include="BackGround.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="GlobalValue.h">
       <Filter>Global</Filter>
     </ClInclude>
@@ -27,22 +21,22 @@
     <ClInclude Include="Portal.h">
       <Filter>Object</Filter>
     </ClInclude>
+    <ClInclude Include="KerningCity.h">
+      <Filter>Level\KerningCity</Filter>
+    </ClInclude>
+    <ClInclude Include="Map0.h">
+      <Filter>Object\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="Player.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="PreCompile.cpp" />
-    <ClCompile Include="BackGround.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="Player_State.cpp">
       <Filter>Object</Filter>
     </ClCompile>
@@ -55,6 +49,12 @@
     <ClCompile Include="Portal.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="KerningCity.cpp">
+      <Filter>Level\KerningCity</Filter>
+    </ClCompile>
+    <ClCompile Include="Map0.cpp">
+      <Filter>Object\Map</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -65,6 +65,12 @@
     </Filter>
     <Filter Include="Global">
       <UniqueIdentifier>{491c0729-a3f0-4469-9c63-a2a32d102fc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Map">
+      <UniqueIdentifier>{26bd1946-72b1-4437-8c22-f5bf3a0fa9d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\KerningCity">
+      <UniqueIdentifier>{99383f15-7e91-44b0-a7ff-d155de92bf0d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,18 +1,19 @@
 #include "PreCompile.h"
-#include "PlayLevel.h"
+#include "KerningCity.h"
 #include "Player.h"
 #include "Monster.h"
-#include "BackGround.h"
+#include "Map0.h"
+#include "Portal.h"
 
-PlayLevel::PlayLevel() 
+KerningCity::KerningCity() 
 {
 }
 
-PlayLevel::~PlayLevel() 
+KerningCity::~KerningCity() 
 {
 }
 
-void PlayLevel::Start()
+void KerningCity::Start()
 {
 
 	{
@@ -59,12 +60,12 @@ void PlayLevel::Start()
 
 	{
 		std::shared_ptr<Player> Object = CreateActor<Player>(ContentsObjectType::Player);
-		CurMap = CreateActor<BackGround>(ContentsObjectType::BackGround);
-
+		CurMap = CreateActor<Map0>(ContentsObjectType::Map0);
+		CreateActor<Portal>(ContentsObjectType::MapObject);
 	}
 }
 
-void PlayLevel::Update(float _Delta)
+void KerningCity::Update(float _Delta)
 {
 	if (GameEngineInput::IsPress('Q'))
 	{
@@ -76,12 +77,12 @@ void PlayLevel::Update(float _Delta)
 	}
 }
 
-void PlayLevel::LevelStart(GameEngineLevel* _PrevLevel)
+void KerningCity::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	int a = 0;
 }
 
-void PlayLevel::LevelEnd(GameEngineLevel* _NextLevel)
+void KerningCity::LevelEnd(GameEngineLevel* _NextLevel)
 {
 	int a = 0;
 }

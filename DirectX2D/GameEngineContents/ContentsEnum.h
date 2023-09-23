@@ -2,16 +2,18 @@
 
 enum class ContentsRenderType
 {
-	BackGround,
+	Map0,
 	Play,
 };
 
 
 enum class ContentsObjectType
 {
-	BackGround,
+	Map0,
 	Player,
 	Monster,
+	NPC,
+	MapObject,
 };
 
 enum class ContentsCollisionType

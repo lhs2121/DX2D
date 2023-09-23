@@ -167,11 +167,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="BackGround.h" />
+    <ClInclude Include="Map0.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayLevel.h" />
+    <ClInclude Include="KerningCity.h" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="GlobalValue.h" />
@@ -179,10 +179,10 @@
     <ClInclude Include="Portal.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="Map0.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayLevel.cpp" />
+    <ClCompile Include="KerningCity.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

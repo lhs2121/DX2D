@@ -20,7 +20,7 @@ void TitleLevel::Update(float _Delta)
 {
 	if (GameEngineInput::IsPress('P'))
 	{
-		GameEngineCore::ChangeLevel("PlayLevel");
+		GameEngineCore::ChangeLevel("KerningCity");
 	}
 }
 

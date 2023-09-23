@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "PhysicsActor.h"
-#include "BackGround.h"
+#include "Map0.h"
 
 PhysicsActor::PhysicsActor()
 {
@@ -17,24 +17,51 @@ void PhysicsActor::SetFootPos(float4 _Pos1, float4 _Pos2)
 	Pos2 = _Pos2;
 }
 
+void PhysicsActor::JumpCheck()
+{
+	if (GravityForce.Y <= 0)
+	{
+		IsJumping = false;
+	}
+	else if (GravityForce.Y > 0)
+	{
+		IsJumping = true;
+	}
+}
+
+void PhysicsActor::GroundCheck()
+{
+	float4 Pos = Transform.GetWorldPosition() + Pos1;
+	CurColor = Map0::MainMap->GetColor(Pos, GameEngineColor::ALAPA);
+
+	if(GameEngineColor::RED == CurColor || GameEngineColor::BLUE == CurColor)//지면
+	{
+		IsGrounded = true;
+	}
+	else if (GameEngineColor::RED != CurColor && GameEngineColor::BLUE != CurColor) //공중
+	{
+		IsGrounded = false;
+	}
+}
+
 void PhysicsActor::Gravity(float _Delta)
 {
-	Transform.AddLocalPosition(GravityForce * _Delta);
-
-	if (IsGrounded == false)
-	{
-		if (GravityForce.Y > -MaxGravity)
-		{
-			GravityForce.Y -= 1000.0f * _Delta;
-		}
-	}
-	else 
+	if (IsGrounded == true)
 	{
 		if (IsJumping == false)
 		{
 			GravityForce.Y = 0.0f;
 		}
 	}
+	else if (IsGrounded == false)
+	{
+		if (GravityForce.Y > -MaxGravity)
+		{
+			GravityForce.Y -= 1000.0f * _Delta;
+		}
+	}
+
+	Transform.AddLocalPosition(GravityForce * _Delta);
 }
 
 void PhysicsActor::Jump()
@@ -49,15 +76,17 @@ void PhysicsActor::RedPixelSnap()
 		return;
 	}
 
-	float4 Pos = Transform.GetWorldPosition() + Pos1;
-	GameEngineColor Color = BackGround::MainMap->GetColor(Pos, GameEngineColor::RED);
+	if (CurColor == GameEngineColor::ALAPA)
+	{
+		return;
+	}
 
-	if (Color == GameEngineColor::RED)
+	if (CurColor == GameEngineColor::RED)
 	{
 		while (true)
 		{
 			float4 Pos = Transform.GetWorldPosition() + Pos2;
-			GameEngineColor Color = BackGround::MainMap->GetColor(Pos, GameEngineColor::RED);
+			GameEngineColor Color = Map0::MainMap->GetColor(Pos, GameEngineColor::RED);
 
 			if (Color == GameEngineColor::RED)
 			{
@@ -88,15 +117,17 @@ void PhysicsActor::BluePixelSnap()
 		return;
 	}
 
-	float4 Pos = Transform.GetWorldPosition() + Pos1;
-	GameEngineColor Color = BackGround::MainMap->GetColor(Pos, GameEngineColor::RED);
+	if (CurColor == GameEngineColor::ALAPA)
+	{
+		return;
+	}
 
-	if (Color == GameEngineColor::BLUE)
+	if (CurColor == GameEngineColor::BLUE)
 	{
 		while (true)
 		{
 			float4 Pos = Transform.GetWorldPosition() + Pos1;
-			GameEngineColor Color = BackGround::MainMap->GetColor(Pos, GameEngineColor::RED);
+			GameEngineColor Color = Map0::MainMap->GetColor(Pos, GameEngineColor::RED);
 
 			if (Color == GameEngineColor::BLUE)
 			{
@@ -107,33 +138,6 @@ void PhysicsActor::BluePixelSnap()
 				break;
 			}
 		}
-	}
-}
-
-void PhysicsActor::JumpCheck()
-{
-	if (GravityForce.Y <= 0)
-	{
-		IsJumping = false;
-	}
-	else if (GravityForce.Y > 0)
-	{
-		IsJumping = true;
-	}
-}
-
-void PhysicsActor::GroundCheck()
-{
-	float4 Pos = Transform.GetWorldPosition() + Pos1;
-	GameEngineColor Color = BackGround::MainMap->GetColor(Pos, GameEngineColor::RED);
-
-	if (GameEngineColor::RED != Color && GameEngineColor::BLUE != Color) //공중
-	{
-		IsGrounded = false;
-	}
-	else  //지면
-	{
-		IsGrounded = true;
 	}
 }
 

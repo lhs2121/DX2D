@@ -4,7 +4,7 @@
 #include <GameEngineCore/GameEngineSampler.h>
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 
-#include "PlayLevel.h"
+#include "KerningCity.h"
 #include "TitleLevel.h"
 
 ContentsCore::ContentsCore() 
@@ -17,9 +17,9 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::Start()
 {
-	GameEngineCore::CreateLevel<PlayLevel>("PlayLevel");
+	GameEngineCore::CreateLevel<KerningCity>("KerningCity");
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
-	GameEngineCore::ChangeLevel("PlayLevel");
+	GameEngineCore::ChangeLevel("KerningCity");
 
 	// 자기 텍스처 로드해야 한다.
 

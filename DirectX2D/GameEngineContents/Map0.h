@@ -2,19 +2,19 @@
 #include <GameEngineCore/GameEngineActor.h>
 
 // Ό³Έν :
-class BackGround : public GameEngineActor
+class Map0 : public GameEngineActor
 {
 public:
-	static BackGround* MainMap;
+	static Map0* MainMap;
 	// constrcuter destructer
-	BackGround();
-	~BackGround();
+	Map0();
+	~Map0();
 
 	// delete Function
-	BackGround(const BackGround& _Other) = delete;
-	BackGround(BackGround&& _Other) noexcept = delete;
-	BackGround& operator=(const BackGround& _Other) = delete;
-	BackGround& operator=(BackGround&& _Other) noexcept = delete;
+	Map0(const Map0& _Other) = delete;
+	Map0(Map0&& _Other) noexcept = delete;
+	Map0& operator=(const Map0& _Other) = delete;
+	Map0& operator=(Map0&& _Other) noexcept = delete;
 
 	float4 GetMapScale();
 	GameEngineColor GetColor(float4 _Pos, GameEngineColor _DefaultColor = { 255, 255, 255, 255 });
