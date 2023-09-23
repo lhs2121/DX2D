@@ -1,11 +1,7 @@
 #include "PreCompile.h"
 #include "Portal.h"
-#include "ContentsEnum.h"
-#include "Map0.h"
-#include <GameEngineCore/GameEngineSpriteRenderer.h>
-#include <GameEngineCore/GameEngineTexture.h>
-#include <GameEngineCore/GameEngineCollision.h>
-#include <GameEngineCore/GameEngineCamera.h>
+#include "KCityMap.h"
+
 Portal::Portal()
 {
 }

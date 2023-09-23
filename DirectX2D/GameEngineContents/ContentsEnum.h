@@ -2,14 +2,14 @@
 
 enum class ContentsRenderType
 {
-	Map0,
+	KCityMap,
 	Play,
 };
 
 
 enum class ContentsObjectType
 {
-	Map0,
+	KCityMap,
 	Player,
 	Monster,
 	NPC,

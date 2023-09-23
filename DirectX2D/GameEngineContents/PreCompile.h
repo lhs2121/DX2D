@@ -15,4 +15,3 @@
 #include <GameEngineCore/GameEngineCollision.h>
 
 #include "ContentsEnum.h"
-#include "GlobalValue.h"

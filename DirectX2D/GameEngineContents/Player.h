@@ -30,8 +30,8 @@ public:
 	Player& operator=(Player&& _Other) noexcept = delete;
 
 private:
-	float4 FootPos1 = { 0 , -43.5f };
-	float4 FootPos2 = { 0 , -42.5f };
+	float4 FootPos1 = { 0 , -42.5f };
+	float4 FootPos2 = { 0 , -41.5f };
 	PlayerState CurState;
 	PlayerDirState CurDirState;
 	float Speed = 125;

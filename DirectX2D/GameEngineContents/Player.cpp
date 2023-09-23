@@ -1,12 +1,6 @@
 #include "PreCompile.h"
 #include "Player.h"
-#include "Monster.h"
-#include "ContentsEnum.h"
-#include "Map0.h"
-#include <GameEngineCore/GameEngineSpriteRenderer.h>
-#include <GameEngineCore/GameEngineTexture.h>
-#include <GameEngineCore/GameEngineCollision.h>
-#include <GameEngineCore/GameEngineCamera.h>
+#include "KCityMap.h"
 
 Player::Player()
 {

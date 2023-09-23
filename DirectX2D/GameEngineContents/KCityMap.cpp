@@ -1,28 +1,28 @@
 #include "PreCompile.h"
-#include "Map0.h"
+#include "KCityMap.h"
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineSprite.h>
 #include <GameEngineCore/GameEngineTexture.h>
 #include <GameEngineCore/GameEngineCollision.h>
 #include "ContentsEnum.h"
 
-Map0* Map0::MainMap;
+KCityMap* KCityMap::MainMap;
 
-Map0::Map0()
+KCityMap::KCityMap()
 {
 	MainMap = this;
 }
 
-Map0::~Map0()
+KCityMap::~KCityMap()
 {
 }
 
-float4 Map0::GetMapScale()
+float4 KCityMap::GetMapScale()
 {
 	return mapScale;
 }
 
-void Map0::Start()
+void KCityMap::Start()
 {
 	{
 		Renderer0 = CreateComponent<GameEngineSpriteRenderer>(0);
@@ -53,7 +53,7 @@ void Map0::Start()
 	Transform.SetLocalPosition({ mapScale.hX(), -mapScale.hY(), 0.0f });
 }
 
-GameEngineColor Map0::GetColor(float4 _Pos, GameEngineColor _DefaultColor)
+GameEngineColor KCityMap::GetColor(float4 _Pos, GameEngineColor _DefaultColor)
 {
 	// 플레이어의 위치를 이미지의 좌표계로 변경한다.
 	// 이미지는 위에서부터 아래로 내려갈수록 +가 되기 때문이다.
@@ -64,7 +64,7 @@ GameEngineColor Map0::GetColor(float4 _Pos, GameEngineColor _DefaultColor)
 
 	return Tex->GetColor(_Pos, _DefaultColor);
 }
-void Map0::Update(float _Delta)
+void KCityMap::Update(float _Delta)
 {
 
 }

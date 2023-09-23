@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "PhysicsActor.h"
-#include "Map0.h"
+#include "KCityMap.h"
 
 PhysicsActor::PhysicsActor()
 {
@@ -32,7 +32,7 @@ void PhysicsActor::JumpCheck()
 void PhysicsActor::GroundCheck()
 {
 	float4 Pos = Transform.GetWorldPosition() + Pos1;
-	CurColor = Map0::MainMap->GetColor(Pos, GameEngineColor::ALAPA);
+	CurColor = KCityMap::MainMap->GetColor(Pos, GameEngineColor::ALAPA);
 
 	if(GameEngineColor::RED == CurColor || GameEngineColor::BLUE == CurColor)//Áö¸é
 	{
@@ -76,7 +76,7 @@ void PhysicsActor::RedPixelSnap()
 		return;
 	}
 
-	if (CurColor == GameEngineColor::ALAPA)
+	if (IsGrounded == false)
 	{
 		return;
 	}
@@ -86,7 +86,7 @@ void PhysicsActor::RedPixelSnap()
 		while (true)
 		{
 			float4 Pos = Transform.GetWorldPosition() + Pos2;
-			GameEngineColor Color = Map0::MainMap->GetColor(Pos, GameEngineColor::RED);
+			GameEngineColor Color = KCityMap::MainMap->GetColor(Pos, GameEngineColor::RED);
 
 			if (Color == GameEngineColor::RED)
 			{
@@ -117,7 +117,7 @@ void PhysicsActor::BluePixelSnap()
 		return;
 	}
 
-	if (CurColor == GameEngineColor::ALAPA)
+	if (IsGrounded == false)
 	{
 		return;
 	}
@@ -127,7 +127,7 @@ void PhysicsActor::BluePixelSnap()
 		while (true)
 		{
 			float4 Pos = Transform.GetWorldPosition() + Pos1;
-			GameEngineColor Color = Map0::MainMap->GetColor(Pos, GameEngineColor::RED);
+			GameEngineColor Color = KCityMap::MainMap->GetColor(Pos, GameEngineColor::RED);
 
 			if (Color == GameEngineColor::BLUE)
 			{

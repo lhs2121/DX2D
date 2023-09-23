@@ -1,14 +1,18 @@
 #include "PreCompile.h"
 #include "Player.h"
-#include "Map0.h"
-#include "ContentsEnum.h"
-#include <GameEngineCore/GameEngineSpriteRenderer.h>
-#include <GameEngineCore/GameEngineTexture.h>
-#include <GameEngineCore/GameEngineCollision.h>
-#include <GameEngineCore/GameEngineCamera.h>
+#include "KCityMap.h"
 
 void Player::IdleUpdate(float _Delta)
 {
+	if (GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT))
+	{
+		ChangeState(PlayerState::RUN);
+	}
+	else if (GameEngineInput::IsDown(VK_DOWN))
+	{
+		ChangeState(PlayerState::DOWN);
+	}
+
 	if (GravityForce.Y != 0)
 	{
 		MainSpriteRenderer->ChangeAnimation("jump");
@@ -17,15 +21,19 @@ void Player::IdleUpdate(float _Delta)
 	{
 		MainSpriteRenderer->ChangeAnimation("idle");
 	}
-	
-	if (GameEngineInput::IsDown(VK_LEFT) || GameEngineInput::IsDown(VK_RIGHT))
-	{
-		ChangeState(PlayerState::RUN);
-	}
 }
 
 void Player::RunUpdate(float _Delta)
 {
+	if (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsFree(VK_RIGHT))
+	{
+		ChangeState(PlayerState::IDLE);
+	}
+	else if (GameEngineInput::IsDown(VK_DOWN))
+	{
+		ChangeState(PlayerState::DOWN);
+	}
+
 	if (GravityForce.Y != 0)
 	{
 		MainSpriteRenderer->ChangeAnimation("jump");
@@ -33,11 +41,6 @@ void Player::RunUpdate(float _Delta)
 	else
 	{
 		MainSpriteRenderer->ChangeAnimation("walk");
-	}
-
-	if (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsFree(VK_RIGHT))
-	{
-		ChangeState(PlayerState::IDLE);
 	}
 
 	if (CurDirState == PlayerDirState::LEFT)
@@ -72,6 +75,12 @@ void Player::RopeUpdate(float _Delta)
 void Player::DownUpdate(float _Delta)
 {
 	MainSpriteRenderer->ChangeAnimation("down");
+
+
+	if (GameEngineInput::IsFree(VK_DOWN))
+	{
+		ChangeState(PlayerState::IDLE);
+	}
 }
 
 void Player::AttackUpdate(float _Delta)

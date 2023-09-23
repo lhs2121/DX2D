@@ -2,19 +2,19 @@
 #include <GameEngineCore/GameEngineActor.h>
 
 // Ό³Έν :
-class Map0 : public GameEngineActor
+class KCityMap : public GameEngineActor
 {
 public:
-	static Map0* MainMap;
+	static KCityMap* MainMap;
 	// constrcuter destructer
-	Map0();
-	~Map0();
+	KCityMap();
+	~KCityMap();
 
 	// delete Function
-	Map0(const Map0& _Other) = delete;
-	Map0(Map0&& _Other) noexcept = delete;
-	Map0& operator=(const Map0& _Other) = delete;
-	Map0& operator=(Map0&& _Other) noexcept = delete;
+	KCityMap(const KCityMap& _Other) = delete;
+	KCityMap(KCityMap&& _Other) noexcept = delete;
+	KCityMap& operator=(const KCityMap& _Other) = delete;
+	KCityMap& operator=(KCityMap&& _Other) noexcept = delete;
 
 	float4 GetMapScale();
 	GameEngineColor GetColor(float4 _Pos, GameEngineColor _DefaultColor = { 255, 255, 255, 255 });
