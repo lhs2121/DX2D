@@ -14,19 +14,22 @@
       <Filter>GlobalActor</Filter>
     </ClInclude>
     <ClInclude Include="TitleLevel.h">
-      <Filter>0 : Title\Level</Filter>
+      <Filter>Scene0 : Title\Level</Filter>
     </ClInclude>
     <ClInclude Include="KCityLevel.h">
-      <Filter>1 : KerningCity\Level</Filter>
+      <Filter>Scene1 : KerningCity\Level</Filter>
     </ClInclude>
     <ClInclude Include="KCityMap.h">
-      <Filter>1 : KerningCity\Actor</Filter>
+      <Filter>Scene1 : KerningCity\Actor</Filter>
     </ClInclude>
     <ClInclude Include="ContentsCore.h">
       <Filter>ETC</Filter>
     </ClInclude>
     <ClInclude Include="PreCompile.h">
       <Filter>ETC</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>GlobalActor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -43,13 +46,13 @@
       <Filter>GlobalActor</Filter>
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
-      <Filter>0 : Title\Level</Filter>
+      <Filter>Scene0 : Title\Level</Filter>
     </ClCompile>
     <ClCompile Include="KCityLevel.cpp">
-      <Filter>1 : KerningCity\Level</Filter>
+      <Filter>Scene1 : KerningCity\Level</Filter>
     </ClCompile>
     <ClCompile Include="KCityMap.cpp">
-      <Filter>1 : KerningCity\Actor</Filter>
+      <Filter>Scene1 : KerningCity\Actor</Filter>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp">
       <Filter>ETC</Filter>
@@ -57,23 +60,11 @@
     <ClCompile Include="PreCompile.cpp">
       <Filter>ETC</Filter>
     </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>GlobalActor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="0 : Title">
-      <UniqueIdentifier>{ee090191-ce80-42ac-87a5-fa7796c467c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="0 : Title\Level">
-      <UniqueIdentifier>{8f5b00fb-5caa-4fae-9d21-46063d7535d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="1 : KerningCity">
-      <UniqueIdentifier>{99383f15-7e91-44b0-a7ff-d155de92bf0d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="1 : KerningCity\Level">
-      <UniqueIdentifier>{26944891-a3c6-4033-ac57-1d204b5afeb3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="1 : KerningCity\Actor">
-      <UniqueIdentifier>{94bd9443-64fa-4f06-a71d-38a5c678fd3e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Global">
       <UniqueIdentifier>{491c0729-a3f0-4469-9c63-a2a32d102fc2}</UniqueIdentifier>
     </Filter>
@@ -82,6 +73,21 @@
     </Filter>
     <Filter Include="ETC">
       <UniqueIdentifier>{01a40786-8b46-44b6-b510-a6c0d135c08c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene0 : Title">
+      <UniqueIdentifier>{ee090191-ce80-42ac-87a5-fa7796c467c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene0 : Title\Level">
+      <UniqueIdentifier>{8f5b00fb-5caa-4fae-9d21-46063d7535d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene1 : KerningCity">
+      <UniqueIdentifier>{99383f15-7e91-44b0-a7ff-d155de92bf0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene1 : KerningCity\Level">
+      <UniqueIdentifier>{26944891-a3c6-4033-ac57-1d204b5afeb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene1 : KerningCity\Actor">
+      <UniqueIdentifier>{94bd9443-64fa-4f06-a71d-38a5c678fd3e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

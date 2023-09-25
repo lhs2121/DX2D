@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "KCityMap.h"
 #include "Portal.h"
+#include "Monster.h"
 
 KCityLevel::KCityLevel() 
 {
@@ -39,8 +40,9 @@ void KCityLevel::Start()
 
 	{
 		std::shared_ptr<Player> Object = CreateActor<Player>(ContentsObjectType::Player);
-		CreateActor<KCityMap>(ContentsObjectType::KCityMap);
+		CreateActor<KCityMap>(ContentsObjectType::Map);
 		CreateActor<Portal>(ContentsObjectType::MapObject);
+		CreateActor<Monster>(ContentsObjectType::Monster);
 	}
 }
 

@@ -11,10 +11,10 @@ PhysicsActor::~PhysicsActor()
 
 }
 
-void PhysicsActor::SetFootPos(float4 _Pos1, float4 _Pos2)
+void PhysicsActor::SetPos(float4 _Bottom1, float4 _Bottom2)
 {
-	Pos1 = _Pos1;
-	Pos2 = _Pos2;
+	Pos1 = _Bottom1;
+	Pos2 = _Bottom2;
 }
 
 void PhysicsActor::JumpCheck()
@@ -55,7 +55,11 @@ void PhysicsActor::Gravity(float _Delta)
 	}
 	else if (IsGrounded == false)
 	{
-		if (GravityForce.Y > -MaxGravity)
+		if (CanClimbRope == true)
+		{
+			GravityForce.Y = 0.0f;
+		}
+		else if (GravityForce.Y > -MaxGravity)
 		{
 			GravityForce.Y -= 1000.0f * _Delta;
 		}
@@ -127,7 +131,7 @@ void PhysicsActor::BluePixelSnap()
 		while (true)
 		{
 			float4 Pos = Transform.GetWorldPosition() + Pos1;
-			GameEngineColor Color = KCityMap::MainMap->GetColor(Pos, GameEngineColor::RED);
+			GameEngineColor Color = KCityMap::MainMap->GetColor(Pos, GameEngineColor::ALAPA);
 
 			if (Color == GameEngineColor::BLUE)
 			{

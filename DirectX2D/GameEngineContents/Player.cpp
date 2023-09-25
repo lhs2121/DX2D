@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include "KCityMap.h"
+#include "Monster.h"
 
 Player::Player()
 {
@@ -17,7 +18,7 @@ void Player::Start()
 	{
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
 		MainSpriteRenderer->SetSprite("idle");
-		MainSpriteRenderer->SetSamplerState(SamplerOption::POINT);
+		//MainSpriteRenderer->SetSamplerState(SamplerOption::POINT);
 
 		{
 			GameEngineDirectory Dir;
@@ -48,11 +49,18 @@ void Player::Start()
 	{
 		DebugRenderer1 = CreateComponent<GameEngineSpriteRenderer>(2);
 		DebugRenderer1->SetRenderOrder(31);
-		DebugRenderer1->SetSprite("etc",1);
+		DebugRenderer1->SetSprite("etc", 1);
 		DebugRenderer1->Transform.SetLocalPosition(FootPos2);
 	}
 
-	SetFootPos(FootPos1, FootPos2);
+	{
+		DebugRenderer2 = CreateComponent<GameEngineSpriteRenderer>(3);
+		DebugRenderer2->SetRenderOrder(31);
+		DebugRenderer2->SetSprite("etc", 1);
+		DebugRenderer2->Transform.SetLocalPosition(RopePos);
+	}
+
+	SetPos(FootPos1, FootPos2);
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	MainSpriteRenderer->SetPivotType(PivotType::Center);
 	MainSpriteRenderer->AutoSpriteSizeOn();
@@ -61,6 +69,20 @@ void Player::Start()
 
 void Player::Update(float _Delta)
 {
+	std::list<std::shared_ptr<Monster>> MonsterList =
+		GetLevel()->GetObjectGroupConvert<Monster>(ContentsObjectType::Monster);
+
+	for (std::shared_ptr<Monster> MonsterPtr : MonsterList)
+	{
+		CollisionData& Left = Transform.ColData;
+		CollisionData& Right = MonsterPtr->Col->Transform.ColData;
+ 
+		if (GameEngineTransform::Collision({Left , Right}))
+		{
+			MonsterPtr->Death();
+		}
+	}
+
 	DirUpdate();
 	CameraFocus();
 	PhysicsActor::Update(_Delta);
@@ -84,7 +106,7 @@ void Player::Update(float _Delta)
 		break;
 	default:
 		break;
-	}	
+	}
 
 	if (GameEngineInput::IsDown(VK_MENU) && IsGrounded == true)
 	{

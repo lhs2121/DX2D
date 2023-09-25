@@ -170,6 +170,7 @@
     <ClInclude Include="KCityMap.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="KCityLevel.h" />
     <ClInclude Include="PreCompile.h" />
@@ -192,6 +193,7 @@
     <ClCompile Include="Player_State.cpp" />
     <ClCompile Include="PhysicsActor.cpp" />
     <ClCompile Include="Portal.cpp" />
+    <ClCompile Include="Monster.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

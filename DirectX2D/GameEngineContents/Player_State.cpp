@@ -8,7 +8,7 @@ void Player::IdleUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::RUN);
 	}
-	else if (GameEngineInput::IsDown(VK_DOWN))
+	else if (GameEngineInput::IsDown(VK_DOWN) && IsGrounded == true)
 	{
 		ChangeState(PlayerState::DOWN);
 	}
@@ -29,7 +29,7 @@ void Player::RunUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::IDLE);
 	}
-	else if (GameEngineInput::IsDown(VK_DOWN))
+	else if (GameEngineInput::IsDown(VK_DOWN) && IsGrounded == true)
 	{
 		ChangeState(PlayerState::DOWN);
 	}
@@ -70,16 +70,39 @@ void Player::RunUpdate(float _Delta)
 void Player::RopeUpdate(float _Delta)
 {
 	MainSpriteRenderer->ChangeAnimation("rope");
+
+	if (GameEngineInput::IsPress(VK_UP))
+	{
+		Transform.AddLocalPosition({ 0, Speed * _Delta, 0 });
+	}
+	else if (GameEngineInput::IsPress(VK_DOWN))
+	{
+		Transform.AddLocalPosition({ 0,-Speed * _Delta, 0 });
+	}
 }
 
 void Player::DownUpdate(float _Delta)
 {
-	MainSpriteRenderer->ChangeAnimation("down");
-
-
+	if (CanClimbRope == true)
+	{
+		ChangeState(PlayerState::ROPE);
+	}
 	if (GameEngineInput::IsFree(VK_DOWN))
 	{
 		ChangeState(PlayerState::IDLE);
+	}
+	else if (GameEngineInput::IsDown(VK_LEFT) || GameEngineInput::IsDown(VK_RIGHT))
+	{
+		ChangeState(PlayerState::RUN);
+	}
+
+	if (GravityForce.Y != 0)
+	{
+		MainSpriteRenderer->ChangeAnimation("jump");
+	}
+	else
+	{
+		MainSpriteRenderer->ChangeAnimation("down");
 	}
 }
 

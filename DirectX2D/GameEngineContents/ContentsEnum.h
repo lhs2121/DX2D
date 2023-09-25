@@ -9,7 +9,7 @@ enum class ContentsRenderType
 
 enum class ContentsObjectType
 {
-	KCityMap,
+	Map,
 	Player,
 	Monster,
 	NPC,

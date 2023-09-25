@@ -16,6 +16,8 @@ void GameEngineCamera::Start()
 {
 	GameEngineActor::Start();
 
+	ZoomValue = 1.0f;
+
 	GameEngineLevel* Level = GetLevel();
 
 	if (nullptr == Level)
@@ -38,6 +40,8 @@ void GameEngineCamera::Update(float _Delta)
 	Transform.LookToLH(Position, Forward, Up);
 
 	float4 WindowScale = GameEngineCore::MainWindow.GetScale();
+
+	WindowScale *= ZoomValue;
 
 	switch (ProjectionType)
 	{
@@ -131,4 +135,30 @@ void GameEngineCamera::AllReleaseCheck()
 			Start = Group.erase(Start);
 		}
 	}
+}
+
+float4 GameEngineCamera::GetWorldMousePos2D()
+{
+	// 월드라고 하는 세상은 화면과 관련이 없었다.
+	// 그런데 관련있게 됐다.
+	
+	// 나누기
+	// 로컬 => 월드(크자이공부) => 뷰 => 프로젝션 => 뷰포트(스크린좌표)
+
+	float4x4 ViewPort;
+
+	float4 MousePos = GameEngineCore::MainWindow.GetMousePos();
+
+	float4 Scale = GameEngineCore::MainWindow.GetScale();
+	ViewPort.ViewPort(Scale.X, Scale.Y, 0, 0);
+	// 스크린 => 프로젝션으로 이동
+	MousePos *= ViewPort.InverseReturn();
+
+	// 프로젝션 => 뷰로 이동
+	MousePos *= Transform.GetConstTransformDataRef().ProjectionMatrix.InverseReturn();
+
+	// 뷰 => 월드로
+	MousePos *= Transform.GetConstTransformDataRef().ViewMatrix.InverseReturn();
+
+	return MousePos;
 }
