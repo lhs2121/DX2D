@@ -6,9 +6,11 @@
 void GameEngineConstantBufferSetter::Setting()
 {
 	ShaderType Type = ParentShader->GetShaderType();
+	// 날 쓰는 쉐이더의 타입을 알아온다
 
 	Res->ChangeData(CPUDataPtr, DataSize);
-	
+	// 컨스턴트버퍼 업데이트
+
 	switch (Type)
 	{
 	case ShaderType::Vertex:
@@ -78,11 +80,11 @@ void GameEngineSamplerSetter::Reset()
 }
 
 
-GameEngineShaderResHelper::GameEngineShaderResHelper() 
+GameEngineShaderResHelper::GameEngineShaderResHelper()
 {
 }
 
-GameEngineShaderResHelper::~GameEngineShaderResHelper() 
+GameEngineShaderResHelper::~GameEngineShaderResHelper()
 {
 }
 
@@ -131,7 +133,7 @@ void GameEngineShaderResHelper::ShaderResCheck(std::string _FunctionName, GameEn
 
 		std::string UpperName = GameEngineString::ToUpperReturn(ResDesc.Name);
 
-		
+
 
 		D3D_SHADER_INPUT_TYPE Type = ResDesc.Type;
 		//D3D_SIT_CBUFFER = 0,
@@ -220,7 +222,7 @@ void GameEngineShaderResHelper::ShaderResCheck(std::string _FunctionName, GameEn
 			break;
 		}
 	}
-	
+
 
 }
 
@@ -243,6 +245,19 @@ void GameEngineShaderResHelper::ShaderResCopy(GameEngineShader* _Shader)
 	for (std::pair<const std::string, GameEngineSamplerSetter>& Pair : OtherSamplerSetters)
 	{
 		SamplerSetters.insert(std::make_pair(Pair.first, Pair.second));
+	}
+
+	// 기본 샘플러로 세팅해줘야할 녀석들이 있는지 확인한다.
+	for (std::pair<const std::string, GameEngineTextureSetter>& Pair : OtherTextureSetters)
+	{
+		std::string SamplerName = Pair.first + "SAMPLER";
+
+		if (true == IsSampler(SamplerName))
+		{
+			std::shared_ptr<GameEngineSampler> Sampler = Pair.second.Res->GetBaseSampler();
+
+			SetSampler(SamplerName, Sampler);
+		}
 	}
 }
 
@@ -294,7 +309,7 @@ void GameEngineShaderResHelper::SetConstantBufferLink(std::string_view _Name, co
 	std::string UpperString = GameEngineString::ToUpperReturn(_Name);
 
 	// 중복되는 이름의 시작 이터레이터와 끝 이터레이터를 찾는법
-	std::multimap<std::string, GameEngineConstantBufferSetter>::iterator NameStariter 
+	std::multimap<std::string, GameEngineConstantBufferSetter>::iterator NameStariter
 		= ConstantBufferSetters.lower_bound(UpperString);
 	std::multimap<std::string, GameEngineConstantBufferSetter>::iterator NameEnditer
 		= ConstantBufferSetters.upper_bound(UpperString);
@@ -379,4 +394,11 @@ void GameEngineShaderResHelper::SetSampler(std::string_view _Name, std::shared_p
 
 		Setter.Res = _TextureSampler;
 	}
+}
+
+void GameEngineShaderResHelper::ResClear()
+{
+	ConstantBufferSetters.clear();
+	TextureSetters.clear();
+	SamplerSetters.clear();
 }

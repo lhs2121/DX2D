@@ -186,6 +186,7 @@
     <ClCompile Include="GameEngineRasterizer.cpp" />
     <ClCompile Include="GameEngineRenderer.cpp" />
     <ClCompile Include="GameEngineRenderTarget.cpp" />
+    <ClCompile Include="GameEngineRenderUnit.cpp" />
     <ClCompile Include="GameEngineResources.cpp" />
     <ClCompile Include="GameEngineSampler.cpp" />
     <ClCompile Include="GameEngineShader.cpp" />
@@ -195,6 +196,7 @@
     <ClCompile Include="GameEngineTexture.cpp" />
     <ClCompile Include="GameEngineTileMap.cpp" />
     <ClCompile Include="GameEngineTransform.cpp" />
+    <ClCompile Include="GameEngineUIRenderer.cpp" />
     <ClCompile Include="GameEngineVertex.cpp" />
     <ClCompile Include="GameEngineVertexBuffer.cpp" />
     <ClCompile Include="GameEngineVertexShader.cpp" />
@@ -206,6 +208,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EngineEnum.h" />
     <ClInclude Include="GameEngineActor.h" />
     <ClInclude Include="GameEngineBlend.h" />
     <ClInclude Include="GameEngineCamera.h" />
@@ -228,6 +231,7 @@
     <ClInclude Include="GameEngineRasterizer.h" />
     <ClInclude Include="GameEngineRenderer.h" />
     <ClInclude Include="GameEngineRenderTarget.h" />
+    <ClInclude Include="GameEngineRenderUnit.h" />
     <ClInclude Include="GameEngineResources.h" />
     <ClInclude Include="GameEngineSampler.h" />
     <ClInclude Include="GameEngineShader.h" />
@@ -237,6 +241,7 @@
     <ClInclude Include="GameEngineTexture.h" />
     <ClInclude Include="GameEngineTileMap.h" />
     <ClInclude Include="GameEngineTransform.h" />
+    <ClInclude Include="GameEngineUIRenderer.h" />
     <ClInclude Include="GameEngineVertex.h" />
     <ClInclude Include="GameEngineVertexBuffer.h" />
     <ClInclude Include="GameEngineVertexShader.h" />

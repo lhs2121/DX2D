@@ -18,7 +18,7 @@ void Player::Start()
 	{
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
 		MainSpriteRenderer->SetSprite("idle");
-		//MainSpriteRenderer->SetSamplerState(SamplerOption::POINT);
+	    //MainSpriteRenderer->SetSamplerState(SamplerOption::POINT);
 
 		{
 			GameEngineDirectory Dir;
@@ -108,7 +108,7 @@ void Player::Update(float _Delta)
 		break;
 	}
 
-	if (GameEngineInput::IsDown(VK_MENU) && IsGrounded == true)
+	if (GameEngineInput::IsDown(VK_UP) && IsGrounded == true)
 	{
 		Jump();
 	}

@@ -65,9 +65,6 @@
     <ClCompile Include="GameEngineRenderer.cpp">
       <Filter>Rendering</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineSpriteRenderer.cpp">
-      <Filter>Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngineInputLayOut.cpp">
       <Filter>Vertex</Filter>
     </ClCompile>
@@ -106,6 +103,15 @@
     </ClCompile>
     <ClCompile Include="GameEngineDebugCore.cpp">
       <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineSpriteRenderer.cpp">
+      <Filter>Rendering\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRenderUnit.cpp">
+      <Filter>Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineUIRenderer.cpp">
+      <Filter>Rendering\Contents</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -173,9 +179,6 @@
     <ClInclude Include="GameEngineRasterizer.h">
       <Filter>Resources\RenderingSetting</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineSpriteRenderer.h">
-      <Filter>Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngineCamera.h">
       <Filter>Rendering</Filter>
     </ClInclude>
@@ -214,6 +217,18 @@
     </ClInclude>
     <ClInclude Include="GameEngineDebugCore.h">
       <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineEnum.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineSpriteRenderer.h">
+      <Filter>Rendering\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineRenderUnit.h">
+      <Filter>Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineUIRenderer.h">
+      <Filter>Rendering\Contents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -276,6 +291,9 @@
     </Filter>
     <Filter Include="Debug">
       <UniqueIdentifier>{4d011309-cfdc-4cd2-9a2b-2863417e45b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{686ff4e6-cefb-481a-89c8-296d16afd87a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
