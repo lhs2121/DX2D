@@ -18,7 +18,6 @@ void Player::Start()
 	{
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
 		MainSpriteRenderer->SetSprite("idle");
-	    //MainSpriteRenderer->SetSamplerState(SamplerOption::POINT);
 
 		{
 			GameEngineDirectory Dir;
@@ -36,34 +35,47 @@ void Player::Start()
 		}
 
 		MainSpriteRenderer->ChangeAnimation("idle");
-		MainSpriteRenderer->SetRenderOrder(29);
+		MainSpriteRenderer->SetRenderOrder(0);
+		MainSpriteRenderer->SetPivotValue({ 0.5,0.71 });
+		MainSpriteRenderer->AutoSpriteSizeOn();
 	}
 
 	{
 		DebugRenderer0 = CreateComponent<GameEngineSpriteRenderer>(1);
-		DebugRenderer0->SetRenderOrder(30);
+		DebugRenderer0->SetRenderOrder(1);
 		DebugRenderer0->SetSprite("etc");
-		DebugRenderer0->Transform.SetLocalPosition(FootPos1);
 	}
 
 	{
 		DebugRenderer1 = CreateComponent<GameEngineSpriteRenderer>(2);
-		DebugRenderer1->SetRenderOrder(31);
+		DebugRenderer1->SetRenderOrder(1);
 		DebugRenderer1->SetSprite("etc", 1);
-		DebugRenderer1->Transform.SetLocalPosition(FootPos2);
+		DebugRenderer1->Transform.AddLocalPosition({ 0,1,0 });
 	}
 
 	{
 		DebugRenderer2 = CreateComponent<GameEngineSpriteRenderer>(3);
-		DebugRenderer2->SetRenderOrder(31);
+		DebugRenderer2->SetRenderOrder(1);
 		DebugRenderer2->SetSprite("etc", 1);
 		DebugRenderer2->Transform.SetLocalPosition(RopePos);
 	}
 
-	SetPos(FootPos1, FootPos2);
+	{
+		Col = CreateComponent<GameEngineCollision>(4);
+		Col->SetCollisionType(ColType::AABBBOX2D);
+		Col->Transform.SetLocalScale({ 50,50 });
+		Col->Transform.AddLocalPosition({ 0,50 });
+	}
+
+	{
+		CollisionRenderer = CreateComponent<GameEngineSpriteRenderer>(5);
+		CollisionRenderer->SetRenderOrder(-1);
+		CollisionRenderer->SetSprite("etc", 1);
+		CollisionRenderer->SetImageScale({50,50});
+		CollisionRenderer->Transform.AddLocalPosition({ 0,50 });
+	}
+
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
-	MainSpriteRenderer->SetPivotType(PivotType::Center);
-	MainSpriteRenderer->AutoSpriteSizeOn();
 	Transform.SetLocalPosition({ 500, -900, 0.0f });
 }
 
@@ -74,7 +86,7 @@ void Player::Update(float _Delta)
 
 	for (std::shared_ptr<Monster> MonsterPtr : MonsterList)
 	{
-		CollisionData& Left = Transform.ColData;
+		CollisionData& Left = Col->Transform.ColData;
 		CollisionData& Right = MonsterPtr->Col->Transform.ColData;
  
 		if (GameEngineTransform::Collision({Left , Right}))

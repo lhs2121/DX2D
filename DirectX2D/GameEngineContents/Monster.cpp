@@ -11,16 +11,30 @@ Monster::~Monster()
 
 void Monster::Start()
 {
-	Renderer = CreateComponent<GameEngineSpriteRenderer>(0);
-	Renderer->SetSprite("m0stand");
-	//Renderer->SetSamplerState(SamplerOption::POINT);
-	Renderer->SetRenderOrder(40);
-	Transform.SetLocalPosition({ 700, -300, 0.0f });
-	Renderer->SetPivotType(PivotType::Bottom);
 
-	Col = CreateComponent<GameEngineCollision>(1);
-	Col->SetCollisionType(ColType::AABBBOX2D);
-	Col->Transform.SetLocalScale({ 100,100 });
+	{
+		Col = CreateComponent<GameEngineCollision>(0);
+		Col->SetCollisionType(ColType::AABBBOX2D);
+		Col->Transform.SetLocalScale({ 100,100 });
+	}
+
+	{
+		CollisionRenderer = CreateComponent<GameEngineSpriteRenderer>(1);
+		CollisionRenderer->SetRenderOrder(32);
+		CollisionRenderer->SetSprite("etc", 1);
+		CollisionRenderer->SetImageScale({ 100,100 });
+	}
+
+	{
+		Renderer = CreateComponent<GameEngineSpriteRenderer>(2);
+		Renderer->SetSprite("m0stand");
+		Renderer->SetRenderOrder(40);
+		Renderer->SetImageScale({ 100,100 });
+		Renderer->SetPivotType(PivotType::Left);
+	}
+
+
+	Transform.SetLocalPosition({ 700, -300, 0.0f });
 }
 
 

@@ -65,6 +65,14 @@ void Player::RunUpdate(float _Delta)
 			Transform.AddLocalPosition({ -Speed * _Delta, 0, 0 });
 		}
 	}
+	//if (GameEngineInput::IsPress(VK_DOWN))
+	//{
+	//	Transform.AddLocalPosition({ 0, -Speed * _Delta, 0 });
+	//}
+	//else if (GameEngineInput::IsPress(VK_UP))
+	//{
+	//	Transform.AddLocalPosition({ 0, Speed * _Delta, 0 });
+	//}
 }
 
 void Player::RopeUpdate(float _Delta)

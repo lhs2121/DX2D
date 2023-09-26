@@ -13,6 +13,7 @@ Portal::~Portal()
 void Portal::Start()
 {
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(0);
+	Renderer->SetRenderOrder(-5);
 	Renderer->SetSprite("portal");
 	Renderer->CreateAnimation("portal", "portal", 0.1f, 0, 7);
 	Renderer->ChangeAnimation("portal");

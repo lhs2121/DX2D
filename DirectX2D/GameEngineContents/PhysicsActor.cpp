@@ -11,12 +11,6 @@ PhysicsActor::~PhysicsActor()
 
 }
 
-void PhysicsActor::SetPos(float4 _Bottom1, float4 _Bottom2)
-{
-	Pos1 = _Bottom1;
-	Pos2 = _Bottom2;
-}
-
 void PhysicsActor::JumpCheck()
 {
 	if (GravityForce.Y <= 0)
@@ -31,7 +25,7 @@ void PhysicsActor::JumpCheck()
 
 void PhysicsActor::GroundCheck()
 {
-	float4 Pos = Transform.GetWorldPosition() + Pos1;
+	float4 Pos = Transform.GetWorldPosition();
 	CurColor = KCityMap::MainMap->GetColor(Pos, GameEngineColor::ALAPA);
 
 	if(GameEngineColor::RED == CurColor || GameEngineColor::BLUE == CurColor)//Áö¸é
@@ -130,7 +124,7 @@ void PhysicsActor::BluePixelSnap()
 	{
 		while (true)
 		{
-			float4 Pos = Transform.GetWorldPosition() + Pos1;
+			float4 Pos = Transform.GetWorldPosition();
 			GameEngineColor Color = KCityMap::MainMap->GetColor(Pos, GameEngineColor::ALAPA);
 
 			if (Color == GameEngineColor::BLUE)

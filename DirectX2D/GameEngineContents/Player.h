@@ -30,8 +30,6 @@ public:
 	Player& operator=(Player&& _Other) noexcept = delete;
 
 private:
-	float4 FootPos1 = { 0 , -42.5f };
-	float4 FootPos2 = { 0 , -41.5f };
 	float4 RopePos = { 0 , 30.0f };
 	PlayerState CurState;
 	PlayerDirState CurDirState;
@@ -41,6 +39,10 @@ private:
 	std::shared_ptr<class GameEngineSpriteRenderer> DebugRenderer0;
 	std::shared_ptr<class GameEngineSpriteRenderer> DebugRenderer1;
 	std::shared_ptr<class GameEngineSpriteRenderer> DebugRenderer2;
+
+	std::shared_ptr<class GameEngineSpriteRenderer> CollisionRenderer;
+
+	std::shared_ptr<class GameEngineCollision> Col;
 
 	void ChangeState(PlayerState _State)
 	{
