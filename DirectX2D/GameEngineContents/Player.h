@@ -30,7 +30,7 @@ public:
 	Player& operator=(Player&& _Other) noexcept = delete;
 
 private:
-	float4 RopePos = { 0 , 30.0f };
+	float4 RopePos = { 0 , 68.0f };
 	PlayerState CurState;
 	PlayerDirState CurDirState;
 	float Speed = 125;
@@ -56,6 +56,7 @@ private:
 	void FlipRenderer();
 	void CameraFocus();
 	void DirUpdate();
+	void HitUpdate();
 
 	void IdleUpdate(float _Delta);
 	void RunUpdate(float _Delta);

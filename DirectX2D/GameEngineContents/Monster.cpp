@@ -11,9 +11,8 @@ Monster::~Monster()
 
 void Monster::Start()
 {
-
 	{
-		Col = CreateComponent<GameEngineCollision>(0);
+		Col = CreateComponent<GameEngineCollision>(ContentsCollisionType::Monster);
 		Col->SetCollisionType(ColType::AABBBOX2D);
 		Col->Transform.SetLocalScale({ 100,100 });
 	}
@@ -32,7 +31,6 @@ void Monster::Start()
 		Renderer->SetImageScale({ 100,100 });
 		Renderer->SetPivotType(PivotType::Left);
 	}
-
 
 	Transform.SetLocalPosition({ 700, -300, 0.0f });
 }

@@ -56,23 +56,23 @@ void Player::Start()
 	{
 		DebugRenderer2 = CreateComponent<GameEngineSpriteRenderer>(3);
 		DebugRenderer2->SetRenderOrder(1);
-		DebugRenderer2->SetSprite("etc", 1);
+		DebugRenderer2->SetSprite("etc", 2);
 		DebugRenderer2->Transform.SetLocalPosition(RopePos);
 	}
 
 	{
 		Col = CreateComponent<GameEngineCollision>(4);
 		Col->SetCollisionType(ColType::AABBBOX2D);
-		Col->Transform.SetLocalScale({ 50,50 });
-		Col->Transform.AddLocalPosition({ 0,50 });
+		Col->Transform.SetLocalScale({ 45,65 });
+		Col->Transform.AddLocalPosition({ 0,35});
 	}
 
 	{
 		CollisionRenderer = CreateComponent<GameEngineSpriteRenderer>(5);
 		CollisionRenderer->SetRenderOrder(-1);
 		CollisionRenderer->SetSprite("etc", 1);
-		CollisionRenderer->SetImageScale({50,50});
-		CollisionRenderer->Transform.AddLocalPosition({ 0,50 });
+		CollisionRenderer->SetImageScale(Col->Transform.GetLocalScale());
+		CollisionRenderer->Transform.AddLocalPosition(Col->Transform.GetLocalPosition());
 	}
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
@@ -81,22 +81,10 @@ void Player::Start()
 
 void Player::Update(float _Delta)
 {
-	std::list<std::shared_ptr<Monster>> MonsterList =
-		GetLevel()->GetObjectGroupConvert<Monster>(ContentsObjectType::Monster);
-
-	for (std::shared_ptr<Monster> MonsterPtr : MonsterList)
-	{
-		CollisionData& Left = Col->Transform.ColData;
-		CollisionData& Right = MonsterPtr->Col->Transform.ColData;
- 
-		if (GameEngineTransform::Collision({Left , Right}))
-		{
-			MonsterPtr->Death();
-		}
-	}
-
 	DirUpdate();
 	CameraFocus();
+	HitUpdate();
+
 	PhysicsActor::Update(_Delta);
 
 	switch (CurState)
@@ -125,6 +113,25 @@ void Player::Update(float _Delta)
 		Jump();
 	}
 }
+
+void Player::HitUpdate()
+{
+	EventParameter Event;
+
+	Event.Enter = [](GameEngineCollision*, GameEngineCollision* Col)
+		{
+
+		};
+	Event.Stay = [](GameEngineCollision*, GameEngineCollision* Col)
+		{
+		};
+	Event.Exit = [](GameEngineCollision*, GameEngineCollision* Col)
+		{
+			Col->GetActor()->Death();
+		};
+	Col->CollisionEvent(ContentsCollisionType::Monster, Event);
+}
+
 
 void Player::DirUpdate()
 {
