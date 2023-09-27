@@ -57,7 +57,7 @@ void Player::Start()
 		DebugRenderer2 = CreateComponent<GameEngineSpriteRenderer>(3);
 		DebugRenderer2->SetRenderOrder(1);
 		DebugRenderer2->SetSprite("etc", 2);
-		DebugRenderer2->Transform.SetLocalPosition(RopePos);
+		DebugRenderer2->Transform.AddLocalPosition({ 0,-1,0 });
 	}
 
 	{
@@ -73,6 +73,7 @@ void Player::Start()
 		CollisionRenderer->SetSprite("etc", 1);
 		CollisionRenderer->SetImageScale(Col->Transform.GetLocalScale());
 		CollisionRenderer->Transform.AddLocalPosition(Col->Transform.GetLocalPosition());
+		CollisionRenderer->Off();
 	}
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
@@ -81,11 +82,16 @@ void Player::Start()
 
 void Player::Update(float _Delta)
 {
+	PhysicsActor::Update(_Delta);
 	DirUpdate();
 	CameraFocus();
 	HitUpdate();
+	RopePivotUpdate();
 
-	PhysicsActor::Update(_Delta);
+	if (GameEngineInput::IsDown(VK_UP) && IsGrounded == true)
+	{
+		Jump();
+	}
 
 	switch (CurState)
 	{
@@ -106,11 +112,6 @@ void Player::Update(float _Delta)
 		break;
 	default:
 		break;
-	}
-
-	if (GameEngineInput::IsDown(VK_UP) && IsGrounded == true)
-	{
-		Jump();
 	}
 }
 
@@ -153,6 +154,20 @@ void Player::DirUpdate()
 	}
 }
 
+void Player::RopePivotUpdate()
+{
+	if (CurState == PlayerState::DOWN)
+	{
+		RopePos = Transform.GetWorldPosition() + float4(0, -1);
+		DebugRenderer2->Transform.SetLocalPosition({ 0,-1 });
+	}
+	else
+	{
+		RopePos = Transform.GetWorldPosition() + float4(0, 68);
+		DebugRenderer2->Transform.SetLocalPosition({ 0,68 });
+	}
+	
+}
 void Player::CameraFocus()
 {
 	GetLevel()->GetMainCamera()->Transform.SetLocalPosition({ Transform.GetWorldPosition().X, Transform.GetWorldPosition().Y,GetLevel()->GetMainCamera()->Transform.GetWorldPosition().Z });

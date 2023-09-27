@@ -22,16 +22,17 @@ void Monster::Start()
 		CollisionRenderer->SetRenderOrder(32);
 		CollisionRenderer->SetSprite("etc", 1);
 		CollisionRenderer->SetImageScale({ 100,100 });
+		CollisionRenderer->Off();
 	}
 
 	{
 		Renderer = CreateComponent<GameEngineSpriteRenderer>(2);
 		Renderer->SetSprite("m0stand");
 		Renderer->SetRenderOrder(40);
-		Renderer->SetImageScale({ 100,100 });
-		Renderer->SetPivotType(PivotType::Left);
+		Renderer->SetPivotType(PivotType::Bottom);
 	}
 
+	Col->Transform.SetLocalPosition(Renderer->Transform.GetLocalPosition());
 	Transform.SetLocalPosition({ 700, -300, 0.0f });
 }
 
