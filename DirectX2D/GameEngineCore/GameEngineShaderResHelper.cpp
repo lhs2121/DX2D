@@ -5,11 +5,14 @@
 
 void GameEngineConstantBufferSetter::Setting()
 {
+	if (nullptr == CPUDataPtr)
+	{
+		MsgBoxAssert(Name + "상수버퍼를 세팅해주지 않았습니다.");
+	}
+
 	ShaderType Type = ParentShader->GetShaderType();
-	// 날 쓰는 쉐이더의 타입을 알아온다
 
 	Res->ChangeData(CPUDataPtr, DataSize);
-	// 컨스턴트버퍼 업데이트
 
 	switch (Type)
 	{

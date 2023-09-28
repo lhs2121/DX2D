@@ -11,6 +11,25 @@ PhysicsActor::~PhysicsActor()
 
 }
 
+GameEngineColor PhysicsActor::CalCulateColor(float4 _Pos)
+{
+	return KCityMap::MainMap->GetColor(_Pos, GameEngineColor::ALAPA);
+}
+
+void PhysicsActor::GroundCheck()
+{
+	CurColor = CalCulateColor(Transform.GetWorldPosition());
+
+	if(GameEngineColor::RED == CurColor || GameEngineColor::BLUE == CurColor)//지면
+	{
+		IsGrounded = true;
+	}
+	else if (GameEngineColor::RED != CurColor && GameEngineColor::BLUE != CurColor) //공중
+	{
+		IsGrounded = false;
+	}
+}
+
 void PhysicsActor::JumpCheck()
 {
 	if (GravityForce.Y <= 0)
@@ -23,19 +42,14 @@ void PhysicsActor::JumpCheck()
 	}
 }
 
-void PhysicsActor::GroundCheck()
+bool PhysicsActor::IsFall()
 {
-	float4 Pos = Transform.GetWorldPosition();
-	CurColor = KCityMap::MainMap->GetColor(Pos, GameEngineColor::ALAPA);
+	if (IsJumping == false && IsGrounded == false)
+	{
+		return true;
+	}
 
-	if(GameEngineColor::RED == CurColor || GameEngineColor::BLUE == CurColor)//지면
-	{
-		IsGrounded = true;
-	}
-	else if (GameEngineColor::RED != CurColor && GameEngineColor::BLUE != CurColor) //공중
-	{
-		IsGrounded = false;
-	}
+	return false;
 }
 
 void PhysicsActor::Gravity(float _Delta)
@@ -49,11 +63,7 @@ void PhysicsActor::Gravity(float _Delta)
 	}
 	else if (IsGrounded == false)
 	{
-		if (CanClimbRope == true)
-		{
-			GravityForce.Y = 0.0f;
-		}
-		else if (GravityForce.Y > -MaxGravity)
+		if (GravityForce.Y > -MaxGravity)
 		{
 			GravityForce.Y -= 1000.0f * _Delta;
 		}
@@ -83,29 +93,17 @@ void PhysicsActor::RedPixelSnap()
 	{
 		while (true)
 		{
-			float4 Pos = Transform.GetWorldPosition() + Pos2;
-			GameEngineColor Color = KCityMap::MainMap->GetColor(Pos, GameEngineColor::RED);
-
+			GameEngineColor Color = CalCulateColor(Transform.GetWorldPosition() + Pos2);
 			if (Color == GameEngineColor::RED)
 			{
 				Transform.AddLocalPosition(float4::UP);
 			}
-			else if (Color != GameEngineColor::RED)
+			else
 			{
 				break;
 			}
 		}
 	}
-}
-
-bool PhysicsActor::IsFall()
-{
-	if (IsJumping == false && IsGrounded == false)
-	{
-		return true;
-	}
-
-	return false;
 }
 
 void PhysicsActor::BluePixelSnap()
@@ -124,14 +122,12 @@ void PhysicsActor::BluePixelSnap()
 	{
 		while (true)
 		{
-			float4 Pos = Transform.GetWorldPosition();
-			GameEngineColor Color = KCityMap::MainMap->GetColor(Pos, GameEngineColor::ALAPA);
-
+			GameEngineColor Color = CalCulateColor(Transform.GetWorldPosition());
 			if (Color == GameEngineColor::BLUE)
 			{
 				Transform.AddLocalPosition(float4::DOWN);
 			}
-			else if (Color != GameEngineColor::BLUE)
+			else
 			{
 				break;
 			}
@@ -143,7 +139,10 @@ void PhysicsActor::Update(float _Delta)
 {
 	JumpCheck();
 	GroundCheck();
-	Gravity(_Delta);
+	if (ApplyGravity == true)
+	{
+		Gravity(_Delta);
+	}
 	BluePixelSnap();
 	RedPixelSnap();
 }

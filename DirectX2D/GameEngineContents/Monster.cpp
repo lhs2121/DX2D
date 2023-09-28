@@ -18,14 +18,6 @@ void Monster::Start()
 	}
 
 	{
-		CollisionRenderer = CreateComponent<GameEngineSpriteRenderer>(1);
-		CollisionRenderer->SetRenderOrder(32);
-		CollisionRenderer->SetSprite("etc", 1);
-		CollisionRenderer->SetImageScale({ 100,100 });
-		CollisionRenderer->Off();
-	}
-
-	{
 		Renderer = CreateComponent<GameEngineSpriteRenderer>(2);
 		Renderer->SetSprite("m0stand");
 		Renderer->SetRenderOrder(40);

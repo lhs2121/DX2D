@@ -26,7 +26,6 @@ void KCityMap::Start()
 {
 	{
 		Renderer0 = CreateComponent<GameEngineSpriteRenderer>(0);
-		//Renderer0->SetSamplerState(SamplerOption::LINEAR);
 		Renderer0->SetSprite("kerningcity", 0);
 		Renderer0->SetRenderOrder(-10);
 
@@ -36,17 +35,15 @@ void KCityMap::Start()
 
 	{
 		Renderer1 = CreateComponent<GameEngineSpriteRenderer>(1);
-		//Renderer1->SetSamplerState(SamplerOption::LINEAR);
 		Renderer1->SetSprite("kerningcity", 1);
 		Renderer1->SetRenderOrder(-9);
 	}
 
 	{
 		Renderer2 = CreateComponent<GameEngineSpriteRenderer>(2);
-		//Renderer2->SetSamplerState(SamplerOption::POINT);
 		Renderer2->SetSprite("kerningcity", 2);
 		Renderer2->SetRenderOrder(-8);
-		//Renderer2->Off();
+	    //Renderer2->Off();
 	}
 
 	mapScale = Renderer0->GetSprite()->GetSpriteData(1).GetScale();

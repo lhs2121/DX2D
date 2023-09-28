@@ -20,4 +20,5 @@ enum class ContentsCollisionType
 {
 	Player,
 	Monster,
+	Portal
 };

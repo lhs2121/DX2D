@@ -17,7 +17,6 @@ public:
 protected:
 	float4 GravityForce = { 0.0f, 0.0f, 0.0f, 1.0f };
 	float4 Pos2 = {0,1};
-	float4 Pos3;
 	GameEngineColor CurColor;
 
 	float MaxGravity = 300.0f;
@@ -25,8 +24,9 @@ protected:
 
 	bool IsJumping;
 	bool IsGrounded;
-	bool CanClimbRope; 
+	bool ApplyGravity = true;
 
+	GameEngineColor CalCulateColor(float4 _Pos);
 	bool IsFall();
 	void RedPixelSnap();
 	void BluePixelSnap();

@@ -44,6 +44,7 @@ void Player::Start()
 		DebugRenderer0 = CreateComponent<GameEngineSpriteRenderer>(1);
 		DebugRenderer0->SetRenderOrder(1);
 		DebugRenderer0->SetSprite("etc");
+		DebugRenderer0->SetMaterial()
 	}
 
 	{
@@ -67,14 +68,6 @@ void Player::Start()
 		Col->Transform.AddLocalPosition({ 0,35});
 	}
 
-	{
-		CollisionRenderer = CreateComponent<GameEngineSpriteRenderer>(5);
-		CollisionRenderer->SetRenderOrder(-1);
-		CollisionRenderer->SetSprite("etc", 1);
-		CollisionRenderer->SetImageScale(Col->Transform.GetLocalScale());
-		CollisionRenderer->Transform.AddLocalPosition(Col->Transform.GetLocalPosition());
-		CollisionRenderer->Off();
-	}
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	Transform.SetLocalPosition({ 500, -900, 0.0f });
@@ -82,29 +75,49 @@ void Player::Start()
 
 void Player::Update(float _Delta)
 {
+	PortalCheck();
 	PhysicsActor::Update(_Delta);
+	RopeCheck();
 	DirUpdate();
 	CameraFocus();
 	HitUpdate();
 	RopePivotUpdate();
+	StateUpdate(_Delta);
 
-	if (GameEngineInput::IsDown(VK_UP) && IsGrounded == true)
+	if (GameEngineInput::IsDown(VK_MENU) && IsGrounded == true)
 	{
 		Jump();
 	}
+	if (GravityForce.Y != 0 && CurState != PlayerState::ROPE)
+	{
+		MainSpriteRenderer->ChangeAnimation("jump");
+	}
+	this;
+}
 
+void Player::ChangeState(PlayerState _State)
+{
+	CurState = _State;
+}
+void Player::StateUpdate(float _Delta)
+{
 	switch (CurState)
 	{
 	case PlayerState::IDLE:
+		MainSpriteRenderer->ChangeAnimation("idle");
 		IdleUpdate(_Delta);
 		break;
 	case PlayerState::RUN:
+		MainSpriteRenderer->ChangeAnimation("walk");
 		RunUpdate(_Delta);
 		break;
 	case PlayerState::ROPE:
+		MainSpriteRenderer->ChangeAnimation("rope");
+		MainSpriteRenderer->AnimationPauseOn();
 		RopeUpdate(_Delta);
 		break;
 	case PlayerState::DOWN:
+		MainSpriteRenderer->ChangeAnimation("down");
 		DownUpdate(_Delta);
 		break;
 	case PlayerState::ATTACK:
@@ -113,6 +126,42 @@ void Player::Update(float _Delta)
 	default:
 		break;
 	}
+}
+void Player::RopeCheck()
+{
+	GameEngineColor Color = KCityMap::MainMap->GetColor(RopePos, GameEngineColor::ALAPA);
+
+	if (GameEngineColor::GREEN == Color)
+	{
+		CanRope = true;
+	}
+	else
+	{
+		CanRope = false;
+	}
+}
+
+void Player::PortalCheck()
+{
+	EventParameter Event;
+
+	Event.Enter = [](GameEngineCollision*, GameEngineCollision* Col)
+		{
+
+		};
+	Event.Stay = [](GameEngineCollision*, GameEngineCollision* Col)
+		{
+			if (GameEngineInput::IsDown(VK_UP))
+			{
+				std::string Level = Col->GetName();
+				GameEngineCore::ChangeLevel(Level);
+			}
+		};
+	Event.Exit = [](GameEngineCollision*, GameEngineCollision* Col)
+		{
+			Col->GetActor()->Death();
+		};
+	Col->CollisionEvent(ContentsCollisionType::Portal, Event);
 }
 
 void Player::HitUpdate()
@@ -136,6 +185,7 @@ void Player::HitUpdate()
 
 void Player::DirUpdate()
 {
+
 	if ((GameEngineInput::IsFree(VK_RIGHT) && GameEngineInput::IsDown(VK_LEFT)) || (GameEngineInput::IsFree(VK_RIGHT) && GameEngineInput::IsPress(VK_LEFT)))
 	{
 		if (CurDirState == PlayerDirState::RIGHT)
@@ -148,7 +198,7 @@ void Player::DirUpdate()
 	{
 		if (CurDirState == PlayerDirState::LEFT)
 		{
-			FlipRenderer();;
+			FlipRenderer();
 		}
 		ChangeDirState(PlayerDirState::RIGHT);
 	}
@@ -156,15 +206,20 @@ void Player::DirUpdate()
 
 void Player::RopePivotUpdate()
 {
-	if (CurState == PlayerState::DOWN)
+	if (GameEngineInput::IsPress(VK_DOWN))
 	{
 		RopePos = Transform.GetWorldPosition() + float4(0, -1);
 		DebugRenderer2->Transform.SetLocalPosition({ 0,-1 });
 	}
+	else if(GameEngineInput::IsPress(VK_UP))
+	{
+		RopePos = Transform.GetWorldPosition() + float4(0, 65);
+		DebugRenderer2->Transform.SetLocalPosition({ 0,65 });
+	}
 	else
 	{
-		RopePos = Transform.GetWorldPosition() + float4(0, 68);
-		DebugRenderer2->Transform.SetLocalPosition({ 0,68 });
+		RopePos = Transform.GetWorldPosition() + float4(0, -1);
+		DebugRenderer2->Transform.SetLocalPosition({ 0,-1 });
 	}
 	
 }

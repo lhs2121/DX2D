@@ -15,7 +15,9 @@ enum class PlayerDirState
 	RIGHT,
 };
 
-// Ό³Έν :
+
+class GameEngineSpriteRenderer;
+class GameEngineCollision;
 class Player : public PhysicsActor
 {
 public:
@@ -34,20 +36,15 @@ private:
 	PlayerState CurState;
 	PlayerDirState CurDirState;
 	float Speed = 125;
+	bool CanRope;
 
-	std::shared_ptr<class GameEngineSpriteRenderer> MainSpriteRenderer;
-	std::shared_ptr<class GameEngineSpriteRenderer> DebugRenderer0;
-	std::shared_ptr<class GameEngineSpriteRenderer> DebugRenderer1;
-	std::shared_ptr<class GameEngineSpriteRenderer> DebugRenderer2;
+	std::shared_ptr<GameEngineSpriteRenderer> MainSpriteRenderer;
+	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer0;
+	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer1;
+	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer2;
+	std::shared_ptr<GameEngineCollision> Col;
 
-	std::shared_ptr<class GameEngineSpriteRenderer> CollisionRenderer;
-
-	std::shared_ptr<class GameEngineCollision> Col;
-
-	void ChangeState(PlayerState _State)
-	{
-		CurState = _State;
-	}
+	void ChangeState(PlayerState _State);
 	void ChangeDirState(PlayerDirState _State)
 	{
 		CurDirState = _State;
@@ -57,15 +54,17 @@ private:
 	void CameraFocus();
 	void DirUpdate();
 	void HitUpdate();
+	void PortalCheck();
 
+	void RopeCheck();
 	void RopePivotUpdate();
 
+	void StateUpdate(float _Delta);
 	void IdleUpdate(float _Delta);
 	void RunUpdate(float _Delta);
 	void RopeUpdate(float _Delta);
 	void DownUpdate(float _Delta);
 	void JumpUpdate(float _Delta);
-	void FallUpdate(float _Delta);
 	void AttackUpdate(float _Delta);
 
 	void Start() override;
