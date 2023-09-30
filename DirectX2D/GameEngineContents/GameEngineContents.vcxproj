@@ -177,6 +177,7 @@
     <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="PhysicsActor.h" />
     <ClInclude Include="Portal.h" />
+    <ClInclude Include="MapleMap.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KCityMap.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="PhysicsActor.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="MapleMap.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

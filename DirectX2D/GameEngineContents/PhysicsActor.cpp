@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "PhysicsActor.h"
-#include "KCityMap.h"
+#include "MapleMap.h"
 
 PhysicsActor::PhysicsActor()
 {
@@ -13,7 +13,7 @@ PhysicsActor::~PhysicsActor()
 
 GameEngineColor PhysicsActor::CalCulateColor(float4 _Pos)
 {
-	return KCityMap::MainMap->GetColor(_Pos, GameEngineColor::ALAPA);
+	return MapleMap::CurMap->GetColor(_Pos, GameEngineColor::ALAPA);
 }
 
 void PhysicsActor::GroundCheck()

@@ -6,20 +6,16 @@
 #include <GameEngineCore/GameEngineCollision.h>
 #include "ContentsEnum.h"
 
-KCityMap* KCityMap::MainMap;
+
 
 KCityMap::KCityMap()
 {
-	MainMap = this;
+	
 }
 
 KCityMap::~KCityMap()
 {
-}
 
-float4 KCityMap::GetMapScale()
-{
-	return mapScale;
 }
 
 void KCityMap::Start()
@@ -40,27 +36,16 @@ void KCityMap::Start()
 	}
 
 	{
-		Renderer2 = CreateComponent<GameEngineSpriteRenderer>(2);
-		Renderer2->SetSprite("kerningcity", 2);
-		Renderer2->SetRenderOrder(-8);
+		DebugRenderer = CreateComponent<GameEngineSpriteRenderer>(2);
+		DebugRenderer->SetSprite("kerningcity", 2);
+		DebugRenderer->SetRenderOrder(-8);
 	    //Renderer2->Off();
 	}
 
-	mapScale = Renderer0->GetSprite()->GetSpriteData(1).GetScale();
-	Transform.SetLocalPosition({ mapScale.hX(), -mapScale.hY(), 0.0f });
+	MapScale = Renderer0->GetSprite()->GetSpriteData(1).GetScale();
+	Transform.SetLocalPosition({ MapScale.hX(), -MapScale.hY(), 0.0f });
 }
 
-GameEngineColor KCityMap::GetColor(float4 _Pos, GameEngineColor _DefaultColor)
-{
-	// 플레이어의 위치를 이미지의 좌표계로 변경한다.
-	// 이미지는 위에서부터 아래로 내려갈수록 +가 되기 때문이다.
-	_Pos.Y *= -1.0f;
-
-	std::shared_ptr<GameEngineTexture> Tex = GameEngineTexture::Find("2.png");
-
-
-	return Tex->GetColor(_Pos, _DefaultColor);
-}
 void KCityMap::Update(float _Delta)
 {
 

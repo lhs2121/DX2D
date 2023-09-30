@@ -1,11 +1,10 @@
 #pragma once
-#include <GameEngineCore/GameEngineActor.h>
+#include "MapleMap.h"
 
 // Ό³Έν :
-class KCityMap : public GameEngineActor
+class KCityMap : public MapleMap
 {
 public:
-	static KCityMap* MainMap;
 	// constrcuter destructer
 	KCityMap();
 	~KCityMap();
@@ -16,19 +15,14 @@ public:
 	KCityMap& operator=(const KCityMap& _Other) = delete;
 	KCityMap& operator=(KCityMap&& _Other) noexcept = delete;
 
-	float4 GetMapScale();
-	GameEngineColor GetColor(float4 _Pos, GameEngineColor _DefaultColor = { 255, 255, 255, 255 });
-
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
+	GameEngineColor GetColor(float4 _Pos, GameEngineColor _DefaultColor = { 0, 0, 0, 0 });
 
 private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer0;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer1;
-	std::shared_ptr<class GameEngineSpriteRenderer> Renderer2;
-
-	float4 mapScale;
 };
 
  

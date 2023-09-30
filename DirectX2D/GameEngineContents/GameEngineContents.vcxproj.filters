@@ -1,26 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Player.h">
-      <Filter>GlobalActor</Filter>
-    </ClInclude>
     <ClInclude Include="ContentsEnum.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsActor.h">
-      <Filter>GlobalActor</Filter>
-    </ClInclude>
-    <ClInclude Include="Portal.h">
-      <Filter>GlobalActor</Filter>
-    </ClInclude>
     <ClInclude Include="TitleLevel.h">
-      <Filter>Scene0 : Title\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="KCityLevel.h">
-      <Filter>Scene1 : KerningCity\Level</Filter>
+      <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="KCityMap.h">
-      <Filter>Scene1 : KerningCity\Actor</Filter>
+      <Filter>Map</Filter>
     </ClInclude>
     <ClInclude Include="ContentsCore.h">
       <Filter>ETC</Filter>
@@ -29,30 +17,30 @@
       <Filter>ETC</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>GlobalActor</Filter>
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsActor.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="KCityLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MapleMap.h">
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Player.cpp">
-      <Filter>GlobalActor</Filter>
-    </ClCompile>
-    <ClCompile Include="Player_State.cpp">
-      <Filter>GlobalActor</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsActor.cpp">
-      <Filter>GlobalActor</Filter>
-    </ClCompile>
-    <ClCompile Include="Portal.cpp">
-      <Filter>GlobalActor</Filter>
-    </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
-      <Filter>Scene0 : Title\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="KCityLevel.cpp">
-      <Filter>Scene1 : KerningCity\Level</Filter>
+      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="KCityMap.cpp">
-      <Filter>Scene1 : KerningCity\Actor</Filter>
+      <Filter>Map</Filter>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp">
       <Filter>ETC</Filter>
@@ -61,32 +49,38 @@
       <Filter>ETC</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>GlobalActor</Filter>
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsActor.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_State.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="KCityLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MapleMap.cpp">
+      <Filter>Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Global">
       <UniqueIdentifier>{491c0729-a3f0-4469-9c63-a2a32d102fc2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GlobalActor">
-      <UniqueIdentifier>{0d7a6e2e-610e-4a22-a788-0b60cefc6b35}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ETC">
       <UniqueIdentifier>{01a40786-8b46-44b6-b510-a6c0d135c08c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene0 : Title">
-      <UniqueIdentifier>{ee090191-ce80-42ac-87a5-fa7796c467c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene0 : Title\Level">
+    <Filter Include="Level">
       <UniqueIdentifier>{8f5b00fb-5caa-4fae-9d21-46063d7535d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene1 : KerningCity">
-      <UniqueIdentifier>{99383f15-7e91-44b0-a7ff-d155de92bf0d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene1 : KerningCity\Level">
-      <UniqueIdentifier>{26944891-a3c6-4033-ac57-1d204b5afeb3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene1 : KerningCity\Actor">
+    <Filter Include="Map">
       <UniqueIdentifier>{94bd9443-64fa-4f06-a71d-38a5c678fd3e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

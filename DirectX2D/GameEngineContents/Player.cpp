@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
-#include "KCityMap.h"
 #include "Monster.h"
+#include "MapleMap.h"
 
 Player::Player()
 {
@@ -44,7 +44,6 @@ void Player::Start()
 		DebugRenderer0 = CreateComponent<GameEngineSpriteRenderer>(1);
 		DebugRenderer0->SetRenderOrder(1);
 		DebugRenderer0->SetSprite("etc");
-		DebugRenderer0->SetMaterial()
 	}
 
 	{
@@ -75,13 +74,13 @@ void Player::Start()
 
 void Player::Update(float _Delta)
 {
-	PortalCheck();
 	PhysicsActor::Update(_Delta);
-	RopeCheck();
-	DirUpdate();
 	CameraFocus();
+	DirUpdate();
 	HitUpdate();
 	RopePivotUpdate();
+	RopeCheck();
+	PortalCheck();
 	StateUpdate(_Delta);
 
 	if (GameEngineInput::IsDown(VK_MENU) && IsGrounded == true)
@@ -92,7 +91,6 @@ void Player::Update(float _Delta)
 	{
 		MainSpriteRenderer->ChangeAnimation("jump");
 	}
-	this;
 }
 
 void Player::ChangeState(PlayerState _State)
@@ -129,7 +127,7 @@ void Player::StateUpdate(float _Delta)
 }
 void Player::RopeCheck()
 {
-	GameEngineColor Color = KCityMap::MainMap->GetColor(RopePos, GameEngineColor::ALAPA);
+	GameEngineColor Color = MapleMap::CurMap->GetColor(RopePos, GameEngineColor::ALAPA);
 
 	if (GameEngineColor::GREEN == Color)
 	{
@@ -159,7 +157,7 @@ void Player::PortalCheck()
 		};
 	Event.Exit = [](GameEngineCollision*, GameEngineCollision* Col)
 		{
-			Col->GetActor()->Death();
+
 		};
 	Col->CollisionEvent(ContentsCollisionType::Portal, Event);
 }

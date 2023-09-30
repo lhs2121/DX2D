@@ -4,6 +4,7 @@
 #include "KCityMap.h"
 #include "Portal.h"
 #include "Monster.h"
+#include "MapleMap.h"
 
 KCityLevel::KCityLevel() 
 {
@@ -40,7 +41,8 @@ void KCityLevel::Start()
 
 	{
 		std::shared_ptr<Player> Object = CreateActor<Player>(ContentsObjectType::Player);
-		CreateActor<KCityMap>(ContentsObjectType::Map);
+		Map = CreateActor<KCityMap>(ContentsObjectType::Map);
+		MapleMap::SetCurMap(Map);
 		CreateActor<Portal>(ContentsObjectType::MapObject);
 		CreateActor<Monster>(ContentsObjectType::Monster);
 	}
@@ -55,6 +57,14 @@ void KCityLevel::Update(float _Delta)
 	if (GameEngineInput::IsPress('E'))
 	{
 		GetMainCamera()->Transform.AddLocalPosition({ 0,0,-500 * _Delta });
+	}
+	if (GameEngineInput::IsDown('C'))
+	{
+		IsDebug = !IsDebug;
+	}
+	if (GameEngineInput::IsDown('P'))
+	{
+		MapleMap::CurMap->SwitchDebugRender();
 	}
 }
 

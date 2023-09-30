@@ -19,7 +19,7 @@ protected:
 	float4 Pos2 = {0,1};
 	GameEngineColor CurColor;
 
-	float MaxGravity = 300.0f;
+	float MaxGravity = 500.0f;
 	float JumpForce = 300.0f;
 
 	bool IsJumping;

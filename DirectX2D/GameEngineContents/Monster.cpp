@@ -24,7 +24,7 @@ void Monster::Start()
 		Renderer->SetPivotType(PivotType::Bottom);
 	}
 
-	Col->Transform.SetLocalPosition(Renderer->Transform.GetLocalPosition());
+	Col->Transform.SetLocalPosition({ 0,50 });
 	Transform.SetLocalPosition({ 700, -300, 0.0f });
 }
 

@@ -1,6 +1,5 @@
 #include "PreCompile.h"
 #include "Portal.h"
-#include "KCityMap.h"
 
 Portal::Portal()
 {
