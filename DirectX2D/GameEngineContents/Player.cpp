@@ -237,6 +237,11 @@ void Player::FlipRenderer()
 void Player::LevelEnd(GameEngineLevel* _NextLevel)
 {
 	SetParent(_NextLevel,3);
+	int order = static_cast<int>(ECAMERAORDER::Main);
+	MainSpriteRenderer->SetViewCameraSelect(order);
+	DebugRenderer0->SetViewCameraSelect(order);
+	DebugRenderer1->SetViewCameraSelect(order);
+	DebugRenderer2->SetViewCameraSelect(order);
 }
 
 
