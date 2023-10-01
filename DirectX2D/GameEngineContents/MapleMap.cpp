@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "MapleMap.h"
-
+#include "Player.h"
 
 std::shared_ptr<MapleMap> MapleMap::CurMap;
 
@@ -28,6 +28,7 @@ GameEngineColor MapleMap::GetColor(float4 _Pos, GameEngineColor _DefaultColor)
 	// 이미지는 위에서부터 아래로 내려갈수록 +가 되기 때문이다.
 	_Pos.Y *= -1.0f;
 
+	std::string_view a = DebugRenderer->GetCurSprite().Texture->GetName();
 	std::shared_ptr<GameEngineTexture> Tex = GameEngineTexture::Find(DebugRenderer->GetCurSprite().Texture->GetName());
 
 

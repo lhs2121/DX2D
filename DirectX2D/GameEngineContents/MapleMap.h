@@ -23,5 +23,7 @@ public:
 protected:
 	std::shared_ptr<class GameEngineSpriteRenderer> DebugRenderer;
 	float4 MapScale;
+	float4 StartingLocation;
+
 };
 

@@ -9,6 +9,11 @@ Portal::~Portal()
 {
 }
 
+void Portal::SetNextMap(std::string _MapName)
+{
+	Col->SetName(_MapName);
+}
+
 void Portal::Start()
 {
 	{
@@ -16,7 +21,6 @@ void Portal::Start()
 		Col->SetCollisionType(ColType::AABBBOX2D);
 		Col->Transform.SetLocalScale({ 50,100 });
 		Col->Transform.SetLocalPosition({ 0,-70 });
-		Col->SetName("TitleLevel");
 	}
 
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(1);

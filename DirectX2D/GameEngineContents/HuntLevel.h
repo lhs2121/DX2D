@@ -2,18 +2,18 @@
 #include <GameEngineCore/GameEngineLevel.h>
 
 // Ό³Έν :
-class KCityLevel : public GameEngineLevel
+class HuntLevel : public GameEngineLevel
 {
 public:
 	// constrcuter destructer
-	KCityLevel();
-	~KCityLevel();
+	HuntLevel();
+	~HuntLevel();
 
 	// delete Function
-	KCityLevel(const KCityLevel& _Other) = delete;
-	KCityLevel(KCityLevel&& _Other) noexcept = delete;
-	KCityLevel& operator=(const KCityLevel& _Other) = delete;
-	KCityLevel& operator=(KCityLevel&& _Other) noexcept = delete;
+	HuntLevel(const HuntLevel& _Other) = delete;
+	HuntLevel(HuntLevel&& _Other) noexcept = delete;
+	HuntLevel& operator=(const HuntLevel& _Other) = delete;
+	HuntLevel& operator=(HuntLevel&& _Other) noexcept = delete;
 
 protected:
 	void Start() override;
@@ -23,5 +23,6 @@ protected:
 
 private:
 	std::shared_ptr<class MapleMap> Map;
+	std::shared_ptr<class Player> Player;
 };
 

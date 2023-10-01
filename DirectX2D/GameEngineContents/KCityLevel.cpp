@@ -40,11 +40,8 @@ void KCityLevel::Start()
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
 
 	{
-		std::shared_ptr<Player> Object = CreateActor<Player>(ContentsObjectType::Player);
+		CreateActor<Player>(ContentsObjectType::Player);
 		Map = CreateActor<KCityMap>(ContentsObjectType::Map);
-		MapleMap::SetCurMap(Map);
-		CreateActor<Portal>(ContentsObjectType::MapObject);
-		CreateActor<Monster>(ContentsObjectType::Monster);
 	}
 }
 
@@ -70,10 +67,10 @@ void KCityLevel::Update(float _Delta)
 
 void KCityLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
-
+	MapleMap::SetCurMap(Map);
 }
 
 void KCityLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	
 }

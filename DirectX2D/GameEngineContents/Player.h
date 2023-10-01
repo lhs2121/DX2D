@@ -31,6 +31,7 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
+	static Player* MainPlayer;
 private:
 	float4 RopePos;
 	PlayerState CurState;
@@ -64,10 +65,10 @@ private:
 	void RunUpdate(float _Delta);
 	void RopeUpdate(float _Delta);
 	void DownUpdate(float _Delta);
-	void JumpUpdate(float _Delta);
 	void AttackUpdate(float _Delta);
 
 	void Start() override;
 	void Update(float _Delta) override;
+	void LevelEnd(GameEngineLevel* _NextLevel) override;
 };
 

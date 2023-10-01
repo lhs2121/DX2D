@@ -3,8 +3,11 @@
 #include "Monster.h"
 #include "MapleMap.h"
 
+Player* Player::MainPlayer = nullptr;
+
 Player::Player()
 {
+	MainPlayer = this;
 	CurState = PlayerState::IDLE;
 	CurDirState = PlayerDirState::LEFT;
 }
@@ -231,6 +234,9 @@ void Player::FlipRenderer()
 	MainSpriteRenderer->Transform.SetLocalScale({ -MainSpriteRenderer->Transform.GetLocalScale().X,1.0f,1.0f });
 }
 
-
+void Player::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	SetParent(_NextLevel,3);
+}
 
 

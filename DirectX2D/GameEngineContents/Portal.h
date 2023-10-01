@@ -14,8 +14,9 @@ public:
 	Portal(Portal&& _Other) noexcept = delete;
 	Portal& operator=(const Portal& _Other) = delete;
 	Portal& operator=(Portal&& _Other) noexcept = delete;
-protected:
 
+	void SetNextMap(std::string _MapName);
+protected:
 	void Start() override;
 	void Update(float _Delta) override;
 
