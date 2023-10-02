@@ -55,7 +55,6 @@ private:
 	void CameraFocus();
 	void DirUpdate();
 	void HitUpdate();
-	void PortalCheck();
 
 	void RopeCheck();
 	void RopePivotUpdate();
