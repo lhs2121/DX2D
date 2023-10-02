@@ -5,7 +5,6 @@
 class MapleMap : public GameEngineActor
 {
 public:
-	static std::shared_ptr<MapleMap> CurMap;
 	// constrcuter destructer
 	MapleMap();
 	~MapleMap();
@@ -16,14 +15,26 @@ public:
 	MapleMap& operator=(const MapleMap& _Other) = delete;
 	MapleMap& operator=(MapleMap&& _Other) noexcept = delete;
 
+	static std::shared_ptr<MapleMap> CurMap;
 	static void SetCurMap(std::shared_ptr<MapleMap> _Map);
-	float4 GetMapScale();
-	GameEngineColor GetColor(float4 _Pos, GameEngineColor _DefaultColor = { 0, 0, 0, 0 });
-	void SwitchDebugRender();
-protected:
-	std::shared_ptr<class GameEngineSpriteRenderer> DebugRenderer;
-	float4 MapScale;
-	float4 StartingLocation;
 
+	void SwitchDebugRender();
+
+	float4 GetMapScale();
+
+	GameEngineColor GetColor(float4 _Pos, GameEngineColor _DefaultColor = { 0, 0, 0, 0 });
+
+	std::shared_ptr<class Portal> CreatePortal(std::string _NextLevel, float4 _Pos);
+
+	std::shared_ptr<class Portal> GetPortal(std::string _NextLevel)
+	{
+		return PortalGroup[_NextLevel];
+	};
+
+protected:
+	float4 MapScale;
+
+	std::shared_ptr<class GameEngineSpriteRenderer> DebugRenderer;
+	std::map<std::string, std::shared_ptr<class Portal>> PortalGroup;
 };
 

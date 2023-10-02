@@ -45,6 +45,7 @@ public:
 		}
 
 		std::shared_ptr<GameEngineLevel> NewLevel = std::make_shared<LevelType>();
+		NewLevel->SetName(Upper);
 		LevelInit(NewLevel);
 		AllLevel.insert(std::make_pair(Upper, NewLevel));
 	}

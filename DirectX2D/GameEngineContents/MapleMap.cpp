@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "MapleMap.h"
 #include "Player.h"
+#include "Portal.h"
 
 std::shared_ptr<MapleMap> MapleMap::CurMap;
 
@@ -33,6 +34,16 @@ GameEngineColor MapleMap::GetColor(float4 _Pos, GameEngineColor _DefaultColor)
 
 
 	return Tex->GetColor(_Pos, _DefaultColor);
+}
+
+std::shared_ptr<class Portal> MapleMap::CreatePortal(std::string _NextLevel, float4 _Pos)
+{
+	std::shared_ptr<Portal> NewPortal = GetLevel()->CreateActor<Portal>(ContentsObjectType::MapObject);
+	std::string Upper = GameEngineString::ToUpperReturn(_NextLevel);
+	NewPortal->SetNextMap(Upper);
+	NewPortal->Transform.SetWorldPosition(_Pos);
+	PortalGroup.insert(std::make_pair(Upper,NewPortal));
+	return NewPortal;
 }
 
 void MapleMap::SwitchDebugRender()

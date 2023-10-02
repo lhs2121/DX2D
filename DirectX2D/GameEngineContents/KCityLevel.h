@@ -1,8 +1,8 @@
 #pragma once
-#include <GameEngineCore/GameEngineLevel.h>
+#include "MapleLevel.h"
 
 // Ό³Έν :
-class KCityLevel : public GameEngineLevel
+class KCityLevel : public MapleLevel
 {
 public:
 	// constrcuter destructer

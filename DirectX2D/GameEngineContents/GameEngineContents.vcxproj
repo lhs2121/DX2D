@@ -180,10 +180,12 @@
     <ClInclude Include="MapleMap.h" />
     <ClInclude Include="HuntingMap.h" />
     <ClInclude Include="HuntLevel.h" />
+    <ClInclude Include="MapleLevel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KCityMap.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
+    <ClCompile Include="MapleLevel.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="KCityLevel.cpp" />
     <ClCompile Include="PreCompile.cpp">

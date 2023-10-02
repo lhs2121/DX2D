@@ -9,9 +9,14 @@ Portal::~Portal()
 {
 }
 
-void Portal::SetNextMap(std::string _MapName)
+void Portal::SetNextMap(std::string _NextLevel)
 {
-	Col->SetName(_MapName);
+	Col->SetName(_NextLevel);
+}
+
+std::string Portal::GetNextMap()
+{
+	return Col->GetName();
 }
 
 void Portal::Start()
@@ -28,9 +33,9 @@ void Portal::Start()
 	Renderer->SetSprite("portal");
 	Renderer->CreateAnimation("portal", "portal", 0.1f, 0, 7);
 	Renderer->ChangeAnimation("portal");
-	Transform.SetLocalPosition({ 310, -910, 0.0f });
 }
 
 void Portal::Update(float _Delta)
 {
+
 }

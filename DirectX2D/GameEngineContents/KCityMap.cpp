@@ -16,8 +16,7 @@ KCityMap::~KCityMap()
 void KCityMap::Start()
 {
 	{
-		Portal0 = GetLevel()->CreateActor<Portal>(ContentsObjectType::MapObject);
-		Portal0->SetNextMap("HuntLevel");
+		CreatePortal("HuntLevel", { 310, -910 });
 		GetLevel()->CreateActor<Monster>(ContentsObjectType::Monster);
 	}
 
@@ -51,3 +50,5 @@ void KCityMap::Update(float _Delta)
 {
 
 }
+
+

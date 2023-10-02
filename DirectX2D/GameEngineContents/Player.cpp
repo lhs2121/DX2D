@@ -2,6 +2,8 @@
 #include "Player.h"
 #include "Monster.h"
 #include "MapleMap.h"
+#include "Portal.h"
+#include "MapleLevel.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -64,7 +66,7 @@ void Player::Start()
 	}
 
 	{
-		Col = CreateComponent<GameEngineCollision>(4);
+		Col = CreateComponent<GameEngineCollision>(ContentsCollisionType::Player);
 		Col->SetCollisionType(ColType::AABBBOX2D);
 		Col->Transform.SetLocalScale({ 45,65 });
 		Col->Transform.AddLocalPosition({ 0,35});
@@ -150,11 +152,12 @@ void Player::PortalCheck()
 		{
 
 		};
-	Event.Stay = [](GameEngineCollision*, GameEngineCollision* Col)
+	Event.Stay = [&](GameEngineCollision*, GameEngineCollision* Col)
 		{
 			if (GameEngineInput::IsDown(VK_UP))
 			{
 				std::string Level = Col->GetName();
+				PrevLevelName = Level;
 				GameEngineCore::ChangeLevel(Level);
 			}
 		};
@@ -186,7 +189,6 @@ void Player::HitUpdate()
 
 void Player::DirUpdate()
 {
-
 	if ((GameEngineInput::IsFree(VK_RIGHT) && GameEngineInput::IsDown(VK_LEFT)) || (GameEngineInput::IsFree(VK_RIGHT) && GameEngineInput::IsPress(VK_LEFT)))
 	{
 		if (CurDirState == PlayerDirState::RIGHT)
@@ -236,12 +238,29 @@ void Player::FlipRenderer()
 
 void Player::LevelEnd(GameEngineLevel* _NextLevel)
 {
-	SetParent(_NextLevel,3);
-	int order = static_cast<int>(ECAMERAORDER::Main);
-	MainSpriteRenderer->SetViewCameraSelect(order);
-	DebugRenderer0->SetViewCameraSelect(order);
-	DebugRenderer1->SetViewCameraSelect(order);
-	DebugRenderer2->SetViewCameraSelect(order);
+	if (false == _NextLevel->GetDynamic_Cast_This<MapleLevel>()->FindActor(1))
+	{
+		SetParent(_NextLevel, 1);
+	}
+}
+
+void Player::LevelStart(GameEngineLevel* _PrevLevel)
+{
+	if (_PrevLevel == nullptr)
+	{
+		return;
+	}
+	_PrevLevel->GetDynamic_Cast_This<MapleLevel>()->EraseActor();
+
+	int CamOrder = static_cast<int>(ECAMERAORDER::Main);
+	MainSpriteRenderer->SetViewCameraSelect(CamOrder);
+	DebugRenderer0->SetViewCameraSelect(CamOrder);
+	DebugRenderer1->SetViewCameraSelect(CamOrder);
+	DebugRenderer2->SetViewCameraSelect(CamOrder);
+
+	std::string name = _PrevLevel->GetName();
+	std::shared_ptr<Portal> portal =MapleMap::CurMap->GetPortal(name);
+	Transform.SetWorldPosition(portal->Transform.GetWorldPosition());
 }
 
 

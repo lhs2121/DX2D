@@ -36,6 +36,9 @@
     <ClInclude Include="HuntLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="MapleLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -71,6 +74,9 @@
       <Filter>Object\Map</Filter>
     </ClCompile>
     <ClCompile Include="HuntLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MapleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>

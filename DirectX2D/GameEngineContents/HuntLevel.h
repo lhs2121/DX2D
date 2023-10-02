@@ -1,8 +1,8 @@
 #pragma once
-#include <GameEngineCore/GameEngineLevel.h>
+#include "MapleLevel.h"
 
 // Ό³Έν :
-class HuntLevel : public GameEngineLevel
+class HuntLevel : public MapleLevel
 {
 public:
 	// constrcuter destructer
@@ -23,6 +23,5 @@ protected:
 
 private:
 	std::shared_ptr<class MapleMap> Map;
-	std::shared_ptr<class Player> Player;
 };
 
