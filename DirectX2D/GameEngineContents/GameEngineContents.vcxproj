@@ -181,6 +181,8 @@
     <ClInclude Include="HuntingMap.h" />
     <ClInclude Include="HuntLevel.h" />
     <ClInclude Include="MapleLevel.h" />
+    <ClInclude Include="LuckySeven.h" />
+    <ClInclude Include="ProJectile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KCityMap.cpp" />
@@ -202,6 +204,8 @@
     <ClCompile Include="MapleMap.cpp" />
     <ClCompile Include="HuntingMap.cpp" />
     <ClCompile Include="HuntLevel.cpp" />
+    <ClCompile Include="LuckySeven.cpp" />
+    <ClCompile Include="ProJectile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

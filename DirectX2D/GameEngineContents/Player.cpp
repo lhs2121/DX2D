@@ -4,6 +4,7 @@
 #include "MapleMap.h"
 #include "Portal.h"
 #include "MapleLevel.h"
+#include "LuckySeven.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -20,6 +21,9 @@ Player::~Player()
 
 void Player::Start()
 {
+	{
+		GetLevel()->CreateActor<LuckySeven>(9)->SetParent(this,7);
+	}
 	{
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
 		MainSpriteRenderer->SetSprite("idle");
@@ -82,12 +86,20 @@ void Player::Update(float _Delta)
 	PhysicsActor::Update(_Delta);
 	CameraFocus();
 	DirUpdate();
-	HitUpdate();
+	ColCheck();
 	RopePivotUpdate();
 	RopeCheck();
 	PortalCheck();
 	StateUpdate(_Delta);
 
+	if (GameEngineInput::IsDown('F'))
+	{
+		Speed += 50;
+	}
+	if (GameEngineInput::IsDown('G'))
+	{
+		ApplyGravity = !ApplyGravity;
+	}
 	if (GameEngineInput::IsDown(VK_MENU) && IsGrounded == true)
 	{
 		Jump();
@@ -168,7 +180,7 @@ void Player::PortalCheck()
 	Col->CollisionEvent(ContentsCollisionType::Portal, Event);
 }
 
-void Player::HitUpdate()
+void Player::ColCheck()
 {
 	EventParameter Event;
 

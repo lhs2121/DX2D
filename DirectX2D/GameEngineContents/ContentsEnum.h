@@ -14,11 +14,14 @@ enum class ContentsObjectType
 	Monster,
 	NPC,
 	MapObject,
+	Skill
 };
 
 enum class ContentsCollisionType
 {
 	Player,
 	Monster,
+	PlayerWeapon,
+	MonsterWeapon,
 	Portal
 };

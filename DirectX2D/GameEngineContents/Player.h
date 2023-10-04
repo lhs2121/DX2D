@@ -31,6 +31,16 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
+	float GetDir()
+	{
+		switch (CurDirState)
+		{
+		case PlayerDirState::LEFT:
+			return -1;
+		case PlayerDirState::RIGHT:
+			return 1;
+		}
+	}
 	static Player* MainPlayer;
 private:
 	float4 RopePos;
@@ -54,7 +64,7 @@ private:
 	void FlipRenderer();
 	void CameraFocus();
 	void DirUpdate();
-	void HitUpdate();
+	void ColCheck();
 	void PortalCheck();
 
 	void RopeCheck();
