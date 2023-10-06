@@ -183,6 +183,7 @@
     <ClInclude Include="MapleLevel.h" />
     <ClInclude Include="LuckySeven.h" />
     <ClInclude Include="ProJectile.h" />
+    <ClInclude Include="MapleActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KCityMap.cpp" />
@@ -206,6 +207,7 @@
     <ClCompile Include="HuntLevel.cpp" />
     <ClCompile Include="LuckySeven.cpp" />
     <ClCompile Include="ProJectile.cpp" />
+    <ClCompile Include="MapleActor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

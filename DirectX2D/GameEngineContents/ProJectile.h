@@ -24,7 +24,7 @@ private:
 	float CoolTime = 2.0f;
 	float Dir;
 	void Move(float _Delta);
-	
+
 	void ColCheck();
 	void StartCoolTime(float _Delta);
 	void Start() override;

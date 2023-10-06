@@ -1,8 +1,8 @@
 #pragma once
-#include <GameEngineCore/GameEngineActor.h>
+#include "MapleActor.h"
 
 // Ό³Έν :
-class PhysicsActor : public GameEngineActor
+class PhysicsActor : public MapleActor
 {
 public:
 	// constrcuter destructer

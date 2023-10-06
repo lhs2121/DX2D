@@ -271,7 +271,7 @@ void Player::LevelStart(GameEngineLevel* _PrevLevel)
 	DebugRenderer2->SetViewCameraSelect(CamOrder);
 
 	std::string name = _PrevLevel->GetName();
-	std::shared_ptr<Portal> portal =MapleMap::CurMap->GetPortal(name);
+	std::shared_ptr<Portal> portal = GetMapleLevel()->GetPortal(name);
 	Transform.SetWorldPosition(portal->Transform.GetWorldPosition());
 }
 

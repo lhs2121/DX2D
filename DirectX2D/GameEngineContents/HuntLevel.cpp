@@ -16,11 +16,17 @@ HuntLevel::~HuntLevel()
 
 void HuntLevel::Start()
 {
+
+
 	GetMainCamera()->Transform.SetLocalPosition({ 0, 0, -500.0f });
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
 
 	{
 		Map = CreateActor<HuntingMap>(ContentsObjectType::Map);
+	}
+
+	{
+		CreatePortal("KCityLevel", { 310, -1210 });
 	}
 }
 

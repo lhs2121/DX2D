@@ -43,6 +43,14 @@ void KCityLevel::Start()
 		CreateActor<Player>(ContentsObjectType::Player);
 		Map = CreateActor<KCityMap>(ContentsObjectType::Map);
 	}
+
+	{
+		CreatePortal("HuntLevel", { 310, -1210 });
+	}
+
+	{
+		CreateActor<Monster>(ContentsObjectType::Monster);
+	}
 }
 
 void KCityLevel::Update(float _Delta)

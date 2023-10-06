@@ -40,7 +40,7 @@ void ProJectile::StartCoolTime(float _Delta)
 
 	if (CoolTime <= 0)
 	{
-		CoolTime = 2.0f;
+		CoolTime = 1.0f;
 
 		Off();
 	}

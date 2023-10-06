@@ -16,11 +16,6 @@ KCityMap::~KCityMap()
 void KCityMap::Start()
 {
 	{
-		CreatePortal("HuntLevel", { 310, -910 });
-		GetLevel()->CreateActor<Monster>(ContentsObjectType::Monster);
-	}
-
-	{
 		Renderer0 = CreateComponent<GameEngineSpriteRenderer>(0);
 		Renderer0->SetSprite("kerningcity", 0);
 		Renderer0->SetRenderOrder(-10);

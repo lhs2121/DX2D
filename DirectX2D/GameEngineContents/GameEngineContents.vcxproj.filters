@@ -7,89 +7,95 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="KCityMap.h">
-      <Filter>Object\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="KCityLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="MapleMap.h">
-      <Filter>Object\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Portal.h">
-      <Filter>Object\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="HuntingMap.h">
-      <Filter>Object\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="HuntLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="MapleLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>Object\PlayActor</Filter>
+      <Filter>Actor\PlayActor</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsActor.h">
-      <Filter>Object\PlayActor</Filter>
+      <Filter>Actor\PlayActor</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Object\PlayActor</Filter>
+      <Filter>Actor\PlayActor</Filter>
     </ClInclude>
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="LuckySeven.h">
-      <Filter>Object\Skill</Filter>
+      <Filter>Actor\Skill</Filter>
     </ClInclude>
     <ClInclude Include="ProJectile.h">
-      <Filter>Object\Skill</Filter>
+      <Filter>Actor\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="HuntingMap.h">
+      <Filter>Actor\Map\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="KCityMap.h">
+      <Filter>Actor\Map\BackGround</Filter>
+    </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>Actor\Map\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="HuntLevel.h">
+      <Filter>Level\Hunt</Filter>
+    </ClInclude>
+    <ClInclude Include="KCityLevel.h">
+      <Filter>Level\Town</Filter>
+    </ClInclude>
+    <ClInclude Include="MapleActor.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="MapleMap.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="MapleLevel.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="KCityMap.cpp">
-      <Filter>Object\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="KCityLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="MapleMap.cpp">
-      <Filter>Object\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Portal.cpp">
-      <Filter>Object\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="HuntingMap.cpp">
-      <Filter>Object\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="HuntLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="MapleLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>Object\PlayActor</Filter>
+      <Filter>Actor\PlayActor</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsActor.cpp">
-      <Filter>Object\PlayActor</Filter>
+      <Filter>Actor\PlayActor</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Object\PlayActor</Filter>
+      <Filter>Actor\PlayActor</Filter>
     </ClCompile>
     <ClCompile Include="Player_State.cpp">
-      <Filter>Object\PlayActor</Filter>
+      <Filter>Actor\PlayActor</Filter>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="PreCompile.cpp" />
     <ClCompile Include="LuckySeven.cpp">
-      <Filter>Object\Skill</Filter>
+      <Filter>Actor\Skill</Filter>
     </ClCompile>
     <ClCompile Include="ProJectile.cpp">
-      <Filter>Object\Skill</Filter>
+      <Filter>Actor\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="HuntingMap.cpp">
+      <Filter>Actor\Map\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="KCityMap.cpp">
+      <Filter>Actor\Map\BackGround</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>Actor\Map\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="HuntLevel.cpp">
+      <Filter>Level\Hunt</Filter>
+    </ClCompile>
+    <ClCompile Include="KCityLevel.cpp">
+      <Filter>Level\Town</Filter>
+    </ClCompile>
+    <ClCompile Include="MapleActor.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="MapleMap.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="MapleLevel.cpp">
+      <Filter>Global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -99,16 +105,28 @@
     <Filter Include="Level">
       <UniqueIdentifier>{8f5b00fb-5caa-4fae-9d21-46063d7535d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object">
+    <Filter Include="Level\Town">
+      <UniqueIdentifier>{85d645d6-13ff-443c-89dc-9577283e32a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Hunt">
+      <UniqueIdentifier>{b1fda4e2-ad1f-4a70-af99-c6f10bc08a19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor">
       <UniqueIdentifier>{dfaa5030-45e1-4f41-83d4-3d4359e25a46}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Map">
+    <Filter Include="Actor\Map">
       <UniqueIdentifier>{94bd9443-64fa-4f06-a71d-38a5c678fd3e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Skill">
+    <Filter Include="Actor\Map\BackGround">
+      <UniqueIdentifier>{186ca69c-60b0-46df-819d-2974933654e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Map\Portal">
+      <UniqueIdentifier>{df717ae5-2c2c-470d-9a12-43c398a5418b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Skill">
       <UniqueIdentifier>{318905c5-b0e4-404b-af05-bd237f99902d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\PlayActor">
+    <Filter Include="Actor\PlayActor">
       <UniqueIdentifier>{29ab7583-6138-44c2-a108-fb12dfbb790e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

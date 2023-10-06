@@ -24,17 +24,9 @@ public:
 
 	GameEngineColor GetColor(float4 _Pos, GameEngineColor _DefaultColor = { 0, 0, 0, 0 });
 
-	std::shared_ptr<class Portal> CreatePortal(std::string _NextLevel, float4 _Pos);
-
-	std::shared_ptr<class Portal> GetPortal(std::string _NextLevel)
-	{
-		return PortalGroup[_NextLevel];
-	};
-
 protected:
 	float4 MapScale;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> DebugRenderer;
-	std::map<std::string, std::shared_ptr<class Portal>> PortalGroup;
 };
 

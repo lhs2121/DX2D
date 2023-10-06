@@ -18,5 +18,14 @@ public:
 	bool FindActor(int num);
 	void EraseActor();
 	void InsertActor();
+
+	std::shared_ptr<class Portal> CreatePortal(std::string _NextLevel, float4 _Pos);
+
+	std::shared_ptr<class Portal> GetPortal(std::string _NextLevel)
+	{
+		return PortalGroup[_NextLevel];
+	};
+
+	std::map<std::string, std::shared_ptr<class Portal>> PortalGroup;
 };
 
