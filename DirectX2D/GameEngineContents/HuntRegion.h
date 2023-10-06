@@ -2,18 +2,18 @@
 #include "MapleLevel.h"
 
 // Ό³Έν :
-class KCityLevel : public MapleLevel
+class HuntRegion : public MapleLevel
 {
 public:
 	// constrcuter destructer
-	KCityLevel();
-	~KCityLevel();
+	HuntRegion();
+	~HuntRegion();
 
 	// delete Function
-	KCityLevel(const KCityLevel& _Other) = delete;
-	KCityLevel(KCityLevel&& _Other) noexcept = delete;
-	KCityLevel& operator=(const KCityLevel& _Other) = delete;
-	KCityLevel& operator=(KCityLevel&& _Other) noexcept = delete;
+	HuntRegion(const HuntRegion& _Other) = delete;
+	HuntRegion(HuntRegion&& _Other) noexcept = delete;
+	HuntRegion& operator=(const HuntRegion& _Other) = delete;
+	HuntRegion& operator=(HuntRegion&& _Other) noexcept = delete;
 
 protected:
 	void Start() override;

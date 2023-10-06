@@ -4,9 +4,9 @@
 #include <GameEngineCore/GameEngineSampler.h>
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 
-#include "KCityLevel.h"
+#include "KerningCity.h"
 #include "TitleLevel.h"
-#include "HuntLevel.h"
+#include "HuntRegion.h"
 
 ContentsCore::ContentsCore() 
 {
@@ -18,10 +18,10 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::Start()
 {
-	GameEngineCore::CreateLevel<KCityLevel>("KCityLevel");
-	GameEngineCore::CreateLevel<HuntLevel>("HuntLevel");
+	GameEngineCore::CreateLevel<KerningCity>("KerningCity");
+	GameEngineCore::CreateLevel<HuntRegion>("HuntRegion");
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
-	GameEngineCore::ChangeLevel("KCityLevel");
+	GameEngineCore::ChangeLevel("KerningCity");
 
 	// 자기 텍스처 로드해야 한다.
 

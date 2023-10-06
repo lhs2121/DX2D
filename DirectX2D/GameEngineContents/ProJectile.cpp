@@ -51,7 +51,7 @@ void ProJectile::Start()
 	{
 		Col = CreateComponent<GameEngineCollision>(ContentsCollisionType::PlayerWeapon);
 		Col->SetCollisionType(ColType::SPHERE2D);
-		Col->Transform.SetLocalScale({ 30,30 });
+		Col->Transform.SetLocalScale({ 20,20 });
 	}
 
 	{
@@ -59,10 +59,11 @@ void ProJectile::Start()
 		Renderer->CreateAnimation("Sureken", "Sureken", 0.1f, 0, 1, true);
 		Renderer->SetSprite("Sureken");
 		Renderer->ChangeAnimation("Sureken");
+		Renderer->SetImageScale({ 20,20 });
 		Renderer->SetRenderOrder(50);
 	}
 
-
+	Off();
 }
 
 void ProJectile::Update(float _Delta)

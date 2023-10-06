@@ -19,9 +19,13 @@ public:
 	{
 		Dir = _Dir;
 	}
+	void SetCoolTime(float _CoolTime)
+	{
+		CoolTime = _CoolTime;
+	}
 private:
-	float Speed = 100.0f;
-	float CoolTime = 2.0f;
+	float Speed = 250.0f;
+	float CoolTime = 1.0f;
 	float Dir;
 	void Move(float _Delta);
 

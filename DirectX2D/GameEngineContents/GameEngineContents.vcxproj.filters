@@ -10,9 +10,6 @@
     <ClInclude Include="Monster.h">
       <Filter>Actor\PlayActor</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsActor.h">
-      <Filter>Actor\PlayActor</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Actor\PlayActor</Filter>
     </ClInclude>
@@ -24,29 +21,35 @@
     <ClInclude Include="ProJectile.h">
       <Filter>Actor\Skill</Filter>
     </ClInclude>
-    <ClInclude Include="HuntingMap.h">
+    <ClInclude Include="HuntRegionBG.h">
       <Filter>Actor\Map\BackGround</Filter>
     </ClInclude>
-    <ClInclude Include="KCityMap.h">
+    <ClInclude Include="KerningCityBG.h">
       <Filter>Actor\Map\BackGround</Filter>
     </ClInclude>
     <ClInclude Include="Portal.h">
       <Filter>Actor\Map\Portal</Filter>
     </ClInclude>
-    <ClInclude Include="HuntLevel.h">
-      <Filter>Level\Hunt</Filter>
+    <ClInclude Include="HuntRegion.h">
+      <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="KCityLevel.h">
-      <Filter>Level\Town</Filter>
+    <ClInclude Include="KerningCity.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugUI.h">
+      <Filter>Actor\UI</Filter>
     </ClInclude>
     <ClInclude Include="MapleActor.h">
-      <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="MapleMap.h">
-      <Filter>Global</Filter>
+      <Filter>Actor\MapleObject</Filter>
     </ClInclude>
     <ClInclude Include="MapleLevel.h">
-      <Filter>Global</Filter>
+      <Filter>Actor\MapleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MapleMap.h">
+      <Filter>Actor\MapleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsActor.h">
+      <Filter>Actor\MapleObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -54,9 +57,6 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>Actor\PlayActor</Filter>
-    </ClCompile>
-    <ClCompile Include="PhysicsActor.cpp">
       <Filter>Actor\PlayActor</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
@@ -73,29 +73,35 @@
     <ClCompile Include="ProJectile.cpp">
       <Filter>Actor\Skill</Filter>
     </ClCompile>
-    <ClCompile Include="HuntingMap.cpp">
+    <ClCompile Include="HuntRegionBG.cpp">
       <Filter>Actor\Map\BackGround</Filter>
     </ClCompile>
-    <ClCompile Include="KCityMap.cpp">
+    <ClCompile Include="KerningCityBG.cpp">
       <Filter>Actor\Map\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="Portal.cpp">
       <Filter>Actor\Map\Portal</Filter>
     </ClCompile>
-    <ClCompile Include="HuntLevel.cpp">
-      <Filter>Level\Hunt</Filter>
+    <ClCompile Include="HuntRegion.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="KCityLevel.cpp">
-      <Filter>Level\Town</Filter>
+    <ClCompile Include="KerningCity.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugUI.cpp">
+      <Filter>Actor\UI</Filter>
     </ClCompile>
     <ClCompile Include="MapleActor.cpp">
-      <Filter>Global</Filter>
-    </ClCompile>
-    <ClCompile Include="MapleMap.cpp">
-      <Filter>Global</Filter>
+      <Filter>Actor\MapleObject</Filter>
     </ClCompile>
     <ClCompile Include="MapleLevel.cpp">
-      <Filter>Global</Filter>
+      <Filter>Actor\MapleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MapleMap.cpp">
+      <Filter>Actor\MapleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsActor.cpp">
+      <Filter>Actor\MapleObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,12 +110,6 @@
     </Filter>
     <Filter Include="Level">
       <UniqueIdentifier>{8f5b00fb-5caa-4fae-9d21-46063d7535d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Town">
-      <UniqueIdentifier>{85d645d6-13ff-443c-89dc-9577283e32a6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level\Hunt">
-      <UniqueIdentifier>{b1fda4e2-ad1f-4a70-af99-c6f10bc08a19}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor">
       <UniqueIdentifier>{dfaa5030-45e1-4f41-83d4-3d4359e25a46}</UniqueIdentifier>
@@ -123,11 +123,17 @@
     <Filter Include="Actor\Map\Portal">
       <UniqueIdentifier>{df717ae5-2c2c-470d-9a12-43c398a5418b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\PlayActor">
+      <UniqueIdentifier>{29ab7583-6138-44c2-a108-fb12dfbb790e}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Actor\Skill">
       <UniqueIdentifier>{318905c5-b0e4-404b-af05-bd237f99902d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\PlayActor">
-      <UniqueIdentifier>{29ab7583-6138-44c2-a108-fb12dfbb790e}</UniqueIdentifier>
+    <Filter Include="Actor\MapleObject">
+      <UniqueIdentifier>{6ae7d6b6-0fae-41a0-8ad9-376c40870c0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI">
+      <UniqueIdentifier>{a9a6990e-34ca-4fde-a442-cf6f214d6ee6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

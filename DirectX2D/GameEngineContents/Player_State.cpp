@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "Player.h"
-#include "KCityMap.h"
+#include "KerningCityBG.h"
 
 void Player::IdleUpdate(float _Delta)
 {

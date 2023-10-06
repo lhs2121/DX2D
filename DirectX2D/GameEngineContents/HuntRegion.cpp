@@ -1,36 +1,31 @@
 #include "PreCompile.h"
-#include "HuntLevel.h"
+#include "HuntRegion.h"
 #include "Player.h"
-#include "HuntingMap.h"
+#include "HuntRegionBG.h"
 #include "Portal.h"
 #include "Monster.h"
 #include "MapleMap.h"
 
-HuntLevel::HuntLevel()
+HuntRegion::HuntRegion()
 {
 }
 
-HuntLevel::~HuntLevel()
+HuntRegion::~HuntRegion()
 {
 }
 
-void HuntLevel::Start()
+void HuntRegion::Start()
 {
-
-
 	GetMainCamera()->Transform.SetLocalPosition({ 0, 0, -500.0f });
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
 
 	{
-		Map = CreateActor<HuntingMap>(ContentsObjectType::Map);
-	}
-
-	{
-		CreatePortal("KCityLevel", { 310, -1210 });
+		Map = CreateActor<HuntRegionBG>(ContentsObjectType::Map);
+		CreatePortal("KerningCity", { 1010, -1110 });
 	}
 }
 
-void HuntLevel::Update(float _Delta)
+void HuntRegion::Update(float _Delta)
 {
 	if (GameEngineInput::IsPress('Q'))
 	{
@@ -50,12 +45,12 @@ void HuntLevel::Update(float _Delta)
 	}
 }
 
-void HuntLevel::LevelStart(GameEngineLevel* _PrevLevel)
+void HuntRegion::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	MapleMap::SetCurMap(Map);
 }
 
-void HuntLevel::LevelEnd(GameEngineLevel* _NextLevel)
+void HuntRegion::LevelEnd(GameEngineLevel* _NextLevel)
 {
 
 }

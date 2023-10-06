@@ -15,13 +15,11 @@ public:
 	LuckySeven& operator=(LuckySeven&& _Other) noexcept = delete;
 
 protected:
-	float InterTime = 1.0f;
-	float CoolTime;
+	float InterTime;
 
 	bool DoneFire1 = false;
 	bool DoneFire2 = false;
 
-	bool IsFire;
 	std::shared_ptr<class ProJectile> sureken1;
 	std::shared_ptr<class ProJectile> sureken2;
 

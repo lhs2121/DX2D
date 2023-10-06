@@ -2,18 +2,18 @@
 #include "MapleMap.h"
 
 // Ό³Έν :
-class KCityMap : public MapleMap
+class HuntRegionBG : public MapleMap
 {
 public:
 	// constrcuter destructer
-	KCityMap();
-	~KCityMap();
+	HuntRegionBG();
+	~HuntRegionBG();
 
 	// delete Function
-	KCityMap(const KCityMap& _Other) = delete;
-	KCityMap(KCityMap&& _Other) noexcept = delete;
-	KCityMap& operator=(const KCityMap& _Other) = delete;
-	KCityMap& operator=(KCityMap&& _Other) noexcept = delete;
+	HuntRegionBG(const HuntRegionBG& _Other) = delete;
+	HuntRegionBG(HuntRegionBG&& _Other) noexcept = delete;
+	HuntRegionBG& operator=(const HuntRegionBG& _Other) = delete;
+	HuntRegionBG& operator=(HuntRegionBG&& _Other) noexcept = delete;
 
 protected:
 	void Start() override;
@@ -22,7 +22,5 @@ protected:
 private:
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer0;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer1;
-	std::shared_ptr<class Portal> Portal0;
 };
 
- 

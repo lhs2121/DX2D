@@ -1,20 +1,20 @@
 #include "PreCompile.h"
-#include "KCityLevel.h"
+#include "KerningCity.h"
 #include "Player.h"
-#include "KCityMap.h"
+#include "KerningCityBG.h"
 #include "Portal.h"
 #include "Monster.h"
 #include "MapleMap.h"
 
-KCityLevel::KCityLevel() 
+KerningCity::KerningCity() 
 {
 }
 
-KCityLevel::~KCityLevel() 
+KerningCity::~KerningCity() 
 {
 }
 
-void KCityLevel::Start()
+void KerningCity::Start()
 {
 	{
 		GameEngineDirectory Dir;
@@ -40,20 +40,16 @@ void KCityLevel::Start()
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
 
 	{
+		Map = CreateActor<KerningCityBG>(ContentsObjectType::Map);
+		CreatePortal("HuntRegion", { 310, -910 });
+	}
+	{
 		CreateActor<Player>(ContentsObjectType::Player);
-		Map = CreateActor<KCityMap>(ContentsObjectType::Map);
-	}
-
-	{
-		CreatePortal("HuntLevel", { 310, -1210 });
-	}
-
-	{
 		CreateActor<Monster>(ContentsObjectType::Monster);
 	}
 }
 
-void KCityLevel::Update(float _Delta)
+void KerningCity::Update(float _Delta)
 {
 	if (GameEngineInput::IsPress('Q'))
 	{
@@ -73,12 +69,12 @@ void KCityLevel::Update(float _Delta)
 	}
 }
 
-void KCityLevel::LevelStart(GameEngineLevel* _PrevLevel)
+void KerningCity::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	MapleMap::SetCurMap(Map);
 }
 
-void KCityLevel::LevelEnd(GameEngineLevel* _NextLevel)
+void KerningCity::LevelEnd(GameEngineLevel* _NextLevel)
 {
 	
 }

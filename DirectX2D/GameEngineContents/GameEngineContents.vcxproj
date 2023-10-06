@@ -167,30 +167,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="KCityMap.h" />
+    <ClInclude Include="KerningCityBG.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="KCityLevel.h" />
+    <ClInclude Include="KerningCity.h" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="PhysicsActor.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="MapleMap.h" />
-    <ClInclude Include="HuntingMap.h" />
-    <ClInclude Include="HuntLevel.h" />
+    <ClInclude Include="HuntRegionBG.h" />
+    <ClInclude Include="HuntRegion.h" />
     <ClInclude Include="MapleLevel.h" />
     <ClInclude Include="LuckySeven.h" />
     <ClInclude Include="ProJectile.h" />
     <ClInclude Include="MapleActor.h" />
+    <ClInclude Include="DebugUI.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="KCityMap.cpp" />
+    <ClCompile Include="KerningCityBG.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="MapleLevel.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="KCityLevel.cpp" />
+    <ClCompile Include="KerningCity.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -203,11 +204,12 @@
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MapleMap.cpp" />
-    <ClCompile Include="HuntingMap.cpp" />
-    <ClCompile Include="HuntLevel.cpp" />
+    <ClCompile Include="HuntRegionBG.cpp" />
+    <ClCompile Include="HuntRegion.cpp" />
     <ClCompile Include="LuckySeven.cpp" />
     <ClCompile Include="ProJectile.cpp" />
     <ClCompile Include="MapleActor.cpp" />
+    <ClCompile Include="DebugUI.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

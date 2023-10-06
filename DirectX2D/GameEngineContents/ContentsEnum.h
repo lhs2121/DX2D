@@ -2,7 +2,7 @@
 
 enum class ContentsRenderType
 {
-	KCityMap,
+	KerningCityBG,
 	Play,
 };
 

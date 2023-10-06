@@ -13,7 +13,7 @@ LuckySeven::~LuckySeven()
 
 float4 LuckySeven::GetBulletPos()
 {
-	float4 BulletPos = Transform.GetWorldPosition() + float4(10 * Player::MainPlayer->GetDir(), 10);
+	float4 BulletPos = Transform.GetWorldPosition() + float4(10 * Player::MainPlayer->GetDir(), 20);
 	return BulletPos;
 }
 
@@ -29,8 +29,15 @@ void LuckySeven::Update(float _Delta)
 	{
 		sureken1->Transform.SetWorldPosition(GetBulletPos());
 		sureken1->SetDir(Player::MainPlayer->GetDir());
+		sureken1->SetCoolTime(1.0f);
+
+		sureken2->Transform.SetWorldPosition(GetBulletPos() + float4(10 * Player::MainPlayer->GetDir(), 10));
+		sureken2->SetDir(Player::MainPlayer->GetDir());
+		sureken2->SetCoolTime(1.0f);
+		
 		sureken1->On();
 
+		InterTime = 0.5f;
 		DoneFire1 = true;
 	}
 
@@ -40,8 +47,6 @@ void LuckySeven::Update(float _Delta)
 
 		if (InterTime <= 0)
 		{
-			sureken2->Transform.SetWorldPosition(GetBulletPos() + float4(10 * Player::MainPlayer->GetDir(), 10));
-			sureken2->SetDir(Player::MainPlayer->GetDir());
 			sureken2->On();
 			DoneFire2 = true;
 		}
