@@ -30,6 +30,7 @@ void Player::StateUpdate(float _Delta)
 void Player::Update(float _Delta)
 {
 	PhysicsActor::Update(_Delta);
+	FlipRenderer();
 	CameraFocus();
 	DirUpdate();
 	ColCheck();
@@ -42,34 +43,29 @@ void Player::Update(float _Delta)
 	{
 		Speed += 50;
 	}
+
 	if (GameEngineInput::IsDown('G'))
 	{
 		ApplyForce = !ApplyForce;
 	}
-	if (GameEngineInput::IsDown(VK_MENU) && IsGrounded == true)
+
+	if (GameEngineInput::IsDown(VK_MENU) && IsGrounded == true && CurState != PlayerState::DOWN)
 	{
 		NetForce.Y = 300.0f;
 	}
-	if (CurDirState == PlayerDirState::LEFT)
+	else if (GameEngineInput::IsDown(VK_MENU) && CurState == PlayerState::DOWN)
 	{
-		if (GameEngineInput::IsPress(VK_LEFT))
-		{
-			NetForce.X = -125.0f;
-		}
-		else if (GameEngineInput::IsPress(VK_RIGHT))
-		{
-			NetForce.X = 125.0f;
-		}
+		Transform.AddWorldPosition({ 0.0f,-3.0f });
 	}
-	else if (CurDirState == PlayerDirState::RIGHT)
+
+	if (GameEngineInput::IsPress(VK_LEFT))
 	{
-		if (GameEngineInput::IsPress(VK_RIGHT))
-		{
-			NetForce.X = 125.0f;
-		}
-		else if (GameEngineInput::IsPress(VK_LEFT))
-		{
-			NetForce.X = -125.0f;
-		}
+		NetForce.X = -125.0f;
 	}
+	else if (GameEngineInput::IsPress(VK_RIGHT))
+	{
+		NetForce.X = 125.0f;
+	}
+
+
 }

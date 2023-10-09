@@ -11,8 +11,6 @@ Player* Player::MainPlayer = nullptr;
 Player::Player()
 {
 	MainPlayer = this;
-	CurState = PlayerState::IDLE;
-	CurDirState = PlayerDirState::LEFT;
 }
 
 Player::~Player()
@@ -74,6 +72,7 @@ void Player::Start()
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	Transform.SetLocalPosition({ 500, -900, 0.0f });
 
+	ChangeDirState(PlayerDirState::LEFT);
 	ChangeState(PlayerState::IDLE);
 }
 
@@ -136,27 +135,18 @@ void Player::ColCheck()
 
 void Player::DirUpdate()
 {
-	if ((GameEngineInput::IsFree(VK_RIGHT) && GameEngineInput::IsDown(VK_LEFT)) || (GameEngineInput::IsFree(VK_RIGHT) && GameEngineInput::IsPress(VK_LEFT)))
+	if (GameEngineInput::IsFree(VK_RIGHT) && GameEngineInput::IsPress(VK_LEFT))
 	{
-		if (CurDirState == PlayerDirState::RIGHT)
-		{
-			FlipRenderer();
-		}
 		ChangeDirState(PlayerDirState::LEFT);
 	}
-	else if (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsDown(VK_RIGHT) || (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsPress(VK_RIGHT)))
+	else if (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsPress(VK_RIGHT))
 	{
-		if (CurDirState == PlayerDirState::LEFT)
-		{
-			FlipRenderer();
-		}
 		ChangeDirState(PlayerDirState::RIGHT);
 	}
 }
 
 void Player::RopePivotUpdate()
 {
-
 	if (GameEngineInput::IsPress(VK_UP))
 	{
 		RopePos = Transform.GetWorldPosition() + float4(0, 65);
@@ -167,7 +157,6 @@ void Player::RopePivotUpdate()
 		RopePos = Transform.GetWorldPosition() + float4(0, -1);
 		DebugRenderer2->Transform.SetLocalPosition({ 0,-1 });
 	}
-
 }
 
 void Player::CameraFocus()
@@ -182,11 +171,13 @@ void Player::FlipRenderer()
 		return;
 	}
 
-	if (CurDirState == PlayerDirState::LEFT)
+	float4 Scale = MainSpriteRenderer->Transform.GetLocalScale();
+
+	if (Scale.X == 1 && NetForce.X > 0)
 	{
 		MainSpriteRenderer->Transform.SetLocalScale({ -1.0f,1.0f,1.0f });
 	}
-	if (CurDirState == PlayerDirState::RIGHT)
+	if (Scale.X == -1 && NetForce.X < 0)
 	{
 		MainSpriteRenderer->Transform.SetLocalScale({ 1.0f,1.0f,1.0f });
 	}

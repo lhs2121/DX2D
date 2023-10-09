@@ -6,6 +6,9 @@ void Player::ChangeState(PlayerState _State)
 {
 	CurState = _State;
 
+	CanFlip = true;
+	ApplyForce = true;
+
 	switch (CurState)
 	{
 	case PlayerState::IDLE:
@@ -18,14 +21,18 @@ void Player::ChangeState(PlayerState _State)
 		MainSpriteRenderer->ChangeAnimation("jump");
 		break;
 	case PlayerState::DOWN:
+		CanFlip = false;
 		MainSpriteRenderer->ChangeAnimation("down");
 		break;
 	case PlayerState::ROPE:
+		CanFlip = false;
+		ApplyForce = false;
 		RopeStart();
 		MainSpriteRenderer->ChangeAnimation("rope");
 		MainSpriteRenderer->AnimationPauseOn();
 		break;
 	case PlayerState::LUCKYSEVEN:
+		CanFlip = false;
 		ChangeRandomSwingAnimation();
 		break;
 	default:
@@ -43,8 +50,6 @@ void Player::RopeStart()
 	{
 		Transform.AddWorldPosition({ 0, 5 });
 	}
-
-	ApplyForce = false;
 }
 
 void Player::IdleUpdate(float _Delta)
@@ -126,7 +131,6 @@ void Player::RopeUpdate(float _Delta)
 		ChangeDirState(PlayerDirState::LEFT);
 		FlipRenderer();
 	}
-	CanFlip = false;
 
 	MainSpriteRenderer->AnimationPauseOn();
 
@@ -141,8 +145,6 @@ void Player::RopeUpdate(float _Delta)
 		if (TopColor != GameEngineColor::GREEN && BottomColor != GameEngineColor::GREEN)
 		{
 			ChangeState(PlayerState::IDLE);
-			CanFlip = true;
-			ApplyForce = true;
 			NetForce.Y = -100.0f;
 			MainSpriteRenderer->AnimationPauseOff();
 		}
@@ -158,8 +160,6 @@ void Player::RopeUpdate(float _Delta)
 		if (BottomColor != GameEngineColor::GREEN)
 		{
 			ChangeState(PlayerState::IDLE);
-			CanFlip = true;
-			ApplyForce = true;
 			NetForce.Y = -100.0f;
 			MainSpriteRenderer->AnimationPauseOff();
 		}
@@ -167,7 +167,6 @@ void Player::RopeUpdate(float _Delta)
 	else if ((GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT)) && GameEngineInput::IsDown(VK_MENU))
 	{
 		ChangeState(PlayerState::WALK);
-		ApplyForce = true;
 		NetForce.Y = JumpForce;
 		MainSpriteRenderer->AnimationPauseOff();
 	}
