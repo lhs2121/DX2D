@@ -25,3 +25,18 @@ enum class ContentsCollisionType
 	MonsterWeapon,
 	Portal
 };
+
+enum class PlayerState
+{
+	IDLE,
+	RUN,
+	DOWN,
+	ROPE,
+	ATTACK,
+	LUCKYSEVEN
+};
+enum class PlayerDirState
+{
+	LEFT,
+	RIGHT,
+};

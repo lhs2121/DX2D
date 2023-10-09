@@ -16,7 +16,6 @@ public:
 	Monster& operator=(Monster&& _Other) noexcept = delete;
 	std::shared_ptr<class GameEngineCollision> Col;
 protected:
-
 	void Start() override;
 	void Update(float _Delta) override;
 

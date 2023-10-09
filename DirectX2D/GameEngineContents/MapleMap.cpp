@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "Portal.h"
 
-std::shared_ptr<MapleMap> MapleMap::CurMap;
+std::shared_ptr<MapleMap> MapleMap::CurMap = nullptr;
 
 MapleMap::MapleMap()
 {

@@ -1,9 +1,10 @@
 #pragma once
-#include <GameEngineCore/GameEngineActor.h>
+#include "MapleSkill.h"
 // Ό³Έν :
-class LuckySeven : public GameEngineActor
+class LuckySeven : public MapleSkill
 {
 public:
+	static LuckySeven* Inst;
 	// constrcuter destructer
 	LuckySeven();
 	~LuckySeven();
@@ -15,16 +16,16 @@ public:
 	LuckySeven& operator=(LuckySeven&& _Other) noexcept = delete;
 
 protected:
-	float InterTime;
-
-	bool DoneFire1 = false;
-	bool DoneFire2 = false;
-
-	std::shared_ptr<class ProJectile> sureken1;
-	std::shared_ptr<class ProJectile> sureken2;
-
-	float4 GetBulletPos();
+	float4 GetBulletPos(float _OffSetX = 0, float _OffSetY = 0);
 	void Start() override;
 	void Update(float _Delta) override;
+
+	float InterTime;
+	float CoolTime;
+	float MaxCoolTime = 1.3f;
+	float MaxInterTime = 0.3f;
+
+	std::shared_ptr<class ProJectile> Sureken1;
+	std::shared_ptr<class ProJectile> Sureken2;
 };
 

@@ -1,6 +1,57 @@
 #include "PreCompile.h"
 #include "Player.h"
-#include "KerningCityBG.h"
+#include "LuckySeven.h"
+
+void Player::ChangeState(PlayerState _State)
+{
+	CurState = _State;
+
+	switch (CurState)
+	{
+	case PlayerState::IDLE:
+		MainSpriteRenderer->ChangeAnimation("idle");
+		break;
+	case PlayerState::RUN:
+		MainSpriteRenderer->ChangeAnimation("walk");
+		break;
+	case PlayerState::DOWN:
+		MainSpriteRenderer->ChangeAnimation("down");
+		break;
+	case PlayerState::ROPE:
+		MainSpriteRenderer->ChangeAnimation("rope");
+		MainSpriteRenderer->AnimationPauseOn();
+		break;
+	case PlayerState::LUCKYSEVEN:
+		ChangeRandomSwingAnimation();
+		break;
+	default:
+		break;
+	}
+}
+
+void Player::StateUpdate(float _Delta)
+{
+	switch (CurState)
+	{
+	case PlayerState::IDLE:
+		IdleUpdate(_Delta);
+		break;
+	case PlayerState::RUN:
+		RunUpdate(_Delta);
+		break;
+	case PlayerState::ROPE:
+		RopeUpdate(_Delta);
+		break;
+	case PlayerState::DOWN:
+		DownUpdate(_Delta);
+		break;
+	case PlayerState::LUCKYSEVEN:
+		LuckySevenUpdate(_Delta);
+		break;
+	default:
+		break;
+	}
+}
 
 void Player::IdleUpdate(float _Delta)
 {
@@ -11,6 +62,10 @@ void Player::IdleUpdate(float _Delta)
 	else if (GameEngineInput::IsPress(VK_DOWN) && IsGrounded == true)
 	{
 		ChangeState(PlayerState::DOWN);
+	}
+	else if (GameEngineInput::IsDown(VK_SHIFT) && LuckySeven::Inst->IsUpdate() == false)
+	{
+		ChangeState(PlayerState::LUCKYSEVEN);
 	}
 }
 
@@ -27,6 +82,10 @@ void Player::RunUpdate(float _Delta)
 	else if (GameEngineInput::IsPress(VK_UP) && IsGrounded == false && CanRope == true)
 	{
 		ChangeState(PlayerState::ROPE);
+	}
+	else if (GameEngineInput::IsDown(VK_SHIFT) && LuckySeven::Inst->IsUpdate() == false)
+	{
+		ChangeState(PlayerState::LUCKYSEVEN);
 	}
 
 	if (CurDirState == PlayerDirState::LEFT)
@@ -56,7 +115,7 @@ void Player::RunUpdate(float _Delta)
 void Player::RopeUpdate(float _Delta)
 {
 	static bool IsJoin = true;
-	if(IsJoin == true)
+	if (IsJoin == true)
 	{
 		if (IsGrounded == true)
 		{
@@ -66,13 +125,13 @@ void Player::RopeUpdate(float _Delta)
 		{
 			Transform.AddWorldPosition({ 0, 2 });
 		}
-		
+
 		ApplyGravity = false;
 		IsJoin = false;
 	}
-	
-	if ((CalCulateColor(Transform.GetWorldPosition() + float4(0,-1)) != GameEngineColor::GREEN &&
-		CalCulateColor(Transform.GetWorldPosition() + float4(0, 40 )) != GameEngineColor::GREEN))
+
+	if ((CalCulateColor(Transform.GetWorldPosition() + float4(0, -1)) != GameEngineColor::GREEN &&
+		CalCulateColor(Transform.GetWorldPosition() + float4(0, 40)) != GameEngineColor::GREEN))
 	{
 		ChangeState(PlayerState::IDLE);
 		IsJoin = true;
@@ -126,6 +185,39 @@ void Player::DownUpdate(float _Delta)
 	}
 }
 
-void Player::AttackUpdate(float _Delta)
+void Player::MeleeAttackUpdate(float _Delta)
 {
+	MainSpriteRenderer->ChangeAnimation("stab1");
 }
+
+void Player::AutoAttackUpdate(float _Delta)
+{
+	MainSpriteRenderer->ChangeAnimation("swing1");
+}
+
+void Player::LuckySevenUpdate(float _Delta)
+{
+	if (MainSpriteRenderer->GetCurIndex() == 2)
+	{
+		LuckySeven::Inst->On();
+	}
+	if (MainSpriteRenderer->IsCurAnimationEnd() == true)
+	{
+		if (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsFree(VK_RIGHT))
+		{
+			ChangeState(PlayerState::IDLE);
+		}
+		else if (GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT))
+		{
+			ChangeState(PlayerState::RUN);
+		}
+	}
+}
+
+void Player::ChangeRandomSwingAnimation()
+{
+	int RandomNumber = GameEngineRandom::GameEngineRandom().RandomInt(1, 3);
+	std::string AnimationName = "swing" + std::to_string(RandomNumber);
+	MainSpriteRenderer->ChangeAnimation(AnimationName);
+}
+

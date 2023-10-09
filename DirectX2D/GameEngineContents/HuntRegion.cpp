@@ -21,7 +21,7 @@ void HuntRegion::Start()
 
 	{
 		Map = CreateActor<HuntRegionBG>(ContentsObjectType::Map);
-		CreatePortal("KerningCity", { 1010, -1110 });
+		CreatePortal("KerningCity", { 1010, -1100 });
 	}
 }
 

@@ -26,22 +26,16 @@ void Player::Start()
 	}
 	{
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
-		MainSpriteRenderer->SetSprite("idle");
-
-		{
-			GameEngineDirectory Dir;
-			Dir.MoveParentToExistsChild("Assets");
-			Dir.MoveChild("Assets");
-			Dir.MoveChild("Character");
-
-			std::vector<GameEngineDirectory> DirGroup = Dir.GetAllDirectory();
-
-			for (int i = 0; i < DirGroup.size(); i++)
-			{
-				std::string SpriteName = DirGroup[i].GetFileName();
-				MainSpriteRenderer->CreateAnimation(SpriteName, SpriteName);
-			}
-		}
+		
+		MainSpriteRenderer->CreateAnimation("idle", "idle", 0.2f);
+		MainSpriteRenderer->CreateAnimation("walk", "walk", 0.2f);
+		MainSpriteRenderer->CreateAnimation("jump","jump");
+		MainSpriteRenderer->CreateAnimation("down", "down");
+		MainSpriteRenderer->CreateAnimation("rope", "rope", 0.2f);
+		MainSpriteRenderer->CreateAnimation("ladder", "ladder", 0.2f);
+		MainSpriteRenderer->CreateAnimation("swing1", "swing1", 0.2f, 0, 2, false);
+		MainSpriteRenderer->CreateAnimation("swing2", "swing2", 0.2f, 0, 2, false);
+		MainSpriteRenderer->CreateAnimation("swing3", "swing3", 0.2f, 0, 2, false);
 
 		MainSpriteRenderer->ChangeAnimation("idle");
 		MainSpriteRenderer->SetRenderOrder(0);
@@ -110,38 +104,6 @@ void Player::Update(float _Delta)
 	}
 }
 
-void Player::ChangeState(PlayerState _State)
-{
-	CurState = _State;
-}
-void Player::StateUpdate(float _Delta)
-{
-	switch (CurState)
-	{
-	case PlayerState::IDLE:
-		MainSpriteRenderer->ChangeAnimation("idle");
-		IdleUpdate(_Delta);
-		break;
-	case PlayerState::RUN:
-		MainSpriteRenderer->ChangeAnimation("walk");
-		RunUpdate(_Delta);
-		break;
-	case PlayerState::ROPE:
-		MainSpriteRenderer->ChangeAnimation("rope");
-		MainSpriteRenderer->AnimationPauseOn();
-		RopeUpdate(_Delta);
-		break;
-	case PlayerState::DOWN:
-		MainSpriteRenderer->ChangeAnimation("down");
-		DownUpdate(_Delta);
-		break;
-	case PlayerState::ATTACK:
-		AttackUpdate(_Delta);
-		break;
-	default:
-		break;
-	}
-}
 void Player::RopeCheck()
 {
 	GameEngineColor Color = MapleMap::CurMap->GetColor(RopePos, GameEngineColor::ALAPA);
@@ -245,7 +207,20 @@ void Player::CameraFocus()
 
 void Player::FlipRenderer()
 {
-	MainSpriteRenderer->Transform.SetLocalScale({ -MainSpriteRenderer->Transform.GetLocalScale().X,1.0f,1.0f });
+	if (CanFlip == false)
+	{
+		return;
+	}
+
+	if (CurDirState == PlayerDirState::LEFT)
+	{
+		MainSpriteRenderer->Transform.SetLocalScale({ -1.0f,1.0f,1.0f });
+	}
+	if (CurDirState == PlayerDirState::RIGHT)
+	{
+		MainSpriteRenderer->Transform.SetLocalScale({ 1.0f,1.0f,1.0f });
+	}
+
 }
 
 void Player::LevelEnd(GameEngineLevel* _NextLevel)
@@ -272,7 +247,7 @@ void Player::LevelStart(GameEngineLevel* _PrevLevel)
 
 	std::string name = _PrevLevel->GetName();
 	std::shared_ptr<Portal> portal = GetMapleLevel()->GetPortal(name);
-	Transform.SetWorldPosition(portal->Transform.GetWorldPosition());
+	Transform.SetWorldPosition(portal->Transform.GetWorldPosition() + float4(0,-70));
 }
 
 

@@ -51,6 +51,9 @@
     <ClInclude Include="PhysicsActor.h">
       <Filter>Actor\MapleObject</Filter>
     </ClInclude>
+    <ClInclude Include="MapleSkill.h">
+      <Filter>Actor\MapleObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -101,6 +104,9 @@
       <Filter>Actor\MapleObject</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsActor.cpp">
+      <Filter>Actor\MapleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MapleSkill.cpp">
       <Filter>Actor\MapleObject</Filter>
     </ClCompile>
   </ItemGroup>

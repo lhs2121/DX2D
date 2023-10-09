@@ -185,6 +185,7 @@
     <ClInclude Include="ProJectile.h" />
     <ClInclude Include="MapleActor.h" />
     <ClInclude Include="DebugUI.h" />
+    <ClInclude Include="MapleSkill.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KerningCityBG.cpp" />
@@ -210,6 +211,7 @@
     <ClCompile Include="ProJectile.cpp" />
     <ClCompile Include="MapleActor.cpp" />
     <ClCompile Include="DebugUI.cpp" />
+    <ClCompile Include="MapleSkill.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

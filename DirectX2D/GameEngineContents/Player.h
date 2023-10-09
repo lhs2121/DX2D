@@ -1,21 +1,6 @@
 #pragma once
 #include "PhysicsActor.h"
 
-enum class PlayerState
-{
-	IDLE,
-	RUN,
-	DOWN,
-	ROPE,
-	ATTACK,
-};
-enum class PlayerDirState
-{
-	LEFT,
-	RIGHT,
-};
-
-
 class GameEngineSpriteRenderer;
 class GameEngineCollision;
 class Player : public PhysicsActor
@@ -41,46 +26,57 @@ public:
 			return 1;
 		}
 	}
+
 	static Player* MainPlayer;
+
 private:
-	float4 RopePos;
-	PlayerState CurState;
-	PlayerDirState CurDirState;
-	float Speed = 125;
-	bool CanRope;
-
-	std::shared_ptr<GameEngineSpriteRenderer> MainSpriteRenderer;
-	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer0;
-	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer1;
-	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer2;
-	std::shared_ptr<GameEngineCollision> Col;
-
-	void ChangeState(PlayerState _State);
-	void ChangeDirState(PlayerDirState _State)
-	{
-		CurDirState = _State;
-	}
-
 	void FlipRenderer();
 	void CameraFocus();
 	void DirUpdate();
+	//basic
+
 	void ColCheck();
 	void PortalCheck();
+	//colcheck
 
 	void RopeCheck();
 	void RopePivotUpdate();
+	//rope
 
 	void StateUpdate(float _Delta);
 	void IdleUpdate(float _Delta);
 	void RunUpdate(float _Delta);
 	void RopeUpdate(float _Delta);
 	void DownUpdate(float _Delta);
-	void AttackUpdate(float _Delta);
+	void MeleeAttackUpdate(float _Delta);
+	void AutoAttackUpdate(float _Delta);
+	void LuckySevenUpdate(float _Delta);
+	//state
+
+	void ChangeRandomSwingAnimation();
+	void ChangeDirState(PlayerDirState _State)
+	{
+		CurDirState = _State;
+	}
+	void ChangeState(PlayerState _State);
 
 	void Start() override;
 	void Update(float _Delta) override;
 	void LevelStart(GameEngineLevel* _PrevLevel) override;
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
+
+	PlayerState CurState;
+	PlayerDirState CurDirState;
+	float Speed = 125;
+	float4 RopePos;
+	bool CanRope;
+	bool CanFlip = true;
 	std::string PrevLevelName;
+
+	std::shared_ptr<GameEngineSpriteRenderer> MainSpriteRenderer;
+	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer0;
+	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer1;
+	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer2;
+	std::shared_ptr<GameEngineCollision> Col;
 };
 

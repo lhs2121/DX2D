@@ -3,61 +3,74 @@
 #include "ProJectile.h"
 #include "Player.h"
 
+LuckySeven* LuckySeven::Inst = nullptr;
+
 LuckySeven::LuckySeven()
 {
+	Inst = this;
 }
 
 LuckySeven::~LuckySeven()
 {
 }
 
-float4 LuckySeven::GetBulletPos()
+
+float4 LuckySeven::GetBulletPos(float _OffSetX, float _OffSetY)
 {
-	float4 BulletPos = Transform.GetWorldPosition() + float4(10 * Player::MainPlayer->GetDir(), 20);
+	float dir = Player::MainPlayer->GetDir();
+	float4 BulletPos = Transform.GetWorldPosition() + float4(5 + _OffSetX * dir, 20 + _OffSetY);
 	return BulletPos;
 }
 
 void LuckySeven::Start()
 {
-	sureken1 = GetLevel()->CreateActor<ProJectile>(10);
-	sureken2 = GetLevel()->CreateActor<ProJectile>(11);
+	Sureken1 = GetLevel()->CreateActor<ProJectile>(10);
+	Sureken2 = GetLevel()->CreateActor<ProJectile>(11);
+
+	Off();
 }
 
 void LuckySeven::Update(float _Delta)
 {
-	if (GameEngineInput::IsDown(VK_LSHIFT) && DoneFire1 == false && DoneFire2 == false)
+	static bool IsJoinUpdate = true;
+
+	if (IsJoinUpdate == true)
 	{
-		sureken1->Transform.SetWorldPosition(GetBulletPos());
-		sureken1->SetDir(Player::MainPlayer->GetDir());
-		sureken1->SetCoolTime(1.0f);
+		Sureken1->Transform.SetWorldPosition(GetBulletPos(1,4));
+		Sureken1->SetDir(Player::MainPlayer->GetDir());
+		Sureken1->SetCoolTime(1.0f);
 
-		sureken2->Transform.SetWorldPosition(GetBulletPos() + float4(10 * Player::MainPlayer->GetDir(), 10));
-		sureken2->SetDir(Player::MainPlayer->GetDir());
-		sureken2->SetCoolTime(1.0f);
-		
-		sureken1->On();
+		Sureken2->Transform.SetWorldPosition(GetBulletPos(2));
+		Sureken2->SetDir(Sureken1->GetDir());
+		Sureken2->SetCoolTime(1.0f);
 
-		InterTime = 0.5f;
-		DoneFire1 = true;
+		Sureken1->On();
+
+		InterTime = MaxInterTime;
+		CoolTime = MaxCoolTime;
+
+		IsJoinUpdate = false;
 	}
-
-	if (DoneFire1 == true && DoneFire2 == false)
+	
+	if (InterTime > 0.0f)
 	{
 		InterTime -= _Delta;
 
 		if (InterTime <= 0)
 		{
-			sureken2->On();
-			DoneFire2 = true;
+			Sureken2->On();
 		}
 	}
 
-	if (sureken1->IsUpdate() == false)
+	if (CoolTime > 0.0f)
 	{
-		DoneFire1 = false;
+		CoolTime -= _Delta;
+
+		if (CoolTime <= 0)
+		{
+			IsJoinUpdate = true;
+			Off();
+		}
 	}
-	if (sureken2->IsUpdate() == false)
-	{
-		DoneFire2 = false;
-	}
+
 }

@@ -19,20 +19,26 @@ public:
 	{
 		Dir = _Dir;
 	}
+	float GetDir()
+	{
+		return Dir;
+	}
 	void SetCoolTime(float _CoolTime)
 	{
 		CoolTime = _CoolTime;
 	}
 private:
-	float Speed = 250.0f;
-	float CoolTime = 1.0f;
-	float Dir;
 	void Move(float _Delta);
 
 	void ColCheck();
 	void StartCoolTime(float _Delta);
 	void Start() override;
 	void Update(float _Delta) override;
+
+	float Speed = 400.0f;
+	float CoolTime = 1.0f;
+	float Dir;
+
 	std::shared_ptr<class GameEngineCollision> Col;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
 };
