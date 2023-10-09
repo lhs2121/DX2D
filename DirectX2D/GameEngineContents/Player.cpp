@@ -156,12 +156,8 @@ void Player::DirUpdate()
 
 void Player::RopePivotUpdate()
 {
-	if (GameEngineInput::IsPress(VK_DOWN))
-	{
-		RopePos = Transform.GetWorldPosition() + float4(0, -1);
-		DebugRenderer2->Transform.SetLocalPosition({ 0,-1 });
-	}
-	else if (GameEngineInput::IsPress(VK_UP))
+
+	if (GameEngineInput::IsPress(VK_UP))
 	{
 		RopePos = Transform.GetWorldPosition() + float4(0, 65);
 		DebugRenderer2->Transform.SetLocalPosition({ 0,65 });
@@ -173,6 +169,7 @@ void Player::RopePivotUpdate()
 	}
 
 }
+
 void Player::CameraFocus()
 {
 	GetLevel()->GetMainCamera()->Transform.SetLocalPosition({ Transform.GetWorldPosition().X, Transform.GetWorldPosition().Y,GetLevel()->GetMainCamera()->Transform.GetWorldPosition().Z });

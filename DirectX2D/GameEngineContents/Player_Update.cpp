@@ -1,6 +1,32 @@
 #include "PreCompile.h"
 #include "Player.h"
 
+void Player::StateUpdate(float _Delta)
+{
+	switch (CurState)
+	{
+	case PlayerState::IDLE:
+		IdleUpdate(_Delta);
+		break;
+	case PlayerState::WALK:
+		WalkUpdate(_Delta);
+		break;
+	case PlayerState::JUMP:
+		JumpUpdate(_Delta);
+		break;
+	case PlayerState::ROPE:
+		RopeUpdate(_Delta);
+		break;
+	case PlayerState::DOWN:
+		DownUpdate(_Delta);
+		break;
+	case PlayerState::LUCKYSEVEN:
+		LuckySevenUpdate(_Delta);
+		break;
+	default:
+		break;
+	}
+}
 void Player::Update(float _Delta)
 {
 	PhysicsActor::Update(_Delta);

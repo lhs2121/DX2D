@@ -22,7 +22,7 @@ protected:
 
 	float InterTime;
 	float CoolTime;
-	float MaxCoolTime = 1.3f;
+	float MaxCoolTime = 2.0f;
 	float MaxInterTime = 0.3f;
 
 	std::shared_ptr<class ProJectile> Sureken1;

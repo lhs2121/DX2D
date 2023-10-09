@@ -21,6 +21,7 @@ void Player::ChangeState(PlayerState _State)
 		MainSpriteRenderer->ChangeAnimation("down");
 		break;
 	case PlayerState::ROPE:
+		RopeStart();
 		MainSpriteRenderer->ChangeAnimation("rope");
 		MainSpriteRenderer->AnimationPauseOn();
 		break;
@@ -32,31 +33,18 @@ void Player::ChangeState(PlayerState _State)
 	}
 }
 
-void Player::StateUpdate(float _Delta)
+void Player::RopeStart()
 {
-	switch (CurState)
+	if (IsGrounded == true && GameEngineInput::IsPress(VK_DOWN))
 	{
-	case PlayerState::IDLE:
-		IdleUpdate(_Delta);
-		break;
-	case PlayerState::WALK:
-		WalkUpdate(_Delta);
-		break;
-	case PlayerState::JUMP:
-		JumpUpdate(_Delta);
-		break;
-	case PlayerState::ROPE:
-		RopeUpdate(_Delta);
-		break;
-	case PlayerState::DOWN:
-		DownUpdate(_Delta);
-		break;
-	case PlayerState::LUCKYSEVEN:
-		LuckySevenUpdate(_Delta);
-		break;
-	default:
-		break;
+		Transform.AddWorldPosition({ 0, -5 });
 	}
+	else if(IsGrounded == true && GameEngineInput::IsPress(VK_UP))
+	{
+		Transform.AddWorldPosition({ 0, 5 });
+	}
+
+	ApplyForce = false;
 }
 
 void Player::IdleUpdate(float _Delta)
@@ -64,6 +52,10 @@ void Player::IdleUpdate(float _Delta)
 	if (GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT))
 	{
 		ChangeState(PlayerState::WALK);
+	}
+	else if (GameEngineInput::IsPress(VK_UP) && CanRope == true)
+	{
+		ChangeState(PlayerState::ROPE);
 	}
 	else if (GameEngineInput::IsPress(VK_DOWN) && IsGrounded == true)
 	{
@@ -85,15 +77,15 @@ void Player::WalkUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::IDLE);
 	}
-	else if (GameEngineInput::IsPress(VK_DOWN) && IsGrounded == true && CanRope == true)
-	{
-		ChangeState(PlayerState::ROPE);
-	}
 	else if (IsGrounded == false && NetForce.Y != 0)
 	{
 		ChangeState(PlayerState::JUMP);
 	}
-	else if (GameEngineInput::IsPress(VK_UP) && IsGrounded == false && CanRope == true)
+	else if (GameEngineInput::IsPress(VK_DOWN) && CanRope == true)
+	{
+		ChangeState(PlayerState::ROPE);
+	}
+	else if (GameEngineInput::IsPress(VK_UP) && CanRope == true)
 	{
 		ChangeState(PlayerState::ROPE);
 	}
@@ -121,61 +113,62 @@ void Player::JumpUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}
+	else if (GameEngineInput::IsPress(VK_UP) && CanRope == true)
+	{
+		ChangeState(PlayerState::ROPE);
+	}
 }
 
 void Player::RopeUpdate(float _Delta)
 {
-	static bool IsJoin = true;
-	if (IsJoin == true)
-	{
-		if (IsGrounded == true)
-		{
-			Transform.AddWorldPosition({ 0,-2 });
-		}
-		else
-		{
-			Transform.AddWorldPosition({ 0, 2 });
-		}
-
-		ApplyForce = false;
-		IsJoin = false;
-	}
-
-	if ((CalCulateColor(Transform.GetWorldPosition() + float4(0, -1)) != GameEngineColor::GREEN &&
-		CalCulateColor(Transform.GetWorldPosition() + float4(0, 40)) != GameEngineColor::GREEN))
-	{
-		ChangeState(PlayerState::IDLE);
-		IsJoin = true;
-		ApplyForce = true;
-		NetForce.Y = -100.0f;
-		MainSpriteRenderer->AnimationPauseOff();
-		return;
-	}
-
-	if ((GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT)) && GameEngineInput::IsDown(VK_MENU))
-	{
-		ChangeState(PlayerState::WALK);
-		IsJoin = true;
-		ApplyForce = true;
-		NetForce.Y = JumpForce;
-		MainSpriteRenderer->AnimationPauseOff();
-		return;
-	}
-
 	if (CurDirState == PlayerDirState::RIGHT)
 	{
+		ChangeDirState(PlayerDirState::LEFT);
 		FlipRenderer();
 	}
-	ChangeDirState(PlayerDirState::LEFT);
+	CanFlip = false;
+
+	MainSpriteRenderer->AnimationPauseOn();
 
 	if (GameEngineInput::IsPress(VK_UP))
 	{
 		Transform.AddLocalPosition({ 0, Speed * _Delta, 0 });
 		MainSpriteRenderer->AnimationPauseOff();
+
+		GameEngineColor TopColor = CalCulateColor(Transform.GetWorldPosition() + float4(0, 65));
+		GameEngineColor BottomColor = CalCulateColor(Transform.GetWorldPosition() + float4(0, -1));
+
+		if (TopColor != GameEngineColor::GREEN && BottomColor != GameEngineColor::GREEN)
+		{
+			ChangeState(PlayerState::IDLE);
+			CanFlip = true;
+			ApplyForce = true;
+			NetForce.Y = -100.0f;
+			MainSpriteRenderer->AnimationPauseOff();
+		}
 	}
 	else if (GameEngineInput::IsPress(VK_DOWN))
 	{
 		Transform.AddLocalPosition({ 0,-Speed * _Delta, 0 });
+		MainSpriteRenderer->AnimationPauseOff();
+
+		GameEngineColor TopColor = CalCulateColor(Transform.GetWorldPosition() + float4(0, 65));
+		GameEngineColor BottomColor = CalCulateColor(Transform.GetWorldPosition() + float4(0, -1));
+
+		if (BottomColor != GameEngineColor::GREEN)
+		{
+			ChangeState(PlayerState::IDLE);
+			CanFlip = true;
+			ApplyForce = true;
+			NetForce.Y = -100.0f;
+			MainSpriteRenderer->AnimationPauseOff();
+		}
+	}
+	else if ((GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT)) && GameEngineInput::IsDown(VK_MENU))
+	{
+		ChangeState(PlayerState::WALK);
+		ApplyForce = true;
+		NetForce.Y = JumpForce;
 		MainSpriteRenderer->AnimationPauseOff();
 	}
 }

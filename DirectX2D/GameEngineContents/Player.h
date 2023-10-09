@@ -43,6 +43,9 @@ private:
 	void RopePivotUpdate();
 	//rope
 
+	void RopeStart();
+	//start
+
 	void StateUpdate(float _Delta);
 	void IdleUpdate(float _Delta);
 	void WalkUpdate(float _Delta);
