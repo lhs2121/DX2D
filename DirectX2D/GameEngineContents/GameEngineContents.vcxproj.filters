@@ -48,11 +48,11 @@
     <ClInclude Include="MapleMap.h">
       <Filter>Actor\MapleObject</Filter>
     </ClInclude>
-    <ClInclude Include="PhysicsActor.h">
-      <Filter>Actor\MapleObject</Filter>
-    </ClInclude>
     <ClInclude Include="MapleSkill.h">
       <Filter>Actor\MapleObject</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsActor.h">
+      <Filter>Actor\PlayActor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -103,11 +103,14 @@
     <ClCompile Include="MapleMap.cpp">
       <Filter>Actor\MapleObject</Filter>
     </ClCompile>
-    <ClCompile Include="PhysicsActor.cpp">
-      <Filter>Actor\MapleObject</Filter>
-    </ClCompile>
     <ClCompile Include="MapleSkill.cpp">
       <Filter>Actor\MapleObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Update.cpp">
+      <Filter>Actor\PlayActor</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsActor.cpp">
+      <Filter>Actor\PlayActor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

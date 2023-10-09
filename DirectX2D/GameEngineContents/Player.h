@@ -45,7 +45,8 @@ private:
 
 	void StateUpdate(float _Delta);
 	void IdleUpdate(float _Delta);
-	void RunUpdate(float _Delta);
+	void WalkUpdate(float _Delta);
+	void JumpUpdate(float _Delta);
 	void RopeUpdate(float _Delta);
 	void DownUpdate(float _Delta);
 	void MeleeAttackUpdate(float _Delta);

@@ -20,7 +20,7 @@ void PhysicsActor::GroundCheck()
 {
 	CurColor = CalCulateColor(Transform.GetWorldPosition());
 
-	if(GameEngineColor::RED == CurColor || GameEngineColor::BLUE == CurColor)//지면
+	if (GameEngineColor::RED == CurColor || GameEngineColor::BLUE == CurColor)//지면
 	{
 		IsGrounded = true;
 	}
@@ -32,11 +32,11 @@ void PhysicsActor::GroundCheck()
 
 void PhysicsActor::JumpCheck()
 {
-	if (GravityForce.Y <= 0)
+	if (NetForce.Y <= 0)
 	{
 		IsJumping = false;
 	}
-	else if (GravityForce.Y > 0)
+	else if (NetForce.Y > 0)
 	{
 		IsJumping = true;
 	}
@@ -58,23 +58,38 @@ void PhysicsActor::Gravity(float _Delta)
 	{
 		if (IsJumping == false)
 		{
-			GravityForce.Y = 0.0f;
+			NetForce.Y = 0.0f;
 		}
 	}
 	else if (IsGrounded == false)
 	{
-		if (GravityForce.Y > -MaxGravity)
+		if (NetForce.Y > -MaxGravity)
 		{
-			GravityForce.Y -= 1000.0f * _Delta;
+			NetForce.Y -= 1000.0f * _Delta;
 		}
 	}
-
-	Transform.AddLocalPosition(GravityForce * _Delta);
 }
 
-void PhysicsActor::Jump()
+void PhysicsActor::Horizontal(float _Delta)
 {
-	GravityForce.Y = JumpForce;
+	if (NetForce.X > 0)
+	{
+		NetForce.X -= 1000.0f * _Delta;
+
+		if (NetForce.X < 0)
+		{
+			NetForce.X = 0;
+		}
+	}
+	else if (NetForce.X < 0)
+	{
+		NetForce.X += 1000.0f * _Delta;
+
+		if (NetForce.X > 0)
+		{
+			NetForce.X = 0;
+		}
+	}
 }
 
 void PhysicsActor::RedPixelSnap()
@@ -137,12 +152,24 @@ void PhysicsActor::BluePixelSnap()
 
 void PhysicsActor::Update(float _Delta)
 {
+	if (ApplyForce == true)
+	{
+		if (ApplyXForce == true)
+		{
+			float X = NetForce.X * _Delta;
+			Transform.AddLocalPosition({ X,0 });
+		}
+		if (ApplyGForce == true)
+		{
+			float Y = NetForce.Y * _Delta;
+			Transform.AddLocalPosition({ 0,Y });
+		}
+	}
+
 	JumpCheck();
 	GroundCheck();
-	if (ApplyGravity == true)
-	{
-		Gravity(_Delta);
-	}
+	Gravity(_Delta);
+	Horizontal(_Delta);
 	BluePixelSnap();
 	RedPixelSnap();
 }

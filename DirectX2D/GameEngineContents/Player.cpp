@@ -22,14 +22,14 @@ Player::~Player()
 void Player::Start()
 {
 	{
-		GetLevel()->CreateActor<LuckySeven>(9)->SetParent(this,7);
+		GetLevel()->CreateActor<LuckySeven>(9)->SetParent(this, 7);
 	}
 	{
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
-		
+
 		MainSpriteRenderer->CreateAnimation("idle", "idle", 0.2f);
 		MainSpriteRenderer->CreateAnimation("walk", "walk", 0.2f);
-		MainSpriteRenderer->CreateAnimation("jump","jump");
+		MainSpriteRenderer->CreateAnimation("jump", "jump");
 		MainSpriteRenderer->CreateAnimation("down", "down");
 		MainSpriteRenderer->CreateAnimation("rope", "rope", 0.2f);
 		MainSpriteRenderer->CreateAnimation("ladder", "ladder", 0.2f);
@@ -67,41 +67,14 @@ void Player::Start()
 		Col = CreateComponent<GameEngineCollision>(ContentsCollisionType::Player);
 		Col->SetCollisionType(ColType::AABBBOX2D);
 		Col->Transform.SetLocalScale({ 45,65 });
-		Col->Transform.AddLocalPosition({ 0,35});
+		Col->Transform.AddLocalPosition({ 0,35 });
 	}
 
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	Transform.SetLocalPosition({ 500, -900, 0.0f });
-}
 
-void Player::Update(float _Delta)
-{
-	PhysicsActor::Update(_Delta);
-	CameraFocus();
-	DirUpdate();
-	ColCheck();
-	RopePivotUpdate();
-	RopeCheck();
-	PortalCheck();
-	StateUpdate(_Delta);
-
-	if (GameEngineInput::IsDown('F'))
-	{
-		Speed += 50;
-	}
-	if (GameEngineInput::IsDown('G'))
-	{
-		ApplyGravity = !ApplyGravity;
-	}
-	if (GameEngineInput::IsDown(VK_MENU) && IsGrounded == true)
-	{
-		Jump();
-	}
-	if (GravityForce.Y != 0 && CurState != PlayerState::ROPE)
-	{
-		MainSpriteRenderer->ChangeAnimation("jump");
-	}
+	ChangeState(PlayerState::IDLE);
 }
 
 void Player::RopeCheck()
@@ -188,7 +161,7 @@ void Player::RopePivotUpdate()
 		RopePos = Transform.GetWorldPosition() + float4(0, -1);
 		DebugRenderer2->Transform.SetLocalPosition({ 0,-1 });
 	}
-	else if(GameEngineInput::IsPress(VK_UP))
+	else if (GameEngineInput::IsPress(VK_UP))
 	{
 		RopePos = Transform.GetWorldPosition() + float4(0, 65);
 		DebugRenderer2->Transform.SetLocalPosition({ 0,65 });
@@ -198,7 +171,7 @@ void Player::RopePivotUpdate()
 		RopePos = Transform.GetWorldPosition() + float4(0, -1);
 		DebugRenderer2->Transform.SetLocalPosition({ 0,-1 });
 	}
-	
+
 }
 void Player::CameraFocus()
 {
@@ -223,6 +196,13 @@ void Player::FlipRenderer()
 
 }
 
+void Player::ChangeRandomSwingAnimation()
+{
+	int RandomNumber = GameEngineRandom::GameEngineRandom().RandomInt(1, 3);
+	std::string AnimationName = "swing" + std::to_string(RandomNumber);
+	MainSpriteRenderer->ChangeAnimation(AnimationName);
+}
+
 void Player::LevelEnd(GameEngineLevel* _NextLevel)
 {
 	if (false == _NextLevel->GetDynamic_Cast_This<MapleLevel>()->FindActor(1))
@@ -239,15 +219,15 @@ void Player::LevelStart(GameEngineLevel* _PrevLevel)
 	}
 	_PrevLevel->GetDynamic_Cast_This<MapleLevel>()->EraseActor();
 
-	int CamOrder = static_cast<int>(ECAMERAORDER::Main);
-	MainSpriteRenderer->SetViewCameraSelect(CamOrder);
-	DebugRenderer0->SetViewCameraSelect(CamOrder);
-	DebugRenderer1->SetViewCameraSelect(CamOrder);
-	DebugRenderer2->SetViewCameraSelect(CamOrder);
+	int MainCamOrder = static_cast<int>(ECAMERAORDER::Main);
+	MainSpriteRenderer->SetViewCameraSelect(MainCamOrder);
+	DebugRenderer0->SetViewCameraSelect(MainCamOrder);
+	DebugRenderer1->SetViewCameraSelect(MainCamOrder);
+	DebugRenderer2->SetViewCameraSelect(MainCamOrder);
 
 	std::string name = _PrevLevel->GetName();
 	std::shared_ptr<Portal> portal = GetMapleLevel()->GetPortal(name);
-	Transform.SetWorldPosition(portal->Transform.GetWorldPosition() + float4(0,-70));
+	Transform.SetWorldPosition(portal->Transform.GetWorldPosition() + float4(0, -70));
 }
 
 

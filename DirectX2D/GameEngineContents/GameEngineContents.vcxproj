@@ -193,6 +193,7 @@
     <ClCompile Include="MapleLevel.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="KerningCity.cpp" />
+    <ClCompile Include="Player_Update.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

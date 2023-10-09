@@ -22,11 +22,11 @@ protected:
 	void BluePixelSnap();
 	void GroundCheck();
 	void JumpCheck();
-	void Jump();
 	void Gravity(float _Delta);
+	void Horizontal(float _Delta);
 	void Update(float _Delta) override;
 
-	float4 GravityForce = { 0.0f, 0.0f, 0.0f, 1.0f };
+	float4 NetForce = { 0.0f, 0.0f, 0.0f, 1.0f };
 	float4 Pos2 = { 0,1 };
 	GameEngineColor CurColor;
 
@@ -35,6 +35,8 @@ protected:
 
 	bool IsJumping;
 	bool IsGrounded;
-	bool ApplyGravity = true;
+	bool ApplyXForce = true;
+	bool ApplyGForce = true;
+	bool ApplyForce = true;
 };
 

@@ -29,7 +29,8 @@ enum class ContentsCollisionType
 enum class PlayerState
 {
 	IDLE,
-	RUN,
+	WALK,
+	JUMP,
 	DOWN,
 	ROPE,
 	ATTACK,
