@@ -46,6 +46,9 @@ private:
 	void RopeStart();
 	//start
 
+	void MoveUpdate();
+	//move position
+
 	void StateUpdate(float _Delta);
 	void IdleUpdate(float _Delta);
 	void WalkUpdate(float _Delta);
@@ -75,6 +78,7 @@ private:
 	float4 RopePos;
 	bool CanRope;
 	bool CanFlip = true;
+	bool CheatMode = false;
 	std::string PrevLevelName;
 
 	std::shared_ptr<GameEngineSpriteRenderer> MainSpriteRenderer;

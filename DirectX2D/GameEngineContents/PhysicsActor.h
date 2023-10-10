@@ -17,7 +17,6 @@ public:
 protected:
 
 	GameEngineColor CalCulateColor(float4 _Pos);
-	bool IsFall();
 	void RedPixelSnap();
 	void BluePixelSnap();
 	void GroundCheck();
@@ -35,6 +34,7 @@ protected:
 
 	bool IsJumping;
 	bool IsGrounded;
+
 	bool ApplyXForce = true;
 	bool ApplyGForce = true;
 	bool ApplyForce = true;

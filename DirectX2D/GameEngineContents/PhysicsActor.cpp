@@ -42,16 +42,6 @@ void PhysicsActor::JumpCheck()
 	}
 }
 
-bool PhysicsActor::IsFall()
-{
-	if (IsJumping == false && IsGrounded == false)
-	{
-		return true;
-	}
-
-	return false;
-}
-
 void PhysicsActor::Gravity(float _Delta)
 {
 	if (IsGrounded == true)

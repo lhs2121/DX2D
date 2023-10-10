@@ -33,22 +33,42 @@ void Player::Update(float _Delta)
 	FlipRenderer();
 	CameraFocus();
 	DirUpdate();
-	ColCheck();
 	RopePivotUpdate();
+	ColCheck();
 	RopeCheck();
 	PortalCheck();
 	StateUpdate(_Delta);
+	MoveUpdate();
+}
 
-	if (GameEngineInput::IsDown('F'))
+void Player::DirUpdate()
+{
+	if (GameEngineInput::IsFree(VK_RIGHT) && GameEngineInput::IsPress(VK_LEFT))
 	{
-		Speed += 50;
+		ChangeDirState(PlayerDirState::LEFT);
 	}
-
-	if (GameEngineInput::IsDown('G'))
+	else if (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsPress(VK_RIGHT))
 	{
-		ApplyForce = !ApplyForce;
+		ChangeDirState(PlayerDirState::RIGHT);
 	}
+}
 
+void Player::RopePivotUpdate()
+{
+	if (GameEngineInput::IsPress(VK_UP))
+	{
+		RopePos = Transform.GetWorldPosition() + float4(0, 65);
+		DebugRenderer2->Transform.SetLocalPosition({ 0,65 });
+	}
+	else
+	{
+		RopePos = Transform.GetWorldPosition() + float4(0, -1);
+		DebugRenderer2->Transform.SetLocalPosition({ 0,-1 });
+	}
+}
+
+void Player::MoveUpdate()
+{
 	if (GameEngineInput::IsDown(VK_MENU) && IsGrounded == true && CurState != PlayerState::DOWN)
 	{
 		NetForce.Y = 300.0f;
@@ -57,7 +77,6 @@ void Player::Update(float _Delta)
 	{
 		Transform.AddWorldPosition({ 0.0f,-3.0f });
 	}
-
 	if (GameEngineInput::IsPress(VK_LEFT))
 	{
 		NetForce.X = -125.0f;
@@ -66,6 +85,4 @@ void Player::Update(float _Delta)
 	{
 		NetForce.X = 125.0f;
 	}
-
-
 }

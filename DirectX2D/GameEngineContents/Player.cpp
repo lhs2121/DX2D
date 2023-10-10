@@ -132,36 +132,10 @@ void Player::ColCheck()
 	Col->CollisionEvent(ContentsCollisionType::Monster, Event);
 }
 
-
-void Player::DirUpdate()
-{
-	if (GameEngineInput::IsFree(VK_RIGHT) && GameEngineInput::IsPress(VK_LEFT))
-	{
-		ChangeDirState(PlayerDirState::LEFT);
-	}
-	else if (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsPress(VK_RIGHT))
-	{
-		ChangeDirState(PlayerDirState::RIGHT);
-	}
-}
-
-void Player::RopePivotUpdate()
-{
-	if (GameEngineInput::IsPress(VK_UP))
-	{
-		RopePos = Transform.GetWorldPosition() + float4(0, 65);
-		DebugRenderer2->Transform.SetLocalPosition({ 0,65 });
-	}
-	else
-	{
-		RopePos = Transform.GetWorldPosition() + float4(0, -1);
-		DebugRenderer2->Transform.SetLocalPosition({ 0,-1 });
-	}
-}
-
 void Player::CameraFocus()
 {
-	GetLevel()->GetMainCamera()->Transform.SetLocalPosition({ Transform.GetWorldPosition().X, Transform.GetWorldPosition().Y,GetLevel()->GetMainCamera()->Transform.GetWorldPosition().Z });
+	float4 Pos = Transform.GetWorldPosition();
+	GetLevel()->GetMainCamera()->Transform.SetWorldPosition({ Pos.X, Pos.Y,GetLevel()->GetMainCamera()->Transform.GetWorldPosition().Z });
 }
 
 void Player::FlipRenderer()
