@@ -12,60 +12,61 @@ LuckySeven::LuckySeven()
 
 LuckySeven::~LuckySeven()
 {
+
 }
 
 
-float4 LuckySeven::GetBulletPos(float _OffSetX, float _OffSetY)
+float4 LuckySeven::GetBulletPos(float4 _OffSet)
 {
 	float dir = Player::MainPlayer->GetDir();
-	float4 BulletPos = Transform.GetWorldPosition() + float4(5 + _OffSetX * dir, 20 + _OffSetY);
+	float4 BulletPos = Player::MainPlayer->Transform.GetWorldPosition()
+	+ float4(_OffSet.X * dir, _OffSet.Y);
 	return BulletPos;
 }
 
 void LuckySeven::Start()
 {
-	Sureken1 = GetLevel()->CreateActor<ProJectile>(10);
-	Sureken2 = GetLevel()->CreateActor<ProJectile>(11);
-
+	Bullet1 = GetLevel()->CreateActor<ProJectile>(55);
+	Bullet2 = GetLevel()->CreateActor<ProJectile>(55);
+	Bullet3 = GetLevel()->CreateActor<ProJectile>(55);
+	Bullet4 = GetLevel()->CreateActor<ProJectile>(55);
 	Off();
 }
 
 void LuckySeven::Update(float _Delta)
 {
-	static bool IsJoinUpdate = true;
-
 	if (IsJoinUpdate == true)
 	{
-		Sureken1->Transform.SetWorldPosition(GetBulletPos(1,4));
-		Sureken1->SetDir(Player::MainPlayer->GetDir());
-		Sureken1->SetCoolTime(1.0f);
-
-		Sureken2->Transform.SetWorldPosition(GetBulletPos(2));
-		Sureken2->SetDir(Sureken1->GetDir());
-		Sureken2->SetCoolTime(1.0f);
-
-		Sureken1->On();
-
+		if (FirstBullet == Bullet3 || FirstBullet == nullptr)
+		{
+			FirstBullet = Bullet1;
+			SecondBullet = Bullet2;
+			BulletSetting();
+			FirstBullet->On();
+		}
+		else if (FirstBullet == Bullet1)
+		{
+			FirstBullet = Bullet3;
+			SecondBullet = Bullet4;
+			BulletSetting();
+			FirstBullet->On();
+		}
 		InterTime = MaxInterTime;
 		CoolTime = MaxCoolTime;
 
 		IsJoinUpdate = false;
 	}
-	
 	if (InterTime > 0.0f)
 	{
 		InterTime -= _Delta;
-
 		if (InterTime <= 0)
 		{
-			Sureken2->On();
+			SecondBullet->On();
 		}
 	}
-
 	if (CoolTime > 0.0f)
 	{
 		CoolTime -= _Delta;
-
 		if (CoolTime <= 0)
 		{
 			IsJoinUpdate = true;
@@ -74,3 +75,19 @@ void LuckySeven::Update(float _Delta)
 	}
 
 }
+
+void LuckySeven::BulletSetting()
+{
+	
+	FirstBullet->Transform.SetWorldPosition(GetBulletPos(BulletPosOffset1));
+	FirstBullet->SetDir(Player::MainPlayer->GetDir());
+	FirstBullet->SetCoolTime(BulletCoolTime);
+	FirstBullet->SetSpeed(BulletSpeed);
+
+	SecondBullet->Transform.SetWorldPosition(GetBulletPos(BulletPosOffset2));
+	SecondBullet->SetDir(FirstBullet->GetDir());
+	SecondBullet->SetCoolTime(BulletCoolTime);
+	SecondBullet->SetSpeed(BulletSpeed);
+}
+
+

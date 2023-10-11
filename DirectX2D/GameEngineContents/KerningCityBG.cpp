@@ -5,7 +5,7 @@
 
 KerningCityBG::KerningCityBG()
 {
-	
+
 }
 
 KerningCityBG::~KerningCityBG()
@@ -20,8 +20,8 @@ void KerningCityBG::Start()
 		Renderer0->SetSprite("kerningcity", 0);
 		Renderer0->SetRenderOrder(-10);
 
-		Renderer0->Transform.SetLocalScale({ 1.3, 1.3 });
-		Renderer0->Transform.AddLocalPosition({ 0,0,100 });
+		Renderer0->Transform.SetLocalScale({ 1.3f, 1.3f });
+		Renderer0->Transform.AddLocalPosition({ 0.0f,0.0f,100.0f });
 	}
 
 	{
@@ -34,7 +34,7 @@ void KerningCityBG::Start()
 		DebugRenderer = CreateComponent<GameEngineSpriteRenderer>(2);
 		DebugRenderer->SetSprite("kerningcity", 2);
 		DebugRenderer->SetRenderOrder(-8);
-	    //Renderer2->Off();
+		//Renderer2->Off();
 	}
 
 	MapScale = Renderer0->GetSprite()->GetSpriteData(1).GetScale();

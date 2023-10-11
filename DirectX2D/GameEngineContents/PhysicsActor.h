@@ -1,8 +1,8 @@
 #pragma once
-#include "MapleActor.h"
+#include <GameEngineCore\GameEngineActor.h>
 
 // Ό³Έν :
-class PhysicsActor : public MapleActor
+class PhysicsActor : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -16,17 +16,21 @@ public:
 	PhysicsActor& operator=(PhysicsActor&& _Other) noexcept = delete;
 protected:
 
-	GameEngineColor CalCulateColor(float4 _Pos);
-	void RedPixelSnap();
-	void BluePixelSnap();
+	GameEngineColor GetColor(float4 _Pos);
+
+	void SetCurColor();
 	void GroundCheck();
 	void JumpCheck();
+
 	void Gravity(float _Delta);
 	void Horizontal(float _Delta);
+
+	void RedPixelSnap();
+	void BluePixelSnap();
+
 	void Update(float _Delta) override;
 
 	float4 NetForce = { 0.0f, 0.0f, 0.0f, 1.0f };
-	float4 Pos2 = { 0,1 };
 	GameEngineColor CurColor;
 
 	float MaxGravity = 500.0f;
@@ -35,8 +39,5 @@ protected:
 	bool IsJumping;
 	bool IsGrounded;
 
-	bool ApplyXForce = true;
-	bool ApplyGForce = true;
-	bool ApplyForce = true;
 };
 

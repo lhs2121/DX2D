@@ -167,32 +167,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="HuntRegion.h" />
+    <ClInclude Include="KerningCity.h" />
     <ClInclude Include="KerningCityBG.h" />
     <ClInclude Include="ContentsCore.h" />
-    <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="KerningCity.h" />
     <ClInclude Include="PreCompile.h" />
-    <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="PhysicsActor.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="MapleMap.h" />
     <ClInclude Include="HuntRegionBG.h" />
-    <ClInclude Include="HuntRegion.h" />
     <ClInclude Include="MapleLevel.h" />
     <ClInclude Include="LuckySeven.h" />
     <ClInclude Include="ProJectile.h" />
-    <ClInclude Include="MapleActor.h" />
     <ClInclude Include="DebugUI.h" />
-    <ClInclude Include="MapleSkill.h" />
+    <ClInclude Include="TitleLevel.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="HuntRegion.cpp" />
+    <ClCompile Include="KerningCity.cpp" />
     <ClCompile Include="KerningCityBG.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="MapleLevel.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="KerningCity.cpp" />
     <ClCompile Include="Player_Update.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -200,19 +199,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TitleLevel.cpp" />
     <ClCompile Include="Player_State.cpp" />
     <ClCompile Include="PhysicsActor.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MapleMap.cpp" />
     <ClCompile Include="HuntRegionBG.cpp" />
-    <ClCompile Include="HuntRegion.cpp" />
     <ClCompile Include="LuckySeven.cpp" />
     <ClCompile Include="ProJectile.cpp" />
-    <ClCompile Include="MapleActor.cpp" />
     <ClCompile Include="DebugUI.cpp" />
-    <ClCompile Include="MapleSkill.cpp" />
+    <ClCompile Include="TitleLevel.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

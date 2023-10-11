@@ -11,15 +11,18 @@ PhysicsActor::~PhysicsActor()
 
 }
 
-GameEngineColor PhysicsActor::CalCulateColor(float4 _Pos)
+GameEngineColor PhysicsActor::GetColor(float4 _Pos)
 {
 	return MapleMap::CurMap->GetColor(_Pos, GameEngineColor::ALAPA);
 }
 
+void PhysicsActor::SetCurColor()
+{
+	CurColor = GetColor(Transform.GetWorldPosition());
+}
+
 void PhysicsActor::GroundCheck()
 {
-	CurColor = CalCulateColor(Transform.GetWorldPosition());
-
 	if (GameEngineColor::RED == CurColor || GameEngineColor::BLUE == CurColor)//Áö¸é
 	{
 		IsGrounded = true;
@@ -98,7 +101,7 @@ void PhysicsActor::RedPixelSnap()
 	{
 		while (true)
 		{
-			GameEngineColor Color = CalCulateColor(Transform.GetWorldPosition() + Pos2);
+			GameEngineColor Color = GetColor(Transform.GetWorldPosition() + float4(0, 1));
 			if (Color == GameEngineColor::RED)
 			{
 				Transform.AddLocalPosition(float4::UP);
@@ -127,7 +130,7 @@ void PhysicsActor::BluePixelSnap()
 	{
 		while (true)
 		{
-			GameEngineColor Color = CalCulateColor(Transform.GetWorldPosition());
+			GameEngineColor Color = GetColor(Transform.GetWorldPosition());
 			if (Color == GameEngineColor::BLUE)
 			{
 				Transform.AddLocalPosition(float4::DOWN);
@@ -142,20 +145,13 @@ void PhysicsActor::BluePixelSnap()
 
 void PhysicsActor::Update(float _Delta)
 {
-	if (ApplyForce == true)
-	{
-		if (ApplyXForce == true)
-		{
-			float X = NetForce.X * _Delta;
-			Transform.AddLocalPosition({ X,0 });
-		}
-		if (ApplyGForce == true)
-		{
-			float Y = NetForce.Y * _Delta;
-			Transform.AddLocalPosition({ 0,Y });
-		}
-	}
+	float X = NetForce.X * _Delta;
+	Transform.AddLocalPosition({ X,0 });
 
+	float Y = NetForce.Y * _Delta;
+	Transform.AddLocalPosition({ 0,Y });
+
+	SetCurColor();
 	JumpCheck();
 	GroundCheck();
 	Gravity(_Delta);

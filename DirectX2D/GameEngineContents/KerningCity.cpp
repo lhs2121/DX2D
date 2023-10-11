@@ -5,6 +5,7 @@
 #include "Portal.h"
 #include "Monster.h"
 #include "MapleMap.h"
+#include "LuckySeven.h"
 
 KerningCity::KerningCity() 
 {
@@ -40,12 +41,11 @@ void KerningCity::Start()
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
 
 	{
-		Map = CreateActor<KerningCityBG>(ContentsObjectType::Map);
+		Map = CreateActor<KerningCityBG>(ActorType::Map);
+		luckySeven = CreateActor<LuckySeven>(ActorType::Skill);
+		player = CreateActor<Player>(ActorType::Player);
 		CreatePortal("HuntRegion", { 310, -910 });
-	}
-	{
-		CreateActor<Player>(ContentsObjectType::Player);
-		CreateActor<Monster>(ContentsObjectType::Monster);
+		CreateActor<Monster>(ActorType::Monster);
 	}
 }
 
@@ -71,6 +71,8 @@ void KerningCity::Update(float _Delta)
 
 void KerningCity::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	Player::MainPlayer = player.get();
+	LuckySeven::Inst = luckySeven.get();
 	MapleMap::SetCurMap(Map);
 }
 

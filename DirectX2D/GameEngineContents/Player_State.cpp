@@ -5,9 +5,11 @@
 void Player::ChangeState(PlayerState _State)
 {
 	CurState = _State;
-
 	CanFlip = true;
+	DirCheck = true;
 	ApplyForce = true;
+	ApplyXForce = true;
+	ApplyGForce = true;
 
 	switch (CurState)
 	{
@@ -21,18 +23,21 @@ void Player::ChangeState(PlayerState _State)
 		MainSpriteRenderer->ChangeAnimation("jump");
 		break;
 	case PlayerState::DOWN:
+		ApplyXForce = false;
 		CanFlip = false;
 		MainSpriteRenderer->ChangeAnimation("down");
 		break;
 	case PlayerState::ROPE:
-		CanFlip = false;
 		ApplyForce = false;
+		CanFlip = false;
 		RopeStart();
 		MainSpriteRenderer->ChangeAnimation("rope");
 		MainSpriteRenderer->AnimationPauseOn();
 		break;
 	case PlayerState::LUCKYSEVEN:
+		ApplyGForce = false;
 		CanFlip = false;
+		DirCheck = false;
 		ChangeRandomSwingAnimation();
 		break;
 	default:
@@ -42,6 +47,7 @@ void Player::ChangeState(PlayerState _State)
 
 void Player::RopeStart()
 {
+	NetForce = 0.0f;
 	if (IsGrounded == true && GameEngineInput::IsPress(VK_DOWN))
 	{
 		Transform.AddWorldPosition({ 0, -5 });
@@ -86,6 +92,10 @@ void Player::WalkUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::JUMP);
 	}
+	//else if (GameEngineInput::IsPress(VK_DOWN) && CanRope == false)
+	//{
+	//	ChangeState(PlayerState::DOWN);
+	//}
 	else if (GameEngineInput::IsPress(VK_DOWN) && CanRope == true)
 	{
 		ChangeState(PlayerState::ROPE);
@@ -126,6 +136,7 @@ void Player::JumpUpdate(float _Delta)
 
 void Player::RopeUpdate(float _Delta)
 {
+	NetForce = 0.0f;
 	if (CurDirState == PlayerDirState::RIGHT)
 	{
 		ChangeDirState(PlayerDirState::LEFT);
@@ -139,8 +150,8 @@ void Player::RopeUpdate(float _Delta)
 		Transform.AddLocalPosition({ 0, Speed * _Delta, 0 });
 		MainSpriteRenderer->AnimationPauseOff();
 
-		GameEngineColor TopColor = CalCulateColor(Transform.GetWorldPosition() + float4(0, 65));
-		GameEngineColor BottomColor = CalCulateColor(Transform.GetWorldPosition() + float4(0, -1));
+		GameEngineColor TopColor = GetColor(Transform.GetWorldPosition() + float4(0, 65));
+		GameEngineColor BottomColor = GetColor(Transform.GetWorldPosition() + float4(0, -1));
 
 		if (TopColor != GameEngineColor::GREEN && BottomColor != GameEngineColor::GREEN)
 		{
@@ -154,8 +165,8 @@ void Player::RopeUpdate(float _Delta)
 		Transform.AddLocalPosition({ 0,-Speed * _Delta, 0 });
 		MainSpriteRenderer->AnimationPauseOff();
 
-		GameEngineColor TopColor = CalCulateColor(Transform.GetWorldPosition() + float4(0, 65));
-		GameEngineColor BottomColor = CalCulateColor(Transform.GetWorldPosition() + float4(0, -1));
+		GameEngineColor TopColor = GetColor(Transform.GetWorldPosition() + float4(0, 65));
+		GameEngineColor BottomColor = GetColor(Transform.GetWorldPosition() + float4(0, -1));
 
 		if (BottomColor != GameEngineColor::GREEN)
 		{
@@ -164,12 +175,31 @@ void Player::RopeUpdate(float _Delta)
 			MainSpriteRenderer->AnimationPauseOff();
 		}
 	}
-	else if ((GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT)) && GameEngineInput::IsDown(VK_MENU))
+
+	if ((GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT)) && GameEngineInput::IsDown(VK_MENU))
 	{
-		ChangeState(PlayerState::WALK);
-		NetForce.Y = JumpForce;
+		ChangeState(PlayerState::JUMP);
+		NetForce.Y = 250.0f;
 		MainSpriteRenderer->AnimationPauseOff();
 	}
+	if ((GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT))
+		&& GameEngineInput::IsPress(VK_UP) 
+		&& GameEngineInput::IsDown(VK_MENU))
+	{
+		if (GameEngineInput::IsPress(VK_LEFT))
+		{
+			Transform.AddWorldPosition({ -3.0f,0.0f });
+		}
+		else if (GameEngineInput::IsPress(VK_RIGHT))
+		{
+			Transform.AddWorldPosition({ 3.0f,0.0f });
+		}
+		
+		ChangeState(PlayerState::JUMP);
+		NetForce.Y = 250.0f;
+		MainSpriteRenderer->AnimationPauseOff();
+	}
+
 }
 
 void Player::DownUpdate(float _Delta)
@@ -198,7 +228,7 @@ void Player::LuckySevenUpdate(float _Delta)
 	{
 		ApplyXForce = false;
 	}
-	
+
 	if (MainSpriteRenderer->GetCurIndex() == 2)
 	{
 		LuckySeven::Inst->On();
@@ -207,12 +237,10 @@ void Player::LuckySevenUpdate(float _Delta)
 	{
 		if (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsFree(VK_RIGHT))
 		{
-			ApplyXForce = true;
 			ChangeState(PlayerState::IDLE);
 		}
 		else if (GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT))
 		{
-			ApplyXForce = true;
 			ChangeState(PlayerState::WALK);
 		}
 	}

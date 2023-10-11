@@ -31,7 +31,7 @@ void ProJectile::ColCheck()
 		{
 
 		};
-	Col->CollisionEvent(ContentsCollisionType::Monster, Event);
+	Col->CollisionEvent(CollisionType::Monster, Event);
 }
 
 void ProJectile::StartCoolTime(float _Delta)
@@ -40,8 +40,6 @@ void ProJectile::StartCoolTime(float _Delta)
 
 	if (CoolTime <= 0)
 	{
-		CoolTime = 1.0f;
-
 		Off();
 	}
 }
@@ -49,7 +47,7 @@ void ProJectile::StartCoolTime(float _Delta)
 void ProJectile::Start()
 {
 	{
-		Col = CreateComponent<GameEngineCollision>(ContentsCollisionType::PlayerWeapon);
+		Col = CreateComponent<GameEngineCollision>(CollisionType::PlayerWeapon);
 		Col->SetCollisionType(ColType::SPHERE2D);
 		Col->Transform.SetLocalScale({ 20,20 });
 	}

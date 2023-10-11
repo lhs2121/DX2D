@@ -22,6 +22,8 @@ protected:
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 private:
+	std::shared_ptr<class Player> player;
 	std::shared_ptr<class MapleMap> Map;
+	std::shared_ptr<class LuckySeven> luckySeven;
 };
 

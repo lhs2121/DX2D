@@ -27,6 +27,10 @@ public:
 	{
 		CoolTime = _CoolTime;
 	}
+	void SetSpeed(float _Speed)
+	{
+		Speed = _Speed;
+	}
 private:
 	void Move(float _Delta);
 
@@ -35,8 +39,8 @@ private:
 	void Start() override;
 	void Update(float _Delta) override;
 
-	float Speed = 400.0f;
-	float CoolTime = 1.0f;
+	float Speed;
+	float CoolTime;
 	float Dir;
 
 	std::shared_ptr<class GameEngineCollision> Col;

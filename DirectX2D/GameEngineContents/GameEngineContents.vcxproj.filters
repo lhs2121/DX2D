@@ -1,148 +1,136 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="ContentsEnum.h">
-      <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>Actor\PlayActor</Filter>
+      <Filter>2. Actor\Players</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Actor\PlayActor</Filter>
+      <Filter>2. Actor\Players</Filter>
     </ClInclude>
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="LuckySeven.h">
-      <Filter>Actor\Skill</Filter>
+      <Filter>2. Actor\Skills</Filter>
     </ClInclude>
     <ClInclude Include="ProJectile.h">
-      <Filter>Actor\Skill</Filter>
-    </ClInclude>
-    <ClInclude Include="HuntRegionBG.h">
-      <Filter>Actor\Map\BackGround</Filter>
-    </ClInclude>
-    <ClInclude Include="KerningCityBG.h">
-      <Filter>Actor\Map\BackGround</Filter>
-    </ClInclude>
-    <ClInclude Include="Portal.h">
-      <Filter>Actor\Map\Portal</Filter>
-    </ClInclude>
-    <ClInclude Include="HuntRegion.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="KerningCity.h">
-      <Filter>Level</Filter>
+      <Filter>2. Actor\Skills</Filter>
     </ClInclude>
     <ClInclude Include="DebugUI.h">
-      <Filter>Actor\UI</Filter>
+      <Filter>2. Actor\UI</Filter>
     </ClInclude>
-    <ClInclude Include="MapleActor.h">
-      <Filter>Actor\MapleObject</Filter>
-    </ClInclude>
-    <ClInclude Include="MapleLevel.h">
-      <Filter>Actor\MapleObject</Filter>
-    </ClInclude>
-    <ClInclude Include="MapleMap.h">
-      <Filter>Actor\MapleObject</Filter>
-    </ClInclude>
-    <ClInclude Include="MapleSkill.h">
-      <Filter>Actor\MapleObject</Filter>
+    <ClInclude Include="ContentsEnum.h">
+      <Filter>0. Global</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsActor.h">
-      <Filter>Actor\PlayActor</Filter>
+      <Filter>2. Actor\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="MapleLevel.h">
+      <Filter>1. Level</Filter>
+    </ClInclude>
+    <ClInclude Include="HuntRegionBG.h">
+      <Filter>2. Actor\Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="KerningCityBG.h">
+      <Filter>2. Actor\Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="MapleMap.h">
+      <Filter>2. Actor\Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="Portal.h">
+      <Filter>2. Actor\Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="KerningCity.h">
+      <Filter>1. Level\1. Town</Filter>
+    </ClInclude>
+    <ClInclude Include="HuntRegion.h">
+      <Filter>1. Level\2. Hunting</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLevel.h">
+      <Filter>1. Level\0. Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TitleLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>Actor\PlayActor</Filter>
+      <Filter>2. Actor\Players</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Actor\PlayActor</Filter>
+      <Filter>2. Actor\Players</Filter>
     </ClCompile>
     <ClCompile Include="Player_State.cpp">
-      <Filter>Actor\PlayActor</Filter>
+      <Filter>2. Actor\Players</Filter>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="PreCompile.cpp" />
     <ClCompile Include="LuckySeven.cpp">
-      <Filter>Actor\Skill</Filter>
+      <Filter>2. Actor\Skills</Filter>
     </ClCompile>
     <ClCompile Include="ProJectile.cpp">
-      <Filter>Actor\Skill</Filter>
-    </ClCompile>
-    <ClCompile Include="HuntRegionBG.cpp">
-      <Filter>Actor\Map\BackGround</Filter>
-    </ClCompile>
-    <ClCompile Include="KerningCityBG.cpp">
-      <Filter>Actor\Map\BackGround</Filter>
-    </ClCompile>
-    <ClCompile Include="Portal.cpp">
-      <Filter>Actor\Map\Portal</Filter>
-    </ClCompile>
-    <ClCompile Include="HuntRegion.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="KerningCity.cpp">
-      <Filter>Level</Filter>
+      <Filter>2. Actor\Skills</Filter>
     </ClCompile>
     <ClCompile Include="DebugUI.cpp">
-      <Filter>Actor\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="MapleActor.cpp">
-      <Filter>Actor\MapleObject</Filter>
-    </ClCompile>
-    <ClCompile Include="MapleLevel.cpp">
-      <Filter>Actor\MapleObject</Filter>
-    </ClCompile>
-    <ClCompile Include="MapleMap.cpp">
-      <Filter>Actor\MapleObject</Filter>
-    </ClCompile>
-    <ClCompile Include="MapleSkill.cpp">
-      <Filter>Actor\MapleObject</Filter>
+      <Filter>2. Actor\UI</Filter>
     </ClCompile>
     <ClCompile Include="Player_Update.cpp">
-      <Filter>Actor\PlayActor</Filter>
+      <Filter>2. Actor\Players</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsActor.cpp">
-      <Filter>Actor\PlayActor</Filter>
+      <Filter>2. Actor\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="MapleLevel.cpp">
+      <Filter>1. Level</Filter>
+    </ClCompile>
+    <ClCompile Include="HuntRegionBG.cpp">
+      <Filter>2. Actor\Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="KerningCityBG.cpp">
+      <Filter>2. Actor\Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="MapleMap.cpp">
+      <Filter>2. Actor\Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>2. Actor\Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="KerningCity.cpp">
+      <Filter>1. Level\1. Town</Filter>
+    </ClCompile>
+    <ClCompile Include="HuntRegion.cpp">
+      <Filter>1. Level\2. Hunting</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>1. Level\0. Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Global">
-      <UniqueIdentifier>{491c0729-a3f0-4469-9c63-a2a32d102fc2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Level">
-      <UniqueIdentifier>{8f5b00fb-5caa-4fae-9d21-46063d7535d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor">
+    <Filter Include="2. Actor">
       <UniqueIdentifier>{dfaa5030-45e1-4f41-83d4-3d4359e25a46}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Map">
+    <Filter Include="2. Actor\UI">
+      <UniqueIdentifier>{a9a6990e-34ca-4fde-a442-cf6f214d6ee6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0. Global">
+      <UniqueIdentifier>{7c8ebcee-870d-45b9-8acd-4a2c36871a8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Level">
+      <UniqueIdentifier>{39ef70cb-ba8e-4535-a7e9-9ab07c3f7dda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Actor\Maps">
       <UniqueIdentifier>{94bd9443-64fa-4f06-a71d-38a5c678fd3e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Map\BackGround">
-      <UniqueIdentifier>{186ca69c-60b0-46df-819d-2974933654e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Map\Portal">
-      <UniqueIdentifier>{df717ae5-2c2c-470d-9a12-43c398a5418b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\PlayActor">
+    <Filter Include="2. Actor\Players">
       <UniqueIdentifier>{29ab7583-6138-44c2-a108-fb12dfbb790e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Skill">
+    <Filter Include="2. Actor\Skills">
       <UniqueIdentifier>{318905c5-b0e4-404b-af05-bd237f99902d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\MapleObject">
-      <UniqueIdentifier>{6ae7d6b6-0fae-41a0-8ad9-376c40870c0e}</UniqueIdentifier>
+    <Filter Include="1. Level\1. Town">
+      <UniqueIdentifier>{af3dc4ff-9dcb-42e5-b798-cb62af12cbb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\UI">
-      <UniqueIdentifier>{a9a6990e-34ca-4fde-a442-cf6f214d6ee6}</UniqueIdentifier>
+    <Filter Include="1. Level\2. Hunting">
+      <UniqueIdentifier>{3b15c5bf-43b6-4278-b992-f51facf2c57e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. Level\0. Title">
+      <UniqueIdentifier>{f8180c3d-1bfa-487d-becb-de712b07446e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

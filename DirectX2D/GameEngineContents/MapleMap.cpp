@@ -38,7 +38,7 @@ GameEngineColor MapleMap::GetColor(float4 _Pos, GameEngineColor _DefaultColor)
 
 void MapleMap::SwitchDebugRender()
 {
-	if(DebugRenderer->IsUpdate() == true)
+	if (DebugRenderer->IsUpdate() == true)
 	{
 		DebugRenderer->Off();
 	}
@@ -46,6 +46,6 @@ void MapleMap::SwitchDebugRender()
 	{
 		DebugRenderer->On();
 	}
-	
+
 }
 

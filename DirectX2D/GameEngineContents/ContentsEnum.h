@@ -1,13 +1,12 @@
 #pragma once
 
-enum class ContentsRenderType
+enum class RenderType
 {
 	KerningCityBG,
 	Play,
 };
 
-
-enum class ContentsObjectType
+enum class ActorType
 {
 	Map,
 	Player,
@@ -17,7 +16,7 @@ enum class ContentsObjectType
 	Skill
 };
 
-enum class ContentsCollisionType
+enum class CollisionType
 {
 	Player,
 	Monster,
@@ -36,8 +35,16 @@ enum class PlayerState
 	ATTACK,
 	LUCKYSEVEN
 };
+
 enum class PlayerDirState
 {
 	LEFT,
 	RIGHT,
+};
+
+enum class SkillType
+{
+	FlashJump,
+	LuckySeven,
+
 };

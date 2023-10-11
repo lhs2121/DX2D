@@ -7,6 +7,7 @@ Portal::Portal()
 
 Portal::~Portal()
 {
+
 }
 
 void Portal::SetNextMap(std::string _NextLevel)
@@ -22,7 +23,7 @@ std::string Portal::GetNextMap()
 void Portal::Start()
 {
 	{
-		Col = CreateComponent<GameEngineCollision>(ContentsCollisionType::Portal);
+		Col = CreateComponent<GameEngineCollision>(CollisionType::Portal);
 		Col->SetCollisionType(ColType::AABBBOX2D);
 		Col->Transform.SetLocalScale({ 50,100 });
 		Col->Transform.SetLocalPosition({ 0,-70 });
@@ -37,5 +38,5 @@ void Portal::Start()
 
 void Portal::Update(float _Delta)
 {
-
+	
 }

@@ -37,7 +37,7 @@ private:
 
 	void ColCheck();
 	void PortalCheck();
-	//colcheck
+	//col
 
 	void RopeCheck();
 	void RopePivotUpdate();
@@ -47,7 +47,7 @@ private:
 	//start
 
 	void MoveUpdate();
-	//move position
+	//move
 
 	void StateUpdate(float _Delta);
 	void IdleUpdate(float _Delta);
@@ -69,22 +69,28 @@ private:
 
 	void Start() override;
 	void Update(float _Delta) override;
+	void Release() override;
+
 	void LevelStart(GameEngineLevel* _PrevLevel) override;
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
-
-	PlayerState CurState;
-	PlayerDirState CurDirState;
+	
 	float Speed = 125;
-	float4 RopePos;
 	bool CanRope;
 	bool CanFlip = true;
-	bool CheatMode = false;
-	std::string PrevLevelName;
+	bool DirCheck = true;
 
+	bool ApplyXForce = true;
+	bool ApplyGForce = true;
+	bool ApplyForce = true;
+
+	float4 RopePos;
+	PlayerState CurState;
+	PlayerDirState CurDirState;
+	std::string PrevLevelName;
+	std::shared_ptr<GameEngineCollision> Col;
 	std::shared_ptr<GameEngineSpriteRenderer> MainSpriteRenderer;
 	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer0;
 	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer1;
 	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer2;
-	std::shared_ptr<GameEngineCollision> Col;
 };
 
