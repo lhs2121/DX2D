@@ -21,13 +21,13 @@ void HuntRegion::Start()
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
 
 	{
-		Map = CreateActor<HuntRegionBG>(ActorType::Map);
+		Map = CreateActor<HuntRegionBG>(ActorOrder::Map);
 		CreatePortal("KerningCity", { 1010, -1100 });
 	}
 	{
-		luckySeven = CreateActor<LuckySeven>(ActorType::Skill);
-		player = CreateActor<Player>(ActorType::Player);
-		CreateActor<Monster>(ActorType::Monster);
+		luckySeven = CreateActor<LuckySeven>(ActorOrder::Skill);
+		player = CreateActor<Player>(ActorOrder::Player);
+		CreateActor<Monster>(ActorOrder::Monster);
 	}
 }
 

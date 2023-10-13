@@ -184,6 +184,7 @@
     <ClInclude Include="ProJectile.h" />
     <ClInclude Include="DebugUI.h" />
     <ClInclude Include="TitleLevel.h" />
+    <ClInclude Include="EffectManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HuntRegion.cpp" />
@@ -209,6 +210,7 @@
     <ClCompile Include="ProJectile.cpp" />
     <ClCompile Include="DebugUI.cpp" />
     <ClCompile Include="TitleLevel.cpp" />
+    <ClCompile Include="EffectManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

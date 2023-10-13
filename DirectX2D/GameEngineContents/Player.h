@@ -82,6 +82,10 @@ private:
 	bool ApplyXForce = true;
 	bool ApplyGForce = true;
 	bool ApplyForce = true;
+	bool EffectManager = false;
+
+	int JumpKey = VK_MENU;
+	int LuckySevenKey = VK_SHIFT;
 
 	float4 RopePos;
 	PlayerState CurState;

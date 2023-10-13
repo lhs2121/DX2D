@@ -40,13 +40,16 @@
       <Filter>2. Actor\Maps</Filter>
     </ClInclude>
     <ClInclude Include="KerningCity.h">
-      <Filter>1. Level\1. Town</Filter>
+      <Filter>1. Level\1. KerningCity</Filter>
     </ClInclude>
     <ClInclude Include="HuntRegion.h">
-      <Filter>1. Level\2. Hunting</Filter>
+      <Filter>1. Level\2. HuntRegion</Filter>
     </ClInclude>
     <ClInclude Include="TitleLevel.h">
-      <Filter>1. Level\0. Title</Filter>
+      <Filter>1. Level\0. TitleLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>2. Actor\Skills</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -92,13 +95,16 @@
       <Filter>2. Actor\Maps</Filter>
     </ClCompile>
     <ClCompile Include="KerningCity.cpp">
-      <Filter>1. Level\1. Town</Filter>
+      <Filter>1. Level\1. KerningCity</Filter>
     </ClCompile>
     <ClCompile Include="HuntRegion.cpp">
-      <Filter>1. Level\2. Hunting</Filter>
+      <Filter>1. Level\2. HuntRegion</Filter>
     </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
-      <Filter>1. Level\0. Title</Filter>
+      <Filter>1. Level\0. TitleLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>2. Actor\Skills</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -123,13 +129,13 @@
     <Filter Include="2. Actor\Skills">
       <UniqueIdentifier>{318905c5-b0e4-404b-af05-bd237f99902d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1. Level\1. Town">
+    <Filter Include="1. Level\1. KerningCity">
       <UniqueIdentifier>{af3dc4ff-9dcb-42e5-b798-cb62af12cbb4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1. Level\2. Hunting">
+    <Filter Include="1. Level\2. HuntRegion">
       <UniqueIdentifier>{3b15c5bf-43b6-4278-b992-f51facf2c57e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1. Level\0. Title">
+    <Filter Include="1. Level\0. TitleLevel">
       <UniqueIdentifier>{f8180c3d-1bfa-487d-becb-de712b07446e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

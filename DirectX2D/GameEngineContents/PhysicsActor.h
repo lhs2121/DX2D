@@ -35,6 +35,8 @@ protected:
 
 	float MaxGravity = 500.0f;
 	float JumpForce = 300.0f;
+	float BrakingXForce = 1000.0f;
+	float BrakingGForce = 1000.0f;
 
 	bool IsJumping;
 	bool IsGrounded;

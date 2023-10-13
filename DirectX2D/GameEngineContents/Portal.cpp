@@ -23,8 +23,8 @@ std::string Portal::GetNextMap()
 void Portal::Start()
 {
 	{
-		Col = CreateComponent<GameEngineCollision>(CollisionType::Portal);
-		Col->SetCollisionType(ColType::AABBBOX2D);
+		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Portal);
+		Col->SetCollisionOrder(ColType::AABBBOX2D);
 		Col->Transform.SetLocalScale({ 50,100 });
 		Col->Transform.SetLocalPosition({ 0,-70 });
 	}

@@ -6,6 +6,7 @@
 #include "Monster.h"
 #include "MapleMap.h"
 #include "LuckySeven.h"
+#include "EffectManager.h"
 
 KerningCity::KerningCity() 
 {
@@ -37,25 +38,26 @@ void KerningCity::Start()
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 
-	GetMainCamera()->Transform.SetLocalPosition({ 0, 0, -500.0f});
-	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
+	GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, 0.0f});
+	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
 
 	{
-		Map = CreateActor<KerningCityBG>(ActorType::Map);
-		luckySeven = CreateActor<LuckySeven>(ActorType::Skill);
-		player = CreateActor<Player>(ActorType::Player);
+		Map = CreateActor<KerningCityBG>(ActorOrder::Map);
+		luckySeven = CreateActor<LuckySeven>(ActorOrder::Skill);
+		player = CreateActor<Player>(ActorOrder::Player);
 		CreatePortal("HuntRegion", { 310, -910 });
-		CreateActor<Monster>(ActorType::Monster);
+		CreateActor<Monster>(ActorOrder::Monster);
+		CreateActor<EffectManager>(ActorOrder::Effect)->Transform.SetWorldPosition(player->Transform.GetWorldPosition());
 	}
 }
 
 void KerningCity::Update(float _Delta)
 {
-	if (GameEngineInput::IsPress('Q'))
+	if (GameEngineInput::IsPress(VK_PRIOR))
 	{
 		GetMainCamera()->Transform.AddLocalPosition({ 0,0,500 * _Delta });
 	}
-	if (GameEngineInput::IsPress('E'))
+	if (GameEngineInput::IsPress(VK_NEXT))
 	{
 		GetMainCamera()->Transform.AddLocalPosition({ 0,0,-500 * _Delta });
 	}

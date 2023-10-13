@@ -59,8 +59,8 @@ void Player::Start()
 
 	//collision
 	{
-		Col = CreateComponent<GameEngineCollision>(CollisionType::Player);
-		Col->SetCollisionType(ColType::AABBBOX2D);
+		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Player);
+		Col->SetCollisionOrder(ColType::AABBBOX2D);
 		Col->Transform.SetLocalScale({ 45,65 });
 		Col->Transform.AddLocalPosition({ 0,35 });
 	}

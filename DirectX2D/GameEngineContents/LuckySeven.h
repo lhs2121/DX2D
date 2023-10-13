@@ -19,9 +19,11 @@ public:
 
 protected:
 	float4 GetBulletPos(float4 _OffSet);
+	void BulletSetting();
 	void Start() override;
 	void Update(float _Delta) override;
-	void BulletSetting();
+
+	bool IsReady = false;
 
 	float InterTime;
 	float CoolTime;
@@ -32,10 +34,9 @@ protected:
 	float BulletSpeed = 400.0f;
 	float BulletCoolTime = 1.0f;
 
-	float4 	BulletPosOffset1 = { 5, 30 };
-	float4 	BulletPosOffset2 = { 7, 20 };
+	float4 BulletPosOffset1 = { 5, 30 };
+	float4 BulletPosOffset2 = { 7, 20 };
 
-	bool IsJoinUpdate = true;
 	std::shared_ptr<ProJectile> FirstBullet = nullptr;
 	std::shared_ptr<ProJectile> SecondBullet = nullptr;
 	std::shared_ptr<ProJectile> Bullet1;

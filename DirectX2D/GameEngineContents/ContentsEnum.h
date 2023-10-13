@@ -1,22 +1,24 @@
 #pragma once
 
-enum class RenderType
+enum class RenderOrder
 {
 	KerningCityBG,
 	Play,
+	Effect,
 };
 
-enum class ActorType
+enum class ActorOrder
 {
 	Map,
 	Player,
 	Monster,
 	NPC,
 	MapObject,
-	Skill
+	Skill,
+	Effect
 };
 
-enum class CollisionType
+enum class CollisionOrder
 {
 	Player,
 	Monster,

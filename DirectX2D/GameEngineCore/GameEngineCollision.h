@@ -76,14 +76,14 @@ public:
 
 	// bool CollisionEnter(int _Order, const float4& _Next, std::function<void(std::vector<std::shared_ptr<GameEngineCollision>>& _Collisions)> _Collision);
 
-	void SetCollisionType(ColType _CollisionType)
+	void SetCollisionOrder(ColType _CollisionOrder)
 	{
-		CollisionType = _CollisionType;
+		CollisionOrder = _CollisionOrder;
 	}
 
-	ColType GetCollisionType()
+	ColType GetCollisionOrder()
 	{
-		return CollisionType;
+		return CollisionOrder;
 	}
 
 protected:
@@ -92,7 +92,7 @@ protected:
 	void Release() override;
 
 private:
-	ColType CollisionType = ColType::SPHERE2D;
+	ColType CollisionOrder = ColType::SPHERE2D;
 	std::set<std::shared_ptr<GameEngineCollision>> Others;
 };
 

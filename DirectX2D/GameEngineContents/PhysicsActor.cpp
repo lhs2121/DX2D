@@ -67,7 +67,7 @@ void PhysicsActor::Horizontal(float _Delta)
 {
 	if (NetForce.X > 0)
 	{
-		NetForce.X -= 1000.0f * _Delta;
+		NetForce.X -= BrakingXForce * _Delta;
 
 		if (NetForce.X < 0)
 		{
@@ -76,7 +76,7 @@ void PhysicsActor::Horizontal(float _Delta)
 	}
 	else if (NetForce.X < 0)
 	{
-		NetForce.X += 1000.0f * _Delta;
+		NetForce.X += BrakingXForce * _Delta;
 
 		if (NetForce.X > 0)
 		{

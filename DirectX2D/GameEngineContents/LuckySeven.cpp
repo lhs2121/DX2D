@@ -35,7 +35,7 @@ void LuckySeven::Start()
 
 void LuckySeven::Update(float _Delta)
 {
-	if (IsJoinUpdate == true)
+	if (IsReady == false)
 	{
 		if (FirstBullet == Bullet3 || FirstBullet == nullptr)
 		{
@@ -54,8 +54,9 @@ void LuckySeven::Update(float _Delta)
 		InterTime = MaxInterTime;
 		CoolTime = MaxCoolTime;
 
-		IsJoinUpdate = false;
+		IsReady = true;
 	}
+
 	if (InterTime > 0.0f)
 	{
 		InterTime -= _Delta;
@@ -69,7 +70,7 @@ void LuckySeven::Update(float _Delta)
 		CoolTime -= _Delta;
 		if (CoolTime <= 0)
 		{
-			IsJoinUpdate = true;
+			IsReady = false;
 			Off();
 		}
 	}
@@ -78,7 +79,6 @@ void LuckySeven::Update(float _Delta)
 
 void LuckySeven::BulletSetting()
 {
-	
 	FirstBullet->Transform.SetWorldPosition(GetBulletPos(BulletPosOffset1));
 	FirstBullet->SetDir(Player::MainPlayer->GetDir());
 	FirstBullet->SetCoolTime(BulletCoolTime);

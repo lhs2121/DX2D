@@ -2,32 +2,6 @@
 #include "Player.h"
 #include "MapleMap.h"
 
-void Player::StateUpdate(float _Delta)
-{
-	switch (CurState)
-	{
-	case PlayerState::IDLE:
-		IdleUpdate(_Delta);
-		break;
-	case PlayerState::WALK:
-		WalkUpdate(_Delta);
-		break;
-	case PlayerState::JUMP:
-		JumpUpdate(_Delta);
-		break;
-	case PlayerState::ROPE:
-		RopeUpdate(_Delta);
-		break;
-	case PlayerState::DOWN:
-		DownUpdate(_Delta);
-		break;
-	case PlayerState::LUCKYSEVEN:
-		LuckySevenUpdate(_Delta);
-		break;
-	default:
-		break;
-	}
-}
 void Player::Update(float _Delta)
 {
 	PhysicsActor::Update(_Delta);
@@ -116,7 +90,11 @@ void Player::MoveUpdate()
 		}
 		else if (GameEngineInput::IsDown(VK_MENU) && CurState == PlayerState::DOWN)
 		{
-			Transform.AddWorldPosition({ 0.0f,-3.0f });
+			if (GetColor(Transform.GetWorldPosition() + float4(0, -5)) == GameEngineColor::RED)
+			{
+				return;
+			}
+			Transform.AddWorldPosition({ 0.0f,-5.0f });
 		}
 	}
 
@@ -158,7 +136,7 @@ void Player::PortalCheck()
 		{
 
 		};
-	Col->CollisionEvent(CollisionType::Portal, Event);
+	Col->CollisionEvent(CollisionOrder::Portal, Event);
 }
 
 void Player::ColCheck()
@@ -176,7 +154,7 @@ void Player::ColCheck()
 		{
 			Col->GetActor()->Death();
 		};
-	Col->CollisionEvent(CollisionType::Monster, Event);
+	Col->CollisionEvent(CollisionOrder::Monster, Event);
 }
 
 void Player::CameraFocus()

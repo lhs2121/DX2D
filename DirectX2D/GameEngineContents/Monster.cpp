@@ -12,8 +12,8 @@ Monster::~Monster()
 void Monster::Start()
 {
 	{
-		Col = CreateComponent<GameEngineCollision>(CollisionType::Monster);
-		Col->SetCollisionType(ColType::AABBBOX2D);
+		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Monster);
+		Col->SetCollisionOrder(ColType::AABBBOX2D);
 		Col->Transform.SetLocalScale({ 100,100 });
 	}
 

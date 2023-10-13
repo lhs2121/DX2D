@@ -20,6 +20,8 @@ void KerningCityBG::Start()
 		Renderer0->SetSprite("kerningcity", 0);
 		Renderer0->SetRenderOrder(-10);
 
+		Renderer0->GetCurSprite().Texture->GetBaseSampler() = GameEngineSampler::Find("LINEAR");
+
 		Renderer0->Transform.SetLocalScale({ 1.3f, 1.3f });
 		Renderer0->Transform.AddLocalPosition({ 0.0f,0.0f,100.0f });
 	}

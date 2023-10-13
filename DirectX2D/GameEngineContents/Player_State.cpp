@@ -1,6 +1,34 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include "LuckySeven.h"
+#include "EffectManager.h"
+
+void Player::StateUpdate(float _Delta)
+{
+	switch (CurState)
+	{
+	case PlayerState::IDLE:
+		IdleUpdate(_Delta);
+		break;
+	case PlayerState::WALK:
+		WalkUpdate(_Delta);
+		break;
+	case PlayerState::JUMP:
+		JumpUpdate(_Delta);
+		break;
+	case PlayerState::ROPE:
+		RopeUpdate(_Delta);
+		break;
+	case PlayerState::DOWN:
+		DownUpdate(_Delta);
+		break;
+	case PlayerState::LUCKYSEVEN:
+		LuckySevenUpdate(_Delta);
+		break;
+	default:
+		break;
+	}
+}
 
 void Player::ChangeState(PlayerState _State)
 {
@@ -10,6 +38,9 @@ void Player::ChangeState(PlayerState _State)
 	ApplyForce = true;
 	ApplyXForce = true;
 	ApplyGForce = true;
+	EffectManager = false;
+	BrakingXForce = 1000.0f;
+
 
 	switch (CurState)
 	{
@@ -72,7 +103,7 @@ void Player::IdleUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::DOWN);
 	}
-	else if (GameEngineInput::IsDown(VK_SHIFT) && LuckySeven::Inst->IsUpdate() == false)
+	else if (GameEngineInput::IsDown(LuckySevenKey) && LuckySeven::Inst->IsUpdate() == false)
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}
@@ -104,7 +135,7 @@ void Player::WalkUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::ROPE);
 	}
-	else if (GameEngineInput::IsDown(VK_SHIFT) && LuckySeven::Inst->IsUpdate() == false)
+	else if (GameEngineInput::IsDown(LuckySevenKey) && LuckySeven::Inst->IsUpdate() == false)
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}
@@ -124,13 +155,24 @@ void Player::JumpUpdate(float _Delta)
 		}
 	}
 
-	if (GameEngineInput::IsDown(VK_SHIFT) && LuckySeven::Inst->IsUpdate() == false)
+	if (GameEngineInput::IsDown(LuckySevenKey) && LuckySeven::Inst->IsUpdate() == false)
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}
 	else if (GameEngineInput::IsPress(VK_UP) && CanRope == true)
 	{
 		ChangeState(PlayerState::ROPE);
+	}
+	else if (GameEngineInput::IsDown(JumpKey) && EffectManager == false)
+	{
+		ApplyXForce = false;
+		EffectManager = true;
+
+		BrakingXForce = 300.0f;
+		NetForce.X = 600.0f;
+		NetForce.Y += 100.0f;
+
+		EffectManager::Inst->StartEffect(Transform.GetWorldPosition(), SkillType::FlashJump);
 	}
 }
 
@@ -176,7 +218,7 @@ void Player::RopeUpdate(float _Delta)
 		}
 	}
 
-	if ((GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT)) && GameEngineInput::IsDown(VK_MENU))
+	if ((GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT)) && GameEngineInput::IsDown(JumpKey))
 	{
 		ChangeState(PlayerState::JUMP);
 		NetForce.Y = 250.0f;
@@ -184,7 +226,7 @@ void Player::RopeUpdate(float _Delta)
 	}
 	if ((GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT))
 		&& GameEngineInput::IsPress(VK_UP) 
-		&& GameEngineInput::IsDown(VK_MENU))
+		&& GameEngineInput::IsDown(JumpKey))
 	{
 		if (GameEngineInput::IsPress(VK_LEFT))
 		{
