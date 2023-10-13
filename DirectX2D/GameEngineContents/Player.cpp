@@ -32,27 +32,27 @@ void Player::Start()
 		MainSpriteRenderer->CreateAnimation("swing3", "swing3", 0.2f, 0, 2, false);
 
 		MainSpriteRenderer->ChangeAnimation("idle");
-		MainSpriteRenderer->SetRenderOrder(0);
+		MainSpriteRenderer->SetRenderOrder(RenderOrder::Player);
 		MainSpriteRenderer->SetPivotValue({ 0.5f,0.71f });
 		MainSpriteRenderer->AutoSpriteSizeOn();
 	}
 
 	{
-		DebugRenderer0 = CreateComponent<GameEngineSpriteRenderer>(1);
-		DebugRenderer0->SetRenderOrder(1);
+		DebugRenderer0 = CreateComponent<GameEngineSpriteRenderer>(0);
+		DebugRenderer0->SetRenderOrder(RenderOrder::Debug);
 		DebugRenderer0->SetSprite("etc");
 	}
 
 	{
-		DebugRenderer1 = CreateComponent<GameEngineSpriteRenderer>(2);
-		DebugRenderer1->SetRenderOrder(1);
+		DebugRenderer1 = CreateComponent<GameEngineSpriteRenderer>(0);
+		DebugRenderer1->SetRenderOrder(RenderOrder::Debug);
 		DebugRenderer1->SetSprite("etc", 1);
 		DebugRenderer1->Transform.AddLocalPosition({ 0,1,0 });
 	}
 
 	{
-		DebugRenderer2 = CreateComponent<GameEngineSpriteRenderer>(3);
-		DebugRenderer2->SetRenderOrder(1);
+		DebugRenderer2 = CreateComponent<GameEngineSpriteRenderer>(0);
+		DebugRenderer2->SetRenderOrder(RenderOrder::Debug);
 		DebugRenderer2->SetSprite("etc", 2);
 		DebugRenderer2->Transform.AddLocalPosition({ 0,-1,0 });
 	}
@@ -60,7 +60,8 @@ void Player::Start()
 	//collision
 	{
 		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Player);
-		Col->SetCollisionOrder(ColType::AABBBOX2D);
+		Col->SetOrder(1);
+		Col->SetCollisionType(ColType::AABBBOX2D);
 		Col->Transform.SetLocalScale({ 45,65 });
 		Col->Transform.AddLocalPosition({ 0,35 });
 	}
@@ -68,6 +69,9 @@ void Player::Start()
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	Transform.SetLocalPosition({ 500, -900, 0.0f });
+
+	GameEngineInput::AddInputObject(this);
+//	GetLevel()->GetMainCamera()->CameraTargetSetting(Transform, float4::BACKWARD * 500.0f);
 
 	ChangeDirState(PlayerDirState::LEFT);
 	ChangeState(PlayerState::IDLE);

@@ -2,9 +2,14 @@
 
 enum class RenderOrder
 {
-	KerningCityBG,
-	Play,
+	MapBackground,
+	MapTile,
+	MapObject,
+	Player,
+	Monster,
+	Projectile,
 	Effect,
+	Debug,
 };
 
 enum class ActorOrder
@@ -20,7 +25,7 @@ enum class ActorOrder
 
 enum class CollisionOrder
 {
-	Player,
+	Player = 10,
 	Monster,
 	PlayerWeapon,
 	MonsterWeapon,

@@ -18,7 +18,7 @@ void TitleLevel::Start()
 
 void TitleLevel::Update(float _Delta)
 {
-	if (GameEngineInput::IsPress('P'))
+	if (InputIsPress('P'))
 	{
 		GameEngineCore::ChangeLevel("KCity");
 	}

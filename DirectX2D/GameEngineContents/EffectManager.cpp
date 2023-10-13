@@ -33,7 +33,6 @@ void EffectManager::StartEffect(float4 _Pos, SkillType _Type)
 void EffectManager::Start()
 {
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(0);
-
 	Renderer->CreateAnimation("etc", "etc");
 	Renderer->CreateAnimation("FlashJump", "flashjump");
 	Renderer->ChangeAnimation("FlashJump");

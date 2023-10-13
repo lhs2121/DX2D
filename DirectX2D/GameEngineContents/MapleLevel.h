@@ -23,5 +23,7 @@ public:
 	};
 
 	std::map<std::string, std::shared_ptr<class Portal>> PortalGroup;
+
+	void Start() override;
 };
 

@@ -51,7 +51,7 @@ bool GameEngineCollisionGroup::Collision(std::shared_ptr<GameEngineCollision> _C
 			continue;
 		}
 
-		if (true == GameEngineTransform::Collision({ _Collision->Transform.ColData , Collision->Transform.ColData, _Collision->GetCollisionOrder(), Collision->GetCollisionOrder() }))
+		if (true == GameEngineTransform::Collision({ _Collision->Transform.ColData , Collision->Transform.ColData, _Collision->GetCollisionType(), Collision->GetCollisionType() }))
 		{
 			return true;
 		}
@@ -85,7 +85,7 @@ bool GameEngineCollisionGroup::Collision(std::shared_ptr<GameEngineCollision> _C
 			continue;
 		}
 
-		if (true == GameEngineTransform::Collision({ Data , Collision->Transform.ColData, _Collision->GetCollisionOrder(), Collision->GetCollisionOrder() }))
+		if (true == GameEngineTransform::Collision({ Data , Collision->Transform.ColData, _Collision->GetCollisionType(), Collision->GetCollisionType() }))
 		{
 			return true;
 		}
@@ -120,7 +120,7 @@ bool GameEngineCollisionGroup::Collision(std::shared_ptr<GameEngineCollision> _C
 			continue;
 		}
 
-		if (true == GameEngineTransform::Collision({ _Collision->Transform.ColData , Collision->Transform.ColData, _Collision->GetCollisionOrder(), Collision->GetCollisionOrder() }))
+		if (true == GameEngineTransform::Collision({ _Collision->Transform.ColData , Collision->Transform.ColData, _Collision->GetCollisionType(), Collision->GetCollisionType() }))
 		{
 			ResultCollision.push_back(Collision);
 		}
@@ -164,7 +164,7 @@ bool GameEngineCollisionGroup::Collision(std::shared_ptr<GameEngineCollision> _C
 			continue;
 		}
 
-		if (true == GameEngineTransform::Collision({ Data , Collision->Transform.ColData, _Collision->GetCollisionOrder(), Collision->GetCollisionOrder() }))
+		if (true == GameEngineTransform::Collision({ Data , Collision->Transform.ColData, _Collision->GetCollisionType(), Collision->GetCollisionType() }))
 		{
 			ResultCollision.push_back(Collision);
 		}
@@ -201,7 +201,7 @@ bool GameEngineCollisionGroup::CollisionEvent(std::shared_ptr<GameEngineCollisio
 			continue;
 		}
 
-		if (true == GameEngineTransform::Collision({ _Collision->Transform.ColData , Collision->Transform.ColData, _Collision->GetCollisionOrder(), Collision->GetCollisionOrder() }))
+		if (true == GameEngineTransform::Collision({ _Collision->Transform.ColData , Collision->Transform.ColData, _Collision->GetCollisionType(), Collision->GetCollisionType() }))
 		{
 			ResultCollision.push_back(Collision);
 			continue;

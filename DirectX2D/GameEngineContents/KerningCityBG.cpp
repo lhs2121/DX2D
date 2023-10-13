@@ -18,24 +18,19 @@ void KerningCityBG::Start()
 	{
 		Renderer0 = CreateComponent<GameEngineSpriteRenderer>(0);
 		Renderer0->SetSprite("kerningcity", 0);
-		Renderer0->SetRenderOrder(-10);
-
-		Renderer0->GetCurSprite().Texture->GetBaseSampler() = GameEngineSampler::Find("LINEAR");
-
-		Renderer0->Transform.SetLocalScale({ 1.3f, 1.3f });
-		Renderer0->Transform.AddLocalPosition({ 0.0f,0.0f,100.0f });
+		Renderer0->SetRenderOrder(RenderOrder::MapBackground);
 	}
 
 	{
-		Renderer1 = CreateComponent<GameEngineSpriteRenderer>(1);
+		Renderer1 = CreateComponent<GameEngineSpriteRenderer>(0);
 		Renderer1->SetSprite("kerningcity", 1);
-		Renderer1->SetRenderOrder(-9);
+		Renderer1->SetRenderOrder(RenderOrder::MapTile);
 	}
 
 	{
-		DebugRenderer = CreateComponent<GameEngineSpriteRenderer>(2);
+		DebugRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
 		DebugRenderer->SetSprite("kerningcity", 2);
-		DebugRenderer->SetRenderOrder(-8);
+		DebugRenderer->SetRenderOrder(RenderOrder::Debug);
 		//Renderer2->Off();
 	}
 

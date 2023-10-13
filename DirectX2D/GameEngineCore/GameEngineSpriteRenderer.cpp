@@ -85,17 +85,8 @@ void GameEngineSpriteRenderer::Start()
 
 	ImageTransform.SetParent(Transform);
 
-	SetMesh("Rect");
-	SetMaterial("2DTexture");
-
-	const TransformData& Data = ImageTransform.GetConstTransformDataRef();
-	GetShaderResHelper().SetConstantBufferLink("TransformData", Data);
-	GetShaderResHelper().SetConstantBufferLink("SpriteData", CurSprite.SpritePivot);
-	// ShaderResHelper.SetTexture("DiffuseTex", "NSet.Png");
-	GetShaderResHelper().SetConstantBufferLink("SpriteRendererInfo", SpriteRendererInfoValue);
-
-	SetSprite("NSet.Png");
-
+	GameEngineRenderer::SetMesh("Rect");
+	GameEngineRenderer::SetMaterial("2DTexture");
 
 	//std::shared_ptr<GameEngineConstantBuffer> Buffer = GameEngineConstantBuffer::CreateAndFind(sizeof(float4), "SpriteData");
 	//if (nullptr != Buffer)
@@ -111,6 +102,7 @@ void GameEngineSpriteRenderer::Update(float _Delta)
 {
 	if (nullptr != CurFrameAnimations)
 	{
+		Sprite = CurFrameAnimations->Sprite;
 		CurSprite = CurFrameAnimations->Update(_Delta);
 	}
 
@@ -163,6 +155,8 @@ void GameEngineSpriteRenderer::Render(GameEngineCamera* _Camera, float _Delta)
 
 void GameEngineSpriteRenderer::SetSprite(std::string_view _Name, unsigned int index /*= 0*/)
 {
+	CurFrameAnimations = nullptr;
+
 	Sprite = GameEngineSprite::Find(_Name);
 
 	if (nullptr == Sprite)
@@ -264,6 +258,7 @@ void GameEngineSpriteRenderer::ChangeAnimation(std::string_view _AnimationName, 
 	CurFrameAnimations = FrameAnimations[UpperName];
 	CurFrameAnimations->Reset();
 	CurFrameAnimations->CurIndex = _FrameIndex;
+	Sprite = CurFrameAnimations->Sprite;
 	CurSprite = CurFrameAnimations->Sprite->GetSpriteData(CurFrameAnimations->CurIndex);
 }
 
@@ -374,4 +369,15 @@ void GameEngineSpriteRenderer::SetPivotType(PivotType _Type)
 	default:
 		break;
 	}
+}
+
+void GameEngineSpriteRenderer::SetMaterialEvent(std::string_view _Name, int _Index)
+{
+	const TransformData& Data = ImageTransform.GetConstTransformDataRef();
+	GetShaderResHelper().SetConstantBufferLink("TransformData", Data);
+	GetShaderResHelper().SetConstantBufferLink("SpriteData", CurSprite.SpritePivot);
+	// ShaderResHelper.SetTexture("DiffuseTex", "NSet.Png");
+	GetShaderResHelper().SetConstantBufferLink("SpriteRendererInfo", SpriteRendererInfoValue);
+
+	SetSprite("NSet.png");
 }

@@ -7,9 +7,9 @@
 class EventParameter 
 {
 public:
-	std::function<void(class GameEngineCollision*, class GameEngineCollision* _Collisions)> Enter = nullptr;
-	std::function<void(class GameEngineCollision*, class GameEngineCollision* _Collisions)> Stay = nullptr;
-	std::function<void(class GameEngineCollision*, class GameEngineCollision* _Collisions)> Exit = nullptr;
+	std::function<void(class GameEngineCollision* _This, class GameEngineCollision* _Collisions)> Enter = nullptr;
+	std::function<void(class GameEngineCollision* _This, class GameEngineCollision* _Collisions)> Stay = nullptr;
+	std::function<void(class GameEngineCollision* _This, class GameEngineCollision* _Collisions)> Exit = nullptr;
 };
 
 // Ό³Έν :
@@ -76,14 +76,14 @@ public:
 
 	// bool CollisionEnter(int _Order, const float4& _Next, std::function<void(std::vector<std::shared_ptr<GameEngineCollision>>& _Collisions)> _Collision);
 
-	void SetCollisionOrder(ColType _CollisionOrder)
+	void SetCollisionType(ColType _CollisionType)
 	{
-		CollisionOrder = _CollisionOrder;
+		CollisionType = _CollisionType;
 	}
 
-	ColType GetCollisionOrder()
+	ColType GetCollisionType()
 	{
-		return CollisionOrder;
+		return CollisionType;
 	}
 
 protected:
@@ -92,7 +92,7 @@ protected:
 	void Release() override;
 
 private:
-	ColType CollisionOrder = ColType::SPHERE2D;
+	ColType CollisionType = ColType::SPHERE2D;
 	std::set<std::shared_ptr<GameEngineCollision>> Others;
 };
 

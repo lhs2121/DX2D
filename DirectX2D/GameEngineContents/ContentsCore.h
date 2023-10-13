@@ -13,7 +13,7 @@ public:
 
 	static float4 GetStartWindowSize()
 	{
-		return {1280, 720};
+		return {1920, 1080};
 	}
 
 	static float4 GetStartWindowPos()
@@ -35,7 +35,7 @@ protected:
 	void Start() override;
 	void Update(float _Delta) override;
 	void Release() override;
-
+	void UserRes();
 
 private:
 

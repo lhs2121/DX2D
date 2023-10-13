@@ -15,7 +15,7 @@ void Player::Update(float _Delta)
 	StateUpdate(_Delta);
 	MoveUpdate();
 
-	if (GameEngineInput::IsDown('P'))
+	if (InputIsDown('P'))
 	{
 		if (DebugRenderer0->IsUpdate())
 		{
@@ -39,11 +39,11 @@ void Player::DirUpdate()
 		return;
 	}
 
-	if (GameEngineInput::IsFree(VK_RIGHT) && GameEngineInput::IsPress(VK_LEFT))
+	if (InputIsFree(VK_RIGHT) && InputIsPress(VK_LEFT))
 	{
 		ChangeDirState(PlayerDirState::LEFT);
 	}
-	else if (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsPress(VK_RIGHT))
+	else if (InputIsFree(VK_LEFT) && InputIsPress(VK_RIGHT))
 	{
 		ChangeDirState(PlayerDirState::RIGHT);
 	}
@@ -51,7 +51,7 @@ void Player::DirUpdate()
 
 void Player::RopePivotUpdate()
 {
-	if (GameEngineInput::IsPress(VK_UP))
+	if (InputIsPress(VK_UP))
 	{
 		RopePos = Transform.GetWorldPosition() + float4(0, 65);
 		DebugRenderer2->Transform.SetLocalPosition({ 0,65 });
@@ -72,11 +72,11 @@ void Player::MoveUpdate()
 
 	if (ApplyXForce == true)
 	{
-		if (GameEngineInput::IsPress(VK_LEFT))
+		if (InputIsPress(VK_LEFT))
 		{
 			NetForce.X = -125.0f;
 		}
-		else if (GameEngineInput::IsPress(VK_RIGHT))
+		else if (InputIsPress(VK_RIGHT))
 		{
 			NetForce.X = 125.0f;
 		}
@@ -84,11 +84,11 @@ void Player::MoveUpdate()
 
 	if (ApplyGForce == true)
 	{
-		if (GameEngineInput::IsDown(VK_MENU) && IsGrounded == true && CurState != PlayerState::DOWN)
+		if (InputIsDown(VK_MENU) && IsGrounded == true && CurState != PlayerState::DOWN)
 		{
 			NetForce.Y = 300.0f;
 		}
-		else if (GameEngineInput::IsDown(VK_MENU) && CurState == PlayerState::DOWN)
+		else if (InputIsDown(VK_MENU) && CurState == PlayerState::DOWN)
 		{
 			if (GetColor(Transform.GetWorldPosition() + float4(0, -5)) == GameEngineColor::RED)
 			{
@@ -125,7 +125,7 @@ void Player::PortalCheck()
 		};
 	Event.Stay = [&](GameEngineCollision*, GameEngineCollision* Col)
 		{
-			if (GameEngineInput::IsDown(VK_UP))
+			if (InputIsDown(VK_UP))
 			{
 				std::string Level = Col->GetName();
 				PrevLevelName = Level;

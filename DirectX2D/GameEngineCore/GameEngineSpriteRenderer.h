@@ -6,6 +6,7 @@ class GameEngineFrameAnimation
 {
 	friend class GameEngineSpriteRenderer;
 
+public:
 	GameEngineSpriteRenderer* Parent = nullptr;
 
 	std::string AnimationName;
@@ -78,6 +79,7 @@ public:
 	GameEngineSpriteRenderer& operator=(GameEngineSpriteRenderer&& _Other) noexcept = delete;
 
 	// 스프라이트는 기본적으로 
+	// 강제로 애니메이션을 정지한다는 뜻으로 받아들이겠다.
 	void SetSprite(std::string_view _Name, unsigned int index = 0);
 
 	void CreateAnimation(
@@ -183,6 +185,11 @@ public:
 		return CurFrameAnimations->CurIndex;
 	}
 
+	std::shared_ptr<GameEngineFrameAnimation> CurAnimation()
+	{
+		return CurFrameAnimations;
+	}
+
 	inline GameEngineTransform& GetImageTransform()
 	{
 		return ImageTransform;
@@ -192,6 +199,8 @@ protected:
 	void Start() override;
 	void Update(float _Delta) override;
 	void Render(GameEngineCamera* _Camera, float _Delta) override;
+	void SetMaterialEvent(std::string_view _Name, int _Index);
+
 	int Index = 0;
 
 private:
@@ -215,4 +224,3 @@ private:
 
 	GameEngineTransform ImageTransform;
 };
-

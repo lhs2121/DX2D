@@ -48,17 +48,17 @@ void ProJectile::Start()
 {
 	{
 		Col = CreateComponent<GameEngineCollision>(CollisionOrder::PlayerWeapon);
-		Col->SetCollisionOrder(ColType::SPHERE2D);
+		Col->SetCollisionType(ColType::SPHERE2D);
 		Col->Transform.SetLocalScale({ 20,20 });
 	}
 
 	{
-		Renderer = CreateComponent<GameEngineSpriteRenderer>(2);
+		Renderer = CreateComponent<GameEngineSpriteRenderer>(1);
 		Renderer->CreateAnimation("Sureken", "Sureken", 0.1f, 0, 1, true);
 		Renderer->SetSprite("Sureken");
 		Renderer->ChangeAnimation("Sureken");
 		Renderer->SetImageScale({ 20,20 });
-		Renderer->SetRenderOrder(50);
+		Renderer->SetRenderOrder(RenderOrder::Projectile);
 	}
 
 	Off();

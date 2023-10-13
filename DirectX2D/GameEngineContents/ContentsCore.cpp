@@ -2,6 +2,7 @@
 #include "ContentsCore.h"
 
 #include <GameEngineCore/GameEngineSampler.h>
+#include <GameEngineCore/GameEngineBlend.h>
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 
 #include "KerningCity.h"
@@ -16,15 +17,18 @@ ContentsCore::~ContentsCore()
 {
 }
 
+void ContentsCore::UserRes()
+{
+	
+}
+
 void ContentsCore::Start()
 {
+	GameEngineRenderTarget::IsDepth = false;
 	GameEngineCore::CreateLevel<KerningCity>("KerningCity");
 	GameEngineCore::CreateLevel<HuntRegion>("HuntRegion");
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
 	GameEngineCore::ChangeLevel("KerningCity");
-
-	// 자기 텍스처 로드해야 한다.
-
 }
 
 void ContentsCore::Update(float _Delta)

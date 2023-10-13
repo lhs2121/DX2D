@@ -24,13 +24,13 @@ void Portal::Start()
 {
 	{
 		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Portal);
-		Col->SetCollisionOrder(ColType::AABBBOX2D);
+		Col->SetCollisionType(ColType::AABBBOX2D);
 		Col->Transform.SetLocalScale({ 50,100 });
 		Col->Transform.SetLocalPosition({ 0,-70 });
 	}
 
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(1);
-	Renderer->SetRenderOrder(-5);
+	Renderer->SetRenderOrder(RenderOrder::MapObject);
 	Renderer->SetSprite("portal");
 	Renderer->CreateAnimation("portal", "portal", 0.1f, 0, 7);
 	Renderer->ChangeAnimation("portal");

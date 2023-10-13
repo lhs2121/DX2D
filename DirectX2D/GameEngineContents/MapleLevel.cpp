@@ -20,3 +20,8 @@ std::shared_ptr<Portal> MapleLevel::CreatePortal(std::string _NextLevel, float4 
     return NewPortal;
 }
 
+void MapleLevel::Start()
+{
+    GameEngineInput::AddInputObject(this);
+}
+

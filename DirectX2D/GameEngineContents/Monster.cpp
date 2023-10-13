@@ -13,14 +13,14 @@ void Monster::Start()
 {
 	{
 		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Monster);
-		Col->SetCollisionOrder(ColType::AABBBOX2D);
-		Col->Transform.SetLocalScale({ 100,100 });
+		Col->SetCollisionType(ColType::AABBBOX2D);
+		Col->Transform.SetLocalScale({ 50,50 });
 	}
 
 	{
-		Renderer = CreateComponent<GameEngineSpriteRenderer>(2);
+		Renderer = CreateComponent<GameEngineSpriteRenderer>(0);
 		Renderer->SetSprite("m0stand");
-		Renderer->SetRenderOrder(40);
+		Renderer->SetRenderOrder(RenderOrder::Monster);
 		Renderer->SetPivotType(PivotType::Bottom);
 	}
 

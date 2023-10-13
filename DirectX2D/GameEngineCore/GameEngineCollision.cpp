@@ -101,10 +101,10 @@ void GameEngineCollision::Update(float _Delta)
 	// 함수는 호출되는것 만으로 이미 처리를 한겁니다.
 	if (true == GameEngineLevel::IsDebug)
 	{
-		switch (CollisionOrder)
+		switch (CollisionType)
 		{
 		case ColType::SPHERE2D:
-			GameEngineDebug::DrawBox2D(Transform);
+			GameEngineDebug::DrawSphere2D(Transform);
 			break;
 		case ColType::AABBBOX2D:
 			GameEngineDebug::DrawBox2D(Transform);
@@ -113,7 +113,7 @@ void GameEngineCollision::Update(float _Delta)
 			GameEngineDebug::DrawBox2D(Transform);
 			break;
 		case ColType::SPHERE3D:
-			GameEngineDebug::DrawBox2D(Transform);
+			GameEngineDebug::DrawSphere2D(Transform);
 			break;
 		case ColType::AABBBOX3D:
 			GameEngineDebug::DrawBox2D(Transform);

@@ -79,11 +79,11 @@ void Player::ChangeState(PlayerState _State)
 void Player::RopeStart()
 {
 	NetForce = 0.0f;
-	if (IsGrounded == true && GameEngineInput::IsPress(VK_DOWN))
+	if (IsGrounded == true && InputIsPress(VK_DOWN))
 	{
 		Transform.AddWorldPosition({ 0, -5 });
 	}
-	else if(IsGrounded == true && GameEngineInput::IsPress(VK_UP))
+	else if(IsGrounded == true && InputIsPress(VK_UP))
 	{
 		Transform.AddWorldPosition({ 0, 5 });
 	}
@@ -91,19 +91,19 @@ void Player::RopeStart()
 
 void Player::IdleUpdate(float _Delta)
 {
-	if (GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT))
+	if (InputIsPress(VK_LEFT) || InputIsPress(VK_RIGHT))
 	{
 		ChangeState(PlayerState::WALK);
 	}
-	else if (GameEngineInput::IsPress(VK_UP) && CanRope == true)
+	else if (InputIsPress(VK_UP) && CanRope == true)
 	{
 		ChangeState(PlayerState::ROPE);
 	}
-	else if (GameEngineInput::IsPress(VK_DOWN) && IsGrounded == true)
+	else if (InputIsPress(VK_DOWN) && IsGrounded == true)
 	{
 		ChangeState(PlayerState::DOWN);
 	}
-	else if (GameEngineInput::IsDown(LuckySevenKey) && LuckySeven::Inst->IsUpdate() == false)
+	else if (InputIsDown(LuckySevenKey) && LuckySeven::Inst->IsUpdate() == false)
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}
@@ -115,7 +115,7 @@ void Player::IdleUpdate(float _Delta)
 
 void Player::WalkUpdate(float _Delta)
 {
-	if (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsFree(VK_RIGHT))
+	if (InputIsFree(VK_LEFT) && InputIsFree(VK_RIGHT))
 	{
 		ChangeState(PlayerState::IDLE);
 	}
@@ -123,19 +123,19 @@ void Player::WalkUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::JUMP);
 	}
-	//else if (GameEngineInput::IsPress(VK_DOWN) && CanRope == false)
+	//else if (InputIsPress(VK_DOWN) && CanRope == false)
 	//{
 	//	ChangeState(PlayerState::DOWN);
 	//}
-	else if (GameEngineInput::IsPress(VK_DOWN) && CanRope == true)
+	else if (InputIsPress(VK_DOWN) && CanRope == true)
 	{
 		ChangeState(PlayerState::ROPE);
 	}
-	else if (GameEngineInput::IsPress(VK_UP) && CanRope == true)
+	else if (InputIsPress(VK_UP) && CanRope == true)
 	{
 		ChangeState(PlayerState::ROPE);
 	}
-	else if (GameEngineInput::IsDown(LuckySevenKey) && LuckySeven::Inst->IsUpdate() == false)
+	else if (InputIsDown(LuckySevenKey) && LuckySeven::Inst->IsUpdate() == false)
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}
@@ -145,25 +145,25 @@ void Player::JumpUpdate(float _Delta)
 {
 	if (NetForce.Y == 0 && IsGrounded == true)
 	{
-		if (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsFree(VK_RIGHT))
+		if (InputIsFree(VK_LEFT) && InputIsFree(VK_RIGHT))
 		{
 			ChangeState(PlayerState::IDLE);
 		}
-		if (GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT))
+		if (InputIsPress(VK_LEFT) || InputIsPress(VK_RIGHT))
 		{
 			ChangeState(PlayerState::WALK);
 		}
 	}
 
-	if (GameEngineInput::IsDown(LuckySevenKey) && LuckySeven::Inst->IsUpdate() == false)
+	if (InputIsDown(LuckySevenKey) && LuckySeven::Inst->IsUpdate() == false)
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}
-	else if (GameEngineInput::IsPress(VK_UP) && CanRope == true)
+	else if (InputIsPress(VK_UP) && CanRope == true)
 	{
 		ChangeState(PlayerState::ROPE);
 	}
-	else if (GameEngineInput::IsDown(JumpKey) && EffectManager == false)
+	else if (InputIsDown(JumpKey) && EffectManager == false)
 	{
 		ApplyXForce = false;
 		EffectManager = true;
@@ -187,7 +187,7 @@ void Player::RopeUpdate(float _Delta)
 
 	MainSpriteRenderer->AnimationPauseOn();
 
-	if (GameEngineInput::IsPress(VK_UP))
+	if (InputIsPress(VK_UP))
 	{
 		Transform.AddLocalPosition({ 0, Speed * _Delta, 0 });
 		MainSpriteRenderer->AnimationPauseOff();
@@ -202,7 +202,7 @@ void Player::RopeUpdate(float _Delta)
 			MainSpriteRenderer->AnimationPauseOff();
 		}
 	}
-	else if (GameEngineInput::IsPress(VK_DOWN))
+	else if (InputIsPress(VK_DOWN))
 	{
 		Transform.AddLocalPosition({ 0,-Speed * _Delta, 0 });
 		MainSpriteRenderer->AnimationPauseOff();
@@ -218,21 +218,21 @@ void Player::RopeUpdate(float _Delta)
 		}
 	}
 
-	if ((GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT)) && GameEngineInput::IsDown(JumpKey))
+	if ((InputIsPress(VK_LEFT) || InputIsPress(VK_RIGHT)) && InputIsDown(JumpKey))
 	{
 		ChangeState(PlayerState::JUMP);
 		NetForce.Y = 250.0f;
 		MainSpriteRenderer->AnimationPauseOff();
 	}
-	if ((GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT))
-		&& GameEngineInput::IsPress(VK_UP) 
-		&& GameEngineInput::IsDown(JumpKey))
+	if ((InputIsPress(VK_LEFT) || InputIsPress(VK_RIGHT))
+		&& InputIsPress(VK_UP) 
+		&& InputIsDown(JumpKey))
 	{
-		if (GameEngineInput::IsPress(VK_LEFT))
+		if (InputIsPress(VK_LEFT))
 		{
 			Transform.AddWorldPosition({ -3.0f,0.0f });
 		}
-		else if (GameEngineInput::IsPress(VK_RIGHT))
+		else if (InputIsPress(VK_RIGHT))
 		{
 			Transform.AddWorldPosition({ 3.0f,0.0f });
 		}
@@ -250,11 +250,11 @@ void Player::DownUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::ROPE);
 	}
-	if (GameEngineInput::IsFree(VK_DOWN))
+	if (InputIsFree(VK_DOWN))
 	{
 		ChangeState(PlayerState::IDLE);
 	}
-	else if (GameEngineInput::IsDown(VK_LEFT) || GameEngineInput::IsDown(VK_RIGHT))
+	else if (InputIsDown(VK_LEFT) || InputIsDown(VK_RIGHT))
 	{
 		ChangeState(PlayerState::WALK);
 	}
@@ -277,11 +277,11 @@ void Player::LuckySevenUpdate(float _Delta)
 	}
 	if (MainSpriteRenderer->IsCurAnimationEnd() == true)
 	{
-		if (GameEngineInput::IsFree(VK_LEFT) && GameEngineInput::IsFree(VK_RIGHT))
+		if (InputIsFree(VK_LEFT) && InputIsFree(VK_RIGHT))
 		{
 			ChangeState(PlayerState::IDLE);
 		}
-		else if (GameEngineInput::IsPress(VK_LEFT) || GameEngineInput::IsPress(VK_RIGHT))
+		else if (InputIsPress(VK_LEFT) || InputIsPress(VK_RIGHT))
 		{
 			ChangeState(PlayerState::WALK);
 		}

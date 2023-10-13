@@ -173,6 +173,7 @@
     <ClCompile Include="GameEngineCore.cpp" />
     <ClCompile Include="GameEngineCoreObject.cpp" />
     <ClCompile Include="GameEngineDebugCore.cpp" />
+    <ClCompile Include="GameEngineDepthStencil.cpp" />
     <ClCompile Include="GameEngineDevice.cpp" />
     <ClCompile Include="GameEngineDevice_Resources.cpp" />
     <ClCompile Include="GameEngineDirectBuffer.cpp" />
@@ -220,6 +221,7 @@
     <ClInclude Include="GameEngineCore.h" />
     <ClInclude Include="GameEngineCoreObject.h" />
     <ClInclude Include="GameEngineDebugCore.h" />
+    <ClInclude Include="GameEngineDepthStencil.h" />
     <ClInclude Include="GameEngineDevice.h" />
     <ClInclude Include="GameEngineDirectBuffer.h" />
     <ClInclude Include="GameEngineGeometryShader.h" />

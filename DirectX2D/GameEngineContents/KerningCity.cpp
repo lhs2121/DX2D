@@ -18,6 +18,7 @@ KerningCity::~KerningCity()
 
 void KerningCity::Start()
 {
+	MapleLevel::Start();
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExistsChild("Assets");
@@ -38,8 +39,8 @@ void KerningCity::Start()
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 
-	GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, 0.0f});
-	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
+	GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, -600.0f});
+	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
 
 	{
 		Map = CreateActor<KerningCityBG>(ActorOrder::Map);
@@ -49,23 +50,33 @@ void KerningCity::Start()
 		CreateActor<Monster>(ActorOrder::Monster);
 		CreateActor<EffectManager>(ActorOrder::Effect)->Transform.SetWorldPosition(player->Transform.GetWorldPosition());
 	}
+	
 }
 
 void KerningCity::Update(float _Delta)
 {
-	if (GameEngineInput::IsPress(VK_PRIOR))
+	if (InputIsPress(VK_PRIOR))
 	{
 		GetMainCamera()->Transform.AddLocalPosition({ 0,0,500 * _Delta });
 	}
-	if (GameEngineInput::IsPress(VK_NEXT))
+	if (InputIsPress(VK_NEXT))
 	{
 		GetMainCamera()->Transform.AddLocalPosition({ 0,0,-500 * _Delta });
 	}
-	if (GameEngineInput::IsDown('C'))
+	if (InputIsDown(VK_HOME))
+	{
+		GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, -600.0f });
+	}
+	if (InputIsDown(VK_END))
+	{
+		GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, -150.0f });
+	}
+	
+	if (InputIsDown('C'))
 	{
 		IsDebug = !IsDebug;
 	}
-	if (GameEngineInput::IsDown('P'))
+	if (InputIsDown('P'))
 	{
 		MapleMap::CurMap->SwitchDebugRender();
 	}

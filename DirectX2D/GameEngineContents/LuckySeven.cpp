@@ -26,10 +26,10 @@ float4 LuckySeven::GetBulletPos(float4 _OffSet)
 
 void LuckySeven::Start()
 {
-	Bullet1 = GetLevel()->CreateActor<ProJectile>(55);
-	Bullet2 = GetLevel()->CreateActor<ProJectile>(55);
-	Bullet3 = GetLevel()->CreateActor<ProJectile>(55);
-	Bullet4 = GetLevel()->CreateActor<ProJectile>(55);
+	Bullet1 = GetLevel()->CreateActor<ProJectile>(ActorOrder::Skill);
+	Bullet2 = GetLevel()->CreateActor<ProJectile>(ActorOrder::Skill);
+	Bullet3 = GetLevel()->CreateActor<ProJectile>(ActorOrder::Skill);
+	Bullet4 = GetLevel()->CreateActor<ProJectile>(ActorOrder::Skill);
 	Off();
 }
 

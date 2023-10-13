@@ -33,19 +33,19 @@ void HuntRegion::Start()
 
 void HuntRegion::Update(float _Delta)
 {
-	if (GameEngineInput::IsPress('Q'))
+	if (InputIsPress('Q'))
 	{
 		GetMainCamera()->Transform.AddLocalPosition({ 0,0,500 * _Delta });
 	}
-	if (GameEngineInput::IsPress('E'))
+	if (InputIsPress('E'))
 	{
 		GetMainCamera()->Transform.AddLocalPosition({ 0,0,-500 * _Delta });
 	}
-	if (GameEngineInput::IsDown('C'))
+	if (InputIsDown('C'))
 	{
 		IsDebug = !IsDebug;
 	}
-	if (GameEngineInput::IsDown('P'))
+	if (InputIsDown('P'))
 	{
 		MapleMap::CurMap->SwitchDebugRender();
 	}
