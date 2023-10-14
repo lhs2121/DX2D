@@ -24,6 +24,6 @@ protected:
 private:
 	std::shared_ptr<class Player> player;
 	std::shared_ptr<class MapleMap> Map;
-	std::shared_ptr<class LuckySeven> luckySeven;
+	std::shared_ptr<class BulletShooter> bulletShooter;
 };
 

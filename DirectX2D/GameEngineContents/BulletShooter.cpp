@@ -1,22 +1,22 @@
 #include "PreCompile.h"
-#include "LuckySeven.h"
+#include "BulletShooter.h"
 #include "ProJectile.h"
 #include "Player.h"
 
-LuckySeven* LuckySeven::Inst = nullptr;
+BulletShooter* BulletShooter::Inst = nullptr;
 
-LuckySeven::LuckySeven()
+BulletShooter::BulletShooter()
 {
 	Inst = this;
 }
 
-LuckySeven::~LuckySeven()
+BulletShooter::~BulletShooter()
 {
 
 }
 
 
-float4 LuckySeven::GetBulletPos(float4 _OffSet)
+float4 BulletShooter::GetBulletPos(float4 _OffSet)
 {
 	float dir = Player::MainPlayer->GetDir();
 	float4 BulletPos = Player::MainPlayer->Transform.GetWorldPosition()
@@ -24,16 +24,16 @@ float4 LuckySeven::GetBulletPos(float4 _OffSet)
 	return BulletPos;
 }
 
-void LuckySeven::Start()
+void BulletShooter::Start()
 {
-	Bullet1 = GetLevel()->CreateActor<ProJectile>(ActorOrder::Skill);
-	Bullet2 = GetLevel()->CreateActor<ProJectile>(ActorOrder::Skill);
-	Bullet3 = GetLevel()->CreateActor<ProJectile>(ActorOrder::Skill);
-	Bullet4 = GetLevel()->CreateActor<ProJectile>(ActorOrder::Skill);
+	Bullet1 = GetLevel()->CreateActor<ProJectile>(ActorOrder::Projectile);
+	Bullet2 = GetLevel()->CreateActor<ProJectile>(ActorOrder::Projectile);
+	Bullet3 = GetLevel()->CreateActor<ProJectile>(ActorOrder::Projectile);
+	Bullet4 = GetLevel()->CreateActor<ProJectile>(ActorOrder::Projectile);
 	Off();
 }
 
-void LuckySeven::Update(float _Delta)
+void BulletShooter::Update(float _Delta)
 {
 	if (IsReady == false)
 	{
@@ -77,7 +77,7 @@ void LuckySeven::Update(float _Delta)
 
 }
 
-void LuckySeven::BulletSetting()
+void BulletShooter::BulletSetting()
 {
 	FirstBullet->Transform.SetWorldPosition(GetBulletPos(BulletPosOffset1));
 	FirstBullet->SetDir(Player::MainPlayer->GetDir());

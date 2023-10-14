@@ -1,11 +1,11 @@
 #include "PreCompile.h"
 #include "HuntRegion.h"
 #include "Player.h"
-#include "HuntRegionBG.h"
+#include "Map1.h"
 #include "Portal.h"
 #include "Monster.h"
 #include "MapleMap.h"
-#include "LuckySeven.h"
+#include "BulletShooter.h"
 
 HuntRegion::HuntRegion()
 {
@@ -21,11 +21,11 @@ void HuntRegion::Start()
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
 
 	{
-		Map = CreateActor<HuntRegionBG>(ActorOrder::Map);
+		Map = CreateActor<Map1>(ActorOrder::Map);
 		CreatePortal("KerningCity", { 1010, -1100 });
 	}
 	{
-		luckySeven = CreateActor<LuckySeven>(ActorOrder::Skill);
+		bulletShooter = CreateActor<BulletShooter>(ActorOrder::Skill);
 		player = CreateActor<Player>(ActorOrder::Player);
 		CreateActor<Monster>(ActorOrder::Monster);
 	}
@@ -54,7 +54,7 @@ void HuntRegion::Update(float _Delta)
 void HuntRegion::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	Player::MainPlayer = player.get();
-	LuckySeven::Inst = luckySeven.get();
+	BulletShooter::Inst = bulletShooter.get();
 	MapleMap::SetCurMap(Map);
 }
 

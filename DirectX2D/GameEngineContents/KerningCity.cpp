@@ -1,11 +1,11 @@
 #include "PreCompile.h"
 #include "KerningCity.h"
 #include "Player.h"
-#include "KerningCityBG.h"
+#include "Map0.h"
 #include "Portal.h"
 #include "Monster.h"
 #include "MapleMap.h"
-#include "LuckySeven.h"
+#include "BulletShooter.h"
 #include "EffectManager.h"
 
 KerningCity::KerningCity() 
@@ -40,11 +40,11 @@ void KerningCity::Start()
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 
 	GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, -600.0f});
-	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
+	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
 
 	{
-		Map = CreateActor<KerningCityBG>(ActorOrder::Map);
-		luckySeven = CreateActor<LuckySeven>(ActorOrder::Skill);
+		Map = CreateActor<Map0>(ActorOrder::Map);
+		bulletShooter = CreateActor<BulletShooter>(ActorOrder::Skill);
 		player = CreateActor<Player>(ActorOrder::Player);
 		CreatePortal("HuntRegion", { 310, -910 });
 		CreateActor<Monster>(ActorOrder::Monster);
@@ -85,8 +85,11 @@ void KerningCity::Update(float _Delta)
 void KerningCity::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	Player::MainPlayer = player.get();
-	LuckySeven::Inst = luckySeven.get();
+	BulletShooter::Inst = bulletShooter.get();
 	MapleMap::SetCurMap(Map);
+
+	IsDebug = false;
+	MapleMap::CurMap->SwitchDebugRender();
 }
 
 void KerningCity::LevelEnd(GameEngineLevel* _NextLevel)

@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "ProJectile.h"
 #include "Player.h"
+#include "EffectManager.h"
 
 ProJectile::ProJectile()
 {
@@ -22,6 +23,7 @@ void ProJectile::ColCheck()
 
 	Event.Enter = [&](GameEngineCollision*, GameEngineCollision* Col2)
 		{
+			EffectManager::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::HitSureken, static_cast<int>(Dir));
 			Off();
 		};
 	Event.Stay = [](GameEngineCollision*, GameEngineCollision* Col2)

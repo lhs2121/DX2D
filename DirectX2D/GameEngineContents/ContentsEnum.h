@@ -5,10 +5,11 @@ enum class RenderOrder
 	MapBackground,
 	MapTile,
 	MapObject,
-	Player,
 	Monster,
 	Projectile,
 	Effect,
+	Player,
+	Effect2,
 	Debug,
 };
 
@@ -20,6 +21,7 @@ enum class ActorOrder
 	NPC,
 	MapObject,
 	Skill,
+	Projectile,
 	Effect
 };
 
@@ -40,7 +42,9 @@ enum class PlayerState
 	DOWN,
 	ROPE,
 	ATTACK,
-	LUCKYSEVEN
+	FLASHJUMP,
+	LUCKYSEVEN,
+	
 };
 
 enum class PlayerDirState
@@ -49,9 +53,9 @@ enum class PlayerDirState
 	RIGHT,
 };
 
-enum class SkillType
+enum class EffectType
 {
 	FlashJump,
 	LuckySeven,
-
+	HitSureken
 };

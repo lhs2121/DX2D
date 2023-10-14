@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "Player.h"
-#include "LuckySeven.h"
+#include "BulletShooter.h"
 #include "EffectManager.h"
 
 void Player::StateUpdate(float _Delta)
@@ -25,6 +25,9 @@ void Player::StateUpdate(float _Delta)
 	case PlayerState::LUCKYSEVEN:
 		LuckySevenUpdate(_Delta);
 		break;
+	case PlayerState::FLASHJUMP:
+		FlashJumpUpdate(_Delta);
+		break;
 	default:
 		break;
 	}
@@ -35,12 +38,12 @@ void Player::ChangeState(PlayerState _State)
 	CurState = _State;
 	CanFlip = true;
 	DirCheck = true;
-	ApplyForce = true;
-	ApplyXForce = true;
-	ApplyGForce = true;
-	EffectManager = false;
-	BrakingXForce = 1000.0f;
-
+	ApplyInput = true;
+	ApplyInputLeft = true;
+	ApplyInputRight = true;
+	ApplyInputJump = true;
+	DoubleJump = false;
+	BrakingXForce = 700.0f;
 
 	switch (CurState)
 	{
@@ -54,22 +57,19 @@ void Player::ChangeState(PlayerState _State)
 		MainSpriteRenderer->ChangeAnimation("jump");
 		break;
 	case PlayerState::DOWN:
-		ApplyXForce = false;
 		CanFlip = false;
+		ApplyInputLeft = false;
+		ApplyInputRight = false;
 		MainSpriteRenderer->ChangeAnimation("down");
 		break;
 	case PlayerState::ROPE:
-		ApplyForce = false;
-		CanFlip = false;
 		RopeStart();
-		MainSpriteRenderer->ChangeAnimation("rope");
-		MainSpriteRenderer->AnimationPauseOn();
+		break;
+	case PlayerState::FLASHJUMP:
+		FlashJumpStart();
 		break;
 	case PlayerState::LUCKYSEVEN:
-		ApplyGForce = false;
-		CanFlip = false;
-		DirCheck = false;
-		ChangeRandomSwingAnimation();
+		LuckySevenStart();
 		break;
 	default:
 		break;
@@ -78,15 +78,37 @@ void Player::ChangeState(PlayerState _State)
 
 void Player::RopeStart()
 {
+	ApplyInput = false;
+	CanFlip = false;
 	NetForce = 0.0f;
 	if (IsGrounded == true && InputIsPress(VK_DOWN))
 	{
 		Transform.AddWorldPosition({ 0, -5 });
 	}
-	else if(IsGrounded == true && InputIsPress(VK_UP))
+	else if (IsGrounded == true && InputIsPress(VK_UP))
 	{
 		Transform.AddWorldPosition({ 0, 5 });
 	}
+
+	MainSpriteRenderer->ChangeAnimation("rope");
+	MainSpriteRenderer->AnimationPauseOn();
+}
+
+void Player::FlashJumpStart()
+{
+	ApplyInputLeft = false;
+	ApplyInputRight = false;
+	NetForce.X = dir * 700.0f;
+	NetForce.Y += 100.0f;
+	EffectManager::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::FlashJump, dir);
+}
+
+void Player::LuckySevenStart()
+{
+	ApplyInputJump = false;
+	CanFlip = false;
+	DirCheck = false;
+	ChangeRandomSwingAnimation();
 }
 
 void Player::IdleUpdate(float _Delta)
@@ -95,19 +117,19 @@ void Player::IdleUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::WALK);
 	}
-	else if (InputIsPress(VK_UP) && CanRope == true)
+	if (InputIsPress(VK_UP) && CanRope == true)
 	{
 		ChangeState(PlayerState::ROPE);
 	}
-	else if (InputIsPress(VK_DOWN) && IsGrounded == true)
+	if (InputIsPress(VK_DOWN) && IsGrounded == true)
 	{
 		ChangeState(PlayerState::DOWN);
 	}
-	else if (InputIsDown(LuckySevenKey) && LuckySeven::Inst->IsUpdate() == false)
+	if (InputIsPress(LuckySevenKey) && BulletShooter::Inst->IsUpdate() == false)
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}
-	else if (IsGrounded == false && NetForce.Y != 0)
+	if (IsGrounded == false && NetForce.Y != 0)
 	{
 		ChangeState(PlayerState::JUMP);
 	}
@@ -119,7 +141,7 @@ void Player::WalkUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::IDLE);
 	}
-	else if (IsGrounded == false && NetForce.Y != 0)
+	if (IsGrounded == false && NetForce.Y != 0)
 	{
 		ChangeState(PlayerState::JUMP);
 	}
@@ -127,15 +149,15 @@ void Player::WalkUpdate(float _Delta)
 	//{
 	//	ChangeState(PlayerState::DOWN);
 	//}
-	else if (InputIsPress(VK_DOWN) && CanRope == true)
+	if (InputIsPress(VK_DOWN) && CanRope == true)
 	{
 		ChangeState(PlayerState::ROPE);
 	}
-	else if (InputIsPress(VK_UP) && CanRope == true)
+	if (InputIsPress(VK_UP) && CanRope == true)
 	{
 		ChangeState(PlayerState::ROPE);
 	}
-	else if (InputIsDown(LuckySevenKey) && LuckySeven::Inst->IsUpdate() == false)
+	if (InputIsDown(LuckySevenKey) && BulletShooter::Inst->IsUpdate() == false)
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}
@@ -155,7 +177,7 @@ void Player::JumpUpdate(float _Delta)
 		}
 	}
 
-	if (InputIsDown(LuckySevenKey) && LuckySeven::Inst->IsUpdate() == false)
+	if (InputIsDown(LuckySevenKey) && BulletShooter::Inst->IsUpdate() == false)
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}
@@ -163,16 +185,9 @@ void Player::JumpUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::ROPE);
 	}
-	else if (InputIsDown(JumpKey) && EffectManager == false)
+	else if (InputIsDown(JumpKey) && InputIsPress(VK_DOWN) == false)
 	{
-		ApplyXForce = false;
-		EffectManager = true;
-
-		BrakingXForce = 300.0f;
-		NetForce.X = 600.0f;
-		NetForce.Y += 100.0f;
-
-		EffectManager::Inst->StartEffect(Transform.GetWorldPosition(), SkillType::FlashJump);
+		ChangeState(PlayerState::FLASHJUMP);
 	}
 }
 
@@ -225,7 +240,7 @@ void Player::RopeUpdate(float _Delta)
 		MainSpriteRenderer->AnimationPauseOff();
 	}
 	if ((InputIsPress(VK_LEFT) || InputIsPress(VK_RIGHT))
-		&& InputIsPress(VK_UP) 
+		&& InputIsPress(VK_UP)
 		&& InputIsDown(JumpKey))
 	{
 		if (InputIsPress(VK_LEFT))
@@ -236,7 +251,7 @@ void Player::RopeUpdate(float _Delta)
 		{
 			Transform.AddWorldPosition({ 3.0f,0.0f });
 		}
-		
+
 		ChangeState(PlayerState::JUMP);
 		NetForce.Y = 250.0f;
 		MainSpriteRenderer->AnimationPauseOff();
@@ -268,12 +283,25 @@ void Player::LuckySevenUpdate(float _Delta)
 {
 	if (NetForce.Y == 0 && IsGrounded == true)
 	{
-		ApplyXForce = false;
+		ApplyInputLeft = false;
+		ApplyInputRight = false;
+	}
+	else
+	{
+		if (dir < 0)
+		{
+			ApplyInputRight = false;
+		}
+		else if (dir > 0)
+		{
+			ApplyInputLeft = false;
+		}
 	}
 
 	if (MainSpriteRenderer->GetCurIndex() == 2)
 	{
-		LuckySeven::Inst->On();
+		BulletShooter::Inst->On();
+		EffectManager::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::LuckySeven, dir);
 	}
 	if (MainSpriteRenderer->IsCurAnimationEnd() == true)
 	{
@@ -288,12 +316,31 @@ void Player::LuckySevenUpdate(float _Delta)
 	}
 }
 
+void Player::FlashJumpUpdate(float _Delta)
+{
+	if (IsGrounded == true)
+	{
+		ChangeState(PlayerState::IDLE);
+	}
+	else if (InputIsDown(JumpKey) && DoubleJump == false)
+	{
+		EffectManager::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::FlashJump, dir);
+		NetForce.X = dir * 700.0f;
+		NetForce.Y += 100.0f;
+		DoubleJump = true;
+	}
+	else if (InputIsPress(VK_UP) && CanRope == true)
+	{
+		ChangeState(PlayerState::ROPE);
+	}
+}
+
 void Player::MeleeAttackUpdate(float _Delta)
 {
-	
+
 }
 
 void Player::AutoAttackUpdate(float _Delta)
 {
-	
+
 }

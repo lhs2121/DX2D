@@ -18,13 +18,7 @@ public:
 
 	float GetDir()
 	{
-		switch (CurDirState)
-		{
-		case PlayerDirState::LEFT:
-			return -1;
-		case PlayerDirState::RIGHT:
-			return 1;
-		}
+		return dir;
 	}
 
 	static Player* MainPlayer;
@@ -49,6 +43,10 @@ private:
 	void MoveUpdate();
 	//move
 
+	void FlashJumpStart();
+	void LuckySevenStart();
+
+	//state start
 	void StateUpdate(float _Delta);
 	void IdleUpdate(float _Delta);
 	void WalkUpdate(float _Delta);
@@ -58,7 +56,8 @@ private:
 	void MeleeAttackUpdate(float _Delta);
 	void AutoAttackUpdate(float _Delta);
 	void LuckySevenUpdate(float _Delta);
-	//state
+	void FlashJumpUpdate(float _Delta);
+	//state update
 
 	void ChangeRandomSwingAnimation();
 	void ChangeDirState(PlayerDirState _State)
@@ -75,14 +74,16 @@ private:
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
 	
 	float Speed = 125;
+	float dir;
 	bool CanRope;
 	bool CanFlip = true;
 	bool DirCheck = true;
+	bool DoubleJump = false;
 
-	bool ApplyXForce = true;
-	bool ApplyGForce = true;
-	bool ApplyForce = true;
-	bool EffectManager = false;
+	bool ApplyInput = true;
+	bool ApplyInputLeft = true;
+	bool ApplyInputRight = true;
+	bool ApplyInputJump = true;
 
 	int JumpKey = VK_MENU;
 	int LuckySevenKey = VK_SHIFT;

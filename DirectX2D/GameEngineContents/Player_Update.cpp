@@ -5,6 +5,10 @@
 void Player::Update(float _Delta)
 {
 	PhysicsActor::Update(_Delta);
+	StateUpdate(_Delta);
+	MoveUpdate();
+
+	
 	FlipRenderer();
 	CameraFocus();
 	DirUpdate();
@@ -12,8 +16,7 @@ void Player::Update(float _Delta)
 	ColCheck();
 	RopeCheck();
 	PortalCheck();
-	StateUpdate(_Delta);
-	MoveUpdate();
+	
 
 	if (InputIsDown('P'))
 	{
@@ -42,10 +45,12 @@ void Player::DirUpdate()
 	if (InputIsFree(VK_RIGHT) && InputIsPress(VK_LEFT))
 	{
 		ChangeDirState(PlayerDirState::LEFT);
+		dir = -1;
 	}
 	else if (InputIsFree(VK_LEFT) && InputIsPress(VK_RIGHT))
 	{
 		ChangeDirState(PlayerDirState::RIGHT);
+		dir = 1;
 	}
 }
 
@@ -65,24 +70,28 @@ void Player::RopePivotUpdate()
 
 void Player::MoveUpdate()
 {
-	if (ApplyForce == false)
+	if (ApplyInput == false)
 	{
 		return;
 	}
 
-	if (ApplyXForce == true)
+	if (ApplyInputLeft == true)
 	{
 		if (InputIsPress(VK_LEFT))
 		{
 			NetForce.X = -125.0f;
 		}
-		else if (InputIsPress(VK_RIGHT))
+	}
+
+	if(ApplyInputRight == true)
+	{
+		if (InputIsPress(VK_RIGHT))
 		{
 			NetForce.X = 125.0f;
 		}
 	}
 
-	if (ApplyGForce == true)
+	if (ApplyInputJump == true)
 	{
 		if (InputIsDown(VK_MENU) && IsGrounded == true && CurState != PlayerState::DOWN)
 		{

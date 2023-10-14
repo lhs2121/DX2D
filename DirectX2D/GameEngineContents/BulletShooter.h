@@ -2,20 +2,20 @@
 #include <GameEngineCore\GameEngineActor.h>
 // Ό³Έν :
 class ProJectile;
-class LuckySeven : public GameEngineActor
+class BulletShooter : public GameEngineActor
 {
 public:
 	// constrcuter destructer
-	LuckySeven();
-	~LuckySeven();
+	BulletShooter();
+	~BulletShooter();
 
 	// delete Function
-	LuckySeven(const LuckySeven& _Other) = delete;
-	LuckySeven(LuckySeven&& _Other) noexcept = delete;
-	LuckySeven& operator=(const LuckySeven& _Other) = delete;
-	LuckySeven& operator=(LuckySeven&& _Other) noexcept = delete;
+	BulletShooter(const BulletShooter& _Other) = delete;
+	BulletShooter(BulletShooter&& _Other) noexcept = delete;
+	BulletShooter& operator=(const BulletShooter& _Other) = delete;
+	BulletShooter& operator=(BulletShooter&& _Other) noexcept = delete;
 
-	static LuckySeven* Inst;
+	static BulletShooter* Inst;
 
 protected:
 	float4 GetBulletPos(float4 _OffSet);
@@ -28,7 +28,7 @@ protected:
 	float InterTime;
 	float CoolTime;
 
-	float MaxCoolTime = 0.5f;
+	float MaxCoolTime = 0.3f;
 	float MaxInterTime = 0.1f;
 
 	float BulletSpeed = 350.0f;

@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore\GameEngineActor.h>
 // Ό³Έν :
+class Effect;
 class EffectManager : public GameEngineActor
 {
 public:
@@ -14,13 +15,14 @@ public:
 	EffectManager& operator=(const EffectManager& _Other) = delete;
 	EffectManager& operator=(EffectManager&& _Other) noexcept = delete;
 
-	static EffectManager* Inst;
+	void StartEffect(float4 _Pos, EffectType _Type, float dir);
 
-	void StartEffect(float4 _Pos,SkillType _Type);
+	static EffectManager* Inst;
 protected:
+	std::shared_ptr<Effect> GetUsableEffect(std::list<std::shared_ptr<Effect>> _list);
+	bool IsAleadyOnEffect(std::list<std::shared_ptr<Effect>> _list);
 	void Start() override;
 	void Update(float _Delta) override;
 
-	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
 };
 

@@ -145,13 +145,14 @@ void PhysicsActor::BluePixelSnap()
 
 void PhysicsActor::Update(float _Delta)
 {
+	SetCurColor();
 	float X = NetForce.X * _Delta;
 	Transform.AddLocalPosition({ X,0 });
 
 	float Y = NetForce.Y * _Delta;
 	Transform.AddLocalPosition({ 0,Y });
 
-	SetCurColor();
+	
 	JumpCheck();
 	GroundCheck();
 	Gravity(_Delta);

@@ -2,18 +2,18 @@
 #include "MapleMap.h"
 
 // Ό³Έν :
-class HuntRegionBG : public MapleMap
+class Map1 : public MapleMap
 {
 public:
 	// constrcuter destructer
-	HuntRegionBG();
-	~HuntRegionBG();
+	Map1();
+	~Map1();
 
 	// delete Function
-	HuntRegionBG(const HuntRegionBG& _Other) = delete;
-	HuntRegionBG(HuntRegionBG&& _Other) noexcept = delete;
-	HuntRegionBG& operator=(const HuntRegionBG& _Other) = delete;
-	HuntRegionBG& operator=(HuntRegionBG&& _Other) noexcept = delete;
+	Map1(const Map1& _Other) = delete;
+	Map1(Map1&& _Other) noexcept = delete;
+	Map1& operator=(const Map1& _Other) = delete;
+	Map1& operator=(Map1&& _Other) noexcept = delete;
 
 protected:
 	void Start() override;

@@ -170,7 +170,7 @@
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="HuntRegion.h" />
     <ClInclude Include="KerningCity.h" />
-    <ClInclude Include="KerningCityBG.h" />
+    <ClInclude Include="Map0.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="Player.h" />
@@ -178,18 +178,19 @@
     <ClInclude Include="PhysicsActor.h" />
     <ClInclude Include="Portal.h" />
     <ClInclude Include="MapleMap.h" />
-    <ClInclude Include="HuntRegionBG.h" />
+    <ClInclude Include="Map1.h" />
     <ClInclude Include="MapleLevel.h" />
-    <ClInclude Include="LuckySeven.h" />
+    <ClInclude Include="BulletShooter.h" />
     <ClInclude Include="ProJectile.h" />
     <ClInclude Include="DebugUI.h" />
     <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="EffectManager.h" />
+    <ClInclude Include="Effect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HuntRegion.cpp" />
     <ClCompile Include="KerningCity.cpp" />
-    <ClCompile Include="KerningCityBG.cpp" />
+    <ClCompile Include="Map0.cpp" />
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="MapleLevel.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -205,12 +206,13 @@
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="MapleMap.cpp" />
-    <ClCompile Include="HuntRegionBG.cpp" />
-    <ClCompile Include="LuckySeven.cpp" />
+    <ClCompile Include="Map1.cpp" />
+    <ClCompile Include="BulletShooter.cpp" />
     <ClCompile Include="ProJectile.cpp" />
     <ClCompile Include="DebugUI.cpp" />
     <ClCompile Include="TitleLevel.cpp" />
     <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="Effect.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

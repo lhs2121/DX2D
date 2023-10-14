@@ -9,7 +9,7 @@
     </ClInclude>
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="ContentsCore.h" />
-    <ClInclude Include="LuckySeven.h">
+    <ClInclude Include="BulletShooter.h">
       <Filter>2. Actor\Skills</Filter>
     </ClInclude>
     <ClInclude Include="ProJectile.h">
@@ -27,10 +27,10 @@
     <ClInclude Include="MapleLevel.h">
       <Filter>1. Level</Filter>
     </ClInclude>
-    <ClInclude Include="HuntRegionBG.h">
+    <ClInclude Include="Map1.h">
       <Filter>2. Actor\Maps</Filter>
     </ClInclude>
-    <ClInclude Include="KerningCityBG.h">
+    <ClInclude Include="Map0.h">
       <Filter>2. Actor\Maps</Filter>
     </ClInclude>
     <ClInclude Include="MapleMap.h">
@@ -48,8 +48,11 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>1. Level\0. TitleLevel</Filter>
     </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>2. Actor\Skills\Effect</Filter>
+    </ClInclude>
     <ClInclude Include="EffectManager.h">
-      <Filter>2. Actor\Skills</Filter>
+      <Filter>2. Actor\Skills\Effect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -64,7 +67,7 @@
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="PreCompile.cpp" />
-    <ClCompile Include="LuckySeven.cpp">
+    <ClCompile Include="BulletShooter.cpp">
       <Filter>2. Actor\Skills</Filter>
     </ClCompile>
     <ClCompile Include="ProJectile.cpp">
@@ -82,10 +85,10 @@
     <ClCompile Include="MapleLevel.cpp">
       <Filter>1. Level</Filter>
     </ClCompile>
-    <ClCompile Include="HuntRegionBG.cpp">
+    <ClCompile Include="Map1.cpp">
       <Filter>2. Actor\Maps</Filter>
     </ClCompile>
-    <ClCompile Include="KerningCityBG.cpp">
+    <ClCompile Include="Map0.cpp">
       <Filter>2. Actor\Maps</Filter>
     </ClCompile>
     <ClCompile Include="MapleMap.cpp">
@@ -103,8 +106,11 @@
     <ClCompile Include="TitleLevel.cpp">
       <Filter>1. Level\0. TitleLevel</Filter>
     </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>2. Actor\Skills\Effect</Filter>
+    </ClCompile>
     <ClCompile Include="EffectManager.cpp">
-      <Filter>2. Actor\Skills</Filter>
+      <Filter>2. Actor\Skills\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +143,9 @@
     </Filter>
     <Filter Include="1. Level\0. TitleLevel">
       <UniqueIdentifier>{f8180c3d-1bfa-487d-becb-de712b07446e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Actor\Skills\Effect">
+      <UniqueIdentifier>{30f744a1-81e6-44de-a4c1-4533c77f64b1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
