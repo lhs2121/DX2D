@@ -41,6 +41,7 @@ void Player::Start()
 		DebugRenderer0 = CreateComponent<GameEngineSpriteRenderer>(0);
 		DebugRenderer0->SetRenderOrder(RenderOrder::Debug);
 		DebugRenderer0->SetSprite("etc");
+		DebugRenderer0->Off();
 	}
 
 	{
@@ -48,6 +49,7 @@ void Player::Start()
 		DebugRenderer1->SetRenderOrder(RenderOrder::Debug);
 		DebugRenderer1->SetSprite("etc", 1);
 		DebugRenderer1->Transform.AddLocalPosition({ 0,1,0 });
+		DebugRenderer1->Off();
 	}
 
 	{
@@ -55,6 +57,7 @@ void Player::Start()
 		DebugRenderer2->SetRenderOrder(RenderOrder::Debug);
 		DebugRenderer2->SetSprite("etc", 2);
 		DebugRenderer2->Transform.AddLocalPosition({ 0,-1,0 });
+		DebugRenderer2->Off();
 	}
 
 	//collision

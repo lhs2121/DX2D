@@ -21,32 +21,32 @@ void EffectManager::StartEffect(float4 _Pos, EffectType _Type, float _Dir)
 
 	int random = GameEngineRandom::GameEngineRandom().RandomInt(1, 30);
 	float4 OffSet;
-	std::string Ani;
+	std::string AnimationName;
 	switch (_Type)
 	{
 	case EffectType::FlashJump:
 		OffSet = { _Dir * -15.0f,10.0f };
-		Ani = "FlashJump";
+		AnimationName = "FlashJump";
 		break;
 	case EffectType::LuckySeven:
-		if (IsAleadyOnEffect(list))
+		/*if (IsAleadyOnEffect(list))
 		{
 			return;
-		}
+		}*/
 		_Dir = Player::MainPlayer->GetDir();
 		OffSet = { _Dir * 40.0f,30.0f };
-		Ani = "LuckySeven";
+		AnimationName = "LuckySeven";
 		break;
 	case EffectType::HitSureken:
 		OffSet = { _Dir * random,0.0f };
-		Ani = "HitSureken";
+		AnimationName = "HitSureken";
 		break;
 	default:
 		break;
 	}
 
 	Effect->Transform.SetWorldPosition(_Pos + OffSet);
-	Effect->ChangeAnimation(Ani);
+	Effect->ChangeAnimation(AnimationName);
 	Effect->FlipX(_Dir);
 	Effect->On();
 }

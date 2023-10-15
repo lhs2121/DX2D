@@ -54,6 +54,9 @@
     <ClInclude Include="EffectManager.h">
       <Filter>2. Actor\Skills\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="StatusBar.h">
+      <Filter>2. Actor\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Monster.cpp">
@@ -111,6 +114,9 @@
     </ClCompile>
     <ClCompile Include="EffectManager.cpp">
       <Filter>2. Actor\Skills\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusBar.cpp">
+      <Filter>2. Actor\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

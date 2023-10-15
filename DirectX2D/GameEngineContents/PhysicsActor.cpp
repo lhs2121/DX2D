@@ -87,11 +87,6 @@ void PhysicsActor::Horizontal(float _Delta)
 
 void PhysicsActor::RedPixelSnap()
 {
-	if (IsJumping == true)
-	{
-		return;
-	}
-
 	if (IsGrounded == false)
 	{
 		return;
@@ -145,14 +140,8 @@ void PhysicsActor::BluePixelSnap()
 
 void PhysicsActor::Update(float _Delta)
 {
+	Transform.AddLocalPosition(NetForce * _Delta);
 	SetCurColor();
-	float X = NetForce.X * _Delta;
-	Transform.AddLocalPosition({ X,0 });
-
-	float Y = NetForce.Y * _Delta;
-	Transform.AddLocalPosition({ 0,Y });
-
-	
 	JumpCheck();
 	GroundCheck();
 	Gravity(_Delta);

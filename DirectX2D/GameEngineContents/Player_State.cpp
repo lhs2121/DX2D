@@ -298,7 +298,7 @@ void Player::LuckySevenUpdate(float _Delta)
 		}
 	}
 
-	if (MainSpriteRenderer->GetCurIndex() == 2)
+	if (MainSpriteRenderer->GetCurIndex() == 2 && BulletShooter::Inst->IsUpdate() == false)
 	{
 		BulletShooter::Inst->On();
 		EffectManager::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::LuckySeven, dir);
@@ -320,6 +320,11 @@ void Player::FlashJumpUpdate(float _Delta)
 {
 	if (IsGrounded == true)
 	{
+		if(CurColor == GameEngineColor::BLUE)
+		{
+			NetForce.X = dir * 100;
+			NetForce.Y = 0;
+		}
 		ChangeState(PlayerState::IDLE);
 	}
 	else if (InputIsDown(JumpKey) && DoubleJump == false)

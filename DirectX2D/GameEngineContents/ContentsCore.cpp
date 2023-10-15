@@ -17,11 +17,6 @@ ContentsCore::~ContentsCore()
 {
 }
 
-void ContentsCore::UserRes()
-{
-	
-}
-
 void ContentsCore::Start()
 {
 	GameEngineRenderTarget::IsDepth = false;

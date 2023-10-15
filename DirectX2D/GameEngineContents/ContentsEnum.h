@@ -22,7 +22,8 @@ enum class ActorOrder
 	MapObject,
 	Skill,
 	Projectile,
-	Effect
+	Effect,
+	UI
 };
 
 enum class CollisionOrder

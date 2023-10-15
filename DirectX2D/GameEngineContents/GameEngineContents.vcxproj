@@ -186,6 +186,7 @@
     <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="EffectManager.h" />
     <ClInclude Include="Effect.h" />
+    <ClInclude Include="StatusBar.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HuntRegion.cpp" />
@@ -210,6 +211,7 @@
     <ClCompile Include="BulletShooter.cpp" />
     <ClCompile Include="ProJectile.cpp" />
     <ClCompile Include="DebugUI.cpp" />
+    <ClCompile Include="StatusBar.cpp" />
     <ClCompile Include="TitleLevel.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="Effect.cpp" />

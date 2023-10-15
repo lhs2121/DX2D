@@ -61,6 +61,7 @@ void ProJectile::Start()
 		Renderer->ChangeAnimation("Sureken");
 		Renderer->SetImageScale({ 20,20 });
 		Renderer->SetRenderOrder(RenderOrder::Projectile);
+		Renderer->AutoSpriteSizeOn();
 	}
 
 	Off();
@@ -68,6 +69,15 @@ void ProJectile::Start()
 
 void ProJectile::Update(float _Delta)
 {
+	if (Dir > 0)
+	{
+		Renderer->Transform.SetLocalScale({ -1,1 });
+	}
+	else if (Dir < 0)
+	{
+		Renderer->Transform.SetLocalScale({ 1,1 });
+	}
+
 	Move(_Delta);
 	ColCheck();
 	StartCoolTime(_Delta);
