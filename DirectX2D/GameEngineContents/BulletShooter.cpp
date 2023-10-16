@@ -7,7 +7,7 @@ BulletShooter* BulletShooter::Inst = nullptr;
 
 BulletShooter::BulletShooter()
 {
-	Inst = this;
+	
 }
 
 BulletShooter::~BulletShooter()

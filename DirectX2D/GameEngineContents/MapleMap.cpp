@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "Portal.h"
 
-std::shared_ptr<MapleMap> MapleMap::CurMap = nullptr;
+MapleMap* MapleMap::CurMap = nullptr;
 
 MapleMap::MapleMap()
 {
@@ -11,11 +11,6 @@ MapleMap::MapleMap()
 
 MapleMap::~MapleMap()
 {
-}
-
-void MapleMap::SetCurMap(std::shared_ptr<MapleMap> _Map)
-{
-	CurMap = _Map;
 }
 
 float4 MapleMap::GetMapScale()

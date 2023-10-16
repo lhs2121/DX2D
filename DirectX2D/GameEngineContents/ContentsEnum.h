@@ -23,6 +23,7 @@ enum class ActorOrder
 	Skill,
 	Projectile,
 	Effect,
+	Manager,
 	UI
 };
 

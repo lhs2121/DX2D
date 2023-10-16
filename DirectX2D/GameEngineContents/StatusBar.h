@@ -15,9 +15,12 @@ public:
 	StatusBar& operator=(const StatusBar& _Other) = delete;
 	StatusBar& operator=(StatusBar&& _Other) noexcept = delete;
 
+	static StatusBar* Inst;
 private:
 	void Start() override;
 	void Update(float _Delta) override;
+	//void AddHpGauge();
+	//void AddMpGauge();
 	std::shared_ptr<class GameEngineUIRenderer> StatusCover;
 
 	std::shared_ptr<class GameEngineUIRenderer> LvText;

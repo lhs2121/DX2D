@@ -1,7 +1,9 @@
 #include "PreCompile.h"
 #include "StatusBar.h"
-#include "ContentsCore.h"
 #include <GameEngineCore\GameEngineUIRenderer.h>
+
+
+StatusBar* StatusBar::Inst = nullptr;
 
 StatusBar::StatusBar()
 {
@@ -67,33 +69,6 @@ void StatusBar::Start()
 		LvNumber2->AddImageScale({ -1.0f,0.0f });
 		LvNumber3->AddImageScale({ -1.0f,0.0f });
 	}
-
-	{
-		float4 ExpBarPos = { 0,-hSize.Y + 5.0f };
-	
-	/*	ExpBG = CreateComponent<GameEngineUIRenderer>(2);
-		ExpBG->Transform.SetLocalPosition(ExpBarPos);
-		ExpBG->SetSprite("ExpBar", 0);
-		ExpBG->SetRenderOrder(3);*/
-
-		ExpCover = CreateComponent<GameEngineUIRenderer>(2);
-		ExpCover->Transform.SetLocalPosition(ExpBarPos);
-		ExpCover->SetSprite("ExpCover.png");
-		ExpCover->SetRenderOrder(1);
-
-		ExpGauge = CreateComponent<GameEngineUIRenderer>(2);
-		ExpGauge->Transform.SetLocalPosition(ExpBarPos);
-		ExpGauge->SetSprite("ExpGauge.png");
-		ExpGauge->SetRenderOrder(2);
-
-		ExpCover2 = CreateComponent<GameEngineUIRenderer>(2);
-		ExpCover2->Transform.SetLocalPosition(ExpBarPos);
-		ExpCover2->SetSprite("ExpCover2.png");
-		ExpCover2->SetRenderOrder(3);
-
-		// ExpNumber;
-	}
-
 }
 
 void StatusBar::Update(float _Delta)

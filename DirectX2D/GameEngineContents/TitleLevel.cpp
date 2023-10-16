@@ -37,6 +37,7 @@ void TitleLevel::Start()
 	GameEngineSprite::CreateSingle("ExpBG.png");
 	GameEngineSprite::CreateSingle("ExpCover.png");
 	GameEngineSprite::CreateSingle("ExpCover2.png");
+	GameEngineSprite::CreateSingle("ExpCover3.png");
 	GameEngineSprite::CreateSingle("ExpGauge.png");
 	GameEngineSprite::CreateSingle("ExpEffect.png");
 	GameEngineSprite::CreateSingle("MainBossUI.png");

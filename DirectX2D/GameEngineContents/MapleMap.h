@@ -15,8 +15,7 @@ public:
 	MapleMap& operator=(const MapleMap& _Other) = delete;
 	MapleMap& operator=(MapleMap&& _Other) noexcept = delete;
 
-	static std::shared_ptr<MapleMap> CurMap;
-	static void SetCurMap(std::shared_ptr<MapleMap> _Map);
+	static MapleMap* CurMap;
 
 	void SwitchDebugRender();
 

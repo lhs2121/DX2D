@@ -22,8 +22,18 @@ public:
 		return PortalGroup[_NextLevel];
 	};
 
-	std::map<std::string, std::shared_ptr<class Portal>> PortalGroup;
-
 	void Start() override;
+	void Update(float _Delta) override;
+	void LevelStart(GameEngineLevel* _PrevLevel) override;
+	void LevelEnd(GameEngineLevel* _NextLevel) override;
+
+	std::shared_ptr<class Player> CurPlayer;
+	std::shared_ptr<class MapleMap> CurMap;
+	std::shared_ptr<class BulletShooter> CurShooter;
+	std::shared_ptr<class EffectManager> CurEffectManager;
+	std::shared_ptr<class StatusBar> CurStatusBar;
+	std::shared_ptr<class ExpBar> CurExpBar;
+
+	std::map<std::string, std::shared_ptr<class Portal>> PortalGroup;
 };
 

@@ -2,156 +2,159 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClInclude Include="Monster.h">
-      <Filter>2. Actor\Players</Filter>
+      <Filter>Actor\Players</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>2. Actor\Players</Filter>
+      <Filter>Actor\Players</Filter>
     </ClInclude>
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="BulletShooter.h">
-      <Filter>2. Actor\Skills</Filter>
+      <Filter>Actor\Skills</Filter>
     </ClInclude>
     <ClInclude Include="ProJectile.h">
-      <Filter>2. Actor\Skills</Filter>
+      <Filter>Actor\Skills</Filter>
     </ClInclude>
     <ClInclude Include="DebugUI.h">
-      <Filter>2. Actor\UI</Filter>
+      <Filter>Actor\UI</Filter>
     </ClInclude>
     <ClInclude Include="ContentsEnum.h">
-      <Filter>0. Global</Filter>
+      <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsActor.h">
-      <Filter>2. Actor\Players</Filter>
+      <Filter>Actor\Players</Filter>
     </ClInclude>
     <ClInclude Include="MapleLevel.h">
-      <Filter>1. Level</Filter>
+      <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Map1.h">
-      <Filter>2. Actor\Maps</Filter>
+      <Filter>Actor\Maps</Filter>
     </ClInclude>
     <ClInclude Include="Map0.h">
-      <Filter>2. Actor\Maps</Filter>
+      <Filter>Actor\Maps</Filter>
     </ClInclude>
     <ClInclude Include="MapleMap.h">
-      <Filter>2. Actor\Maps</Filter>
+      <Filter>Actor\Maps</Filter>
     </ClInclude>
     <ClInclude Include="Portal.h">
-      <Filter>2. Actor\Maps</Filter>
-    </ClInclude>
-    <ClInclude Include="KerningCity.h">
-      <Filter>1. Level\1. KerningCity</Filter>
-    </ClInclude>
-    <ClInclude Include="HuntRegion.h">
-      <Filter>1. Level\2. HuntRegion</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleLevel.h">
-      <Filter>1. Level\0. TitleLevel</Filter>
+      <Filter>Actor\Maps</Filter>
     </ClInclude>
     <ClInclude Include="Effect.h">
-      <Filter>2. Actor\Skills\Effect</Filter>
+      <Filter>Actor\Effect</Filter>
     </ClInclude>
     <ClInclude Include="EffectManager.h">
-      <Filter>2. Actor\Skills\Effect</Filter>
+      <Filter>Actor\Effect</Filter>
     </ClInclude>
     <ClInclude Include="StatusBar.h">
-      <Filter>2. Actor\UI</Filter>
+      <Filter>Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpBar.h">
+      <Filter>Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="KerningCity.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="HuntRegion.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerStat.h">
+      <Filter>Global</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Monster.cpp">
-      <Filter>2. Actor\Players</Filter>
+      <Filter>Actor\Players</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>2. Actor\Players</Filter>
+      <Filter>Actor\Players</Filter>
     </ClCompile>
     <ClCompile Include="Player_State.cpp">
-      <Filter>2. Actor\Players</Filter>
+      <Filter>Actor\Players</Filter>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="PreCompile.cpp" />
     <ClCompile Include="BulletShooter.cpp">
-      <Filter>2. Actor\Skills</Filter>
+      <Filter>Actor\Skills</Filter>
     </ClCompile>
     <ClCompile Include="ProJectile.cpp">
-      <Filter>2. Actor\Skills</Filter>
+      <Filter>Actor\Skills</Filter>
     </ClCompile>
     <ClCompile Include="DebugUI.cpp">
-      <Filter>2. Actor\UI</Filter>
+      <Filter>Actor\UI</Filter>
     </ClCompile>
     <ClCompile Include="Player_Update.cpp">
-      <Filter>2. Actor\Players</Filter>
+      <Filter>Actor\Players</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsActor.cpp">
-      <Filter>2. Actor\Players</Filter>
+      <Filter>Actor\Players</Filter>
     </ClCompile>
     <ClCompile Include="MapleLevel.cpp">
-      <Filter>1. Level</Filter>
+      <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Map1.cpp">
-      <Filter>2. Actor\Maps</Filter>
+      <Filter>Actor\Maps</Filter>
     </ClCompile>
     <ClCompile Include="Map0.cpp">
-      <Filter>2. Actor\Maps</Filter>
+      <Filter>Actor\Maps</Filter>
     </ClCompile>
     <ClCompile Include="MapleMap.cpp">
-      <Filter>2. Actor\Maps</Filter>
+      <Filter>Actor\Maps</Filter>
     </ClCompile>
     <ClCompile Include="Portal.cpp">
-      <Filter>2. Actor\Maps</Filter>
-    </ClCompile>
-    <ClCompile Include="KerningCity.cpp">
-      <Filter>1. Level\1. KerningCity</Filter>
-    </ClCompile>
-    <ClCompile Include="HuntRegion.cpp">
-      <Filter>1. Level\2. HuntRegion</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleLevel.cpp">
-      <Filter>1. Level\0. TitleLevel</Filter>
+      <Filter>Actor\Maps</Filter>
     </ClCompile>
     <ClCompile Include="Effect.cpp">
-      <Filter>2. Actor\Skills\Effect</Filter>
+      <Filter>Actor\Effect</Filter>
     </ClCompile>
     <ClCompile Include="EffectManager.cpp">
-      <Filter>2. Actor\Skills\Effect</Filter>
+      <Filter>Actor\Effect</Filter>
     </ClCompile>
     <ClCompile Include="StatusBar.cpp">
-      <Filter>2. Actor\UI</Filter>
+      <Filter>Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ExpBar.cpp">
+      <Filter>Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="KerningCity.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="HuntRegion.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerStat.cpp">
+      <Filter>Global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="2. Actor">
+    <Filter Include="Actor">
       <UniqueIdentifier>{dfaa5030-45e1-4f41-83d4-3d4359e25a46}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2. Actor\UI">
+    <Filter Include="Actor\UI">
       <UniqueIdentifier>{a9a6990e-34ca-4fde-a442-cf6f214d6ee6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="0. Global">
-      <UniqueIdentifier>{7c8ebcee-870d-45b9-8acd-4a2c36871a8c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="1. Level">
-      <UniqueIdentifier>{39ef70cb-ba8e-4535-a7e9-9ab07c3f7dda}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="2. Actor\Maps">
+    <Filter Include="Actor\Maps">
       <UniqueIdentifier>{94bd9443-64fa-4f06-a71d-38a5c678fd3e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2. Actor\Players">
+    <Filter Include="Actor\Players">
       <UniqueIdentifier>{29ab7583-6138-44c2-a108-fb12dfbb790e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="2. Actor\Skills">
+    <Filter Include="Actor\Skills">
       <UniqueIdentifier>{318905c5-b0e4-404b-af05-bd237f99902d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="1. Level\1. KerningCity">
-      <UniqueIdentifier>{af3dc4ff-9dcb-42e5-b798-cb62af12cbb4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="1. Level\2. HuntRegion">
-      <UniqueIdentifier>{3b15c5bf-43b6-4278-b992-f51facf2c57e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="1. Level\0. TitleLevel">
-      <UniqueIdentifier>{f8180c3d-1bfa-487d-becb-de712b07446e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="2. Actor\Skills\Effect">
+    <Filter Include="Actor\Effect">
       <UniqueIdentifier>{30f744a1-81e6-44de-a4c1-4533c77f64b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level">
+      <UniqueIdentifier>{39ef70cb-ba8e-4535-a7e9-9ab07c3f7dda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{7c8ebcee-870d-45b9-8acd-4a2c36871a8c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

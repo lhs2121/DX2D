@@ -6,7 +6,7 @@ EffectManager* EffectManager::Inst = nullptr;
 
 EffectManager::EffectManager()
 {
-	Inst = this;
+	
 }
 
 EffectManager::~EffectManager()
