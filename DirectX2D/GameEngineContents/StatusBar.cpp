@@ -19,7 +19,7 @@ void StatusBar::Start()
 	{
 		StatusCover = CreateComponent<GameEngineUIRenderer>(0);
 		StatusCover->Transform.SetLocalPosition({ 0,70 - hSize.Y });
-		StatusCover->SetSprite("Status", 3);
+		StatusCover->SetSprite("StatusCover.png");
 		StatusCover->SetRenderOrder(1);
 		StatusCoverPos = StatusCover->Transform.GetLocalPosition();
 	}
@@ -27,21 +27,21 @@ void StatusBar::Start()
 	{
 		HpGauge = CreateComponent<GameEngineUIRenderer>(0);
 		HpGauge->Transform.SetLocalPosition(StatusCoverPos + float4(10, 0));
-		HpGauge->SetSprite("Status", 0);
+		HpGauge->SetSprite("HpGauge.png");
 		HpGauge->SetRenderOrder(0);
 	}
 
 	{
 		MpGauge = CreateComponent<GameEngineUIRenderer>(0);
 		MpGauge->Transform.SetLocalPosition(StatusCoverPos + float4(10, -15));
-		MpGauge->SetSprite("Status", 2);
+		MpGauge->SetSprite("MpGauge.png");
 		MpGauge->SetRenderOrder(0);
 	}
 
 	{
 		LvText = CreateComponent<GameEngineUIRenderer>(1);
 		LvText->Transform.SetLocalPosition(StatusCoverPos + float4(-67, 22));
-		LvText->SetSprite("Status", 1);
+		LvText->SetSprite("LvText.png");
 		LvText->SetRenderOrder(2);
 		LvTextPos = LvText->Transform.GetWorldPosition();
 
@@ -78,17 +78,17 @@ void StatusBar::Start()
 
 		ExpCover = CreateComponent<GameEngineUIRenderer>(2);
 		ExpCover->Transform.SetLocalPosition(ExpBarPos);
-		ExpCover->SetSprite("ExpBar", 1);
+		ExpCover->SetSprite("ExpCover.png");
 		ExpCover->SetRenderOrder(1);
 
 		ExpGauge = CreateComponent<GameEngineUIRenderer>(2);
 		ExpGauge->Transform.SetLocalPosition(ExpBarPos);
-		ExpGauge->SetSprite("ExpBar", 4);
+		ExpGauge->SetSprite("ExpGauge.png");
 		ExpGauge->SetRenderOrder(2);
 
 		ExpCover2 = CreateComponent<GameEngineUIRenderer>(2);
 		ExpCover2->Transform.SetLocalPosition(ExpBarPos);
-		ExpCover2->SetSprite("ExpBar", 2);
+		ExpCover2->SetSprite("ExpCover2.png");
 		ExpCover2->SetRenderOrder(3);
 
 		// ExpNumber;

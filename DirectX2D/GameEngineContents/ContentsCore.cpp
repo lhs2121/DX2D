@@ -20,9 +20,9 @@ ContentsCore::~ContentsCore()
 void ContentsCore::Start()
 {
 	GameEngineRenderTarget::IsDepth = false;
+	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
 	GameEngineCore::CreateLevel<KerningCity>("KerningCity");
 	GameEngineCore::CreateLevel<HuntRegion>("HuntRegion");
-	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
 	GameEngineCore::ChangeLevel("KerningCity");
 }
 
