@@ -43,7 +43,6 @@ void Player::ChangeState(PlayerState _State)
 	ApplyInputRight = true;
 	ApplyInputJump = true;
 	DoubleJump = false;
-	BrakingXForce = 700.0f;
 
 	switch (CurState)
 	{
@@ -318,16 +317,19 @@ void Player::LuckySevenUpdate(float _Delta)
 
 void Player::FlashJumpUpdate(float _Delta)
 {
-	if (IsGrounded == true)
+	if (IsGrounded == true && NetForce.Y <= 0)
 	{
-		if(CurColor == GameEngineColor::BLUE)
-		{
-			NetForce.X = dir * 100;
-			NetForce.Y = 0;
-		}
 		ChangeState(PlayerState::IDLE);
 	}
-	else if (InputIsDown(JumpKey) && DoubleJump == false)
+
+	if (CurColor == GameEngineColor::BLUE)
+	{
+		NetForce.X = dir * 400.0f;
+		NetForce.Y = 0;
+		ChangeState(PlayerState::IDLE);
+	}
+	
+	if (InputIsDown(JumpKey) && DoubleJump == false)
 	{
 		EffectManager::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::FlashJump, dir);
 		NetForce.X = dir * 700.0f;

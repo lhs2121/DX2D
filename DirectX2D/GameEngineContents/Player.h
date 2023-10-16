@@ -73,7 +73,7 @@ private:
 	void LevelStart(GameEngineLevel* _PrevLevel) override;
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
 	
-	float Speed = 125;
+	float Speed = 150.0f;
 	float dir;
 	bool CanRope;
 	bool CanFlip = true;

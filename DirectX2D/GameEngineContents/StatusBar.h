@@ -32,6 +32,7 @@ private:
 	std::shared_ptr<class GameEngineUIRenderer> ExpGauge;
 	std::shared_ptr<class GameEngineUIRenderer> ExpBG;
 	std::shared_ptr<class GameEngineUIRenderer> ExpCover;
+	std::shared_ptr<class GameEngineUIRenderer> ExpCover2;
 	std::shared_ptr<class GameEngineUIRenderer> ExpNumber;
 };
 

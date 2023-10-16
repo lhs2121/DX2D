@@ -65,6 +65,14 @@ void PhysicsActor::Gravity(float _Delta)
 
 void PhysicsActor::Horizontal(float _Delta)
 {
+	if (IsGrounded == true)
+	{
+		BrakingXForce = 2300.0f;
+	}
+	else
+	{
+		BrakingXForce = 300.0f;
+	}
 	if (NetForce.X > 0)
 	{
 		NetForce.X -= BrakingXForce * _Delta;

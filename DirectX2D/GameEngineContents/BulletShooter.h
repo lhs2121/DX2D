@@ -31,7 +31,7 @@ protected:
 	float MaxCoolTime = 0.3f;
 	float MaxInterTime = 0.1f;
 
-	float BulletSpeed = 350.0f;
+	float BulletSpeed = 400.0f;
 	float BulletCoolTime = 1.0f;
 
 	float4 BulletPosOffset1 = { 5, 30 };

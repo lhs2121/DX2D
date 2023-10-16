@@ -33,7 +33,7 @@ protected:
 	float4 NetForce = { 0.0f, 0.0f, 0.0f, 1.0f };
 	GameEngineColor CurColor;
 
-	float MaxGravity = 500.0f;
+	float MaxGravity = 700.0f;
 	float JumpForce = 300.0f;
 	float BrakingXForce = 1000.0f;
 	float BrakingGForce = 1000.0f;
