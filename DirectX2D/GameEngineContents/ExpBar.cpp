@@ -54,3 +54,8 @@ void ExpBar::ChangeExpGauge(float _Value)
 {
 	ExpGauge->AddImageScale({ _Value ,0 });
 }
+
+void ExpBar::ExpGaugeReset()
+{
+	ExpGauge->SetImageScale({ 0,10 });
+}

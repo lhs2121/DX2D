@@ -27,26 +27,19 @@ private:
 	void FlipRenderer();
 	void CameraFocus();
 	void DirUpdate();
-	//basic
-
-	void ColCheck();
+	void ColCheck(float _Delta);
 	void PortalCheck();
-	//col
-
 	void RopeCheck();
 	void RopePivotUpdate();
-	//rope
+	void MoveUpdate();
+	//basic update
 
 	void RopeStart();
-	//start
-
-	void MoveUpdate();
-	//move
-
 	void FlashJumpStart();
 	void LuckySevenStart();
 	void HitStart();
 	//state start
+
 	void StateUpdate(float _Delta);
 	void IdleUpdate(float _Delta);
 	void WalkUpdate(float _Delta);
@@ -75,7 +68,10 @@ private:
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 	float Speed = 150.0f;
+	float HitCoolTime = 2.0f;
 	float dir;
+
+	bool CanHit = true;
 	bool CanRope;
 	bool CanFlip = true;
 	bool DirCheck = true;

@@ -29,7 +29,7 @@ private:
 	float CurMp = 100.0f;
 	float MaxMp = 100.0f;
 
-	float CurExp = 100.0f;
+	float CurExp = 0.0f;
 	float MaxExp = 100.0f;
 
 	int CurLevel = 100;

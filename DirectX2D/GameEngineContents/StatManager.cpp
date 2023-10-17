@@ -60,7 +60,7 @@ void StatManager::ChangeExp(float _ExpValue)
 	PlayerStat::Inst->CurExp += _ExpValue;
 
 	float MaxExp = PlayerStat::Inst->MaxExp;
-	float GaugeSizeX = ContentsCore::GetStartWindowSize().X;
+	float GaugeSizeX = 1920.0f;
 	float ConvertedExp = _ExpValue * (GaugeSizeX / MaxExp);
 
 	ExpBar::Inst->ChangeExpGauge(ConvertedExp);
@@ -68,7 +68,8 @@ void StatManager::ChangeExp(float _ExpValue)
 	if (PlayerStat::Inst->CurExp >= PlayerStat::Inst->MaxExp)
 	{
 		PlayerStat::Inst->CurExp = 0;
-		PlayerStat::Inst->MaxExp += 100;
+		PlayerStat::Inst->MaxExp += 10;
 		PlayerStat::Inst->CurLevel += 1;
+		ExpBar::Inst->ExpGaugeReset();
 	}
 }

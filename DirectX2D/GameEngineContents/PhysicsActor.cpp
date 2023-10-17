@@ -63,7 +63,7 @@ void PhysicsActor::Gravity(float _Delta)
 	}
 }
 
-void PhysicsActor::Horizontal(float _Delta)
+void PhysicsActor::Breaking(float _Delta)
 {
 	if (IsGrounded == true)
 	{
@@ -153,7 +153,7 @@ void PhysicsActor::Update(float _Delta)
 	JumpCheck();
 	GroundCheck();
 	Gravity(_Delta);
-	Horizontal(_Delta);
+	Breaking(_Delta);
 	BluePixelSnap();
 	RedPixelSnap();
 }

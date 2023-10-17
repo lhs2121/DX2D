@@ -27,6 +27,7 @@ void Player::Start()
 		MainSpriteRenderer->CreateAnimation("down", "down");
 		MainSpriteRenderer->CreateAnimation("rope", "rope", 0.2f);
 		MainSpriteRenderer->CreateAnimation("ladder", "ladder", 0.2f);
+		MainSpriteRenderer->CreateAnimation("hit", "hit",0.3f);
 		MainSpriteRenderer->CreateAnimation("swing1", "swing1", 0.2f, 0, 2, false);
 		MainSpriteRenderer->CreateAnimation("swing2", "swing2", 0.2f, 0, 2, false);
 		MainSpriteRenderer->CreateAnimation("swing3", "swing3", 0.2f, 0, 2, false);

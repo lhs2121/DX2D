@@ -74,7 +74,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>Actor\Players</Filter>
     </ClCompile>
-    <ClCompile Include="Player_State.cpp">
+    <ClCompile Include="Player_StateUpdate.cpp">
       <Filter>Actor\Players</Filter>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
@@ -87,9 +87,6 @@
     </ClCompile>
     <ClCompile Include="DebugUI.cpp">
       <Filter>Actor\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Player_Update.cpp">
-      <Filter>Actor\Players</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsActor.cpp">
       <Filter>Actor\Players</Filter>
@@ -135,6 +132,9 @@
     </ClCompile>
     <ClCompile Include="StatManager.cpp">
       <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_BasicUpdate.cpp">
+      <Filter>Actor\Players</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

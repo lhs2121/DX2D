@@ -43,7 +43,7 @@ enum class PlayerState
 	JUMP,
 	DOWN,
 	ROPE,
-	ATTACK,
+	HIT,
 	FLASHJUMP,
 	LUCKYSEVEN,
 	

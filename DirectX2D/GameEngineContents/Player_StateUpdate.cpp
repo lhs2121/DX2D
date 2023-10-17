@@ -22,6 +22,9 @@ void Player::StateUpdate(float _Delta)
 	case PlayerState::DOWN:
 		DownUpdate(_Delta);
 		break;
+	case PlayerState::HIT:
+		HitUpdate(_Delta);
+		break;
 	case PlayerState::LUCKYSEVEN:
 		LuckySevenUpdate(_Delta);
 		break;
@@ -63,6 +66,9 @@ void Player::ChangeState(PlayerState _State)
 		break;
 	case PlayerState::ROPE:
 		RopeStart();
+		break;
+	case PlayerState::HIT:
+		HitStart();
 		break;
 	case PlayerState::FLASHJUMP:
 		FlashJumpStart();
@@ -112,6 +118,12 @@ void Player::LuckySevenStart()
 
 void Player::HitStart()
 {
+	ApplyInputLeft = false;
+	ApplyInputRight = false;
+
+	NetForce.X += -dir * 350.0f;
+	NetForce.Y += 100.0f;
+	MainSpriteRenderer->ChangeAnimation("hit");
 }
 
 void Player::IdleUpdate(float _Delta)
@@ -348,6 +360,11 @@ void Player::FlashJumpUpdate(float _Delta)
 
 void Player::HitUpdate(float _Delta)
 {
+	if (IsGrounded)
+	{
+		ChangeState(PlayerState::IDLE);
+	}
+
 }
 
 void Player::MeleeAttackUpdate(float _Delta)

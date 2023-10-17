@@ -14,7 +14,7 @@ void Player::Update(float _Delta)
 	CameraFocus();
 	DirUpdate();
 	RopePivotUpdate();
-	ColCheck();
+	ColCheck(_Delta);
 	RopeCheck();
 	PortalCheck();
 
@@ -149,14 +149,27 @@ void Player::PortalCheck()
 	Col->CollisionEvent(CollisionOrder::Portal, Event);
 }
 
-void Player::ColCheck()
+void Player::ColCheck(float _Delta)
 {
+	if (CanHit == false)
+	{
+		HitCoolTime -= _Delta;
+
+		if (HitCoolTime <= 0)
+		{
+			CanHit = true;
+			HitCoolTime = 2.0f;
+		}
+		return;
+	}
+
 	EventParameter Event;
 
-	Event.Enter = [](GameEngineCollision*, GameEngineCollision* Col)
+	Event.Enter = [&](GameEngineCollision*, GameEngineCollision* Col)
 		{
-			StatManager::Inst->ChangeHp(-10);
-			StatManager::Inst->ChangeExp(10);
+			StatManager::Inst->ChangeHp(-34.0f);
+			ChangeState(PlayerState::HIT);
+			CanHit = false;
 		};
 	Event.Stay = [](GameEngineCollision*, GameEngineCollision* Col)
 		{

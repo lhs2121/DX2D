@@ -23,7 +23,7 @@ protected:
 	void JumpCheck();
 
 	void Gravity(float _Delta);
-	void Horizontal(float _Delta);
+	void Breaking(float _Delta);
 
 	void RedPixelSnap();
 	void BluePixelSnap();

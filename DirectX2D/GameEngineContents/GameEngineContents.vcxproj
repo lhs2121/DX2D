@@ -198,14 +198,14 @@
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="MapleLevel.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Player_Update.cpp" />
+    <ClCompile Include="Player_BasicUpdate.cpp" />
     <ClCompile Include="PreCompile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Player_State.cpp" />
+    <ClCompile Include="Player_StateUpdate.cpp" />
     <ClCompile Include="PhysicsActor.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="Monster.cpp" />
