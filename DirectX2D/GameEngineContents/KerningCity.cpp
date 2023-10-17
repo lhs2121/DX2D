@@ -3,6 +3,7 @@
 #include "Map0.h"
 #include "Portal.h"
 #include "PlayerStat.h"
+#include "Monster.h"
 
 KerningCity::KerningCity() 
 {
@@ -16,20 +17,17 @@ void KerningCity::Start()
 {
 	MapleLevel::Start();
 	{
-		CreateActor<PlayerStat>(ActorOrder::Manager);
 		CurMap = CreateActor<Map0>(ActorOrder::Map);
 		CreatePortal("HuntRegion", { 310, -910 });
+	}
+	{
+		CreateActor<Monster>(ActorOrder::Monster);
 	}
 }
 
 void KerningCity::Update(float _Delta)
 {
 	MapleLevel::Update(_Delta);
-
-	if (InputIsDown('C'))
-	{
-		PlayerStat::Inst->curhp -= 10.0f;
-	}
 }
 
 void KerningCity::LevelStart(GameEngineLevel* _PrevLevel)

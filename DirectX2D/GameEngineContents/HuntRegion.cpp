@@ -27,11 +27,6 @@ void HuntRegion::Start()
 void HuntRegion::Update(float _Delta)
 {
 	MapleLevel::Update(_Delta);
-
-	if (InputIsDown('C'))
-	{
-		PlayerStat::Inst->curhp -= 10.0f;
-	}
 }
 
 void HuntRegion::LevelStart(GameEngineLevel* _PrevLevel)

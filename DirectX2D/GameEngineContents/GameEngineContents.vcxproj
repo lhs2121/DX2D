@@ -189,6 +189,7 @@
     <ClInclude Include="Effect.h" />
     <ClInclude Include="StatusBar.h" />
     <ClInclude Include="PlayerStat.h" />
+    <ClInclude Include="StatManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HuntRegion.cpp" />
@@ -219,6 +220,7 @@
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="ExpBar.cpp" />
     <ClCompile Include="PlayerStat.cpp" />
+    <ClCompile Include="StatManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

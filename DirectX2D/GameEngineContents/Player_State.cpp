@@ -110,6 +110,10 @@ void Player::LuckySevenStart()
 	ChangeRandomSwingAnimation();
 }
 
+void Player::HitStart()
+{
+}
+
 void Player::IdleUpdate(float _Delta)
 {
 	if (InputIsPress(VK_LEFT) || InputIsPress(VK_RIGHT))
@@ -328,7 +332,7 @@ void Player::FlashJumpUpdate(float _Delta)
 		NetForce.Y = 0;
 		ChangeState(PlayerState::IDLE);
 	}
-	
+
 	if (InputIsDown(JumpKey) && DoubleJump == false)
 	{
 		EffectManager::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::FlashJump, dir);
@@ -340,6 +344,10 @@ void Player::FlashJumpUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::ROPE);
 	}
+}
+
+void Player::HitUpdate(float _Delta)
+{
 }
 
 void Player::MeleeAttackUpdate(float _Delta)

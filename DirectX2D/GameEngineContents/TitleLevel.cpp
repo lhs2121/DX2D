@@ -1,5 +1,7 @@
 #include "PreCompile.h"
 #include "TitleLevel.h"
+#include "PlayerStat.h"
+#include "StatManager.h"
 
 TitleLevel::TitleLevel() 
 {
@@ -41,24 +43,27 @@ void TitleLevel::Start()
 	GameEngineSprite::CreateSingle("ExpGauge.png");
 	GameEngineSprite::CreateSingle("ExpEffect.png");
 	GameEngineSprite::CreateSingle("MainBossUI.png");
+
+	{
+		CreateActor<PlayerStat>(ActorOrder::Manager);
+		CreateActor<StatManager>(ActorOrder::Manager);
+	}
+	
 }
 
 void TitleLevel::Update(float _Delta)
 {
-	if (InputIsPress('P'))
-	{
-		GameEngineCore::ChangeLevel("KCity");
-	}
+
 }
 
 
 void TitleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	int a = 0;
+
 }
 
 void TitleLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-	int a = 0;
+	
 }
 

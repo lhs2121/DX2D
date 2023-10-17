@@ -63,6 +63,9 @@
     <ClInclude Include="PlayerStat.h">
       <Filter>Global</Filter>
     </ClInclude>
+    <ClInclude Include="StatManager.h">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Monster.cpp">
@@ -128,6 +131,9 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="PlayerStat.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="StatManager.cpp">
       <Filter>Global</Filter>
     </ClCompile>
   </ItemGroup>

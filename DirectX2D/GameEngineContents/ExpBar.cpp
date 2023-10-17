@@ -36,34 +36,21 @@ void ExpBar::Start()
 	ExpCover3->SetRenderOrder(4);
 	ExpCover3->SetPivotType(PivotType::Left);
 
-	
+
 	ExpCover->Transform.SetLocalPosition(ExpBarPos);
 	ExpCover2->Transform.SetLocalPosition(ExpBarPos);
 	ExpCover3->Transform.SetLocalPosition(ExpBarPos);
 	ExpGauge->Transform.SetLocalPosition(ExpBarPos);
-	ExpGauge->SetImageScale({ 10,10 });
-	GameEngineInput::AddInputObject(this);
+	ExpGauge->SetImageScale({ 0,10 });
+
 }
 
 void ExpBar::Update(float _Delta)
 {
-	if (InputIsPress('Z'))
-	{
-		ExpGauge->AddImageScale({ 100.0f * _Delta, 0 });
-	}
-	if (ExpGauge->GetImageTransform().GetLocalScale().X >= 1920)
-	{
-		int a = 0;
-	}
+
 }
 
-void ExpBar::AddExpGauge(float _Value)
+void ExpBar::ChangeExpGauge(float _Value)
 {
-	//float ConvertValue = _Value * (ContentsCore::GetStartWindowSize().X / maxexp)
-	//ExpGauge->AddImageScale({ ConvertValue, 0 });
-
-	if (ExpGauge->GetImageTransform().GetLocalScale().X >= ContentsCore::GetStartWindowSize().X)
-	{
-		ExpGauge->SetImageScale({ 0,10 });
-	}
+	ExpGauge->AddImageScale({ _Value ,0 });
 }

@@ -7,12 +7,12 @@ Player* Player::MainPlayer = nullptr;
 
 Player::Player()
 {
-	
+
 }
 
 Player::~Player()
 {
-	
+
 }
 
 void Player::Start()
@@ -74,7 +74,7 @@ void Player::Start()
 	Transform.SetLocalPosition({ 500, -900, 0.0f });
 
 	GameEngineInput::AddInputObject(this);
-//	GetLevel()->GetMainCamera()->CameraTargetSetting(Transform, float4::BACKWARD * 500.0f);
+	//	GetLevel()->GetMainCamera()->CameraTargetSetting(Transform, float4::BACKWARD * 500.0f);
 
 	ChangeDirState(PlayerDirState::LEFT);
 	ChangeState(PlayerState::IDLE);

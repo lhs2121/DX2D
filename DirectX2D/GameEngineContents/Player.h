@@ -45,7 +45,7 @@ private:
 
 	void FlashJumpStart();
 	void LuckySevenStart();
-
+	void HitStart();
 	//state start
 	void StateUpdate(float _Delta);
 	void IdleUpdate(float _Delta);
@@ -57,6 +57,7 @@ private:
 	void AutoAttackUpdate(float _Delta);
 	void LuckySevenUpdate(float _Delta);
 	void FlashJumpUpdate(float _Delta);
+	void HitUpdate(float _Delta);
 	//state update
 
 	void ChangeRandomSwingAnimation();
@@ -72,7 +73,7 @@ private:
 
 	void LevelStart(GameEngineLevel* _PrevLevel) override;
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
-	
+
 	float Speed = 150.0f;
 	float dir;
 	bool CanRope;

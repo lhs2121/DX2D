@@ -15,7 +15,7 @@ public:
 	ExpBar& operator=(const ExpBar& _Other) = delete;
 	ExpBar& operator=(ExpBar&& _Other) noexcept = delete;
 
-	void AddExpGauge(float _Value);
+	void ChangeExpGauge(float _Value);
 
 	static ExpBar* Inst;
 

@@ -3,6 +3,7 @@
 
 class PlayerStat : public GameEngineActor
 {
+	friend class StatManager;
 public:
 	// constrcuter destructer
 	PlayerStat();
@@ -21,18 +22,19 @@ public:
 	void LevelStart(GameEngineLevel* _PrevLevel) override;
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
-	float curhp = 100.0f;
-	float maxhp = 100.0f;
+private:
+	float CurHp = 100.0f;
+	float MaxHp = 100.0f;
 
-	float curmp = 100.0f;
-	float maxmp = 100.0f;
+	float CurMp = 100.0f;
+	float MaxMp = 100.0f;
 
-	float curexp = 100.0f;
-	float maxexp = 100.0f;
+	float CurExp = 100.0f;
+	float MaxExp = 100.0f;
 
-	int level = 100;
-	int maxlevel = 300;
+	int CurLevel = 100;
+	int MaxLevel = 300;
 
-	int money = 0;
-	int maxmoney = 999999999;
+	int CurMoney = 0;
+	int MaxMoney = 999999999;
 };

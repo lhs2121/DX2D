@@ -4,6 +4,7 @@
 // Ό³Έν :
 class StatusBar : public GameEngineActor
 {
+	friend class StatManager;
 public:
 	// constrcuter destructer
 	StatusBar();
@@ -16,11 +17,16 @@ public:
 	StatusBar& operator=(StatusBar&& _Other) noexcept = delete;
 
 	static StatusBar* Inst;
+
+	void ChangeHpGauge(float _Value);
+	void ChangeMpGauge(float _Value);
+
+	float HpGaugeSizeX;
+	float MpGaugeSizeX;
 private:
 	void Start() override;
 	void Update(float _Delta) override;
-	//void AddHpGauge();
-	//void AddMpGauge();
+
 	std::shared_ptr<class GameEngineUIRenderer> StatusCover;
 
 	std::shared_ptr<class GameEngineUIRenderer> LvText;
@@ -31,11 +37,5 @@ private:
 	std::shared_ptr<class GameEngineUIRenderer> HpGauge;
 	std::shared_ptr<class GameEngineUIRenderer> MpGauge;
 	std::shared_ptr<class GameEngineUIRenderer> GaugeNumber;
-
-	std::shared_ptr<class GameEngineUIRenderer> ExpGauge;
-	std::shared_ptr<class GameEngineUIRenderer> ExpBG;
-	std::shared_ptr<class GameEngineUIRenderer> ExpCover;
-	std::shared_ptr<class GameEngineUIRenderer> ExpCover2;
-	std::shared_ptr<class GameEngineUIRenderer> ExpNumber;
 };
 

@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include "MapleMap.h"
+#include "StatManager.h"
 
 void Player::Update(float _Delta)
 {
@@ -8,7 +9,7 @@ void Player::Update(float _Delta)
 	StateUpdate(_Delta);
 	MoveUpdate();
 
-	
+
 	FlipRenderer();
 	CameraFocus();
 	DirUpdate();
@@ -16,7 +17,7 @@ void Player::Update(float _Delta)
 	ColCheck();
 	RopeCheck();
 	PortalCheck();
-	
+
 
 	if (InputIsDown('P'))
 	{
@@ -83,7 +84,7 @@ void Player::MoveUpdate()
 		}
 	}
 
-	if(ApplyInputRight == true)
+	if (ApplyInputRight == true)
 	{
 		if (InputIsPress(VK_RIGHT))
 		{
@@ -154,14 +155,15 @@ void Player::ColCheck()
 
 	Event.Enter = [](GameEngineCollision*, GameEngineCollision* Col)
 		{
-
+			StatManager::Inst->ChangeHp(-10);
+			StatManager::Inst->ChangeExp(10);
 		};
 	Event.Stay = [](GameEngineCollision*, GameEngineCollision* Col)
 		{
 		};
 	Event.Exit = [](GameEngineCollision*, GameEngineCollision* Col)
 		{
-			Col->GetActor()->Death();
+		
 		};
 	Col->CollisionEvent(CollisionOrder::Monster, Event);
 }

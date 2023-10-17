@@ -50,7 +50,6 @@ void MapleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	EffectManager::Inst = CurEffectManager.get();
 	StatusBar::Inst = CurStatusBar.get();
 	ExpBar::Inst = CurExpBar.get();
-
 	MapleMap::CurMap = CurMap.get();
 }
 
