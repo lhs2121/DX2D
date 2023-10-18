@@ -6,17 +6,15 @@
 void Player::Update(float _Delta)
 {
 	PhysicsActor::Update(_Delta);
-	StateUpdate(_Delta);
-	RopeCheck();
-	MoveUpdate();
 	FlipRenderer();
 	CameraFocus();
 	DirUpdate();
 	RopePivotUpdate();
 	ColCheck(_Delta);
+	RopeCheck();
 	PortalCheck();
-
-	float4 a = Transform.GetWorldPosition();
+	MoveUpdate();
+	StateUpdate(_Delta);
 
 	if (InputIsDown('P'))
 	{

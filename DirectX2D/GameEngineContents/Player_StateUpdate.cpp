@@ -81,11 +81,8 @@ void Player::ChangeState(PlayerState _State)
 	}
 }
 
-void Player::RopeStart()
+void Player::MicroAdjustment()
 {
-	ApplyInput = false;
-	CanFlip = false;
-	NetForce = 0.0f;
 	if (IsGrounded == true && InputIsPress(VK_DOWN))
 	{
 		Transform.AddWorldPosition({ 0, -5 });
@@ -94,6 +91,15 @@ void Player::RopeStart()
 	{
 		Transform.AddWorldPosition({ 0, 5 });
 	}
+}
+
+
+void Player::RopeStart()
+{
+	ApplyInput = false;
+	CanFlip = false;
+	NetForce = 0.0f;
+	MicroAdjustment();
 	MainSpriteRenderer->ChangeAnimation("rope");
 	MainSpriteRenderer->AnimationPauseOn();
 }
@@ -117,10 +123,7 @@ void Player::LuckySevenStart()
 
 void Player::HitStart()
 {
-	ApplyInputLeft = false;
-	ApplyInputRight = false;
 
-	MainSpriteRenderer->ChangeAnimation("hit");
 }
 
 void Player::IdleUpdate(float _Delta)
@@ -205,6 +208,7 @@ void Player::JumpUpdate(float _Delta)
 
 void Player::RopeUpdate(float _Delta)
 {
+	float4 a = Transform.GetWorldPosition();
 	NetForce = 0.0f;
 	if (CurDirState == PlayerDirState::RIGHT)
 	{

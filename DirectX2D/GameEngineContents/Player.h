@@ -38,6 +38,7 @@ private:
 	void FlashJumpStart();
 	void LuckySevenStart();
 	void HitStart();
+	void MicroAdjustment();
 	//state start
 
 	void StateUpdate(float _Delta);
@@ -52,6 +53,7 @@ private:
 	void FlashJumpUpdate(float _Delta);
 	void HitUpdate(float _Delta);
 	//state update
+
 
 	void ChangeRandomSwingAnimation();
 	void ChangeDirState(PlayerDirState _State)
