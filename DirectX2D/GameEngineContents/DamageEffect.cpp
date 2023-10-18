@@ -26,19 +26,27 @@ void DamageEffect::Start()
 	Off();
 }
 
+void DamageEffect::StartEffect()
+{
+	cool = 1.5f;
+	On();
+}
+
+void DamageEffect::EndEffect()
+{
+	Off();
+	Renderer->SetRenderOrder(RenderOrder::Effect2);
+	CurOrder = int(RenderOrder::Effect2);
+	Renderer->Transform.SetLocalPosition({ 0.0f,0.0f });
+}
+
 void DamageEffect::Update(float _Delta)
 {
 	cool -= _Delta;
 	if (cool <= 0)
 	{
-		Off();
-		Renderer->Transform.SetLocalPosition({ 0,0 });
+		EndEffect();
 	}
 	Renderer->Transform.AddLocalPosition(float4::UP * _Delta * 20.0f);
 }
 
-void DamageEffect::On()
-{
-	GameEngineActor::On();
-	cool = 1.5f;
-}

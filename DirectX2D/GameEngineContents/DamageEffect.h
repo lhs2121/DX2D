@@ -25,7 +25,8 @@ public:
 	{
 		return cool;
 	}
-	void On() override;
+	void StartEffect();
+	void EndEffect();
 	int CurOrder;
 protected:
 	void Start() override;

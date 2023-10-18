@@ -31,25 +31,18 @@ public:
 	{
 		Speed = _Speed;
 	}
+	void StartFire();
+	void Off();
 private:
 	void Move(float _Delta);
-
-	void ColCheck();
-
 	void StartCoolTime(float _Delta);
-
 	void Start() override;
-
 	void Update(float _Delta) override;
 
 	float Speed;
-
 	float CoolTime;
-
 	float Dir;
-
 	std::shared_ptr<class GameEngineCollision> Col;
-
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
 };
 

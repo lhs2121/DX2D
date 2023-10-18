@@ -17,32 +17,13 @@ void ProJectile::Move(float _Delta)
 	Transform.AddWorldPosition(Force);
 }
 
-void ProJectile::ColCheck()
-{
-	EventParameter Event;
-
-	Event.Enter = [&](GameEngineCollision*, GameEngineCollision* Col2)
-		{
-			SkillEffctor::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::HitSureken, static_cast<int>(Dir));
-			Renderer->Off();
-		};
-	Event.Stay = [](GameEngineCollision*, GameEngineCollision* Col2)
-		{
-		};
-	Event.Exit = [](GameEngineCollision*, GameEngineCollision* Col2)
-		{
-
-		};
-	Col->CollisionEvent(CollisionOrder::Monster, Event);
-}
-
 void ProJectile::StartCoolTime(float _Delta)
 {
 	CoolTime -= _Delta;
 
 	if (CoolTime <= 0)
 	{
-		Off();
+		GameEngineActor::Off();
 	}
 }
 
@@ -64,7 +45,7 @@ void ProJectile::Start()
 		Renderer->AutoSpriteSizeOn();
 	}
 
-	Off();
+	GameEngineActor::Off();
 }
 
 void ProJectile::Update(float _Delta)
@@ -79,6 +60,20 @@ void ProJectile::Update(float _Delta)
 	}
 
 	Move(_Delta);
-	ColCheck();
 	StartCoolTime(_Delta);
+}
+
+void ProJectile::StartFire()
+{
+	On();
+}
+
+void ProJectile::Off()
+{
+	if (SkillEffctor::Inst != nullptr)
+	{
+		SkillEffctor::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::HitSureken, Dir);
+	}
+	
+	GameEngineActor::Off();
 }

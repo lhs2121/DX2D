@@ -40,6 +40,5 @@ protected:
 
 	bool IsJumping;
 	bool IsGrounded;
-
 };
 

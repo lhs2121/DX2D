@@ -66,11 +66,14 @@
     <ClInclude Include="StatManager.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="DamageEffctor.h">
+    <ClInclude Include="DamageEffectController.h">
       <Filter>Actor\Effect</Filter>
     </ClInclude>
     <ClInclude Include="DamageEffect.h">
       <Filter>Actor\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="CombatActor.h">
+      <Filter>Actor\Players</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -142,11 +145,14 @@
     <ClCompile Include="Player_BasicUpdate.cpp">
       <Filter>Actor\Players</Filter>
     </ClCompile>
-    <ClCompile Include="DamageEffctor.cpp">
+    <ClCompile Include="DamageEffectController.cpp">
       <Filter>Actor\Effect</Filter>
     </ClCompile>
     <ClCompile Include="DamageEffect.cpp">
       <Filter>Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="CombatActor.cpp">
+      <Filter>Actor\Players</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

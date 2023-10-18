@@ -1,8 +1,8 @@
 #pragma once
-#include "PhysicsActor.h"
+#include "CombatActor.h"
 
 // Ό³Έν :
-class Monster : public PhysicsActor
+class Monster : public CombatActor
 {
 public:
 	// constrcuter destructer
@@ -14,13 +14,12 @@ public:
 	Monster(Monster&& _Other) noexcept = delete;
 	Monster& operator=(const Monster& _Other) = delete;
 	Monster& operator=(Monster&& _Other) noexcept = delete;
-	std::shared_ptr<class GameEngineCollision> Col;
+
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
-	void ColCheck();
-	int hp = 100.0f;
+
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
-	std::shared_ptr<class DamageEffctor> MyDamageEffctor;
+	
 };
 

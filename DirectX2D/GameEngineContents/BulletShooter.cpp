@@ -19,9 +19,8 @@ BulletShooter::~BulletShooter()
 float4 BulletShooter::GetBulletPos(float4 _OffSet)
 {
 	float dir = Player::MainPlayer->GetDir();
-	float4 BulletPos = Player::MainPlayer->Transform.GetWorldPosition()
-	+ float4(_OffSet.X * dir, _OffSet.Y);
-	return BulletPos;
+	float4 BulletPos = Player::MainPlayer->Transform.GetWorldPosition() + float4(_OffSet.X * dir, _OffSet.Y);
+	return BulletPos; 
 }
 
 void BulletShooter::Start()
@@ -42,7 +41,7 @@ void BulletShooter::Update(float _Delta)
 			FirstBullet = Bullet1;
 			SecondBullet = Bullet2;
 			BulletSetting();
-			FirstBullet->On();
+			FirstBullet->StartFire();
 		}
 		else if (FirstBullet == Bullet1)
 		{
@@ -62,7 +61,7 @@ void BulletShooter::Update(float _Delta)
 		InterTime -= _Delta;
 		if (InterTime <= 0)
 		{
-			SecondBullet->On();
+			SecondBullet->StartFire();
 		}
 	}
 	if (CoolTime > 0.0f)

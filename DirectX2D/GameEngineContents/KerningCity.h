@@ -22,6 +22,6 @@ protected:
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 private:
-	std::shared_ptr<class DamageEffctor> CurDamageEffctor;
+	std::shared_ptr<class DamageEffectController> CurDamageEffectController;
 };
 

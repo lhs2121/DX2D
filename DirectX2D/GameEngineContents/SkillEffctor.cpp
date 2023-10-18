@@ -6,7 +6,6 @@ SkillEffctor* SkillEffctor::Inst = nullptr;
 
 SkillEffctor::SkillEffctor()
 {
-	
 }
 
 SkillEffctor::~SkillEffctor()
@@ -17,41 +16,10 @@ void SkillEffctor::StartEffect(float4 _Pos, EffectType _Type, float _Dir)
 {
 	std::list<std::shared_ptr<SkillEffect>> list;
 	list = GetLevel()->GetObjectGroupConvert<SkillEffect>(ActorOrder::SkillEffect);
-	std::shared_ptr<SkillEffect> Effect = GetUsableEffect(list);
-
-	int random = GameEngineRandom::GameEngineRandom().RandomInt(1, 30);
-	float4 OffSet;
-	std::string AnimationName;
-	switch (_Type)
-	{
-	case EffectType::FlashJump:
-		OffSet = { _Dir * -15.0f,10.0f };
-		AnimationName = "FlashJump";
-		break;
-	case EffectType::LuckySeven:
-		/*if (IsAleadyOnEffect(list))
-		{
-			return;
-		}*/
-		_Dir = Player::MainPlayer->GetDir();
-		OffSet = { _Dir * 40.0f,30.0f };
-		AnimationName = "LuckySeven";
-		break;
-	case EffectType::HitSureken:
-		OffSet = { _Dir * random,0.0f };
-		AnimationName = "HitSureken";
-		break;
-	default:
-		break;
-	}
-
-	Effect->Transform.SetWorldPosition(_Pos + OffSet);
-	Effect->ChangeAnimation(AnimationName);
-	Effect->FlipX(_Dir);
-	Effect->On();
+	std::shared_ptr<SkillEffect> NewEffect = GetUsableEffect(list);
+	NewEffect->EffectSetting(_Pos, _Type, _Dir);
+	NewEffect->On();
 }
-
-
 
 void SkillEffctor::Start()
 {
@@ -59,11 +27,6 @@ void SkillEffctor::Start()
 	{
 		GetLevel()->CreateActor<SkillEffect>(ActorOrder::SkillEffect);
 	}
-}
-
-void SkillEffctor::Update(float _Delta)
-{
-
 }
 
 std::shared_ptr<SkillEffect> SkillEffctor::GetUsableEffect(std::list<std::shared_ptr<SkillEffect>> _list)

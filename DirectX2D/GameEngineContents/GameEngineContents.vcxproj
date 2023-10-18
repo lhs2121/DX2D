@@ -190,8 +190,9 @@
     <ClInclude Include="StatusBar.h" />
     <ClInclude Include="PlayerStat.h" />
     <ClInclude Include="StatManager.h" />
-    <ClInclude Include="DamageEffctor.h" />
+    <ClInclude Include="DamageEffectController.h" />
     <ClInclude Include="DamageEffect.h" />
+    <ClInclude Include="CombatActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HuntRegion.cpp" />
@@ -223,8 +224,9 @@
     <ClCompile Include="ExpBar.cpp" />
     <ClCompile Include="PlayerStat.cpp" />
     <ClCompile Include="StatManager.cpp" />
-    <ClCompile Include="DamageEffctor.cpp" />
+    <ClCompile Include="DamageEffectController.cpp" />
     <ClCompile Include="DamageEffect.cpp" />
+    <ClCompile Include="CombatActor.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

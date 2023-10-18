@@ -21,7 +21,6 @@ public:
 protected:
 	std::shared_ptr<SkillEffect> GetUsableEffect(std::list<std::shared_ptr<SkillEffect>> _list);
 	void Start() override;
-	void Update(float _Delta) override;
 
 };
 
