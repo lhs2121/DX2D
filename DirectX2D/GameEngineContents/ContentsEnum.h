@@ -22,7 +22,8 @@ enum class ActorOrder
 	MapObject,
 	Skill,
 	Projectile,
-	Effect,
+	SkillEffect,
+	DamageEffect,
 	Manager,
 	UI
 };

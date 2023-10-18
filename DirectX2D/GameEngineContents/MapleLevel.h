@@ -30,7 +30,7 @@ public:
 	std::shared_ptr<class Player> CurPlayer;
 	std::shared_ptr<class MapleMap> CurMap;
 	std::shared_ptr<class BulletShooter> CurShooter;
-	std::shared_ptr<class EffectManager> CurEffectManager;
+	std::shared_ptr<class SkillEffctor> CurSkillEffctor;
 	std::shared_ptr<class StatusBar> CurStatusBar;
 	std::shared_ptr<class ExpBar> CurExpBar;
 

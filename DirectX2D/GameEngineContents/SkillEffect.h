@@ -1,18 +1,18 @@
 #pragma once
 #include <GameEngineCore\GameEngineActor.h>
 // Ό³Έν :
-class Effect : public GameEngineActor
+class SkillEffect : public GameEngineActor
 {
 public:
 	// constrcuter destructer
-	Effect();
-	~Effect();
+	SkillEffect();
+	~SkillEffect();
 
 	// delete Function
-	Effect(const Effect& _Other) = delete;
-	Effect(Effect&& _Other) noexcept = delete;
-	Effect& operator=(const Effect& _Other) = delete;
-	Effect& operator=(Effect&& _Other) noexcept = delete;
+	SkillEffect(const SkillEffect& _Other) = delete;
+	SkillEffect(SkillEffect&& _Other) noexcept = delete;
+	SkillEffect& operator=(const SkillEffect& _Other) = delete;
+	SkillEffect& operator=(SkillEffect&& _Other) noexcept = delete;
 
 
 	void ChangeAnimation(std::string _String);

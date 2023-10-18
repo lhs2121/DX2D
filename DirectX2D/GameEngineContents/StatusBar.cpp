@@ -34,7 +34,7 @@ void StatusBar::Start()
 		StatusCover->SetSprite("StatusCover.png");
 		StatusCover->SetRenderOrder(1);
 		StatusCover->SetPivotType(PivotType::Left);
-		StatusCover->Off();
+		//StatusCover->Off();
 		StatusCoverPos = StatusCover->Transform.GetLocalPosition();
 	}
 

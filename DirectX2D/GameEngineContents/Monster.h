@@ -18,8 +18,9 @@ public:
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
-
-	int hp;
+	void ColCheck();
+	int hp = 100.0f;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
+	std::shared_ptr<class DamageEffctor> MyDamageEffctor;
 };
 

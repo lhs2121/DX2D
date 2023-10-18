@@ -185,11 +185,13 @@
     <ClInclude Include="ProJectile.h" />
     <ClInclude Include="DebugUI.h" />
     <ClInclude Include="TitleLevel.h" />
-    <ClInclude Include="EffectManager.h" />
-    <ClInclude Include="Effect.h" />
+    <ClInclude Include="SkillEffctor.h" />
+    <ClInclude Include="SkillEffect.h" />
     <ClInclude Include="StatusBar.h" />
     <ClInclude Include="PlayerStat.h" />
     <ClInclude Include="StatManager.h" />
+    <ClInclude Include="DamageEffctor.h" />
+    <ClInclude Include="DamageEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HuntRegion.cpp" />
@@ -216,11 +218,13 @@
     <ClCompile Include="DebugUI.cpp" />
     <ClCompile Include="StatusBar.cpp" />
     <ClCompile Include="TitleLevel.cpp" />
-    <ClCompile Include="EffectManager.cpp" />
-    <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="SkillEffctor.cpp" />
+    <ClCompile Include="SkillEffect.cpp" />
     <ClCompile Include="ExpBar.cpp" />
     <ClCompile Include="PlayerStat.cpp" />
     <ClCompile Include="StatManager.cpp" />
+    <ClCompile Include="DamageEffctor.cpp" />
+    <ClCompile Include="DamageEffect.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

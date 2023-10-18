@@ -69,7 +69,7 @@ private:
 
 	float Speed = 150.0f;
 	float HitCoolTime = 2.0f;
-	float dir;
+	float dir = -1;
 
 	bool CanHit = true;
 	bool CanRope;
@@ -86,6 +86,7 @@ private:
 	int LuckySevenKey = VK_SHIFT;
 
 	float4 RopePos;
+	float4 RP;
 	PlayerState CurState;
 	PlayerDirState CurDirState;
 	std::string PrevLevelName;

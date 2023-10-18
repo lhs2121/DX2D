@@ -1,15 +1,15 @@
 #include "PreCompile.h"
-#include "Effect.h"
+#include "SkillEffect.h"
 
-Effect::Effect()
+SkillEffect::SkillEffect()
 {
 }
 
-Effect::~Effect()
+SkillEffect::~SkillEffect()
 {
 }
 
-void Effect::FlipX(int _dir)
+void SkillEffect::FlipX(int _dir)
 {
 	if (_dir == 1)
 	{
@@ -22,17 +22,17 @@ void Effect::FlipX(int _dir)
 	
 }
 
-void Effect::ChangeAnimation(std::string _String)
+void SkillEffect::ChangeAnimation(std::string _String)
 {
 	Renderer->ChangeAnimation(_String);
 	Renderer->CurAnimation()->Reset();
 }
 
-void Effect::Start()
+void SkillEffect::Start()
 {
 	Renderer = CreateComponent<GameEngineSpriteRenderer>(0);
-	Renderer->SetRenderOrder(RenderOrder::Effect2);
-	Renderer->CreateAnimation("FlashJump", "FlashJump", 0.1f, 0, 9, false);
+	Renderer->SetRenderOrder(RenderOrder::Effect);
+	Renderer->CreateAnimation("FlashJump", "FlashJump", 0.1f, 0, 7, false);
 	Renderer->CreateAnimation("LuckySeven", "LuckySeven", 0.1f, 0, 6, false);
 	Renderer->CreateAnimation("HitSureken", "HitSureken", 0.1f, 0, 3, false);
 	Renderer->AutoSpriteSizeOn();
@@ -40,11 +40,10 @@ void Effect::Start()
 	Off();
 }
 
-void Effect::Update(float _Delta)
+void SkillEffect::Update(float _Delta)
 {
 	if (Renderer->IsCurAnimationEnd())
 	{
 		Off();
-		Renderer->CurAnimation()->Reset();
 	}
 }

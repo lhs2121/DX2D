@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include "BulletShooter.h"
-#include "EffectManager.h"
+#include "SkillEffctor.h"
 
 void Player::StateUpdate(float _Delta)
 {
@@ -94,7 +94,6 @@ void Player::RopeStart()
 	{
 		Transform.AddWorldPosition({ 0, 5 });
 	}
-
 	MainSpriteRenderer->ChangeAnimation("rope");
 	MainSpriteRenderer->AnimationPauseOn();
 }
@@ -105,7 +104,7 @@ void Player::FlashJumpStart()
 	ApplyInputRight = false;
 	NetForce.X = dir * 700.0f;
 	NetForce.Y += 100.0f;
-	EffectManager::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::FlashJump, dir);
+	SkillEffctor::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::FlashJump, dir);
 }
 
 void Player::LuckySevenStart()
@@ -121,8 +120,6 @@ void Player::HitStart()
 	ApplyInputLeft = false;
 	ApplyInputRight = false;
 
-	NetForce.X += -dir * 350.0f;
-	NetForce.Y += 100.0f;
 	MainSpriteRenderer->ChangeAnimation("hit");
 }
 
@@ -219,7 +216,7 @@ void Player::RopeUpdate(float _Delta)
 
 	if (InputIsPress(VK_UP))
 	{
-		Transform.AddLocalPosition({ 0, Speed * _Delta, 0 });
+		Transform.AddWorldPosition({ 0, Speed * _Delta});
 		MainSpriteRenderer->AnimationPauseOff();
 
 		GameEngineColor TopColor = GetColor(Transform.GetWorldPosition() + float4(0, 65));
@@ -234,7 +231,7 @@ void Player::RopeUpdate(float _Delta)
 	}
 	else if (InputIsPress(VK_DOWN))
 	{
-		Transform.AddLocalPosition({ 0,-Speed * _Delta, 0 });
+		Transform.AddWorldPosition({ 0,-Speed * _Delta, 0 });
 		MainSpriteRenderer->AnimationPauseOff();
 
 		GameEngineColor TopColor = GetColor(Transform.GetWorldPosition() + float4(0, 65));
@@ -316,7 +313,7 @@ void Player::LuckySevenUpdate(float _Delta)
 	if (MainSpriteRenderer->GetCurIndex() == 2 && BulletShooter::Inst->IsUpdate() == false)
 	{
 		BulletShooter::Inst->On();
-		EffectManager::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::LuckySeven, dir);
+		SkillEffctor::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::LuckySeven, dir);
 	}
 	if (MainSpriteRenderer->IsCurAnimationEnd() == true)
 	{
@@ -347,12 +344,12 @@ void Player::FlashJumpUpdate(float _Delta)
 
 	if (InputIsDown(JumpKey) && DoubleJump == false)
 	{
-		EffectManager::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::FlashJump, dir);
+		SkillEffctor::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::FlashJump, dir);
 		NetForce.X = dir * 700.0f;
 		NetForce.Y += 100.0f;
 		DoubleJump = true;
 	}
-	else if (InputIsPress(VK_UP) && CanRope == true)
+	if (InputIsPress(VK_UP) && CanRope == true)
 	{
 		ChangeState(PlayerState::ROPE);
 	}
