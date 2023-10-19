@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-
+std::function<LRESULT(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)> GameEngineWindow::MsgFunction;
 HINSTANCE GameEngineWindow::Instance = nullptr;
 bool GameEngineWindow::IsWindowUpdate = true;
 bool GameEngineWindow::IsFocusValue = false;

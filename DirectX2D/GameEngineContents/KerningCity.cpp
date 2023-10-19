@@ -13,6 +13,8 @@ KerningCity::~KerningCity()
 
 void KerningCity::Start()
 {
+	GameEngineGUI::CreateGUIWindow<TestGUIWindow>("Test");
+
 	MapleLevel::Start();
 	{
 		CurMap = CreateActor<Map0>(ActorOrder::Map);
