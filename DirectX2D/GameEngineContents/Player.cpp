@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Portal.h"
 #include "MapleLevel.h"
+#include "StatData.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -67,6 +68,10 @@ void Player::Start()
 		Col->Transform.AddLocalPosition({ 0,35 });
 	}
 
+	//stat
+	{
+		PlayerStat = GetLevel()->CreateActor<PlayerStatData>(2);
+	}
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	Transform.SetLocalPosition({ 500, -900, 0.0f });
@@ -75,7 +80,7 @@ void Player::Start()
 	//	GetLevel()->GetMainCamera()->CameraTargetSetting(Transform, float4::BACKWARD * 500.0f);
 
 	ChangeDirState(PlayerDirState::LEFT);
-	ChangeState(PlayerState::IDLE);
+	ChangeState(StatDatae::IDLE);
 }
 
 void Player::FlipRenderer()

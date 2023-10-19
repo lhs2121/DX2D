@@ -25,6 +25,8 @@ enum class ActorOrder
 	SkillEffect,
 	DamageEffect,
 	Manager,
+	PlayerStat,
+	MonsterStat,
 	UI
 };
 
@@ -37,7 +39,7 @@ enum class CollisionOrder
 	Portal
 };
 
-enum class PlayerState
+enum class StatDatae
 {
 	IDLE,
 	WALK,

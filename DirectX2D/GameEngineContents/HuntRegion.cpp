@@ -3,7 +3,7 @@
 #include "Map1.h"
 #include "Monster.h"
 #include "ExpBar.h"
-#include "PlayerStat.h"
+#include "StatData.h"
 HuntRegion::HuntRegion()
 {
 }

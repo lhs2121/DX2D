@@ -22,7 +22,10 @@ public:
 	}
 
 	static Player* MainPlayer;
-
+	std::shared_ptr<class PlayerStatData> GetStat()
+	{
+		return PlayerStat;
+	}
 private:
 	void FlipRenderer();
 	void CameraFocus();
@@ -60,7 +63,7 @@ private:
 	{
 		CurDirState = _State;
 	}
-	void ChangeState(PlayerState _State);
+	void ChangeState(StatDatae _State);
 
 	void Start() override;
 	void Update(float _Delta) override;
@@ -89,7 +92,7 @@ private:
 
 	float4 RopePos;
 	float4 RP;
-	PlayerState CurState;
+	StatDatae CurState;
 	PlayerDirState CurDirState;
 	std::string PrevLevelName;
 	std::shared_ptr<GameEngineCollision> Col;
@@ -97,5 +100,6 @@ private:
 	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer0;
 	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer1;
 	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer2;
+	std::shared_ptr<class PlayerStatData> PlayerStat;
 };
 

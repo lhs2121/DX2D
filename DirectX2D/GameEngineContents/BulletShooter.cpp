@@ -2,6 +2,7 @@
 #include "BulletShooter.h"
 #include "ProJectile.h"
 #include "Player.h"
+#include "StatManager.h"
 
 BulletShooter* BulletShooter::Inst = nullptr;
 
@@ -48,7 +49,7 @@ void BulletShooter::Update(float _Delta)
 			FirstBullet = Bullet3;
 			SecondBullet = Bullet4;
 			BulletSetting();
-			FirstBullet->On();
+			FirstBullet->StartFire();
 		}
 		InterTime = MaxInterTime;
 		CoolTime = MaxCoolTime;
@@ -82,11 +83,13 @@ void BulletShooter::BulletSetting()
 	FirstBullet->SetDir(Player::MainPlayer->GetDir());
 	FirstBullet->SetCoolTime(BulletCoolTime);
 	FirstBullet->SetSpeed(BulletSpeed);
+	StatManager::Inst->SetDamage(Player::MainPlayer->GetStat().get(), FirstBullet->GetDynamic_Cast_This<DamageActor>().get());
 
 	SecondBullet->Transform.SetWorldPosition(GetBulletPos(BulletPosOffset2));
 	SecondBullet->SetDir(FirstBullet->GetDir());
 	SecondBullet->SetCoolTime(BulletCoolTime);
 	SecondBullet->SetSpeed(BulletSpeed);
+	StatManager::Inst->SetDamage(Player::MainPlayer->GetStat().get(), SecondBullet->GetDynamic_Cast_This<DamageActor>().get());
 }
 
 

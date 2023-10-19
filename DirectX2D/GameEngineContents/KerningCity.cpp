@@ -1,10 +1,7 @@
 #include "PreCompile.h"
 #include "KerningCity.h"
 #include "Map0.h"
-#include "Portal.h"
-#include "PlayerStat.h"
 #include "Monster.h"
-#include "DamageEffectController.h"
 
 KerningCity::KerningCity() 
 {
@@ -23,7 +20,6 @@ void KerningCity::Start()
 	}
 	{
 		CreateActor<Monster>(ActorOrder::Monster);
-		CurDamageEffectController = CreateActor<DamageEffectController>(ActorOrder::Manager);
 	}
 }
 
@@ -31,14 +27,7 @@ void KerningCity::Update(float _Delta)
 {
 	MapleLevel::Update(_Delta);
 
-	if (InputIsDown('N'))
-	{
-		this;
-		std::random_device rnd;
-		GameEngineRandom rd = GameEngineRandom();
-		rd.SetSeed(rnd());
-		CurDamageEffectController->StartEffect({ 500, -1100 }, rd.RandomFloat(9999999, 99999999));
-	}
+	
 }
 
 void KerningCity::LevelStart(GameEngineLevel* _PrevLevel)

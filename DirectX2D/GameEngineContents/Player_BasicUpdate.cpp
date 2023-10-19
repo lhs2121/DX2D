@@ -91,11 +91,11 @@ void Player::MoveUpdate()
 
 	if (ApplyInputJump == true)
 	{
-		if (InputIsDown(VK_MENU) && IsGrounded == true && CurState != PlayerState::DOWN)
+		if (InputIsDown(VK_MENU) && IsGrounded == true && CurState != StatDatae::DOWN)
 		{
 			NetForce.Y = 300.0f;
 		}
-		else if (InputIsDown(VK_MENU) && CurState == PlayerState::DOWN)
+		else if (InputIsDown(VK_MENU) && CurState == StatDatae::DOWN)
 		{
 			if (GetColor(Transform.GetWorldPosition() + float4(0, -5)) == GameEngineColor::RED)
 			{
@@ -164,7 +164,7 @@ void Player::ColCheck(float _Delta)
 
 	Event.Enter = [&](GameEngineCollision*, GameEngineCollision* Col)
 		{
-			StatManager::Inst->ChangeHp(-5.0f);
+			//StatManager::Inst->ChangeHp(-5.0f);
 			CanHit = false;
 		};
 	Event.Stay = [](GameEngineCollision*, GameEngineCollision* Col)

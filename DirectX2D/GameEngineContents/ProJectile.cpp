@@ -2,7 +2,7 @@
 #include "ProJectile.h"
 #include "Player.h"
 #include "SkillEffctor.h"
-
+#include "StatManager.h"
 ProJectile::ProJectile()
 {
 }

@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="Monster.h">
-      <Filter>Actor\Players</Filter>
+    <ClInclude Include="MonsterBase.h">
+      <Filter>Actor\PlayActor</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Actor\Players</Filter>
+      <Filter>Actor\PlayActor</Filter>
     </ClInclude>
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="ContentsCore.h" />
@@ -22,7 +22,7 @@
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsActor.h">
-      <Filter>Actor\Players</Filter>
+      <Filter>Actor\PlayActor</Filter>
     </ClInclude>
     <ClInclude Include="MapleLevel.h">
       <Filter>Level</Filter>
@@ -60,31 +60,34 @@
     <ClInclude Include="HuntRegion.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerStat.h">
-      <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="StatManager.h">
-      <Filter>Global</Filter>
-    </ClInclude>
     <ClInclude Include="DamageEffectController.h">
       <Filter>Actor\Effect</Filter>
     </ClInclude>
     <ClInclude Include="DamageEffect.h">
       <Filter>Actor\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="CombatActor.h">
-      <Filter>Actor\Players</Filter>
+    <ClInclude Include="StatData.h">
+      <Filter>Actor\Stat</Filter>
+    </ClInclude>
+    <ClInclude Include="StatManager.h">
+      <Filter>Actor\Stat</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageActor.h">
+      <Filter>Actor\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Actor\PlayActor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Actor\Players</Filter>
+    <ClCompile Include="MonsterBase.cpp">
+      <Filter>Actor\PlayActor</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Actor\Players</Filter>
+      <Filter>Actor\PlayActor</Filter>
     </ClCompile>
     <ClCompile Include="Player_StateUpdate.cpp">
-      <Filter>Actor\Players</Filter>
+      <Filter>Actor\PlayActor</Filter>
     </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="PreCompile.cpp" />
@@ -98,7 +101,7 @@
       <Filter>Actor\UI</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsActor.cpp">
-      <Filter>Actor\Players</Filter>
+      <Filter>Actor\PlayActor</Filter>
     </ClCompile>
     <ClCompile Include="MapleLevel.cpp">
       <Filter>Level</Filter>
@@ -136,14 +139,8 @@
     <ClCompile Include="HuntRegion.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerStat.cpp">
-      <Filter>Global</Filter>
-    </ClCompile>
-    <ClCompile Include="StatManager.cpp">
-      <Filter>Global</Filter>
-    </ClCompile>
     <ClCompile Include="Player_BasicUpdate.cpp">
-      <Filter>Actor\Players</Filter>
+      <Filter>Actor\PlayActor</Filter>
     </ClCompile>
     <ClCompile Include="DamageEffectController.cpp">
       <Filter>Actor\Effect</Filter>
@@ -151,8 +148,17 @@
     <ClCompile Include="DamageEffect.cpp">
       <Filter>Actor\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="CombatActor.cpp">
-      <Filter>Actor\Players</Filter>
+    <ClCompile Include="StatData.cpp">
+      <Filter>Actor\Stat</Filter>
+    </ClCompile>
+    <ClCompile Include="StatManager.cpp">
+      <Filter>Actor\Stat</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageActor.cpp">
+      <Filter>Actor\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Actor\PlayActor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -165,9 +171,6 @@
     <Filter Include="Actor\Maps">
       <UniqueIdentifier>{94bd9443-64fa-4f06-a71d-38a5c678fd3e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Players">
-      <UniqueIdentifier>{29ab7583-6138-44c2-a108-fb12dfbb790e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\Skills">
       <UniqueIdentifier>{318905c5-b0e4-404b-af05-bd237f99902d}</UniqueIdentifier>
     </Filter>
@@ -179,6 +182,12 @@
     </Filter>
     <Filter Include="Global">
       <UniqueIdentifier>{7c8ebcee-870d-45b9-8acd-4a2c36871a8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Stat">
+      <UniqueIdentifier>{ed0790f9-d916-4b86-95d2-c43a2c0f3523}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\PlayActor">
+      <UniqueIdentifier>{29ab7583-6138-44c2-a108-fb12dfbb790e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

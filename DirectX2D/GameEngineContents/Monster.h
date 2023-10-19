@@ -1,8 +1,8 @@
 #pragma once
-#include "CombatActor.h"
+#include "MonsterBase.h"
 
 // Ό³Έν :
-class Monster : public CombatActor
+class Monster : public MonsterBase
 {
 public:
 	// constrcuter destructer
@@ -20,6 +20,5 @@ protected:
 	void Update(float _Delta) override;
 
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
-	
 };
 

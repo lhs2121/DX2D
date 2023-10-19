@@ -1,8 +1,7 @@
 #pragma once
-#include <GameEngineCore/GameEngineActor.h>
-
+#include "DamageActor.h"
 // Ό³Έν :
-class ProJectile : public GameEngineActor
+class ProJectile : public DamageActor
 {
 public:
 	// constrcuter destructer

@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "TitleLevel.h"
-#include "PlayerStat.h"
+#include "StatData.h"
 #include "StatManager.h"
 
 TitleLevel::TitleLevel() 
@@ -45,7 +45,6 @@ void TitleLevel::Start()
 	GameEngineSprite::CreateSingle("MainBossUI.png");
 
 	{
-		CreateActor<PlayerStat>(ActorOrder::Manager);
 		CreateActor<StatManager>(ActorOrder::Manager);
 	}
 	

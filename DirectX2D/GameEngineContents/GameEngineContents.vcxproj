@@ -168,12 +168,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="DamageActor.h" />
     <ClInclude Include="ExpBar.h" />
     <ClInclude Include="HuntRegion.h" />
     <ClInclude Include="KerningCity.h" />
     <ClInclude Include="Map0.h" />
     <ClInclude Include="ContentsCore.h" />
-    <ClInclude Include="Monster.h" />
+    <ClInclude Include="MonsterBase.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="PhysicsActor.h" />
@@ -188,11 +189,11 @@
     <ClInclude Include="SkillEffctor.h" />
     <ClInclude Include="SkillEffect.h" />
     <ClInclude Include="StatusBar.h" />
-    <ClInclude Include="PlayerStat.h" />
+    <ClInclude Include="StatData.h" />
     <ClInclude Include="StatManager.h" />
     <ClInclude Include="DamageEffectController.h" />
     <ClInclude Include="DamageEffect.h" />
-    <ClInclude Include="CombatActor.h" />
+    <ClInclude Include="Monster.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HuntRegion.cpp" />
@@ -211,7 +212,7 @@
     <ClCompile Include="Player_StateUpdate.cpp" />
     <ClCompile Include="PhysicsActor.cpp" />
     <ClCompile Include="Portal.cpp" />
-    <ClCompile Include="Monster.cpp" />
+    <ClCompile Include="MonsterBase.cpp" />
     <ClCompile Include="MapleMap.cpp" />
     <ClCompile Include="Map1.cpp" />
     <ClCompile Include="BulletShooter.cpp" />
@@ -222,11 +223,12 @@
     <ClCompile Include="SkillEffctor.cpp" />
     <ClCompile Include="SkillEffect.cpp" />
     <ClCompile Include="ExpBar.cpp" />
-    <ClCompile Include="PlayerStat.cpp" />
+    <ClCompile Include="StatData.cpp" />
     <ClCompile Include="StatManager.cpp" />
     <ClCompile Include="DamageEffectController.cpp" />
     <ClCompile Include="DamageEffect.cpp" />
-    <ClCompile Include="CombatActor.cpp" />
+    <ClCompile Include="DamageActor.cpp" />
+    <ClCompile Include="Monster.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

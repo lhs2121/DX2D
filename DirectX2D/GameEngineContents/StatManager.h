@@ -1,6 +1,10 @@
 #pragma once
 #include <GameEngineCore\GameEngineActor.h>
 
+class StatData;
+class MonsterStatData;
+class PlayerStatData;
+class DamageActor;
 class StatManager : public GameEngineActor
 {
 public:
@@ -16,18 +20,13 @@ public:
 
 	static StatManager* Inst;
 
-	void ChangeHp(float _HpValue);
-	void ChangeMp(float _MpValue);
-	void ChangeExp(float _ExpValue);
+	float GetDamage(GameEngineCollision* _Col);
+	void SetDamage(PlayerStatData* _StatData,DamageActor* _Weapon);
+	void ChangeHp(MonsterStatData* _StatData, float _HpValue);
+	void ChangeHp(StatData* _StatData,float _HpValue);
+	void ChangeMp(PlayerStatData* _StatData,float _MpValue);
+	void ChangeExp(PlayerStatData* _StatData,float _ExpValue);
 private:
 	void Start() override;
 	void Update(float _Delta) override;
-
-	
-
-	std::shared_ptr<class Player> Player;
-	std::shared_ptr<class PlayerStat> Stat;
-	std::shared_ptr<class StatusBar> StatusBar;
-	std::shared_ptr<class ExpBar> ExpBar;
-
 };
