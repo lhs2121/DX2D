@@ -21,6 +21,7 @@ protected:
 	void Hit();
 	void Die();
 
+	float4 ImageSize;
 	CollisionOrder EnemyColOrder = CollisionOrder::PlayerWeapon;
 	std::shared_ptr<class DamageEffectController> HitDmgEffController;
 	std::shared_ptr<class GameEngineCollision> Col;

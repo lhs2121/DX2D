@@ -19,6 +19,11 @@ void Monster::Start()
 		Renderer->SetPivotType(PivotType::Bottom);
 		Renderer->SetRenderOrder(RenderOrder::Monster);
 		Renderer->AutoSpriteSizeOn();
+		Renderer->SetAutoScaleRatio(1);
+		ImageSize = Renderer->GetCurSprite().Texture->GetScale();
+		Col->Transform.SetLocalScale(ImageSize);
+		Col->Transform.SetLocalPosition({ 0,ImageSize.hY() });
+		int a = 0;
 	}
 }
 void Monster::Update(float _Delta)

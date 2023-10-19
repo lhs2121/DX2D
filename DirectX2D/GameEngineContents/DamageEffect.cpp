@@ -9,20 +9,42 @@ DamageEffect::~DamageEffect()
 {
 }
 
-void DamageEffect::SetNumber(int _Value)
+void DamageEffect::SetNumber(int RendererNumber,int _Value)
 {
-	Renderer->SetSprite("AtkDmg", _Value);
+	if (RendererNumber > RendererSize - 1)
+	{
+		std::shared_ptr <GameEngineSpriteRenderer> NewRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
+		NewRenderer->SetRenderOrder(RenderOrder::Effect2);
+		NewRenderer->Off();
+		RendererGroup.push_back(NewRenderer);
+		RendererSize++;
+	}
+	RendererGroup[RendererNumber]->SetSprite("AtkDmg", _Value);
+	RendererGroup[RendererNumber]->On();
 }
 
-void DamageEffect::MovePos(float4 _Pos)
+void DamageEffect::MoveRendererPos(int RendererNumber, float4 _Pos)
 {
-	Renderer->Transform.AddLocalPosition(_Pos);
+	RendererGroup[RendererNumber]->Transform.AddLocalPosition(_Pos);
+}
+
+void DamageEffect::SetRenderOrder(int RendererNumber, int _Order)
+{
+	RendererGroup[RendererNumber]->SetRenderOrder(_Order);
+	CurOrder = _Order;
 }
 
 void DamageEffect::Start()
 {
-	Renderer = CreateComponent<GameEngineSpriteRenderer>(0);
-	Renderer->SetRenderOrder(RenderOrder::Effect2);
+	RendererGroup.reserve(RendererSize);
+	for (size_t i = 0; i < RendererSize; i++)
+	{
+		std::shared_ptr <GameEngineSpriteRenderer> NewRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
+		NewRenderer->SetRenderOrder(RenderOrder::Effect2);
+		NewRenderer->Off();
+		RendererGroup.push_back(NewRenderer);
+	}
+	
 	Off();
 }
 
@@ -35,9 +57,15 @@ void DamageEffect::StartEffect()
 void DamageEffect::EndEffect()
 {
 	Off();
-	Renderer->SetRenderOrder(RenderOrder::Effect2);
+	for (size_t i = 0; i < RendererSize; i++)
+	{
+		RendererGroup[i]->Off();
+		RendererGroup[i]->Transform.SetLocalPosition({ 0.0f,0.0f });
+		RendererGroup[i]->SetRenderOrder(RenderOrder::Effect2);
+	}
+	
 	CurOrder = int(RenderOrder::Effect2);
-	Renderer->Transform.SetLocalPosition({ 0.0f,0.0f });
+	Transform.SetLocalPosition({ 0.0f,0.0f });
 }
 
 void DamageEffect::Update(float _Delta)
@@ -47,6 +75,6 @@ void DamageEffect::Update(float _Delta)
 	{
 		EndEffect();
 	}
-	Renderer->Transform.AddLocalPosition(float4::UP * _Delta * 20.0f);
+	Transform.AddLocalPosition(float4::UP * _Delta * 20.0f);
 }
 

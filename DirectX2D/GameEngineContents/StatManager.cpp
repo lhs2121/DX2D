@@ -53,7 +53,7 @@ void StatManager::ChangeHp(MonsterStatData* _StatData, float _HpValue)
 	_StatData->CurHp += _HpValue;
 }
 
-void StatManager::ChangeHp(StatData* _StatData, float _HpValue)
+void StatManager::ChangeHp(PlayerStatData* _StatData, float _HpValue)
 {
 	_StatData->CurHp += _HpValue;
 
@@ -62,9 +62,9 @@ void StatManager::ChangeHp(StatData* _StatData, float _HpValue)
 	float ConvertedHp = _HpValue * (GaugeSizeX / MaxHp);
 	StatusBar::Inst->ChangeHpGauge(ConvertedHp);
 
-	if (_StatData->CurHp <= 0)
+	if (_StatData->CurHp <= 0.0f)
 	{
-		//this->Death();
+		int a = 0;
 	}
 	if (_StatData->CurHp >= _StatData->MaxHp)
 	{

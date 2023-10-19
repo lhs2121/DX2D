@@ -22,8 +22,6 @@ void MonsterBase::Start()
 	{
 		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Monster);
 		Col->SetCollisionType(ColType::AABBBOX2D);
-		Col->Transform.SetLocalScale({ 50,50 });
-		Col->Transform.SetLocalPosition({ 0,50 });
 	}
 
 	{
@@ -44,9 +42,10 @@ void MonsterBase::Hit()
 
 	Event.Enter = [&](GameEngineCollision*, GameEngineCollision* Col2)
 		{
+			Col2->GetParentObject()->Off();
 			float Dmg = StatManager::Inst->GetDamage(Col2);
 			StatManager::Inst->ChangeHp(MonsterStat.get(), -Dmg);
-			HitDmgEffController->StartEffect(Transform.GetWorldPosition() + float4(-70.0f, 70.0f), Dmg);
+			HitDmgEffController->StartEffect(Transform.GetWorldPosition() + float4(0,ImageSize.Y * 3/4), Dmg);
 		};
 	Event.Stay = [](GameEngineCollision*, GameEngineCollision* Col2)
 		{
@@ -60,9 +59,6 @@ void MonsterBase::Hit()
 
 void MonsterBase::Die()
 {
-	if(MonsterStat->CurHp < 0)
-	{
-		Death();
-	}
+
 }
 

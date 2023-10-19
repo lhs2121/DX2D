@@ -1,36 +1,7 @@
 #pragma once
 #include <GameEngineCore\GameEngineActor.h>
 
-class StatData : public GameEngineActor
-{
-	friend class StatManager;
-public:
-	// constrcuter destructer
-	StatData();
-	~StatData();
-
-	// delete Function
-	StatData(const StatData& _Other) = delete;
-	StatData(StatData&& _Other) noexcept = delete;
-	StatData& operator=(const StatData& _Other) = delete;
-	StatData& operator=(StatData&& _Other) noexcept = delete;
-
-	void Start() override;
-	void Update(float _Delta) override;
-	void LevelStart(GameEngineLevel* _PrevLevel) override;
-	void LevelEnd(GameEngineLevel* _NextLevel) override;
-
-protected:
-	float CurHp = 30100.0f;
-	float MaxHp = 30100.0f;
-
-	float DEF;
-
-private:
-
-};
-
-class MonsterStatData : public StatData
+class MonsterStatData :public GameEngineActor
 {
 	friend class MonsterBase;
 	friend class StatManager;
@@ -46,10 +17,13 @@ public:
 	MonsterStatData& operator=(MonsterStatData&& _Other) noexcept = delete;
 
 private:
+	float CurHp = 100.0f;
+	float MaxHp = 100.0f;
+
 	float DefRate = 50;
 };
 
-class PlayerStatData : public StatData
+class PlayerStatData : public GameEngineActor
 {
 	friend class Player;
 	friend class StatManager;
@@ -65,6 +39,9 @@ public:
 	PlayerStatData& operator=(PlayerStatData&& _Other) noexcept = delete;
 
 private:
+	float CurHp = 100.0f;
+	float MaxHp = 100.0f;
+
 	float CurMp = 100.0f;
 	float MaxMp = 100.0f;
 

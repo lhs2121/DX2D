@@ -164,7 +164,7 @@ void Player::ColCheck(float _Delta)
 
 	Event.Enter = [&](GameEngineCollision*, GameEngineCollision* Col)
 		{
-			//StatManager::Inst->ChangeHp(-5.0f);
+			StatManager::Inst->ChangeHp(PlayerStat.get(), -50.0f);
 			CanHit = false;
 		};
 	Event.Stay = [](GameEngineCollision*, GameEngineCollision* Col)

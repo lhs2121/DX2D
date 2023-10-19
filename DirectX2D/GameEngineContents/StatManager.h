@@ -23,7 +23,7 @@ public:
 	float GetDamage(GameEngineCollision* _Col);
 	void SetDamage(PlayerStatData* _StatData,DamageActor* _Weapon);
 	void ChangeHp(MonsterStatData* _StatData, float _HpValue);
-	void ChangeHp(StatData* _StatData,float _HpValue);
+	void ChangeHp(PlayerStatData* _StatData,float _HpValue);
 	void ChangeMp(PlayerStatData* _StatData,float _MpValue);
 	void ChangeExp(PlayerStatData* _StatData,float _ExpValue);
 private:

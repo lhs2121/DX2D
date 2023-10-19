@@ -17,49 +17,50 @@ void DamageEffectController::StartEffect(float4 _Pos, float _DamageValue)
 	float4 SpawnPos = GetSpawnPos(_Pos);
 
 	PrevSpawnPos = _Pos;
-	
-    std::vector<int> NewArray = GetIntArray(_DamageValue); 
 
-    std::list<std::shared_ptr<DamageEffect>> list;
+	std::vector<int> NewArray = GetIntArray(_DamageValue);
 
-    list = GetLevel()->GetObjectGroupConvert<DamageEffect>(ActorOrder::DamageEffect);
+	std::list<std::shared_ptr<DamageEffect>> list;
+
+	list = GetLevel()->GetObjectGroupConvert<DamageEffect>(ActorOrder::DamageEffect);
+
+	std::shared_ptr<DamageEffect> NewEffect = GetUsableEffect(list);
+
+	NewEffect->Transform.SetWorldPosition(SpawnPos);
 
 	for (int i = 0; i < NewArray.size(); i++)
 	{
-		std::shared_ptr<DamageEffect> NewEffect = GetUsableEffect(list);
 
-		float4 NextPos;
+		NewEffect->SetNumber(i, NewArray[i]);
+
+		float4 RendererOffset;
 
 		if (i % 2 == 0)
 		{
-			NextPos = { 20.0f * i, 0.0f };
+			RendererOffset = { 20.0f * i, 0.0f };
 		}
 		else
 		{
-			NextPos = { 20.0f * i, -3.0f };
+			RendererOffset = { 20.0f * i, -3.0f };
 		}
 
-		NewEffect->Transform.SetWorldPosition(SpawnPos);
-
-		NewEffect->MovePos(NextPos);
+		NewEffect->MoveRendererPos(i, RendererOffset);
 
 		if (PrevEffect != nullptr)
 		{
 			int order = PrevEffect->CurOrder + 1;
-			NewEffect->SetRenderOrder(order);
+			NewEffect->SetRenderOrder(i, order);
 		}
 		else
 		{
 			int order = int(RenderOrder::Effect2);
-			NewEffect->SetRenderOrder(order);
+			NewEffect->SetRenderOrder(i, order);
 		}
-
-		NewEffect->SetNumber(NewArray[i]);
-
-		NewEffect->StartEffect();
-
-		PrevEffect = NewEffect;
 	}
+	NewEffect->Transform.AddWorldPosition({ -8.0f * NewArray.size() -1,0 });
+	NewEffect->StartEffect();
+
+	PrevEffect = NewEffect;
 
 }
 
@@ -84,7 +85,7 @@ float4 DamageEffectController::GetSpawnPos(float4 _Pos)
 	float4 StartPos;
 	StartPos = (PrevEffect != nullptr) ? PrevSpawnPos : _Pos;
 	float4 OffsetY = float4(0.0f, 30.0f * CurStack);
-	float RandomOffset = GameEngineRandom::GameEngineRandom().RandomFloat(-10, 10);
+	float RandomOffset = GameEngineRandom::GameEngineRandom().RandomFloat(-5, 5);
 	float4 SpawnPos = StartPos + OffsetY + RandomOffset;
 	return SpawnPos;
 }
@@ -131,9 +132,6 @@ std::shared_ptr<DamageEffect> DamageEffectController::GetUsableEffect(std::list<
 
 void DamageEffectController::Start()
 {
-	for (int i = 0; i < 1; i++)
-	{
-		GetLevel()->CreateActor<DamageEffect>(ActorOrder::DamageEffect);
-	}
+
 
 }
