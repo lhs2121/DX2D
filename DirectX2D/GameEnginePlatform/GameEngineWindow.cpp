@@ -3,7 +3,6 @@
 #include <GameEngineBase/GameEngineDebug.h>
 #include <iostream>
 
-
 std::function<LRESULT(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)> GameEngineWindow::MsgFunction;
 HINSTANCE GameEngineWindow::Instance = nullptr;
 bool GameEngineWindow::IsWindowUpdate = true;
@@ -107,6 +106,13 @@ void GameEngineWindow::InitInstance()
 
 LRESULT CALLBACK GameEngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	// 뭔가 니가 처리하기전에
+	if (nullptr != MsgFunction)
+	{
+		if (MsgFunction(hWnd, message, wParam, lParam))
+			return true;
+	}
+
 	switch (message)
 	{
 	case WM_SYSKEYDOWN:

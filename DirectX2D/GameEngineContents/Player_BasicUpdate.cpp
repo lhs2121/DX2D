@@ -172,13 +172,61 @@ void Player::ColCheck(float _Delta)
 		};
 	Event.Exit = [](GameEngineCollision*, GameEngineCollision* Col)
 		{
-		
+
 		};
 	Col->CollisionEvent(CollisionOrder::Monster, Event);
 }
 
 void Player::CameraFocus()
 {
-	float4 Pos = Transform.GetWorldPosition();
-	GetLevel()->GetMainCamera()->Transform.SetWorldPosition({ Pos.X, Pos.Y,GetLevel()->GetMainCamera()->Transform.GetWorldPosition().Z });
+	float4 PlayerPos = Transform.GetWorldPosition();
+	float4 CameraPos = GetLevel()->GetMainCamera()->Transform.GetWorldPosition();
+
+	if (PlayerPos.X - ContentsCore::GetStartWindowSize().hX() > 0 && PlayerPos.X + ContentsCore::GetStartWindowSize().hX() < MapleMap::CurMap->GetMapScale().X)
+	{
+		CameraPos.X = PlayerPos.X;
+	}
+	if (PlayerPos.Y - ContentsCore::GetStartWindowSize().hY() > -MapleMap::CurMap->GetMapScale().Y)
+	{
+		CameraPos.Y = PlayerPos.Y;
+	}
+
+	GetLevel()->GetMainCamera()->Transform.SetWorldPosition({ CameraPos.X ,CameraPos.Y,CameraPos.Z });
+
+	if (CameraPos.X - ContentsCore::GetStartWindowSize().hX() < 0)
+	{
+		while (true)
+		{
+			GetLevel()->GetMainCamera()->Transform.AddWorldPosition(float4::RIGHT * 100.0f);
+			float X = GetLevel()->GetMainCamera()->Transform.GetWorldPosition().X - ContentsCore::GetStartWindowSize().hX();
+			if (X >= 0)
+			{
+				break;
+			}
+		}
+	}
+	if (CameraPos.X + ContentsCore::GetStartWindowSize().hX() > MapleMap::CurMap->GetMapScale().X)
+	{
+		while (true)
+		{
+			GetLevel()->GetMainCamera()->Transform.AddWorldPosition(float4::LEFT * 100.0f);
+			float X = GetLevel()->GetMainCamera()->Transform.GetWorldPosition().X + ContentsCore::GetStartWindowSize().hX();
+			if (X <= MapleMap::CurMap->GetMapScale().X)
+			{
+				break;
+			}
+		}
+	}
+	if (CameraPos.Y - ContentsCore::GetStartWindowSize().hY() < -MapleMap::CurMap->GetMapScale().Y)
+	{
+		while (true)
+		{
+			GetLevel()->GetMainCamera()->Transform.AddWorldPosition(float4::UP * 100.0f);
+			float Y = GetLevel()->GetMainCamera()->Transform.GetWorldPosition().Y - ContentsCore::GetStartWindowSize().hY();
+			if (Y >= -MapleMap::CurMap->GetMapScale().Y)
+			{
+				break;
+			}
+		}
+	}
 }

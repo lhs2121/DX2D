@@ -78,6 +78,9 @@
     <ClInclude Include="Monster.h">
       <Filter>Actor\PlayActor</Filter>
     </ClInclude>
+    <ClInclude Include="FadeScreen.h">
+      <Filter>Actor\Maps</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MonsterBase.cpp">
@@ -159,6 +162,9 @@
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Actor\PlayActor</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeScreen.cpp">
+      <Filter>Actor\Maps</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

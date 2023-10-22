@@ -61,15 +61,6 @@ void StatManager::ChangeHp(PlayerStatData* _StatData, float _HpValue)
 	float GaugeSizeX = StatusBar::Inst->HpGaugeSizeX;
 	float ConvertedHp = _HpValue * (GaugeSizeX / MaxHp);
 	StatusBar::Inst->ChangeHpGauge(ConvertedHp);
-
-	if (_StatData->CurHp <= 0.0f)
-	{
-		int a = 0;
-	}
-	if (_StatData->CurHp >= _StatData->MaxHp)
-	{
-		_StatData->CurHp = _StatData->MaxHp;
-	}
 }
 
 void StatManager::ChangeMp(PlayerStatData* _StatData, float _MpValue)

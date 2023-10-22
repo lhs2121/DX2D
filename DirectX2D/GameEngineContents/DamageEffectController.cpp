@@ -14,7 +14,11 @@ DamageEffectController::~DamageEffectController()
 void DamageEffectController::StartEffect(float4 _Pos, float _DamageValue)
 {
 	CountStack();
-	float4 SpawnPos = GetSpawnPos(_Pos);
+
+	float4 StartPos;
+	float4 OffsetY = float4(0.0f, 30.0f * CurStack);
+	float RandomOffset = GameEngineRandom::GameEngineRandom().RandomFloat(-5, 5);
+	float4 SpawnPos = _Pos + OffsetY + RandomOffset;
 
 	PrevSpawnPos = _Pos;
 

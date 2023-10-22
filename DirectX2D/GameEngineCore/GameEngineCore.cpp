@@ -39,6 +39,7 @@ void GameEngineCore::Update()
 		if (nullptr != CurLevel)
 		{
 			CurLevel->AllLevelEnd(NextLevel.get());
+			CurLevel->AllReleaseCheck();
 		}
 
 		// NextLevel->OverCheck(CurLevel);
@@ -85,7 +86,7 @@ void GameEngineCore::Update()
 
 	CurLevel->Render(DeltaTime);
 
-	GameEngineGUI::GUIRender(DeltaTime);
+	GameEngineGUI::GUIRender(CurLevel.get(), DeltaTime);
 
 	MainDevice.RenderEnd();
 

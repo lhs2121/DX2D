@@ -1,18 +1,6 @@
 #pragma once
 #include "MapleLevel.h"
-#include <GameEngineCore/GameEngineGUI.h>
 
-class TestGUIWindow : public GameEngineGUIWindow
-{
-public:
-	virtual void Start() {
-
-	}
-	virtual void OnGUI(float _DeltaTime)
-	{
-
-	}
-};
 // Ό³Έν :
 class KerningCity : public MapleLevel
 {

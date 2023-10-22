@@ -70,11 +70,13 @@ void Player::Start()
 
 	//stat
 	{
-		PlayerStat = GetLevel()->CreateActor<PlayerStatData>(2);
+		PlayerStat = GetLevel()->CreateActor<PlayerStatData>(ActorOrder::PlayerStat);
 	}
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	Transform.SetLocalPosition({ 500, -900, 0.0f });
+	float4 PlayerPos = Transform.GetWorldPosition();
+	GetLevel()->GetMainCamera()->Transform.SetWorldPosition({ PlayerPos.X, PlayerPos.Y,GetLevel()->GetMainCamera()->Transform.GetWorldPosition().Z });
 
 	GameEngineInput::AddInputObject(this);
 	//	GetLevel()->GetMainCamera()->CameraTargetSetting(Transform, float4::BACKWARD * 500.0f);
