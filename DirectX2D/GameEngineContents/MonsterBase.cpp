@@ -20,8 +20,8 @@ void MonsterBase::Setting(std::string MonsterName)
 	DieAniName = MonsterName + "Die";
 
 	Renderer->CreateAnimation(IdleAniName, IdleAniName, 0.2f);
-	Renderer->CreateAnimation(HitAniName, IdleAniName, 0.2f);
-	Renderer->CreateAnimation(DieAniName, IdleAniName, 0.2f);
+	Renderer->CreateAnimation(HitAniName, HitAniName, 0.2f);
+	Renderer->CreateAnimation(DieAniName, DieAniName, 0.3f);
 	Renderer->ChangeAnimation(IdleAniName);
 	Renderer->AutoSpriteSizeOn();
 
@@ -29,6 +29,9 @@ void MonsterBase::Setting(std::string MonsterName)
 
 	Col->Transform.SetLocalScale(ImageSize);
 	Col->Transform.SetLocalPosition({ 0,ImageSize.hY() });
+
+	//TrackingCol->Transform.SetLocalScale({ ImageSize.X * 10,ImageSize.Y });
+	//TrackingCol->Transform.SetLocalPosition({ 0,ImageSize.hY() });
 }
 
 void MonsterBase::Start()
@@ -45,6 +48,11 @@ void MonsterBase::Start()
 		Col->SetCollisionType(ColType::AABBBOX2D);
 	}
 
+	//{
+	//	TrackingCol = CreateComponent<GameEngineCollision>(CollisionOrder::Monster);
+	//	TrackingCol->SetCollisionType(ColType::SPHERE2D);
+	//}
+
 	{
 		MonsterStat = GetLevel()->CreateActor<MonsterStatData>(ActorOrder::MonsterStat);
 	}
@@ -53,25 +61,36 @@ void MonsterBase::Start()
 
 void MonsterBase::Update(float _Delta)
 {
+	ColCheck();
+	
 	switch (CurState)
 	{
 	case MonsterState::HIT:
-		HitUpdate();
+		HitUpdate(_Delta);
 		break;
 	case MonsterState::RUN:
 		RunUpdate(_Delta);
 		break;
 	case MonsterState::DIE:
-		DieUpdate();
+		DieUpdate(_Delta);
 		break;
 	default:
 		break;
 	}
 }
 
+void MonsterBase::Release()
+{
+	HitDmgEffController->Death();
+	HitDmgEffController = nullptr;
+    MonsterStat->Death();
+	MonsterStat = nullptr;
+}
+
 void MonsterBase::ChangeState(MonsterState _State)
 {
-	switch (_State)
+	CurState = _State;
+	switch (CurState)
 	{
 	case MonsterState::HIT:
 		HitStart();
@@ -86,55 +105,6 @@ void MonsterBase::ChangeState(MonsterState _State)
 		break;
 	}
 }
-
-void MonsterBase::HitUpdate()
-{
-	if (MonsterStat->CurHp <= 0)
-	{
-		ChangeState(MonsterState::DIE);
-	}
-}
-
-void MonsterBase::DieUpdate()
-{
-	
-}
-
-void MonsterBase::RunUpdate(float _Delta)
-{
-	EventParameter Event;
-
-	Event.Enter = [&](GameEngineCollision*, GameEngineCollision* Col2)
-		{
-			Col2->GetParentObject()->Off();
-			float Dmg = StatManager::Inst->GetDamage(Col2);
-			StatManager::Inst->ChangeHp(MonsterStat.get(), -Dmg);
-			HitDmgEffController->StartEffect(Transform.GetWorldPosition() + float4(0, ImageSize.Y * 3 / 4), Dmg);
-		};
-	Event.Stay = [](GameEngineCollision*, GameEngineCollision* Col2)
-		{
-		};
-	Event.Exit = [](GameEngineCollision*, GameEngineCollision* Col2)
-		{
-
-		};
-	Col->CollisionEvent(EnemyColOrder, Event);
-
-	if (MonsterStat->CurHp <= 0)
-	{
-		ChangeState(MonsterState::DIE);
-	}
-
-	DirCycleTime -= _Delta;
-	if (DirCycleTime <= 0)
-	{
-		dir = GameEngineRandom::GameEngineRandom().RandomInt(-1, 1);
-		DirCycleTime = 2.0f;
-	}
-
-	Transform.AddWorldPosition(float4(1,0) * dir * Speed * _Delta);
-}
-
 void MonsterBase::HitStart()
 {
 	Renderer->ChangeAnimation(HitAniName);
@@ -147,5 +117,75 @@ void MonsterBase::RunStart()
 
 void MonsterBase::DieStart()
 {
+	StatManager::Inst->ChangeExp(Player::MainPlayer->GetStat().get(), 30.0f);
 	Renderer->ChangeAnimation(DieAniName);
 }
+
+void MonsterBase::HitUpdate(float _Delta)
+{
+	HitCoolTime -= _Delta;
+	if (HitCoolTime <= 0)
+	{
+		HitCoolTime = 1.0f;
+		ChangeState(MonsterState::RUN);
+	}
+	else if (MonsterStat->CurHp <= 0)
+	{
+		ChangeState(MonsterState::DIE);
+	}
+}
+
+void MonsterBase::DieUpdate(float _Delta)
+{
+	if (Renderer->GetCurIndex() == 1)
+	{
+		Col->Off();
+	}
+	if (Renderer->IsCurAnimationEnd())
+	{
+		Death();
+	}
+}
+
+void MonsterBase::RunUpdate(float _Delta)
+{
+	DirCycleTime -= _Delta;
+	if (DirCycleTime <= 0)
+	{
+		std::random_device rnd;
+		GameEngineRandom random = GameEngineRandom();
+		random.SetSeed(rnd());
+		dir = random.RandomInt(-1, 1);
+		DirCycleTime = 2.0f;
+	}
+
+	Transform.AddWorldPosition(float4(1,0) * dir * Speed * _Delta);
+}
+
+void MonsterBase::ColCheck()
+{
+	EventParameter Event;
+
+	Event.Enter = [&](GameEngineCollision*, GameEngineCollision* Col2)
+		{
+			Col2->GetParentObject()->Off();
+			float Dmg = StatManager::Inst->GetDamage(Col2);
+			HitDmgEffController->StartEffect(Transform.GetWorldPosition() + float4(0, ImageSize.Y * 3 / 4), Dmg);
+
+			if (CurState != MonsterState::DIE)
+			{
+				StatManager::Inst->ChangeHp(MonsterStat.get(), -Dmg);
+				ChangeState(MonsterState::HIT);
+			}
+			
+		};
+	Event.Stay = [](GameEngineCollision*, GameEngineCollision* Col2)
+		{
+		};
+	Event.Exit = [](GameEngineCollision*, GameEngineCollision* Col2)
+		{
+
+		};
+	Col->CollisionEvent(EnemyColOrder, Event);
+}
+

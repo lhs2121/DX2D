@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="MonsterBase.h">
-      <Filter>Actor\PlayActor</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Actor\PlayActor</Filter>
-    </ClInclude>
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="ContentsCore.h" />
     <ClInclude Include="BulletShooter.h">
@@ -22,7 +16,7 @@
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="PhysicsActor.h">
-      <Filter>Actor\PlayActor</Filter>
+      <Filter>Actor\Physics</Filter>
     </ClInclude>
     <ClInclude Include="MapleLevel.h">
       <Filter>Level</Filter>
@@ -75,23 +69,24 @@
     <ClInclude Include="DamageActor.h">
       <Filter>Actor\Skills</Filter>
     </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>Actor\PlayActor</Filter>
-    </ClInclude>
     <ClInclude Include="FadeScreen.h">
       <Filter>Actor\Maps</Filter>
     </ClInclude>
+    <ClInclude Include="ContentsControlWindow.h" />
+    <ClInclude Include="MonsterSpawner.h">
+      <Filter>Actor\Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Actor\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterBase.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MonsterBase.cpp">
-      <Filter>Actor\PlayActor</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Actor\PlayActor</Filter>
-    </ClCompile>
-    <ClCompile Include="Player_StateUpdate.cpp">
-      <Filter>Actor\PlayActor</Filter>
-    </ClCompile>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="PreCompile.cpp" />
     <ClCompile Include="BulletShooter.cpp">
@@ -104,7 +99,7 @@
       <Filter>Actor\UI</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsActor.cpp">
-      <Filter>Actor\PlayActor</Filter>
+      <Filter>Actor\Physics</Filter>
     </ClCompile>
     <ClCompile Include="MapleLevel.cpp">
       <Filter>Level</Filter>
@@ -142,9 +137,6 @@
     <ClCompile Include="HuntRegion.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="Player_BasicUpdate.cpp">
-      <Filter>Actor\PlayActor</Filter>
-    </ClCompile>
     <ClCompile Include="DamageEffectController.cpp">
       <Filter>Actor\Effect</Filter>
     </ClCompile>
@@ -160,11 +152,27 @@
     <ClCompile Include="DamageActor.cpp">
       <Filter>Actor\Skills</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Actor\PlayActor</Filter>
-    </ClCompile>
     <ClCompile Include="FadeScreen.cpp">
       <Filter>Actor\Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsControlWindow.cpp" />
+    <ClCompile Include="MonsterSpawner.cpp">
+      <Filter>Actor\Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_StateUpdate.cpp">
+      <Filter>Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_BasicUpdate.cpp">
+      <Filter>Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterBase.cpp">
+      <Filter>Actor\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -192,7 +200,13 @@
     <Filter Include="Actor\Stat">
       <UniqueIdentifier>{ed0790f9-d916-4b86-95d2-c43a2c0f3523}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\PlayActor">
+    <Filter Include="Actor\Player">
+      <UniqueIdentifier>{2e11f385-15c2-4d16-8f3b-cef3dd0869d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Monster">
+      <UniqueIdentifier>{9abb5b0b-6717-42a1-9620-a9283ab192cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Physics">
       <UniqueIdentifier>{29ab7583-6138-44c2-a108-fb12dfbb790e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

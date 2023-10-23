@@ -22,26 +22,30 @@ void TitleLevel::Start()
 
 		for (int i = 0; i < DirGroup.size(); i++)
 		{
-			if (DirGroup[i].GetAllFile().size() == 0)
-			{
-				continue;
-			}
             GameEngineSprite::CreateFolder(DirGroup[i].GetStringPath());
 		}
 	}
 	GameEngineSprite::CreateSingle("HpGauge.png");
 	GameEngineSprite::CreateSingle("MpGauge.png");
 	GameEngineSprite::CreateSingle("LvText.png");
+	GameEngineSprite::CreateSingle("StatusBG.png");
 	GameEngineSprite::CreateSingle("StatusCover.png");
 	GameEngineSprite::CreateSingle("QuickSlotBG.png");
 	GameEngineSprite::CreateSingle("QuickSlotCover.png");
 	GameEngineSprite::CreateSingle("QuickSlotExpandButton.png");
-	GameEngineSprite::CreateSingle("ExpBG.png");
-	GameEngineSprite::CreateSingle("ExpCover.png");
-	GameEngineSprite::CreateSingle("ExpCover2.png");
-	GameEngineSprite::CreateSingle("ExpCover3.png");
-	GameEngineSprite::CreateSingle("ExpGauge.png");
-	GameEngineSprite::CreateSingle("ExpEffect.png");
+
+	GameEngineSprite::CreateSingle("1366ExpCover.png");
+	GameEngineSprite::CreateSingle("1366ExpCover2.png");
+	GameEngineSprite::CreateSingle("1366ExpCover3.png");
+	GameEngineSprite::CreateSingle("1366ExpGauge.png");
+	GameEngineSprite::CreateSingle("1366ExpEffect.png");
+
+	GameEngineSprite::CreateSingle("1920ExpCover.png");
+	GameEngineSprite::CreateSingle("1920ExpCover2.png");
+	GameEngineSprite::CreateSingle("1920ExpCover3.png");
+	GameEngineSprite::CreateSingle("1920ExpGauge.png");
+	GameEngineSprite::CreateSingle("1920ExpEffect.png");
+
 	GameEngineSprite::CreateSingle("MainBossUI.png");
 
 	{

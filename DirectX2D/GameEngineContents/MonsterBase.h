@@ -25,16 +25,18 @@ public:
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
-
+	void Release() override;
 	void ChangeState(MonsterState _State);
 
 	void HitStart();
 	void RunStart();
 	void DieStart();
 
-	void HitUpdate();
-	void DieUpdate();
+	void HitUpdate(float _Delta);
+	void DieUpdate(float _Delta);
 	void RunUpdate(float _Delta);
+
+	void ColCheck();
 
 	std::string DieAniName;
 	std::string HitAniName;
@@ -42,14 +44,16 @@ protected:
 	std::string IdleAniName;
 	
 	MonsterState CurState = MonsterState::RUN;
+	float HitCoolTime = 1.0f;
 	float DirCycleTime = 2.0f;
-	float Speed = 30.0f;
+	float Speed = 60.0f;
 	int dir = 0;
 	float4 ImageSize;
 	CollisionOrder EnemyColOrder = CollisionOrder::PlayerWeapon;
 	std::shared_ptr<class DamageEffectController> HitDmgEffController;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
 	std::shared_ptr<class GameEngineCollision> Col;
+	std::shared_ptr<class GameEngineCollision> TrackingCol;
 	std::shared_ptr<class MonsterStatData> MonsterStat;
 	
 };

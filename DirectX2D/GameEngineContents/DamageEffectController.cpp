@@ -8,6 +8,7 @@ DamageEffectController::DamageEffectController()
 
 DamageEffectController::~DamageEffectController()
 {
+
 }
 
 

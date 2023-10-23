@@ -17,25 +17,27 @@ void ExpBar::Start()
 	float4 ExpBarPos = { -hSize.X,-hSize.Y + 5.0f };
 
 	ExpCover = CreateComponent<GameEngineUIRenderer>(0);
-	ExpCover->SetSprite("ExpCover.png");
-	ExpCover->SetRenderOrder(1);
+	ExpCover->SetRenderOrder(UIRenderOrder::PlayerUI);
 	ExpCover->SetPivotType(PivotType::Left);
 
 	ExpGauge = CreateComponent<GameEngineUIRenderer>(0);
-	ExpGauge->SetSprite("ExpGauge.png");
-	ExpGauge->SetRenderOrder(2);
+	ExpGauge->SetRenderOrder(UIRenderOrder::PlayerUI2);
 	ExpGauge->SetPivotType(PivotType::Left);
 
 	ExpCover2 = CreateComponent<GameEngineUIRenderer>(0);
-	ExpCover2->SetSprite("ExpCover2.png");
-	ExpCover2->SetRenderOrder(3);
+	ExpCover2->SetRenderOrder(UIRenderOrder::PlayerUI3);
 	ExpCover2->SetPivotType(PivotType::Left);
 
 	ExpCover3 = CreateComponent<GameEngineUIRenderer>(0);
-	ExpCover3->SetSprite("ExpCover3.png");
-	ExpCover3->SetRenderOrder(4);
+	ExpCover3->SetRenderOrder(UIRenderOrder::PlayerUI3);
 	ExpCover3->SetPivotType(PivotType::Left);
 
+	int a = ContentsCore::GetStartWindowSize().X;
+	std::string SizeX = std::to_string(a);
+	ExpCover->SetSprite(SizeX + "ExpCover.png");
+	ExpCover2->SetSprite(SizeX +"ExpCover2.png");
+	ExpCover3->SetSprite(SizeX +"ExpCover3.png");
+	ExpGauge->SetSprite(SizeX + "ExpGauge.png");
 
 	ExpCover->Transform.SetLocalPosition(ExpBarPos);
 	ExpCover2->Transform.SetLocalPosition(ExpBarPos);
@@ -59,3 +61,4 @@ void ExpBar::ExpGaugeReset()
 {
 	ExpGauge->SetImageScale({ 0,10 });
 }
+

@@ -58,7 +58,7 @@ void StatManager::ChangeHp(PlayerStatData* _StatData, float _HpValue)
 	_StatData->CurHp += _HpValue;
 
 	float MaxHp = _StatData->MaxHp;
-	float GaugeSizeX = StatusBar::Inst->HpGaugeSizeX;
+	float GaugeSizeX = StatusBar::Inst->HpGaugeSize.X;
 	float ConvertedHp = _HpValue * (GaugeSizeX / MaxHp);
 	StatusBar::Inst->ChangeHpGauge(ConvertedHp);
 }
@@ -68,7 +68,7 @@ void StatManager::ChangeMp(PlayerStatData* _StatData, float _MpValue)
 	_StatData->CurMp += _MpValue;
 
 	float MaxMp = _StatData->MaxMp;
-	float GaugeSizeX = StatusBar::Inst->MpGaugeSizeX;
+	float GaugeSizeX = StatusBar::Inst->MpGaugeSize.X;
 	float ConvertedMp = _MpValue * (GaugeSizeX / MaxMp);
 	StatusBar::Inst->ChangeHpGauge(ConvertedMp);
 }
@@ -78,7 +78,7 @@ void StatManager::ChangeExp(PlayerStatData* _StatData, float _ExpValue)
 	_StatData->CurExp += _ExpValue;
 
 	float MaxExp = _StatData->MaxExp;
-	float GaugeSizeX = 1920.0f;
+	float GaugeSizeX = ContentsCore::GetStartWindowSize().X;
 	float ConvertedExp = _ExpValue * (GaugeSizeX / MaxExp);
 
 	ExpBar::Inst->ChangeExpGauge(ConvertedExp);
@@ -88,6 +88,7 @@ void StatManager::ChangeExp(PlayerStatData* _StatData, float _ExpValue)
 		_StatData->CurExp = 0;
 		_StatData->MaxExp += 10;
 		_StatData->CurLevel += 1;
+		StatusBar::Inst->LevelUp(_StatData->CurLevel);
 		ExpBar::Inst->ExpGaugeReset();
 	}
 }

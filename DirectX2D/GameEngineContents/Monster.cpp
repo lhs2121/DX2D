@@ -12,7 +12,6 @@ Monster::~Monster()
 void Monster::Start()
 {
 	MonsterBase::Start();
-	Setting("Octopus");
 	{
 		Transform.SetWorldPosition({ 800,300 });
 	}

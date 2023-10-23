@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "MapleMap.h"
 #include "StatManager.h"
+#include "FadeScreen.h"
 
 void Player::Update(float _Delta)
 {
@@ -136,7 +137,10 @@ void Player::PortalCheck()
 			{
 				std::string Level = Col->GetName();
 				PrevLevelName = Level;
-				GameEngineCore::ChangeLevel(Level);
+
+				std::list<std::shared_ptr<FadeScreen>> list = GetLevel()->GetObjectGroupConvert<FadeScreen>(ActorOrder::FadeScreen);
+				std::list<std::shared_ptr<FadeScreen>>::iterator Start = list.begin();
+				(*Start)->SettingAndStart(FadeType::FADEIN, Level);
 			}
 		};
 	Event.Exit = [](GameEngineCollision*, GameEngineCollision* Col)
@@ -192,41 +196,4 @@ void Player::CameraFocus()
 	}
 
 	GetLevel()->GetMainCamera()->Transform.SetWorldPosition({ CameraPos.X ,CameraPos.Y,CameraPos.Z });
-
-	if (CameraPos.X - ContentsCore::GetStartWindowSize().hX() < 0)
-	{
-		while (true)
-		{
-			GetLevel()->GetMainCamera()->Transform.AddWorldPosition(float4::RIGHT * 100.0f);
-			float X = GetLevel()->GetMainCamera()->Transform.GetWorldPosition().X - ContentsCore::GetStartWindowSize().hX();
-			if (X >= 0)
-			{
-				break;
-			}
-		}
-	}
-	if (CameraPos.X + ContentsCore::GetStartWindowSize().hX() > MapleMap::CurMap->GetMapScale().X)
-	{
-		while (true)
-		{
-			GetLevel()->GetMainCamera()->Transform.AddWorldPosition(float4::LEFT * 100.0f);
-			float X = GetLevel()->GetMainCamera()->Transform.GetWorldPosition().X + ContentsCore::GetStartWindowSize().hX();
-			if (X <= MapleMap::CurMap->GetMapScale().X)
-			{
-				break;
-			}
-		}
-	}
-	if (CameraPos.Y - ContentsCore::GetStartWindowSize().hY() < -MapleMap::CurMap->GetMapScale().Y)
-	{
-		while (true)
-		{
-			GetLevel()->GetMainCamera()->Transform.AddWorldPosition(float4::UP * 100.0f);
-			float Y = GetLevel()->GetMainCamera()->Transform.GetWorldPosition().Y - ContentsCore::GetStartWindowSize().hY();
-			if (Y >= -MapleMap::CurMap->GetMapScale().Y)
-			{
-				break;
-			}
-		}
-	}
 }

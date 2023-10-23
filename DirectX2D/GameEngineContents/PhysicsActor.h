@@ -21,7 +21,7 @@ protected:
 	void SetCurColor();
 	void GroundCheck();
 	void JumpCheck();
-
+	void LimitToMapBounds();
 	void Gravity(float _Delta);
 	void Breaking(float _Delta);
 

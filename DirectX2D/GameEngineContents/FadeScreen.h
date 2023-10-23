@@ -15,11 +15,17 @@ public:
 	FadeScreen& operator=(const FadeScreen& _Other) = delete;
 	FadeScreen& operator=(FadeScreen&& _Other) noexcept = delete;
 
-	void StartFadeIn(std::string _NextLevelString);
-	void StartFadeOut();
+	void SettingAndStart(FadeType _Type, std::string _NextLevelStr = "");
+
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
+	void Release() override;
+
+	FadeType CurType;
+	std::string NextLevelStr;
+	float AlphaValue = 0.0f;
+	std::shared_ptr<class GameEngineUIRenderer> Renderer;
 
 };
 

@@ -75,6 +75,7 @@ GameEngineSpriteRenderer::GameEngineSpriteRenderer()
 
 GameEngineSpriteRenderer::~GameEngineSpriteRenderer() 
 {
+
 }
 
 void GameEngineSpriteRenderer::Start() 

@@ -10,7 +10,16 @@ enum class RenderOrder
 	Effect,
 	Player,
 	Effect2,
-	Debug,
+	Debug
+};
+
+enum class UIRenderOrder
+{
+	PlayerUI,
+	PlayerUI2,
+	PlayerUI3,
+	FadeScreen,
+	DebugUI,
 };
 
 enum class ActorOrder
@@ -27,6 +36,7 @@ enum class ActorOrder
 	Manager,
 	PlayerStat,
 	MonsterStat,
+	FadeScreen,
 	UI
 };
 
@@ -63,4 +73,10 @@ enum class EffectType
 	FlashJump,
 	LuckySeven,
 	HitSureken
+};
+
+enum class FadeType
+{
+	FADEIN,
+	FADEOUT
 };

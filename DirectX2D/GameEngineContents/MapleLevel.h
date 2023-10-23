@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
+#include <list>
 
 // Ό³Έν :
 class MapleLevel : public GameEngineLevel
@@ -33,6 +34,7 @@ public:
 	std::shared_ptr<class SkillEffctor> CurSkillEffctor;
 	std::shared_ptr<class StatusBar> CurStatusBar;
 	std::shared_ptr<class ExpBar> CurExpBar;
+	std::shared_ptr<class FadeScreen> CurFadeScreen;
 
 	std::map<std::string, std::shared_ptr<class Portal>> PortalGroup;
 };

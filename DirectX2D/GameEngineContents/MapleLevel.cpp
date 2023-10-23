@@ -7,7 +7,7 @@
 #include "ExpBar.h"
 #include "MapleMap.h"
 #include "SkillEffctor.h"
-
+#include "FadeScreen.h"
 
 MapleLevel::MapleLevel()
 {
@@ -40,6 +40,9 @@ void MapleLevel::Start()
 		CurStatusBar = CreateActor<StatusBar>(ActorOrder::UI);
 		CurExpBar = CreateActor<ExpBar>(ActorOrder::UI);
 	}
+	{
+		CurFadeScreen = CreateActor<FadeScreen>(ActorOrder::FadeScreen);
+	}
 }
 
 void MapleLevel::LevelStart(GameEngineLevel* _PrevLevel)
@@ -50,6 +53,8 @@ void MapleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	StatusBar::Inst = CurStatusBar.get();
 	ExpBar::Inst = CurExpBar.get();
 	MapleMap::CurMap = CurMap.get();
+
+	CurFadeScreen->SettingAndStart(FadeType::FADEOUT);
 }
 
 void MapleLevel::LevelEnd(GameEngineLevel* _NextLevel)
@@ -85,4 +90,5 @@ void MapleLevel::Update(float _Delta)
 		MapleMap::CurMap->SwitchDebugRender();
 	}
 }
+
 

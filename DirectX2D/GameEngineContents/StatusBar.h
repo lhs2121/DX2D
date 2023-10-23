@@ -19,10 +19,12 @@ public:
 	static StatusBar* Inst;
 
 	void ChangeHpGauge(float _Value);
+	void ResetHpGauge();
 	void ChangeMpGauge(float _Value);
-
-	float HpGaugeSizeX;
-	float MpGaugeSizeX;
+	void ResetMpGauge();
+	void LevelUp(int Level);
+	float4 HpGaugeSize;
+	float4 MpGaugeSize;
 private:
 	void Start() override;
 	void Update(float _Delta) override;

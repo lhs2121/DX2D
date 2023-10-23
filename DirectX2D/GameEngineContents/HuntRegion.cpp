@@ -17,10 +17,11 @@ void HuntRegion::Start()
 	MapleLevel::Start();
 	{
 		CurMap = CreateActor<Map1>(ActorOrder::Map);
+		SetName(std::string("HuntRegion"));
 		CreatePortal("KerningCity", { 1010, -1100 });
 	}
 	{
-		CreateActor<Monster>(ActorOrder::Monster);
+
 	}
 }
 

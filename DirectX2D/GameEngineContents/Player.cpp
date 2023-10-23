@@ -3,6 +3,7 @@
 #include "Portal.h"
 #include "MapleLevel.h"
 #include "StatData.h"
+#include "MapleMap.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -28,7 +29,7 @@ void Player::Start()
 		MainSpriteRenderer->CreateAnimation("down", "down");
 		MainSpriteRenderer->CreateAnimation("rope", "rope", 0.2f);
 		MainSpriteRenderer->CreateAnimation("ladder", "ladder", 0.2f);
-		MainSpriteRenderer->CreateAnimation("hit", "hit",0.3f);
+		MainSpriteRenderer->CreateAnimation("hit", "hit", 0.3f);
 		MainSpriteRenderer->CreateAnimation("swing1", "swing1", 0.2f, 0, 2, false);
 		MainSpriteRenderer->CreateAnimation("swing2", "swing2", 0.2f, 0, 2, false);
 		MainSpriteRenderer->CreateAnimation("swing3", "swing3", 0.2f, 0, 2, false);
@@ -126,13 +127,63 @@ void Player::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	if (_PrevLevel == nullptr)
 	{
+		float4 StartPos = MapleMap::CurMap->GetMapScale().Half();
+		Transform.SetWorldPosition({ StartPos.X, -StartPos.Y });
 		return;
 	}
 
 	std::string name = _PrevLevel->GetName();
 	MapleLevel* Level = GetLevel()->GetDynamic_Cast_This<MapleLevel>().get();
 	std::shared_ptr<Portal> portal = Level->GetPortal(name);
-	Transform.SetWorldPosition(portal->Transform.GetWorldPosition() + float4(0, -70));
+	if (portal != nullptr)
+	{
+		Transform.SetWorldPosition(portal->Transform.GetWorldPosition() + float4(0, -70));
+		GetLevel()->GetMainCamera()->Transform.SetWorldPosition({ Transform.GetWorldPosition().X, Transform.GetWorldPosition().Y,-600.0f });
+	}
+	else
+	{
+		float4 StartPos = MapleMap::CurMap->GetMapScale().Half();
+		Transform.SetWorldPosition({ StartPos.X, -StartPos.Y });
+	}
+
+	float4 CameraPos = GetLevel()->GetMainCamera()->Transform.GetWorldPosition();
+
+	if (CameraPos.X - ContentsCore::GetStartWindowSize().hX() < 0.0f)
+	{
+		while (true)
+		{
+			GetLevel()->GetMainCamera()->Transform.AddWorldPosition(float4::RIGHT);
+			float X = GetLevel()->GetMainCamera()->Transform.GetWorldPosition().X - ContentsCore::GetStartWindowSize().hX();
+			if (X >= 0)
+			{
+				break;
+			}
+		}
+	}
+	if (CameraPos.X + ContentsCore::GetStartWindowSize().hX() > MapleMap::CurMap->GetMapScale().X)
+	{
+		while (true)
+		{
+			GetLevel()->GetMainCamera()->Transform.AddWorldPosition(float4::LEFT);
+			float X = GetLevel()->GetMainCamera()->Transform.GetWorldPosition().X + ContentsCore::GetStartWindowSize().hX();
+			if (X <= MapleMap::CurMap->GetMapScale().X)
+			{
+				break;
+			}
+		}
+	}
+	if (CameraPos.Y - ContentsCore::GetStartWindowSize().hY() < -MapleMap::CurMap->GetMapScale().Y)
+	{
+		while (true)
+		{
+			GetLevel()->GetMainCamera()->Transform.AddWorldPosition(float4::UP);
+			float Y = GetLevel()->GetMainCamera()->Transform.GetWorldPosition().Y - ContentsCore::GetStartWindowSize().hY();
+			if (Y >= -MapleMap::CurMap->GetMapScale().Y)
+			{
+				break;
+			}
+		}
+	}
 }
 
 

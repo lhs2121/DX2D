@@ -45,6 +45,20 @@ void PhysicsActor::JumpCheck()
 	}
 }
 
+void PhysicsActor::LimitToMapBounds()
+{
+	float4 Pos = Transform.GetWorldPosition();
+	float4 MapScale = MapleMap::CurMap->GetMapScale();
+	if (Pos.X < 0.0f)
+	{
+		Transform.SetWorldPosition({ 0.0f,Pos.Y });
+	}
+	if (Pos.X > MapScale.X)
+	{
+		Transform.SetWorldPosition({ MapScale.X - 1.0f,Pos.Y });
+	}
+}
+
 void PhysicsActor::Gravity(float _Delta)
 {
 	if (IsGrounded == true)
@@ -156,4 +170,5 @@ void PhysicsActor::Update(float _Delta)
 	Breaking(_Delta);
 	BluePixelSnap();
 	RedPixelSnap();
+	LimitToMapBounds();
 }

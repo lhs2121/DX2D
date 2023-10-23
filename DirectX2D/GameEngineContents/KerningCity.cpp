@@ -2,6 +2,7 @@
 #include "KerningCity.h"
 #include "Map0.h"
 #include "Monster.h"
+#include "MonsterSpawner.h"
 
 KerningCity::KerningCity() 
 {
@@ -16,12 +17,11 @@ void KerningCity::Start()
 	MapleLevel::Start();
 	{
 		CurMap = CreateActor<Map0>(ActorOrder::Map);
-		std::string a = "KerningCity";
-		SetName(a);
+		SetName(std::string("KerningCity"));
 		CreatePortal("HuntRegion", { 310, -910 });
 	}
 	{
-		CreateActor<Monster>(ActorOrder::Monster);
+		//CreateActor<MonsterSpawner>(ActorOrder::Manager)->Setting("Octopus", 10.0f, 10);
 	}
 }
 
