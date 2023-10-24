@@ -69,13 +69,7 @@
     <ClInclude Include="DamageActor.h">
       <Filter>Actor\Skills</Filter>
     </ClInclude>
-    <ClInclude Include="FadeScreen.h">
-      <Filter>Actor\Maps</Filter>
-    </ClInclude>
     <ClInclude Include="ContentsControlWindow.h" />
-    <ClInclude Include="MonsterSpawner.h">
-      <Filter>Actor\Maps</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Actor\Player</Filter>
     </ClInclude>
@@ -84,6 +78,21 @@
     </ClInclude>
     <ClInclude Include="MonsterBase.h">
       <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterSpawner.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="FadeScreen.h">
+      <Filter>Actor\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="BossLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Map2.h">
+      <Filter>Actor\Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss_Vellum.h">
+      <Filter>Actor\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -152,13 +161,7 @@
     <ClCompile Include="DamageActor.cpp">
       <Filter>Actor\Skills</Filter>
     </ClCompile>
-    <ClCompile Include="FadeScreen.cpp">
-      <Filter>Actor\Maps</Filter>
-    </ClCompile>
     <ClCompile Include="ContentsControlWindow.cpp" />
-    <ClCompile Include="MonsterSpawner.cpp">
-      <Filter>Actor\Maps</Filter>
-    </ClCompile>
     <ClCompile Include="Player_StateUpdate.cpp">
       <Filter>Actor\Player</Filter>
     </ClCompile>
@@ -173,6 +176,21 @@
     </ClCompile>
     <ClCompile Include="MonsterBase.cpp">
       <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterSpawner.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeScreen.cpp">
+      <Filter>Actor\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="BossLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Map2.cpp">
+      <Filter>Actor\Maps</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss_Vellum.cpp">
+      <Filter>Actor\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +226,9 @@
     </Filter>
     <Filter Include="Actor\Physics">
       <UniqueIdentifier>{29ab7583-6138-44c2-a108-fb12dfbb790e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Boss">
+      <UniqueIdentifier>{c17c1fe8-0e8d-4036-a963-b1c8fdd2a3cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

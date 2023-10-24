@@ -27,6 +27,7 @@ enum class ActorOrder
 	Map,
 	Player,
 	Monster,
+	Boss,
 	NPC,
 	MapObject,
 	Skill,
@@ -47,19 +48,6 @@ enum class CollisionOrder
 	PlayerWeapon,
 	MonsterWeapon,
 	Portal
-};
-
-enum class StatDatae
-{
-	IDLE,
-	WALK,
-	JUMP,
-	DOWN,
-	ROPE,
-	HIT,
-	FLASHJUMP,
-	LUCKYSEVEN,
-	
 };
 
 enum class PlayerDirState

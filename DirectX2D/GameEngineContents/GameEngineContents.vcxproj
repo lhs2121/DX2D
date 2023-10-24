@@ -197,6 +197,9 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="FadeScreen.h" />
     <ClInclude Include="MonsterSpawner.h" />
+    <ClInclude Include="BossLevel.h" />
+    <ClInclude Include="Map2.h" />
+    <ClInclude Include="Boss_Vellum.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsControlWindow.cpp" />
@@ -235,6 +238,9 @@
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="FadeScreen.cpp" />
     <ClCompile Include="MonsterSpawner.cpp" />
+    <ClCompile Include="BossLevel.cpp" />
+    <ClCompile Include="Map2.cpp" />
+    <ClCompile Include="Boss_Vellum.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

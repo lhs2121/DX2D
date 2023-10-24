@@ -31,7 +31,7 @@ void MapleLevel::Start()
     GameEngineInput::AddInputObject(this);
 
 	GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, -600.0f });
-	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Perspective);
+	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
 
 	{
 		CurPlayer = CreateActor<Player>(ActorOrder::Player);
@@ -39,8 +39,6 @@ void MapleLevel::Start()
 		CurSkillEffctor = CreateActor<SkillEffctor>(ActorOrder::Manager);
 		CurStatusBar = CreateActor<StatusBar>(ActorOrder::UI);
 		CurExpBar = CreateActor<ExpBar>(ActorOrder::UI);
-	}
-	{
 		CurFadeScreen = CreateActor<FadeScreen>(ActorOrder::FadeScreen);
 	}
 }
@@ -53,13 +51,12 @@ void MapleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	StatusBar::Inst = CurStatusBar.get();
 	ExpBar::Inst = CurExpBar.get();
 	MapleMap::CurMap = CurMap.get();
-
 	CurFadeScreen->SettingAndStart(FadeType::FADEOUT);
 }
 
 void MapleLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	
 }
 
 void MapleLevel::Update(float _Delta)

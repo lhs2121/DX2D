@@ -1,6 +1,20 @@
 #pragma once
 #include "PhysicsActor.h"
 
+enum class PlayerState
+{
+	IDLE,
+	WALK,
+	JUMP,
+	DOWN,
+	ROPE,
+	HIT,
+	PORTAL,
+	FLASHJUMP,
+	LUCKYSEVEN,
+
+};
+
 class GameEngineSpriteRenderer;
 class GameEngineCollision;
 class Player : public PhysicsActor
@@ -41,6 +55,7 @@ private:
 	void FlashJumpStart();
 	void LuckySevenStart();
 	void HitStart();
+	void PortalStart();
 	void MicroAdjustment();
 	//state start
 
@@ -63,7 +78,7 @@ private:
 	{
 		CurDirState = _State;
 	}
-	void ChangeState(StatDatae _State);
+	void ChangeState(PlayerState _State);
 
 	void Start() override;
 	void Update(float _Delta) override;
@@ -81,6 +96,7 @@ private:
 	bool CanFlip = true;
 	bool DirCheck = true;
 	bool DoubleJump = false;
+	bool IsFadeIn = false;
 
 	bool ApplyInput = true;
 	bool ApplyInputLeft = true;
@@ -92,7 +108,7 @@ private:
 
 	float4 RopePos;
 	float4 RP;
-	StatDatae CurState;
+	PlayerState CurState;
 	PlayerDirState CurDirState;
 	std::string PrevLevelName;
 	std::shared_ptr<GameEngineCollision> Col;

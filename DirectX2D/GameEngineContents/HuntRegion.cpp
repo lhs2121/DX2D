@@ -18,7 +18,7 @@ void HuntRegion::Start()
 	{
 		CurMap = CreateActor<Map1>(ActorOrder::Map);
 		SetName(std::string("HuntRegion"));
-		CreatePortal("KerningCity", { 1010, -1100 });
+		CreatePortal("KerningCity", { 74, -1253 });
 	}
 	{
 
@@ -37,5 +37,5 @@ void HuntRegion::LevelStart(GameEngineLevel* _PrevLevel)
 
 void HuntRegion::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	MapleLevel::LevelEnd(_NextLevel);
 }

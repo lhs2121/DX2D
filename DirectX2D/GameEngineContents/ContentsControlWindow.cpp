@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "ContentsControlWindow.h"
-
+#include "Player.h"
 
 void MapEditorTab::Start()
 {
@@ -75,6 +75,12 @@ void TestTab::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 	std::string MousePos = GameEngineCore::MainWindow.GetMousePos().ToString();
 
 	if (ImGui::Button(MousePos.c_str()))
+	{
+
+	}
+
+	std::string PlayerPos = Player::MainPlayer->Transform.GetWorldPosition().ToString();
+	if (ImGui::Button(PlayerPos.c_str()))
 	{
 
 	}

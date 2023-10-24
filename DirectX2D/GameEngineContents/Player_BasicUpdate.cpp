@@ -92,11 +92,11 @@ void Player::MoveUpdate()
 
 	if (ApplyInputJump == true)
 	{
-		if (InputIsDown(VK_MENU) && IsGrounded == true && CurState != StatDatae::DOWN)
+		if (InputIsDown(VK_MENU) && IsGrounded == true && CurState != PlayerState::DOWN)
 		{
 			NetForce.Y = 300.0f;
 		}
-		else if (InputIsDown(VK_MENU) && CurState == StatDatae::DOWN)
+		else if (InputIsDown(VK_MENU) && CurState == PlayerState::DOWN)
 		{
 			if (GetColor(Transform.GetWorldPosition() + float4(0, -5)) == GameEngineColor::RED)
 			{
@@ -133,19 +133,21 @@ void Player::PortalCheck()
 		};
 	Event.Stay = [&](GameEngineCollision*, GameEngineCollision* Col)
 		{
-			if (InputIsDown(VK_UP))
+			if (InputIsDown(VK_UP) && IsFadeIn == false)
 			{
+				ChangeState(PlayerState::PORTAL);
 				std::string Level = Col->GetName();
 				PrevLevelName = Level;
 
 				std::list<std::shared_ptr<FadeScreen>> list = GetLevel()->GetObjectGroupConvert<FadeScreen>(ActorOrder::FadeScreen);
 				std::list<std::shared_ptr<FadeScreen>>::iterator Start = list.begin();
 				(*Start)->SettingAndStart(FadeType::FADEIN, Level);
+				IsFadeIn = true;
 			}
 		};
 	Event.Exit = [](GameEngineCollision*, GameEngineCollision* Col)
 		{
-
+			
 		};
 	Col->CollisionEvent(CollisionOrder::Portal, Event);
 }

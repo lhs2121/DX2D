@@ -7,28 +7,28 @@ void Player::StateUpdate(float _Delta)
 {
 	switch (CurState)
 	{
-	case StatDatae::IDLE:
+	case PlayerState::IDLE:
 		IdleUpdate(_Delta);
 		break;
-	case StatDatae::WALK:
+	case PlayerState::WALK:
 		WalkUpdate(_Delta);
 		break;
-	case StatDatae::JUMP:
+	case PlayerState::JUMP:
 		JumpUpdate(_Delta);
 		break;
-	case StatDatae::ROPE:
+	case PlayerState::ROPE:
 		RopeUpdate(_Delta);
 		break;
-	case StatDatae::DOWN:
+	case PlayerState::DOWN:
 		DownUpdate(_Delta);
 		break;
-	case StatDatae::HIT:
+	case PlayerState::HIT:
 		HitUpdate(_Delta);
 		break;
-	case StatDatae::LUCKYSEVEN:
+	case PlayerState::LUCKYSEVEN:
 		LuckySevenUpdate(_Delta);
 		break;
-	case StatDatae::FLASHJUMP:
+	case PlayerState::FLASHJUMP:
 		FlashJumpUpdate(_Delta);
 		break;
 	default:
@@ -36,7 +36,7 @@ void Player::StateUpdate(float _Delta)
 	}
 }
 
-void Player::ChangeState(StatDatae _State)
+void Player::ChangeState(PlayerState _State)
 {
 	CurState = _State;
 	CanFlip = true;
@@ -49,31 +49,34 @@ void Player::ChangeState(StatDatae _State)
 
 	switch (CurState)
 	{
-	case StatDatae::IDLE:
+	case PlayerState::IDLE:
 		MainSpriteRenderer->ChangeAnimation("idle");
 		break;
-	case StatDatae::WALK:
+	case PlayerState::WALK:
 		MainSpriteRenderer->ChangeAnimation("walk");
 		break;
-	case StatDatae::JUMP:
+	case PlayerState::JUMP:
 		MainSpriteRenderer->ChangeAnimation("jump");
 		break;
-	case StatDatae::DOWN:
+	case PlayerState::DOWN:
 		CanFlip = false;
 		ApplyInputLeft = false;
 		ApplyInputRight = false;
 		MainSpriteRenderer->ChangeAnimation("down");
 		break;
-	case StatDatae::ROPE:
+	case PlayerState::ROPE:
 		RopeStart();
 		break;
-	case StatDatae::HIT:
+	case PlayerState::HIT:
 		HitStart();
 		break;
-	case StatDatae::FLASHJUMP:
+	case PlayerState::PORTAL:
+		PortalStart();
+		break;
+	case PlayerState::FLASHJUMP:
 		FlashJumpStart();
 		break;
-	case StatDatae::LUCKYSEVEN:
+	case PlayerState::LUCKYSEVEN:
 		LuckySevenStart();
 		break;
 	default:
@@ -126,27 +129,34 @@ void Player::HitStart()
 
 }
 
+void Player::PortalStart()
+{
+	ApplyInput = false;
+	CanFlip = false;
+	MainSpriteRenderer->ChangeAnimation("idle");
+}
+
 void Player::IdleUpdate(float _Delta)
 {
 	if (InputIsPress(VK_LEFT) || InputIsPress(VK_RIGHT))
 	{
-		ChangeState(StatDatae::WALK);
+		ChangeState(PlayerState::WALK);
 	}
 	if (InputIsPress(VK_UP) && CanRope == true)
 	{
-		ChangeState(StatDatae::ROPE);
+		ChangeState(PlayerState::ROPE);
 	}
 	if (InputIsPress(VK_DOWN) && IsGrounded == true)
 	{
-		ChangeState(StatDatae::DOWN);
+		ChangeState(PlayerState::DOWN);
 	}
 	if (InputIsPress(LuckySevenKey) && BulletShooter::Inst->IsUpdate() == false)
 	{
-		ChangeState(StatDatae::LUCKYSEVEN);
+		ChangeState(PlayerState::LUCKYSEVEN);
 	}
 	if (IsGrounded == false && NetForce.Y != 0)
 	{
-		ChangeState(StatDatae::JUMP);
+		ChangeState(PlayerState::JUMP);
 	}
 }
 
@@ -154,27 +164,27 @@ void Player::WalkUpdate(float _Delta)
 {
 	if (InputIsFree(VK_LEFT) && InputIsFree(VK_RIGHT))
 	{
-		ChangeState(StatDatae::IDLE);
+		ChangeState(PlayerState::IDLE);
 	}
 	if (IsGrounded == false && NetForce.Y != 0)
 	{
-		ChangeState(StatDatae::JUMP);
+		ChangeState(PlayerState::JUMP);
 	}
 	//else if (InputIsPress(VK_DOWN) && CanRope == false)
 	//{
-	//	ChangeState(StatDatae::DOWN);
+	//	ChangeState(PlayerState::DOWN);
 	//}
 	if (InputIsPress(VK_DOWN) && CanRope == true)
 	{
-		ChangeState(StatDatae::ROPE);
+		ChangeState(PlayerState::ROPE);
 	}
 	if (InputIsPress(VK_UP) && CanRope == true)
 	{
-		ChangeState(StatDatae::ROPE);
+		ChangeState(PlayerState::ROPE);
 	}
 	if (InputIsDown(LuckySevenKey) && BulletShooter::Inst->IsUpdate() == false)
 	{
-		ChangeState(StatDatae::LUCKYSEVEN);
+		ChangeState(PlayerState::LUCKYSEVEN);
 	}
 }
 
@@ -184,25 +194,25 @@ void Player::JumpUpdate(float _Delta)
 	{
 		if (InputIsFree(VK_LEFT) && InputIsFree(VK_RIGHT))
 		{
-			ChangeState(StatDatae::IDLE);
+			ChangeState(PlayerState::IDLE);
 		}
 		if (InputIsPress(VK_LEFT) || InputIsPress(VK_RIGHT))
 		{
-			ChangeState(StatDatae::WALK);
+			ChangeState(PlayerState::WALK);
 		}
 	}
 
 	if (InputIsDown(LuckySevenKey) && BulletShooter::Inst->IsUpdate() == false)
 	{
-		ChangeState(StatDatae::LUCKYSEVEN);
+		ChangeState(PlayerState::LUCKYSEVEN);
 	}
 	else if (InputIsPress(VK_UP) && CanRope == true)
 	{
-		ChangeState(StatDatae::ROPE);
+		ChangeState(PlayerState::ROPE);
 	}
 	else if (InputIsDown(JumpKey) && InputIsPress(VK_DOWN) == false)
 	{
-		ChangeState(StatDatae::FLASHJUMP);
+		ChangeState(PlayerState::FLASHJUMP);
 	}
 }
 
@@ -228,7 +238,7 @@ void Player::RopeUpdate(float _Delta)
 
 		if (TopColor != GameEngineColor::GREEN && BottomColor != GameEngineColor::GREEN)
 		{
-			ChangeState(StatDatae::IDLE);
+			ChangeState(PlayerState::IDLE);
 			NetForce.Y = -100.0f;
 			MainSpriteRenderer->AnimationPauseOff();
 		}
@@ -243,7 +253,7 @@ void Player::RopeUpdate(float _Delta)
 
 		if (BottomColor != GameEngineColor::GREEN)
 		{
-			ChangeState(StatDatae::IDLE);
+			ChangeState(PlayerState::IDLE);
 			NetForce.Y = -100.0f;
 			MainSpriteRenderer->AnimationPauseOff();
 		}
@@ -251,7 +261,7 @@ void Player::RopeUpdate(float _Delta)
 
 	if ((InputIsPress(VK_LEFT) || InputIsPress(VK_RIGHT)) && InputIsDown(JumpKey))
 	{
-		ChangeState(StatDatae::JUMP);
+		ChangeState(PlayerState::JUMP);
 		NetForce.Y = 250.0f;
 		MainSpriteRenderer->AnimationPauseOff();
 	}
@@ -268,7 +278,7 @@ void Player::RopeUpdate(float _Delta)
 			Transform.AddWorldPosition({ 3.0f,0.0f });
 		}
 
-		ChangeState(StatDatae::JUMP);
+		ChangeState(PlayerState::JUMP);
 		NetForce.Y = 250.0f;
 		MainSpriteRenderer->AnimationPauseOff();
 	}
@@ -279,19 +289,19 @@ void Player::DownUpdate(float _Delta)
 {
 	if (CanRope == true)
 	{
-		ChangeState(StatDatae::ROPE);
+		ChangeState(PlayerState::ROPE);
 	}
 	if (InputIsFree(VK_DOWN))
 	{
-		ChangeState(StatDatae::IDLE);
+		ChangeState(PlayerState::IDLE);
 	}
 	else if (InputIsDown(VK_LEFT) || InputIsDown(VK_RIGHT))
 	{
-		ChangeState(StatDatae::WALK);
+		ChangeState(PlayerState::WALK);
 	}
 	else if (IsGrounded == false && NetForce.Y != 0)
 	{
-		ChangeState(StatDatae::JUMP);
+		ChangeState(PlayerState::JUMP);
 	}
 }
 
@@ -323,11 +333,11 @@ void Player::LuckySevenUpdate(float _Delta)
 	{
 		if (InputIsFree(VK_LEFT) && InputIsFree(VK_RIGHT))
 		{
-			ChangeState(StatDatae::IDLE);
+			ChangeState(PlayerState::IDLE);
 		}
 		else if (InputIsPress(VK_LEFT) || InputIsPress(VK_RIGHT))
 		{
-			ChangeState(StatDatae::WALK);
+			ChangeState(PlayerState::WALK);
 		}
 	}
 }
@@ -336,14 +346,14 @@ void Player::FlashJumpUpdate(float _Delta)
 {
 	if (IsGrounded == true && NetForce.Y <= 0)
 	{
-		ChangeState(StatDatae::IDLE);
+		ChangeState(PlayerState::IDLE);
 	}
 
 	if (CurColor == GameEngineColor::BLUE)
 	{
 		NetForce.X = dir * 400.0f;
 		NetForce.Y = 0;
-		ChangeState(StatDatae::IDLE);
+		ChangeState(PlayerState::IDLE);
 	}
 
 	if (InputIsDown(JumpKey) && DoubleJump == false)
@@ -355,7 +365,7 @@ void Player::FlashJumpUpdate(float _Delta)
 	}
 	if (InputIsPress(VK_UP) && CanRope == true)
 	{
-		ChangeState(StatDatae::ROPE);
+		ChangeState(PlayerState::ROPE);
 	}
 }
 
@@ -363,7 +373,7 @@ void Player::HitUpdate(float _Delta)
 {
 	if (IsGrounded)
 	{
-		ChangeState(StatDatae::IDLE);
+		ChangeState(PlayerState::IDLE);
 	}
 
 }

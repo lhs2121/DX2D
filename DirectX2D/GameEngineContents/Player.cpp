@@ -83,7 +83,7 @@ void Player::Start()
 	//	GetLevel()->GetMainCamera()->CameraTargetSetting(Transform, float4::BACKWARD * 500.0f);
 
 	ChangeDirState(PlayerDirState::LEFT);
-	ChangeState(StatDatae::IDLE);
+	ChangeState(PlayerState::IDLE);
 }
 
 void Player::FlipRenderer()
@@ -125,6 +125,9 @@ void Player::LevelEnd(GameEngineLevel* _NextLevel)
 
 void Player::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	IsFadeIn = false;
+	ChangeState(PlayerState::IDLE);
+
 	if (_PrevLevel == nullptr)
 	{
 		float4 StartPos = MapleMap::CurMap->GetMapScale().Half();

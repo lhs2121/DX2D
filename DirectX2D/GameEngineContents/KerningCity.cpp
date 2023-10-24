@@ -18,7 +18,7 @@ void KerningCity::Start()
 	{
 		CurMap = CreateActor<Map0>(ActorOrder::Map);
 		SetName(std::string("KerningCity"));
-		CreatePortal("HuntRegion", { 310, -910 });
+		CreatePortal("HuntRegion", { 310, -1033 });
 	}
 	{
 		//CreateActor<MonsterSpawner>(ActorOrder::Manager)->Setting("Octopus", 10.0f, 10);
@@ -40,5 +40,5 @@ void KerningCity::LevelStart(GameEngineLevel* _PrevLevel)
 
 void KerningCity::LevelEnd(GameEngineLevel* _NextLevel)
 {
-	
+	MapleLevel::LevelEnd(_NextLevel);
 }
