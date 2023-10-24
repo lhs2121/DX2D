@@ -50,7 +50,7 @@ protected:
 	int dir = 0;
 	float4 ImageSize;
 	CollisionOrder EnemyColOrder = CollisionOrder::PlayerWeapon;
-	std::shared_ptr<class DamageEffectController> HitDmgEffController;
+	std::shared_ptr<class DamageEffectController> DamageViewer;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
 	std::shared_ptr<class GameEngineCollision> Col;
 	std::shared_ptr<class GameEngineCollision> TrackingCol;

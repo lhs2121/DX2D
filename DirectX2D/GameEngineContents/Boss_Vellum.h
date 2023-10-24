@@ -37,31 +37,36 @@ protected:
 	//Body
 
 	void FireStart();
-	void FireUpdate();
+	void FireUpdate(float _Delta);
 	void FireEnd();
 	//Fire
 
 	void PoisonStart();
-	void PoisonUpdate();
+	void PoisonUpdate(float _Delta);
 	void PoisonEnd();
 	//Poison
 
 	void DiveStart();
-	void DiveUpdate();
+	void DiveUpdate(float _Delta);
 	void DiveEnd();
 	//Dive
 
 	void UltStart();
-	void UltUpdate();
+	void UltUpdate(float _Delta);
 	void UltEnd();
 	//Ult
 
 	void ColCheck();
 
-	
+	float Speed = 150.0f;
 	BossState CurState;
+	std::shared_ptr<class MonsterStatData> BossStat;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
-	std::shared_ptr<class GameEngineCollision> Col;
+
+	std::shared_ptr<class GameEngineCollision> BodyCol;
+	std::shared_ptr<class GameEngineCollision> FireCol;
+	std::vector<std::shared_ptr<class GameEngineCollision>> PoisonDownCol;
+	std::vector<std::shared_ptr<class GameEngineCollision>> PoisonAreaCol;
 	std::shared_ptr<class DamageEffectController> DamageViewer;
 };
 

@@ -40,7 +40,7 @@ void MonsterBase::Start()
 		Renderer = CreateComponent<GameEngineSpriteRenderer>();
 		Renderer->SetRenderOrder(RenderOrder::Monster);
 		Renderer->SetPivotType(PivotType::Bottom);
-		HitDmgEffController = GetLevel()->CreateActor<DamageEffectController>();
+		DamageViewer = GetLevel()->CreateActor<DamageEffectController>();
 	}
 
 	{
@@ -81,8 +81,8 @@ void MonsterBase::Update(float _Delta)
 
 void MonsterBase::Release()
 {
-	HitDmgEffController->Death();
-	HitDmgEffController = nullptr;
+	DamageViewer->Death();
+	DamageViewer = nullptr;
     MonsterStat->Death();
 	MonsterStat = nullptr;
 }
@@ -170,22 +170,15 @@ void MonsterBase::ColCheck()
 		{
 			Col2->GetParentObject()->Off();
 			float Dmg = StatManager::Inst->GetDamage(Col2);
-			HitDmgEffController->StartEffect(Transform.GetWorldPosition() + float4(0, ImageSize.Y * 3 / 4), Dmg);
+			DamageViewer->StartEffect(Transform.GetWorldPosition() + float4(0, ImageSize.Y * 3 / 4), Dmg);
 
 			if (CurState != MonsterState::DIE)
 			{
 				StatManager::Inst->ChangeHp(MonsterStat.get(), -Dmg);
 				ChangeState(MonsterState::HIT);
 			}
-			
 		};
-	Event.Stay = [](GameEngineCollision*, GameEngineCollision* Col2)
-		{
-		};
-	Event.Exit = [](GameEngineCollision*, GameEngineCollision* Col2)
-		{
 
-		};
 	Col->CollisionEvent(EnemyColOrder, Event);
 }
 

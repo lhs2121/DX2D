@@ -17,7 +17,7 @@ public:
 	MonsterStatData& operator=(MonsterStatData&& _Other) noexcept = delete;
 
 private:
-	float CurHp = 100.0f;
+	float CurHp = 10000.0f;
 	float MaxHp = 100.0f;
 
 	float DefRate = 50;
