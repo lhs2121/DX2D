@@ -1,5 +1,5 @@
 #pragma once
-#include "PhysicsActor.h"
+#include "CombatActor.h"
 
 enum class MonsterState
 {
@@ -8,7 +8,7 @@ enum class MonsterState
 	DIE,
 };
 // Ό³Έν :
-class MonsterBase : public PhysicsActor
+class MonsterBase : public CombatActor
 {
 public:
 	// constrcuter destructer
@@ -28,15 +28,18 @@ protected:
 	void Release() override;
 	void ChangeState(MonsterState _State);
 
-	void HitStart();
-	void RunStart();
-	void DieStart();
 
-	void HitUpdate(float _Delta);
-	void DieUpdate(float _Delta);
+	void RunStart();
 	void RunUpdate(float _Delta);
 
-	void ColCheck();
+	void HitStart();
+	void HitUpdate(float _Delta);
+
+	void DieStart();
+	void DieUpdate(float _Delta);
+
+	void Hit() override;
+    void Die() override;
 
 	std::string DieAniName;
 	std::string HitAniName;
@@ -44,15 +47,10 @@ protected:
 	
 	MonsterState CurState = MonsterState::RUN;
 	float HitCoolTime = 0.3f;
-	float DirCycleTime = 2.0f;
+	float DirCycleTime = 0.0f;
 	float Speed = 60.0f;
 	int dir = 0;
 	float4 ImageSize;
-	CollisionOrder EnemyColOrder = CollisionOrder::PlayerWeapon;
-	std::shared_ptr<class DamageEffectController> DamageViewer;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
-	std::shared_ptr<class GameEngineCollision> Col;
-	std::shared_ptr<class MonsterStatData> MonsterStat;
-	
 };
 

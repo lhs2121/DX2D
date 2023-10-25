@@ -9,7 +9,7 @@ DamageEffect::~DamageEffect()
 {
 }
 
-void DamageEffect::SetNumber(int RendererNumber,int _Value)
+void DamageEffect::SetNumber(DamageColor _Color, int RendererNumber,int _Value)
 {
 	if (RendererNumber > RendererSize - 1)
 	{
@@ -19,7 +19,20 @@ void DamageEffect::SetNumber(int RendererNumber,int _Value)
 		RendererGroup.push_back(NewRenderer);
 		RendererSize++;
 	}
-	RendererGroup[RendererNumber]->SetSprite("AtkDmg", _Value);
+	switch (_Color)
+	{
+	case DamageColor::Orange:
+		RendererGroup[RendererNumber]->SetSprite("AtkDmg", _Value);
+		break;
+	case DamageColor::Red:
+		RendererGroup[RendererNumber]->SetSprite("CriDmg", _Value);
+		break;
+	case DamageColor::Purple:
+		RendererGroup[RendererNumber]->SetSprite("HitDmg", _Value);
+		break;
+	default:
+		break;
+	}
 	RendererGroup[RendererNumber]->On();
 }
 

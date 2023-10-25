@@ -46,6 +46,7 @@ void SkillEffect::EffectSetting(float4 _Pos, EffectType _Type, float _Dir)
 		break;
 	case EffectType::ShowDown:
 		Renderer->ChangeAnimation("ShowDownChallenge");
+		break;
 	default:
 		break;
 	}
@@ -64,6 +65,7 @@ void SkillEffect::Start()
 	Renderer->CreateAnimation("FlashJump", "FlashJump", 0.1f, 0, 7, false);
 	Renderer->CreateAnimation("LuckySeven", "LuckySeven", 0.1f, 0, 6, false);
 	Renderer->CreateAnimation("HitSureken", "HitSureken", 0.1f, 0, 3, false);
+	Renderer->CreateAnimation("ShowDownChallenge", "ShowDownChallenge", 0.07f,0,24,false);
 	Off();
 }
 

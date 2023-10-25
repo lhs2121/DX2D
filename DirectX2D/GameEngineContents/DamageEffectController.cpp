@@ -12,7 +12,7 @@ DamageEffectController::~DamageEffectController()
 }
 
 
-void DamageEffectController::StartEffect(float4 _Pos, float _DamageValue)
+void DamageEffectController::StartEffect(float4 _Pos, float _DamageValue, DamageColor _Color)
 {
 	CountStack();
 
@@ -36,7 +36,7 @@ void DamageEffectController::StartEffect(float4 _Pos, float _DamageValue)
 	for (int i = 0; i < NewArray.size(); i++)
 	{
 
-		NewEffect->SetNumber(i, NewArray[i]);
+		NewEffect->SetNumber(_Color, i, NewArray[i]);
 
 		float4 RendererOffset;
 
@@ -62,7 +62,7 @@ void DamageEffectController::StartEffect(float4 _Pos, float _DamageValue)
 			NewEffect->SetRenderOrder(i, order);
 		}
 	}
-	NewEffect->Transform.AddWorldPosition({ -8.0f * NewArray.size() -1,0 });
+	NewEffect->Transform.AddWorldPosition({ -8.0f * NewArray.size() - 1,0 });
 	NewEffect->StartEffect();
 
 	PrevEffect = NewEffect;

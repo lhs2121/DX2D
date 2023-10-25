@@ -1,10 +1,9 @@
 #include "PreCompile.h"
 #include "StatManager.h"
-#include "Player.h"
 #include "StatData.h"
-#include "ExpBar.h"
+#include "DamageEffectController.h"
 #include "StatusBar.h"
-#include "DamageActor.h"
+#include "Player.h"
 
 StatManager* StatManager::Inst;
 
@@ -18,77 +17,42 @@ StatManager::~StatManager()
 
 }
 
-void StatManager::Start()
+void StatManager::ChangeHp(std::shared_ptr<PlayerStatData> _Stat, float _Damage)
 {
-}
+	_Stat->CurHp -= _Damage;
 
-void StatManager::Update(float _Delta)
-{
-
-}
-
-float StatManager::GetDamage(GameEngineCollision* _Col)
-{
-	std::shared_ptr<DamageActor> damageActor = _Col->GetActor()->GetDynamic_Cast_This<DamageActor>();
-
-	GameEngineRandom rd = GameEngineRandom();
-	std::random_device rnd;
-	rd.SetSeed(rnd());
-
-	float Dmg = damageActor->GetDamage();
-	float Random = rd.RandomInt(-Dmg/10, Dmg/10);
-	return Dmg + Random;
-}
-
-void StatManager::SetDamage(PlayerStatData* _StatData, DamageActor* _Weapon)
-{
-	float Dmg = (_StatData->LUK * 4 + _StatData->DEX) * _StatData->ATK *
-		((100.0f + _StatData->AtkRate) / 100.0f) * ((100.0f + _StatData->DmgRate + _StatData->BossDmgRate) / 100.0f);
-
-	_Weapon->SetDamage(Dmg);
-}
-
-void StatManager::ChangeHp(MonsterStatData* _StatData, float _HpValue)
-{
-	_StatData->CurHp += _HpValue;
-}
-
-void StatManager::ChangeHp(PlayerStatData* _StatData, float _HpValue)
-{
-	_StatData->CurHp += _HpValue;
-
-	float MaxHp = _StatData->MaxHp;
+	float MaxHp = _Stat->MaxHp;
 	float GaugeSizeX = StatusBar::Inst->HpGaugeSize.X;
-	float ConvertedHp = _HpValue * (GaugeSizeX / MaxHp);
+	float ConvertedHp = -_Damage * (GaugeSizeX / MaxHp);
 	StatusBar::Inst->ChangeHpGauge(ConvertedHp);
 }
 
-void StatManager::ChangeMp(PlayerStatData* _StatData, float _MpValue)
+void StatManager::ChangeHp(std::shared_ptr<MonsterStatData> _Stat, float _Damage)
 {
-	_StatData->CurMp += _MpValue;
-
-	float MaxMp = _StatData->MaxMp;
-	float GaugeSizeX = StatusBar::Inst->MpGaugeSize.X;
-	float ConvertedMp = _MpValue * (GaugeSizeX / MaxMp);
-	StatusBar::Inst->ChangeHpGauge(ConvertedMp);
+	_Stat->CurHp -= _Damage;
 }
 
-void StatManager::ChangeExp(PlayerStatData* _StatData, float _ExpValue)
+void StatManager::ChangeExp(float _Exp)
 {
-	_StatData->CurExp += _ExpValue;
+	std::shared_ptr<PlayerStatData> stat = Player::MainPlayer->GetStatData()->GetDynamic_Cast_This<PlayerStatData>();
+	stat->CurExp += _Exp;
 
-	float MaxExp = _StatData->MaxExp;
+	float MaxExp = stat->MaxExp;
 	float GaugeSizeX = ContentsCore::GetStartWindowSize().X;
-	float ConvertedExp = _ExpValue * (GaugeSizeX / MaxExp);
+	float ConvertedExp = _Exp * (GaugeSizeX / MaxExp);
 
-	ExpBar::Inst->ChangeExpGauge(ConvertedExp);
+	StatusBar::Inst->ChangeExpGauge(ConvertedExp);
 
-	if (_StatData->CurExp >= _StatData->MaxExp)
+	if (stat->CurExp > stat->MaxExp)
 	{
-		_StatData->CurExp = 0;
-		_StatData->MaxExp += 10;
-		_StatData->CurLevel += 1;
-		StatusBar::Inst->LevelUp(_StatData->CurLevel);
-		ExpBar::Inst->ExpGaugeReset();
+		stat->CurExp = 0.0f;
+		stat->CurLevel += 1;
+		StatusBar::Inst->LevelUp(stat->CurLevel);
 	}
+	
 }
+
+
+
+
+

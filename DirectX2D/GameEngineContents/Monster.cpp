@@ -12,9 +12,6 @@ Monster::~Monster()
 void Monster::Start()
 {
 	MonsterBase::Start();
-	{
-		Transform.SetWorldPosition({ 800,300 });
-	}
 }
 void Monster::Update(float _Delta)
 {

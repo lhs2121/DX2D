@@ -1,9 +1,29 @@
 #pragma once
 #include <GameEngineCore\GameEngineActor.h>
 
-class MonsterStatData :public GameEngineActor
+class StatData : public GameEngineActor
 {
-	friend class MonsterBase;
+	friend class StatManager;
+public:
+	// constrcuter destructer
+	StatData() {};
+	~StatData() {};
+
+	// delete Function
+	StatData(const StatData& _Other) = delete;
+	StatData(StatData&& _Other) noexcept = delete;
+	StatData& operator=(const StatData& _Other) = delete;
+	StatData& operator=(StatData&& _Other) noexcept = delete;
+
+	virtual float GetDamage();
+
+	float CurHp = 100.0f;
+	float MaxHp = 100.0f;
+	float DefRate = 50;
+};
+
+class MonsterStatData : public StatData
+{
 	friend class StatManager;
 public:
 	// constrcuter destructer
@@ -16,16 +36,14 @@ public:
 	MonsterStatData& operator=(const MonsterStatData& _Other) = delete;
 	MonsterStatData& operator=(MonsterStatData&& _Other) noexcept = delete;
 
-private:
-	float CurHp = 10000.0f;
-	float MaxHp = 100.0f;
+	float GetDamage() override;
 
-	float DefRate = 50;
+private:
+	float Damage = 50.0f;
 };
 
-class PlayerStatData : public GameEngineActor
+class PlayerStatData : public StatData
 {
-	friend class Player;
 	friend class StatManager;
 public:
 	// constrcuter destructer
@@ -38,10 +56,9 @@ public:
 	PlayerStatData& operator=(const PlayerStatData& _Other) = delete;
 	PlayerStatData& operator=(PlayerStatData&& _Other) noexcept = delete;
 
-private:
-	float CurHp = 100.0f;
-	float MaxHp = 100.0f;
+	float GetDamage() override;
 
+private:
 	float CurMp = 100.0f;
 	float MaxMp = 100.0f;
 

@@ -15,15 +15,24 @@ public:
 	DamageActor& operator=(const DamageActor& _Other) = delete;
 	DamageActor& operator=(DamageActor&& _Other) noexcept = delete;
 
-	void SetDamage(float _Damage)
-	{
-		Damage = _Damage;
-	}
 	float GetDamage()
 	{
 		return Damage;
 	}
+
+	void SetDamage(float _Damage)
+	{
+		Damage = _Damage;
+	}
+	void SetCollisionScale(float4 _Scale)
+	{
+		Col->Transform.SetLocalScale(_Scale);
+	}
+	virtual void Hit();
 protected:
+	void Start() override;
+	
 	float Damage;
+	std::shared_ptr<class GameEngineCollision> Col;
 };
 

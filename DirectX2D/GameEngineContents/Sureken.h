@@ -42,6 +42,5 @@ private:
 	float CoolTime;
 	float Dir;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
-	std::shared_ptr<class GameEngineCollision> Col;
 };
 

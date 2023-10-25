@@ -14,7 +14,7 @@ public:
 	DamageEffect& operator=(const DamageEffect& _Other) = delete;
 	DamageEffect& operator=(DamageEffect&& _Other) noexcept = delete;
 
-	void SetNumber(int RendererNumber, int _Value);
+	void SetNumber(DamageColor _Color,int RendererNumber, int _Value);
 	void MoveRendererPos(int RendererNumber, float4 _Pos);
 	void SetRenderOrder(int RendererNumber, int _Order);
 

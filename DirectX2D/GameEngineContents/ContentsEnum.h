@@ -45,8 +45,8 @@ enum class CollisionOrder
 {
 	Player = 10,
 	Monster,
-	PlayerWeapon,
-	MonsterWeapon,
+	PlayerSkill,
+	MonsterSkill,
 	Portal
 };
 
@@ -70,21 +70,9 @@ enum class FadeType
 	FADEOUT
 };
 
-enum class SkillType
+enum class DamageColor
 {
-	Sureken,
-	Melee,
-	Magic
-
-};
-struct SkillDesc
-{
-	SkillType Type;
-	float StartPos;
-	float hitCount;
-	float Damage;
-	float Speed;
-	float CoolTime;
-	float Dir;
-	std::string AniName;
+	Orange,
+	Red,
+	Purple
 };

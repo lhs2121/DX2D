@@ -8,14 +8,11 @@ SurekenShooter* SurekenShooter::Inst = nullptr;
 
 SurekenShooter::SurekenShooter()
 {
-
 }
 
 SurekenShooter::~SurekenShooter()
 {
-
 }
-
 
 float4 SurekenShooter::GetSurekenPos(float4 _OffSet)
 {
@@ -83,13 +80,13 @@ void SurekenShooter::SurekenSetting()
 	FirstSureken->SetDir(Player::MainPlayer->GetDir());
 	FirstSureken->SetCoolTime(SurekenCoolTime);
 	FirstSureken->SetSpeed(SurekenSpeed);
-	StatManager::Inst->SetDamage(Player::MainPlayer->GetStat().get(), FirstSureken->GetDynamic_Cast_This<DamageActor>().get());
+	//StatManager::Inst->SetDamage(Player::MainPlayer->GetStat().get(), FirstSureken->GetDynamic_Cast_This<DamageActor>().get());
 
 	SecondSureken->Transform.SetWorldPosition(GetSurekenPos(SurekenPosOffset2));
 	SecondSureken->SetDir(FirstSureken->GetDir());
 	SecondSureken->SetCoolTime(SurekenCoolTime);
 	SecondSureken->SetSpeed(SurekenSpeed);
-	StatManager::Inst->SetDamage(Player::MainPlayer->GetStat().get(), SecondSureken->GetDynamic_Cast_This<DamageActor>().get());
+	//StatManager::Inst->SetDamage(Player::MainPlayer->GetStat().get(), SecondSureken->GetDynamic_Cast_This<DamageActor>().get());
 }
 
 

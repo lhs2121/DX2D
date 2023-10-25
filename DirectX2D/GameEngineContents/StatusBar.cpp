@@ -29,18 +29,41 @@ void StatusBar::ChangeHpGauge(float _Value)
 	}
 }
 
+void StatusBar::ResetHpGauge()
+{
+}
+
 void StatusBar::ChangeMpGauge(float _Value)
 {
 	MpGauge->AddImageScale({ _Value,0 });
 }
 
+void StatusBar::ResetMpGauge()
+{
+}
+
+void StatusBar::ChangeExpGauge(float _Value)
+{
+	ExpGauge->AddImageScale({ _Value ,0 });
+
+	TransformData data = ExpGauge->GetImageTransform().GetConstTransformDataRef();
+
+	if (data.Scale.X > ContentsCore::GetStartWindowSize().X)
+	{
+		ResetExpGauge();
+	}
+}
+
+void StatusBar::ResetExpGauge()
+{
+	ExpGauge->SetImageScale({ 0,10 });
+}
 void StatusBar::LevelUp(int Level)
 {
 	int digit1, digit2, digit3;
 
-	// a의 각 자릿수 추출
-	digit1 = Level / 100;    // 백의 자리
-	digit2 = (Level % 100) / 10; // 십의 자리
+	digit1 = Level / 100;    
+	digit2 = (Level % 100) / 10;
 	digit3 = Level % 10;
 
 	LvNumber1->SetSprite("LvNumber", digit1);
@@ -104,7 +127,7 @@ void StatusBar::Start()
 		LvNumber2->Transform.SetLocalPosition(LvTextPos + float4(21, 0));
 		LvNumber3->Transform.SetLocalPosition(LvTextPos + float4(28, 0));
 
-		LvNumber1->SetSprite("LvNumber", 2);
+		LvNumber1->SetSprite("LvNumber", 1);
 		LvNumber2->SetSprite("LvNumber", 0);
 		LvNumber3->SetSprite("LvNumber", 0);
 
@@ -114,6 +137,40 @@ void StatusBar::Start()
 		LvNumber3->AddImageScale({ -1.0f,0.0f });
 	}
 
+	{
+		float4 hSize = ContentsCore::GetStartWindowSize().Half();
+		float4 ExpBarPos = { -hSize.X,-hSize.Y + 5.0f };
+
+		ExpCover = CreateComponent<GameEngineUIRenderer>(0);
+		ExpCover->SetRenderOrder(UIRenderOrder::PlayerUI);
+		ExpCover->SetPivotType(PivotType::Left);
+
+		ExpGauge = CreateComponent<GameEngineUIRenderer>(0);
+		ExpGauge->SetRenderOrder(UIRenderOrder::PlayerUI2);
+		ExpGauge->SetPivotType(PivotType::Left);
+
+		ExpCover2 = CreateComponent<GameEngineUIRenderer>(0);
+		ExpCover2->SetRenderOrder(UIRenderOrder::PlayerUI3);
+		ExpCover2->SetPivotType(PivotType::Left);
+
+		ExpCover3 = CreateComponent<GameEngineUIRenderer>(0);
+		ExpCover3->SetRenderOrder(UIRenderOrder::PlayerUI3);
+		ExpCover3->SetPivotType(PivotType::Left);
+
+		int a = ContentsCore::GetStartWindowSize().X;
+		std::string SizeX = std::to_string(a);
+		ExpCover->SetSprite(SizeX + "ExpCover.png");
+		ExpCover2->SetSprite(SizeX + "ExpCover2.png");
+		ExpCover3->SetSprite(SizeX + "ExpCover3.png");
+		ExpGauge->SetSprite(SizeX + "ExpGauge.png");
+
+		ExpCover->Transform.SetLocalPosition(ExpBarPos);
+		ExpCover2->Transform.SetLocalPosition(ExpBarPos);
+		ExpCover3->Transform.SetLocalPosition(ExpBarPos);
+		ExpGauge->Transform.SetLocalPosition(ExpBarPos);
+		ExpGauge->Transform.AddLocalPosition({ 15.0f,0 });
+		ExpGauge->SetImageScale({ 30,10 });
+	}
 }
 
 void StatusBar::Update(float _Delta)

@@ -3,6 +3,8 @@
 #include "Player.h"
 #include "SkillEffctor.h"
 #include "StatManager.h"
+#include "StatData.h"
+
 Sureken::Sureken()
 {
 }
@@ -29,12 +31,8 @@ void Sureken::StartCoolTime(float _Delta)
 
 void Sureken::Start()
 {
-	{
-		Col = CreateComponent<GameEngineCollision>(CollisionOrder::PlayerWeapon);
-		Col->SetCollisionType(ColType::SPHERE2D);
-		Col->Transform.SetLocalScale({ 20,20 });
-	}
-
+	DamageActor::Start();
+	SetCollisionScale({ 20,20 });
 	{
 		Renderer = CreateComponent<GameEngineSpriteRenderer>(1);
 		Renderer->CreateAnimation("Sureken", "Sureken", 0.1f, 0, 1, true);
@@ -50,6 +48,7 @@ void Sureken::Start()
 
 void Sureken::Update(float _Delta)
 {
+	DamageActor::Update(_Delta);
 	if (Dir > 0)
 	{
 		Renderer->Transform.SetLocalScale({ -1,1 });
@@ -65,6 +64,8 @@ void Sureken::Update(float _Delta)
 
 void Sureken::StartFire()
 {
+	std::shared_ptr<StatData> playerstat = Player::MainPlayer->GetDynamic_Cast_This<CombatActor>()->GetStatData();
+	SetDamage(playerstat->GetDamage());
 	On();
 }
 

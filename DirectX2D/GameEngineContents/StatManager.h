@@ -2,9 +2,8 @@
 #include <GameEngineCore\GameEngineActor.h>
 
 class StatData;
-class MonsterStatData;
 class PlayerStatData;
-class DamageActor;
+class MonsterStatData;
 class StatManager : public GameEngineActor
 {
 public:
@@ -18,15 +17,10 @@ public:
 	StatManager& operator=(const StatManager& _Other) = delete;
 	StatManager& operator=(StatManager&& _Other) noexcept = delete;
 
-	static StatManager* Inst;
+	void ChangeHp(std::shared_ptr<PlayerStatData> _Stat, float _Damage);
+	void ChangeHp(std::shared_ptr<MonsterStatData> _Stat, float _Damage);
 
-	float GetDamage(GameEngineCollision* _Col);
-	void SetDamage(PlayerStatData* _StatData,DamageActor* _Weapon);
-	void ChangeHp(MonsterStatData* _StatData, float _HpValue);
-	void ChangeHp(PlayerStatData* _StatData,float _HpValue);
-	void ChangeMp(PlayerStatData* _StatData,float _MpValue);
-	void ChangeExp(PlayerStatData* _StatData,float _ExpValue);
-private:
-	void Start() override;
-	void Update(float _Delta) override;
+	void ChangeExp(float Value);
+
+	static StatManager* Inst;
 };

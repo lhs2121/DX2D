@@ -1,5 +1,5 @@
 #pragma once
-#include "PhysicsActor.h"
+#include "CombatActor.h"
 
 enum class PlayerState
 {
@@ -12,12 +12,13 @@ enum class PlayerState
 	PORTAL,
 	FLASHJUMP,
 	LUCKYSEVEN,
+	SHOWDOWN
 
 };
 
 class GameEngineSpriteRenderer;
 class GameEngineCollision;
-class Player : public PhysicsActor
+class Player : public CombatActor
 {
 public:
 	// constrcuter destructer
@@ -36,15 +37,10 @@ public:
 	}
 
 	static Player* MainPlayer;
-	std::shared_ptr<class PlayerStatData> GetStat()
-	{
-		return PlayerStat;
-	}
 private:
 	void FlipRenderer();
 	void CameraFocus();
 	void DirUpdate();
-	void ColCheck(float _Delta);
 	void PortalCheck();
 	void RopeCheck();
 	void RopePivotUpdate();
@@ -107,17 +103,16 @@ private:
 
 	int JumpKey = VK_MENU;
 	int LuckySevenKey = VK_SHIFT;
+	int ShowDownKey = VK_CONTROL;
 
 	float4 RopePos;
 	float4 RP;
 	PlayerState CurState;
 	PlayerDirState CurDirState;
 	std::string PrevLevelName;
-	std::shared_ptr<GameEngineCollision> Col;
 	std::shared_ptr<GameEngineSpriteRenderer> MainSpriteRenderer;
 	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer0;
 	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer1;
 	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer2;
-	std::shared_ptr<class PlayerStatData> PlayerStat;
 };
 

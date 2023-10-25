@@ -19,6 +19,8 @@ Player::~Player()
 
 void Player::Start()
 {
+	CombatActor::Start();
+	CreateStatData(StatType::Player);
 	//renderer
 	{
 		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
@@ -63,15 +65,9 @@ void Player::Start()
 	//collision
 	{
 		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Player);
-		Col->SetOrder(1);
 		Col->SetCollisionType(ColType::AABBBOX2D);
 		Col->Transform.SetLocalScale({ 45,65 });
 		Col->Transform.AddLocalPosition({ 0,35 });
-	}
-
-	//stat
-	{
-		PlayerStat = GetLevel()->CreateActor<PlayerStatData>(ActorOrder::PlayerStat);
 	}
 
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();

@@ -7,11 +7,11 @@
 void Player::Update(float _Delta)
 {
 	PhysicsActor::Update(_Delta);
+	CombatActor::Update(_Delta);
 	FlipRenderer();
 	CameraFocus();
 	DirUpdate();
 	RopePivotUpdate();
-	ColCheck(_Delta);
 	RopeCheck();
 	PortalCheck();
 	MoveUpdate();
@@ -105,8 +105,6 @@ void Player::MoveUpdate()
 			Transform.AddWorldPosition({ 0.0f,-5.0f });
 		}
 	}
-
-
 }
 
 void Player::RopeCheck()
@@ -150,37 +148,6 @@ void Player::PortalCheck()
 			
 		};
 	Col->CollisionEvent(CollisionOrder::Portal, Event);
-}
-
-void Player::ColCheck(float _Delta)
-{
-	if (CanHit == false)
-	{
-		HitCoolTime -= _Delta;
-
-		if (HitCoolTime <= 0)
-		{
-			CanHit = true;
-			HitCoolTime = 2.0f;
-		}
-		return;
-	}
-
-	EventParameter Event;
-
-	Event.Enter = [&](GameEngineCollision*, GameEngineCollision* Col)
-		{
-			StatManager::Inst->ChangeHp(PlayerStat.get(), -50.0f);
-			CanHit = false;
-		};
-	Event.Stay = [](GameEngineCollision*, GameEngineCollision* Col)
-		{
-		};
-	Event.Exit = [](GameEngineCollision*, GameEngineCollision* Col)
-		{
-
-		};
-	Col->CollisionEvent(CollisionOrder::Monster, Event);
 }
 
 void Player::CameraFocus()

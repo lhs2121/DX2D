@@ -31,6 +31,9 @@ void Player::StateUpdate(float _Delta)
 	case PlayerState::FLASHJUMP:
 		FlashJumpUpdate(_Delta);
 		break;
+	case PlayerState::SHOWDOWN:
+		ShowDownUpdate(_Delta);
+		break;
 	default:
 		break;
 	}
@@ -78,6 +81,9 @@ void Player::ChangeState(PlayerState _State)
 		break;
 	case PlayerState::LUCKYSEVEN:
 		LuckySevenStart();
+		break;
+	case PlayerState::SHOWDOWN:
+		ShowDownStart();
 		break;
 	default:
 		break;
@@ -133,6 +139,10 @@ void Player::IdleUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}
+	if (InputIsPress(ShowDownKey))
+	{
+		ChangeState(PlayerState::SHOWDOWN);
+	}
 	if (IsGrounded == false && NetForce.Y != 0)
 	{
 		ChangeState(PlayerState::JUMP);
@@ -165,6 +175,10 @@ void Player::WalkUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}
+	if (InputIsPress(ShowDownKey))
+	{
+		ChangeState(PlayerState::SHOWDOWN);
+	}
 }
 
 void Player::JumpUpdate(float _Delta)
@@ -192,6 +206,10 @@ void Player::JumpUpdate(float _Delta)
 	else if (InputIsDown(JumpKey) && InputIsPress(VK_DOWN) == false)
 	{
 		ChangeState(PlayerState::FLASHJUMP);
+	}
+	if (InputIsPress(ShowDownKey))
+	{
+		ChangeState(PlayerState::SHOWDOWN);
 	}
 }
 
@@ -290,5 +308,4 @@ void Player::HitUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::IDLE);
 	}
-
 }

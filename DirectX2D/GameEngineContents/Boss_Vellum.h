@@ -56,17 +56,10 @@ protected:
 	void UltEnd();
 	//Ult
 
-	void ColCheck();
-
 	float Speed = 150.0f;
 	BossState CurState;
-	std::shared_ptr<class MonsterStatData> BossStat;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
-
-	std::shared_ptr<class GameEngineCollision> BodyCol;
-	std::shared_ptr<class GameEngineCollision> FireCol;
 	std::vector<std::shared_ptr<class GameEngineCollision>> PoisonDownCol;
 	std::vector<std::shared_ptr<class GameEngineCollision>> PoisonAreaCol;
-	std::shared_ptr<class DamageEffectController> DamageViewer;
 };
 

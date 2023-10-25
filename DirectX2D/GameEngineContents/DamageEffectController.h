@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore\GameEngineActor.h>
 // Ό³Έν :
+
 class DamageEffect;
 class DamageEffectController : public GameEngineActor
 {
@@ -15,7 +16,7 @@ public:
 	DamageEffectController& operator=(const DamageEffectController& _Other) = delete;
 	DamageEffectController& operator=(DamageEffectController&& _Other) noexcept = delete;
 
-	void StartEffect(float4 _Pos, float _DamageValue);
+	void StartEffect(float4 _Pos, float _DamageValue, DamageColor _Color);
 
 private:
 	std::shared_ptr<DamageEffect> GetUsableEffect(std::list<std::shared_ptr<DamageEffect>> _list);

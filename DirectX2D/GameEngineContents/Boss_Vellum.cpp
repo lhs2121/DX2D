@@ -16,14 +16,6 @@ Boss_Vellum::~Boss_Vellum()
 void Boss_Vellum::Start()
 {
 	{
-		BossStat = GetLevel()->CreateActor<MonsterStatData>(ActorOrder::MonsterStat);
-	}
-
-	{
-		DamageViewer = GetLevel()->CreateActor<DamageEffectController>(ActorOrder::Manager);
-	}
-
-	{
 		Renderer = CreateComponent<GameEngineSpriteRenderer>();
 		Renderer->SetRenderOrder(RenderOrder::Monster);
 		Renderer->SetPivotType(PivotType::Bottom);
@@ -44,19 +36,11 @@ void Boss_Vellum::Start()
 		Renderer->AutoSpriteSizeOn();
 	}
 
-	{
-	    BodyCol = CreateComponent<GameEngineCollision>(CollisionOrder::Monster);
-		BodyCol->SetCollisionType(ColType::AABBBOX2D);
-		BodyCol->Transform.SetLocalScale({ 400,500 });
-		BodyCol->Transform.SetLocalPosition({ 0,250 });
-	}
-
 	ChangeState(BossState::Body);
 	Transform.SetWorldPosition({ 1695 ,-723 });
 }
 void Boss_Vellum::Update(float _Delta)
 {
-	ColCheck();
 	StateUpdate(_Delta);
 }
 
@@ -180,18 +164,3 @@ void Boss_Vellum::FireEnd()
 	}
 }
 
-
-void Boss_Vellum::ColCheck()
-{
-	EventParameter Event;
-
-	Event.Enter = [&](GameEngineCollision*, GameEngineCollision* Col2)
-		{
-			Col2->GetParentObject()->Off();
-			float Dmg = StatManager::Inst->GetDamage(Col2);
-			DamageViewer->StartEffect(Transform.GetWorldPosition(), Dmg);
-			StatManager::Inst->ChangeHp(BossStat.get(), -Dmg);
-			
-		};
-	BodyCol->CollisionEvent(CollisionOrder::PlayerWeapon, Event);
-}

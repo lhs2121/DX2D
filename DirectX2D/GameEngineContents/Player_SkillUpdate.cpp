@@ -85,9 +85,44 @@ void Player::LuckySevenUpdate(float _Delta)
 
 void Player::ShowDownStart()
 {
-	SkillEffctor::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::FlashJump, dir);
+	ApplyInputJump = false;
+	CanFlip = false;
+	DirCheck = false;
+	float4 SpawnPos = { Transform.GetWorldPosition().X + dir * 200.0f,Transform.GetWorldPosition().Y };
+	SkillEffctor::Inst->StartEffect(SpawnPos, EffectType::ShowDown, dir);
+
+	ChangeRandomSwingAnimation();
 }
 
 void Player::ShowDownUpdate(float _Delta)
 {
+	if (NetForce.Y == 0 && IsGrounded == true)
+	{
+		ApplyInputLeft = false;
+		ApplyInputRight = false;
+	}
+	else
+	{
+		if (dir < 0)
+		{
+			ApplyInputRight = false;
+		}
+		else if (dir > 0)
+		{
+			ApplyInputLeft = false;
+		}
+	}
+
+	if (MainSpriteRenderer->IsCurAnimationEnd())
+	{
+		if (InputIsFree(VK_LEFT) && InputIsFree(VK_RIGHT))
+		{
+			ChangeState(PlayerState::IDLE);
+		}
+		else if (InputIsPress(VK_LEFT) || InputIsPress(VK_RIGHT))
+		{
+			ChangeState(PlayerState::WALK);
+		}
+	}
+
 }

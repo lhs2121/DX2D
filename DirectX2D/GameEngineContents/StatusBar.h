@@ -20,9 +20,15 @@ public:
 
 	void ChangeHpGauge(float _Value);
 	void ResetHpGauge();
+
 	void ChangeMpGauge(float _Value);
 	void ResetMpGauge();
+
+	void ChangeExpGauge(float _Value);
+	void ResetExpGauge();
+
 	void LevelUp(int Level);
+
 	float4 HpGaugeSize;
 	float4 MpGaugeSize;
 private:
@@ -39,5 +45,12 @@ private:
 	std::shared_ptr<class GameEngineUIRenderer> HpGauge;
 	std::shared_ptr<class GameEngineUIRenderer> MpGauge;
 	std::shared_ptr<class GameEngineUIRenderer> GaugeNumber;
+
+	std::shared_ptr<class GameEngineUIRenderer> ExpGauge;
+	std::shared_ptr<class GameEngineUIRenderer> ExpBG;
+	std::shared_ptr<class GameEngineUIRenderer> ExpCover;
+	std::shared_ptr<class GameEngineUIRenderer> ExpCover2;
+	std::shared_ptr<class GameEngineUIRenderer> ExpCover3;
+	std::shared_ptr<class GameEngineUIRenderer> ExpNumber;
 };
 

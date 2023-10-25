@@ -36,9 +36,6 @@
     <ClInclude Include="StatusBar.h">
       <Filter>Actor\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ExpBar.h">
-      <Filter>Actor\UI</Filter>
-    </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -53,12 +50,6 @@
     </ClInclude>
     <ClInclude Include="DamageEffect.h">
       <Filter>Actor\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="StatData.h">
-      <Filter>Actor\Stat</Filter>
-    </ClInclude>
-    <ClInclude Include="StatManager.h">
-      <Filter>Actor\Stat</Filter>
     </ClInclude>
     <ClInclude Include="ContentsControlWindow.h" />
     <ClInclude Include="Player.h">
@@ -89,7 +80,16 @@
       <Filter>Actor\Skills\DamageActor</Filter>
     </ClInclude>
     <ClInclude Include="DamageActor.h">
-      <Filter>Actor\Skills\DamageActor</Filter>
+      <Filter>Actor\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="StatData.h">
+      <Filter>Actor\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="StatManager.h">
+      <Filter>Actor\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="CombatActor.h">
+      <Filter>Actor\Combat</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -125,9 +125,6 @@
     <ClCompile Include="StatusBar.cpp">
       <Filter>Actor\UI</Filter>
     </ClCompile>
-    <ClCompile Include="ExpBar.cpp">
-      <Filter>Actor\UI</Filter>
-    </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
@@ -142,12 +139,6 @@
     </ClCompile>
     <ClCompile Include="DamageEffect.cpp">
       <Filter>Actor\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="StatData.cpp">
-      <Filter>Actor\Stat</Filter>
-    </ClCompile>
-    <ClCompile Include="StatManager.cpp">
-      <Filter>Actor\Stat</Filter>
     </ClCompile>
     <ClCompile Include="ContentsControlWindow.cpp" />
     <ClCompile Include="Player_StateUpdate.cpp">
@@ -183,11 +174,20 @@
     <ClCompile Include="Sureken.cpp">
       <Filter>Actor\Skills\DamageActor</Filter>
     </ClCompile>
-    <ClCompile Include="DamageActor.cpp">
-      <Filter>Actor\Skills\DamageActor</Filter>
-    </ClCompile>
     <ClCompile Include="Player_SkillUpdate.cpp">
       <Filter>Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageActor.cpp">
+      <Filter>Actor\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="StatData.cpp">
+      <Filter>Actor\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="StatManager.cpp">
+      <Filter>Actor\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="CombatActor.cpp">
+      <Filter>Actor\Combat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,9 +212,6 @@
     <Filter Include="Global">
       <UniqueIdentifier>{7c8ebcee-870d-45b9-8acd-4a2c36871a8c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Stat">
-      <UniqueIdentifier>{ed0790f9-d916-4b86-95d2-c43a2c0f3523}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actor\Player">
       <UniqueIdentifier>{2e11f385-15c2-4d16-8f3b-cef3dd0869d7}</UniqueIdentifier>
     </Filter>
@@ -229,6 +226,9 @@
     </Filter>
     <Filter Include="Actor\Skills\DamageActor">
       <UniqueIdentifier>{5dd6f7be-dd61-4c8e-990b-e2dcf88c5771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Combat">
+      <UniqueIdentifier>{22f90041-8882-492f-b6e1-7838b0a62a57}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
