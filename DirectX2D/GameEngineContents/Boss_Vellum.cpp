@@ -45,10 +45,10 @@ void Boss_Vellum::Start()
 	}
 
 	{
-		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Monster);
-		Col->SetCollisionType(ColType::AABBBOX2D);
-		Col->Transform.SetLocalScale({ 400,500 });
-		Col->Transform.SetLocalPosition({ 0,250 });
+	    BodyCol = CreateComponent<GameEngineCollision>(CollisionOrder::Monster);
+		BodyCol->SetCollisionType(ColType::AABBBOX2D);
+		BodyCol->Transform.SetLocalScale({ 400,500 });
+		BodyCol->Transform.SetLocalPosition({ 0,250 });
 	}
 
 	ChangeState(BossState::Body);
@@ -193,5 +193,5 @@ void Boss_Vellum::ColCheck()
 			StatManager::Inst->ChangeHp(BossStat.get(), -Dmg);
 			
 		};
-	Col->CollisionEvent(CollisionOrder::PlayerWeapon, Event);
+	BodyCol->CollisionEvent(CollisionOrder::PlayerWeapon, Event);
 }

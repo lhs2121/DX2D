@@ -17,30 +17,30 @@ void Map0::Start()
 {
 	{
 		Renderer0 = CreateComponent<GameEngineSpriteRenderer>(0);
-		Renderer0->SetSprite("kerningcity", 0);
+		Renderer0->SetSprite("Map_Town_BG.png");
 		Renderer0->SetRenderOrder(RenderOrder::MapBackground);
 	}
 
 	{
 		Renderer1 = CreateComponent<GameEngineSpriteRenderer>(0);
-		Renderer1->SetSprite("kerningcity", 1);
+		Renderer1->SetSprite("Map_Town_Tile.png");
 		Renderer1->SetRenderOrder(RenderOrder::MapTile);
 	}
 
 	{
 		DebugRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
-		DebugRenderer->SetSprite("kerningcity", 2);
+		DebugRenderer->SetSprite("Map_Town_Ground.png");
 		DebugRenderer->SetRenderOrder(RenderOrder::Debug);
-		//Renderer2->Off();
+		DebugRenderer->Off();
 	}
 
-	MapScale = Renderer0->GetSprite()->GetSpriteData(1).GetScale();
+	MapScale = DebugRenderer->GetSprite()->GetSpriteData(0).GetScale();
 	Transform.SetLocalPosition({ MapScale.hX(), -MapScale.hY(), 0.0f });
 }
 
 void Map0::Update(float _Delta)
 {
-
+	Renderer0->Transform.SetWorldPosition({ DebugRenderer->Transform.GetWorldPosition().X,GetLevel()->GetMainCamera()->Transform.GetWorldPosition().Y});
 }
 
 

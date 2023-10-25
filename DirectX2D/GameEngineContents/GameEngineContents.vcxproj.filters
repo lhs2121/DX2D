@@ -3,14 +3,8 @@
   <ItemGroup>
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="ContentsCore.h" />
-    <ClInclude Include="BulletShooter.h">
+    <ClInclude Include="SurekenShooter.h">
       <Filter>Actor\Skills</Filter>
-    </ClInclude>
-    <ClInclude Include="ProJectile.h">
-      <Filter>Actor\Skills</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugUI.h">
-      <Filter>Actor\UI</Filter>
     </ClInclude>
     <ClInclude Include="ContentsEnum.h">
       <Filter>Global</Filter>
@@ -48,10 +42,10 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="KerningCity.h">
+    <ClInclude Include="TownLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="HuntRegion.h">
+    <ClInclude Include="HuntLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="DamageEffectController.h">
@@ -65,9 +59,6 @@
     </ClInclude>
     <ClInclude Include="StatManager.h">
       <Filter>Actor\Stat</Filter>
-    </ClInclude>
-    <ClInclude Include="DamageActor.h">
-      <Filter>Actor\Skills</Filter>
     </ClInclude>
     <ClInclude Include="ContentsControlWindow.h" />
     <ClInclude Include="Player.h">
@@ -94,18 +85,18 @@
     <ClInclude Include="Boss_Vellum.h">
       <Filter>Actor\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="Sureken.h">
+      <Filter>Actor\Skills\DamageActor</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageActor.h">
+      <Filter>Actor\Skills\DamageActor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="PreCompile.cpp" />
-    <ClCompile Include="BulletShooter.cpp">
+    <ClCompile Include="SurekenShooter.cpp">
       <Filter>Actor\Skills</Filter>
-    </ClCompile>
-    <ClCompile Include="ProJectile.cpp">
-      <Filter>Actor\Skills</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugUI.cpp">
-      <Filter>Actor\UI</Filter>
     </ClCompile>
     <ClCompile Include="PhysicsActor.cpp">
       <Filter>Actor\Physics</Filter>
@@ -140,10 +131,10 @@
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="KerningCity.cpp">
+    <ClCompile Include="TownLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="HuntRegion.cpp">
+    <ClCompile Include="HuntLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="DamageEffectController.cpp">
@@ -157,9 +148,6 @@
     </ClCompile>
     <ClCompile Include="StatManager.cpp">
       <Filter>Actor\Stat</Filter>
-    </ClCompile>
-    <ClCompile Include="DamageActor.cpp">
-      <Filter>Actor\Skills</Filter>
     </ClCompile>
     <ClCompile Include="ContentsControlWindow.cpp" />
     <ClCompile Include="Player_StateUpdate.cpp">
@@ -191,6 +179,15 @@
     </ClCompile>
     <ClCompile Include="Boss_Vellum.cpp">
       <Filter>Actor\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Sureken.cpp">
+      <Filter>Actor\Skills\DamageActor</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageActor.cpp">
+      <Filter>Actor\Skills\DamageActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_SkillUpdate.cpp">
+      <Filter>Actor\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +226,9 @@
     </Filter>
     <Filter Include="Actor\Boss">
       <UniqueIdentifier>{c17c1fe8-0e8d-4036-a963-b1c8fdd2a3cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Skills\DamageActor">
+      <UniqueIdentifier>{5dd6f7be-dd61-4c8e-990b-e2dcf88c5771}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

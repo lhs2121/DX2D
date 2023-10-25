@@ -1,18 +1,18 @@
 #pragma once
 #include "DamageActor.h"
 // Ό³Έν :
-class ProJectile : public DamageActor
+class Sureken : public DamageActor
 {
 public:
 	// constrcuter destructer
-	ProJectile();
-	~ProJectile();
+	Sureken();
+	~Sureken();
 
 	// delete Function
-	ProJectile(const ProJectile& _Other) = delete;
-	ProJectile(ProJectile&& _Other) noexcept = delete;
-	ProJectile& operator=(const ProJectile& _Other) = delete;
-	ProJectile& operator=(ProJectile&& _Other) noexcept = delete;
+	Sureken(const Sureken& _Other) = delete;
+	Sureken(Sureken&& _Other) noexcept = delete;
+	Sureken& operator=(const Sureken& _Other) = delete;
+	Sureken& operator=(Sureken&& _Other) noexcept = delete;
 
 	void SetDir(float _Dir)
 	{
@@ -41,7 +41,7 @@ private:
 	float Speed;
 	float CoolTime;
 	float Dir;
-	std::shared_ptr<class GameEngineCollision> Col;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
+	std::shared_ptr<class GameEngineCollision> Col;
 };
 

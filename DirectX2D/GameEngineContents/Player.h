@@ -52,11 +52,8 @@ private:
 	//basic update
 
 	void RopeStart();
-	void FlashJumpStart();
-	void LuckySevenStart();
 	void HitStart();
 	void PortalStart();
-	void MicroAdjustment();
 	//state start
 
 	void StateUpdate(float _Delta);
@@ -65,13 +62,18 @@ private:
 	void JumpUpdate(float _Delta);
 	void RopeUpdate(float _Delta);
 	void DownUpdate(float _Delta);
-	void MeleeAttackUpdate(float _Delta);
-	void AutoAttackUpdate(float _Delta);
-	void LuckySevenUpdate(float _Delta);
-	void FlashJumpUpdate(float _Delta);
 	void HitUpdate(float _Delta);
 	//state update
 
+	void FlashJumpStart();
+	void LuckySevenStart();
+	void ShowDownStart();
+	//skill start
+
+	void LuckySevenUpdate(float _Delta);
+	void FlashJumpUpdate(float _Delta);
+	void ShowDownUpdate(float _Delta);
+	//skill update
 
 	void ChangeRandomSwingAnimation();
 	void ChangeDirState(PlayerDirState _State)

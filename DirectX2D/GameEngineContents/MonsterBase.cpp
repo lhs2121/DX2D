@@ -107,12 +107,13 @@ void MonsterBase::ChangeState(MonsterState _State)
 }
 void MonsterBase::HitStart()
 {
+	NetForce.X += 200.0f;
 	Renderer->ChangeAnimation(HitAniName);
 }
 
 void MonsterBase::RunStart()
 {
-	Renderer->ChangeAnimation(RunAniName);
+	Renderer->ChangeAnimation(IdleAniName);
 }
 
 void MonsterBase::DieStart()
@@ -126,7 +127,7 @@ void MonsterBase::HitUpdate(float _Delta)
 	HitCoolTime -= _Delta;
 	if (HitCoolTime <= 0)
 	{
-		HitCoolTime = 1.0f;
+		HitCoolTime = 0.3f;
 		ChangeState(MonsterState::RUN);
 	}
 	else if (MonsterStat->CurHp <= 0)

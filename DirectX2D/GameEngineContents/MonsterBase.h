@@ -40,11 +40,10 @@ protected:
 
 	std::string DieAniName;
 	std::string HitAniName;
-	std::string RunAniName;
 	std::string IdleAniName;
 	
 	MonsterState CurState = MonsterState::RUN;
-	float HitCoolTime = 1.0f;
+	float HitCoolTime = 0.3f;
 	float DirCycleTime = 2.0f;
 	float Speed = 60.0f;
 	int dir = 0;
@@ -53,7 +52,6 @@ protected:
 	std::shared_ptr<class DamageEffectController> DamageViewer;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
 	std::shared_ptr<class GameEngineCollision> Col;
-	std::shared_ptr<class GameEngineCollision> TrackingCol;
 	std::shared_ptr<class MonsterStatData> MonsterStat;
 	
 };

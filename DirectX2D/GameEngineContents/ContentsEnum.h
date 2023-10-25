@@ -6,7 +6,7 @@ enum class RenderOrder
 	MapTile,
 	MapObject,
 	Monster,
-	Projectile,
+	Sureken,
 	Effect,
 	Player,
 	Effect2,
@@ -31,7 +31,7 @@ enum class ActorOrder
 	NPC,
 	MapObject,
 	Skill,
-	Projectile,
+	Sureken,
 	SkillEffect,
 	DamageEffect,
 	Manager,
@@ -60,11 +60,31 @@ enum class EffectType
 {
 	FlashJump,
 	LuckySeven,
-	HitSureken
+	HitSureken,
+	ShowDown,
 };
 
 enum class FadeType
 {
 	FADEIN,
 	FADEOUT
+};
+
+enum class SkillType
+{
+	Sureken,
+	Melee,
+	Magic
+
+};
+struct SkillDesc
+{
+	SkillType Type;
+	float StartPos;
+	float hitCount;
+	float Damage;
+	float Speed;
+	float CoolTime;
+	float Dir;
+	std::string AniName;
 };

@@ -2,18 +2,18 @@
 #include "MapleLevel.h"
 
 // Ό³Έν :
-class HuntRegion : public MapleLevel
+class HuntLevel : public MapleLevel
 {
 public:
 	// constrcuter destructer
-	HuntRegion();
-	~HuntRegion();
+	HuntLevel();
+	~HuntLevel();
 
 	// delete Function
-	HuntRegion(const HuntRegion& _Other) = delete;
-	HuntRegion(HuntRegion&& _Other) noexcept = delete;
-	HuntRegion& operator=(const HuntRegion& _Other) = delete;
-	HuntRegion& operator=(HuntRegion&& _Other) noexcept = delete;
+	HuntLevel(const HuntLevel& _Other) = delete;
+	HuntLevel(HuntLevel&& _Other) noexcept = delete;
+	HuntLevel& operator=(const HuntLevel& _Other) = delete;
+	HuntLevel& operator=(HuntLevel&& _Other) noexcept = delete;
 
 protected:
 	void Start() override;

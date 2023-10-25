@@ -15,34 +15,34 @@ void Map2::Start()
 {
 	{
 		Renderer0 = CreateComponent<GameEngineSpriteRenderer>(0);
-		Renderer0->SetSprite("bossmap", 0);
+		Renderer0->SetSprite("Map_Boss_BG.png");
 		Renderer0->SetRenderOrder(RenderOrder::MapBackground);
 	}
 
 	{
 		Renderer1 = CreateComponent<GameEngineSpriteRenderer>(0);
-		Renderer1->SetSprite("bossmap", 1);
-		Renderer1->SetRenderOrder(RenderOrder::MapTile);
+		Renderer1->SetSprite("Map_Boss_Tile.png");
+		Renderer1->SetRenderOrder(2);
 	}
 
 	{
 		Renderer2 = CreateComponent<GameEngineSpriteRenderer>(0);
-		Renderer2->SetSprite("bossmap", 2);
+		Renderer2->SetSprite("Map_Boss_Object.png");
 		Renderer2->SetRenderOrder(RenderOrder::MapTile);
 	}
 
 	{
 		DebugRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
-		DebugRenderer->SetSprite("bossmap", 3);
+		DebugRenderer->SetSprite("Map_Boss_Ground.png");
 		DebugRenderer->SetRenderOrder(RenderOrder::Debug);
-		//Renderer2->Off(); 
+		DebugRenderer->Off();
 	}
 
-	MapScale = Renderer0->GetSprite()->GetSpriteData(0).GetScale();
+	MapScale = DebugRenderer->GetSprite()->GetSpriteData(0).GetScale();
 	Transform.SetLocalPosition({ MapScale.hX(), -MapScale.hY(), 0.0f });
 }
 
 void Map2::Update(float _Delta)
 {
-
+	Renderer0->Transform.SetWorldPosition({ DebugRenderer->Transform.GetWorldPosition().X,GetLevel()->GetMainCamera()->Transform.GetWorldPosition().Y });
 }

@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "Portal.h"
 #include "StatusBar.h"
-#include "BulletShooter.h"
+#include "SurekenShooter.h"
 #include "ExpBar.h"
 #include "MapleMap.h"
 #include "SkillEffctor.h"
@@ -35,7 +35,7 @@ void MapleLevel::Start()
 
 	{
 		CurPlayer = CreateActor<Player>(ActorOrder::Player);
-		CurShooter = CreateActor<BulletShooter>(ActorOrder::Manager);
+		CurShooter = CreateActor<SurekenShooter>(ActorOrder::Manager);
 		CurSkillEffctor = CreateActor<SkillEffctor>(ActorOrder::Manager);
 		CurStatusBar = CreateActor<StatusBar>(ActorOrder::UI);
 		CurExpBar = CreateActor<ExpBar>(ActorOrder::UI);
@@ -46,7 +46,7 @@ void MapleLevel::Start()
 void MapleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	Player::MainPlayer = CurPlayer.get();
-	BulletShooter::Inst = CurShooter.get();
+	SurekenShooter::Inst = CurShooter.get();
 	SkillEffctor::Inst = CurSkillEffctor.get();
 	StatusBar::Inst = CurStatusBar.get();
 	ExpBar::Inst = CurExpBar.get();

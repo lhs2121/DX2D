@@ -5,10 +5,12 @@
 #include <GameEngineCore/GameEngineBlend.h>
 #include <GameEngineCore/GameEngineSpriteRenderer.h>
 #include <GameEngineCore/GameEngineMaterial.h>
-#include "KerningCity.h"
+
 #include "TitleLevel.h"
-#include "HuntRegion.h"
+#include "TownLevel.h"
+#include "HuntLevel.h"
 #include "BossLevel.h"
+
 #include "ContentsControlWindow.h"
 
 ContentsCore::ContentsCore() 
@@ -25,10 +27,10 @@ void ContentsCore::Start()
     GameEngineRenderTarget::IsDepth = false;
 	GameEngineGUI::CreateGUIWindow<ContentsControlWindow>("ContentsControlWindow");
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
-	GameEngineCore::CreateLevel<KerningCity>("KerningCity");
-	GameEngineCore::CreateLevel<HuntRegion>("HuntRegion");
+	GameEngineCore::CreateLevel<TownLevel>("TownLevel");
+	GameEngineCore::CreateLevel<HuntLevel>("HuntLevel");
 	GameEngineCore::CreateLevel<BossLevel>("BossLevel");
-	GameEngineCore::ChangeLevel("KerningCity");
+	GameEngineCore::ChangeLevel("TownLevel");
 }
 
 void ContentsCore::Update(float _Delta)

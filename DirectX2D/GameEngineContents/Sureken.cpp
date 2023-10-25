@@ -1,23 +1,23 @@
 #include "PreCompile.h"
-#include "ProJectile.h"
+#include "Sureken.h"
 #include "Player.h"
 #include "SkillEffctor.h"
 #include "StatManager.h"
-ProJectile::ProJectile()
+Sureken::Sureken()
 {
 }
 
-ProJectile::~ProJectile()
+Sureken::~Sureken()
 {
 }
 
-void ProJectile::Move(float _Delta)
+void Sureken::Move(float _Delta)
 {
 	float4 Force = { Dir * Speed * _Delta, 0 };
 	Transform.AddWorldPosition(Force);
 }
 
-void ProJectile::StartCoolTime(float _Delta)
+void Sureken::StartCoolTime(float _Delta)
 {
 	CoolTime -= _Delta;
 
@@ -27,7 +27,7 @@ void ProJectile::StartCoolTime(float _Delta)
 	}
 }
 
-void ProJectile::Start()
+void Sureken::Start()
 {
 	{
 		Col = CreateComponent<GameEngineCollision>(CollisionOrder::PlayerWeapon);
@@ -41,14 +41,14 @@ void ProJectile::Start()
 		Renderer->SetSprite("Sureken");
 		Renderer->ChangeAnimation("Sureken");
 		Renderer->SetImageScale({ 20,20 });
-		Renderer->SetRenderOrder(RenderOrder::Projectile);
+		Renderer->SetRenderOrder(RenderOrder::Sureken);
 		Renderer->AutoSpriteSizeOn();
 	}
 
 	GameEngineActor::Off();
 }
 
-void ProJectile::Update(float _Delta)
+void Sureken::Update(float _Delta)
 {
 	if (Dir > 0)
 	{
@@ -63,12 +63,12 @@ void ProJectile::Update(float _Delta)
 	StartCoolTime(_Delta);
 }
 
-void ProJectile::StartFire()
+void Sureken::StartFire()
 {
 	On();
 }
 
-void ProJectile::Off()
+void Sureken::Off()
 {
 	if (SkillEffctor::Inst != nullptr)
 	{

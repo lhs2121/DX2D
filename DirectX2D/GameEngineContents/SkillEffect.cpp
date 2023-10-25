@@ -44,6 +44,8 @@ void SkillEffect::EffectSetting(float4 _Pos, EffectType _Type, float _Dir)
 		OffSet = { _Dir * random,0.0f };
 		Renderer->ChangeAnimation("HitSureken");
 		break;
+	case EffectType::ShowDown:
+		Renderer->ChangeAnimation("ShowDownChallenge");
 	default:
 		break;
 	}

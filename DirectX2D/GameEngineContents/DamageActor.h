@@ -23,7 +23,7 @@ public:
 	{
 		return Damage;
 	}
-private:
+protected:
 	float Damage;
 };
 

@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "BossLevel.h"
 #include "Map2.h"
-#include "MonsterSpawner.h"
 #include "Boss_Vellum.h"
 
 BossLevel::BossLevel()

@@ -25,6 +25,20 @@ void TitleLevel::Start()
             GameEngineSprite::CreateFolder(DirGroup[i].GetStringPath());
 		}
 	}
+
+	GameEngineSprite::CreateSingle("Map_Town_Ground.png");
+	GameEngineSprite::CreateSingle("Map_Town_BG.png");
+	GameEngineSprite::CreateSingle("Map_Town_Tile.png");
+
+	GameEngineSprite::CreateSingle("Map_Hunt_Ground.png");
+	GameEngineSprite::CreateSingle("Map_Hunt_BG.png");
+	GameEngineSprite::CreateSingle("Map_Hunt_Tile.png");
+
+	GameEngineSprite::CreateSingle("Map_Boss_Ground.png");
+	GameEngineSprite::CreateSingle("Map_Boss_BG.png");
+	GameEngineSprite::CreateSingle("Map_Boss_Object.png");
+	GameEngineSprite::CreateSingle("Map_Boss_Tile.png");
+
 	GameEngineSprite::CreateSingle("HpGauge.png");
 	GameEngineSprite::CreateSingle("MpGauge.png");
 	GameEngineSprite::CreateSingle("LvText.png");

@@ -2,18 +2,18 @@
 #include "MapleLevel.h"
 
 // Ό³Έν :
-class KerningCity : public MapleLevel
+class TownLevel : public MapleLevel
 {
 public:
 	// constrcuter destructer
-	KerningCity();
-	~KerningCity();
+	TownLevel();
+	~TownLevel();
 
 	// delete Function
-	KerningCity(const KerningCity& _Other) = delete;
-	KerningCity(KerningCity&& _Other) noexcept = delete;
-	KerningCity& operator=(const KerningCity& _Other) = delete;
-	KerningCity& operator=(KerningCity&& _Other) noexcept = delete;
+	TownLevel(const TownLevel& _Other) = delete;
+	TownLevel(TownLevel&& _Other) noexcept = delete;
+	TownLevel& operator=(const TownLevel& _Other) = delete;
+	TownLevel& operator=(TownLevel&& _Other) noexcept = delete;
 
 protected:
 	void Start() override;
