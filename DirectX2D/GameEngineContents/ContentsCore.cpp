@@ -11,7 +11,7 @@
 #include "HuntLevel.h"
 #include "BossLevel.h"
 
-#include "ContentsControlWindow.h"
+#include "MapleStoryGUI.h"
 
 ContentsCore::ContentsCore() 
 {
@@ -25,7 +25,7 @@ void ContentsCore::Start()
 {
 	GameEngineLevel::OffDebug();
     GameEngineRenderTarget::IsDepth = false;
-	GameEngineGUI::CreateGUIWindow<ContentsControlWindow>("ContentsControlWindow");
+	GameEngineGUI::CreateGUIWindow<MapleStoryGUI>("MapleStoryGUI");
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
 	GameEngineCore::CreateLevel<TownLevel>("TownLevel");
 	GameEngineCore::CreateLevel<HuntLevel>("HuntLevel");

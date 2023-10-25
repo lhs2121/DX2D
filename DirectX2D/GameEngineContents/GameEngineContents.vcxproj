@@ -167,7 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ContentsControlWindow.h" />
+    <ClInclude Include="MapleStoryGUI.h" />
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="DamageActor.h" />
     <ClInclude Include="HuntLevel.h" />
@@ -199,9 +199,10 @@
     <ClInclude Include="Map2.h" />
     <ClInclude Include="Boss_Vellum.h" />
     <ClInclude Include="CombatActor.h" />
+    <ClInclude Include="Inventory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ContentsControlWindow.cpp" />
+    <ClCompile Include="MapleStoryGUI.cpp" />
     <ClCompile Include="HuntLevel.cpp" />
     <ClCompile Include="TownLevel.cpp" />
     <ClCompile Include="Map0.cpp" />
@@ -240,6 +241,7 @@
     <ClCompile Include="Map2.cpp" />
     <ClCompile Include="Boss_Vellum.cpp" />
     <ClCompile Include="CombatActor.cpp" />
+    <ClCompile Include="Inventory.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

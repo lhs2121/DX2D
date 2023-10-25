@@ -34,6 +34,7 @@ public:
 	std::shared_ptr<class SkillEffctor> CurSkillEffctor;
 	std::shared_ptr<class StatusBar> CurStatusBar;
 	std::shared_ptr<class FadeScreen> CurFadeScreen;
+	std::shared_ptr<class Inventory> CurInventory;
 
 	std::map<std::string, std::shared_ptr<class Portal>> PortalGroup;
 };

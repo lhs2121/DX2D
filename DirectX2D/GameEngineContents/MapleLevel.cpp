@@ -7,6 +7,7 @@
 #include "MapleMap.h"
 #include "SkillEffctor.h"
 #include "FadeScreen.h"
+#include "Inventory.h"
 
 MapleLevel::MapleLevel()
 {
@@ -38,6 +39,7 @@ void MapleLevel::Start()
 		CurSkillEffctor = CreateActor<SkillEffctor>(ActorOrder::Manager);
 		CurStatusBar = CreateActor<StatusBar>(ActorOrder::UI);
 		CurFadeScreen = CreateActor<FadeScreen>(ActorOrder::FadeScreen);
+		CurInventory = CreateActor<Inventory>(ActorOrder::UI);
 	}
 }
 
@@ -48,6 +50,7 @@ void MapleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	SkillEffctor::Inst = CurSkillEffctor.get();
 	StatusBar::Inst = CurStatusBar.get();
 	MapleMap::CurMap = CurMap.get();
+	Inventory::Inst = CurInventory.get();
 	CurFadeScreen->SettingAndStart(FadeType::FADEOUT);
 }
 

@@ -31,21 +31,21 @@ public:
 	}
 };
 
-class MapEditorTab : public Tab
-{
-public:
-	std::string SavePath;
-	std::string InputPath;
-
-	void Start();
-	void OnGUI(GameEngineLevel* _Level, float _DeltaTime);
-
-public:
-	MapEditorTab(std::string_view _Name)
-		: Tab(_Name)
-	{
-	}
-};
+//class MapEditorTab : public Tab
+//{
+//public:
+//	std::string SavePath;
+//	std::string InputPath;
+//
+//	void Start();
+//	void OnGUI(GameEngineLevel* _Level, float _DeltaTime);
+//
+//public:
+//	MapEditorTab(std::string_view _Name)
+//		: Tab(_Name)
+//	{
+//	}
+//};
 
 
 class LevelChangeTab : public Tab
@@ -61,7 +61,7 @@ public:
 
 
 // Ό³Έν :
-class ContentsControlWindow : public GameEngineGUIWindow
+class MapleStoryGUI : public GameEngineGUIWindow
 {
 public:
 	void Start() override;

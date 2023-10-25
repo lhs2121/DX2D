@@ -51,7 +51,7 @@
     <ClInclude Include="DamageEffect.h">
       <Filter>Actor\Effect</Filter>
     </ClInclude>
-    <ClInclude Include="ContentsControlWindow.h" />
+    <ClInclude Include="MapleStoryGUI.h" />
     <ClInclude Include="Player.h">
       <Filter>Actor\Player</Filter>
     </ClInclude>
@@ -90,6 +90,9 @@
     </ClInclude>
     <ClInclude Include="CombatActor.h">
       <Filter>Actor\Combat</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Actor\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -140,7 +143,7 @@
     <ClCompile Include="DamageEffect.cpp">
       <Filter>Actor\Effect</Filter>
     </ClCompile>
-    <ClCompile Include="ContentsControlWindow.cpp" />
+    <ClCompile Include="MapleStoryGUI.cpp" />
     <ClCompile Include="Player_StateUpdate.cpp">
       <Filter>Actor\Player</Filter>
     </ClCompile>
@@ -188,6 +191,9 @@
     </ClCompile>
     <ClCompile Include="CombatActor.cpp">
       <Filter>Actor\Combat</Filter>
+    </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Actor\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
