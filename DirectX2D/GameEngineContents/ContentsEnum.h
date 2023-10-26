@@ -56,7 +56,7 @@ enum class PlayerDirState
 	RIGHT,
 };
 
-enum class EffectType
+enum class SkillType
 {
 	FlashJump,
 	LuckySeven,

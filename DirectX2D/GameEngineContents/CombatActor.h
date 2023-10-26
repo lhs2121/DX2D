@@ -37,8 +37,9 @@ protected:
 	void ColCheck();
 	void PlayerColUpdate();
 	void MonsterColUpdate();
+
 	StatType CurStatType;
-	std::shared_ptr<class DamageEffectController> DamageViewer;
+	std::shared_ptr<class DamageIndicator> DamageViewer;
 	std::shared_ptr<class GameEngineCollision> Col;
 	std::shared_ptr<StatData> MyStatData;
 };

@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "Sureken.h"
 #include "Player.h"
-#include "SkillEffctor.h"
+#include "SkillManager.h"
 #include "StatManager.h"
 #include "StatData.h"
 
@@ -66,14 +66,15 @@ void Sureken::StartFire()
 {
 	std::shared_ptr<StatData> playerstat = Player::MainPlayer->GetDynamic_Cast_This<CombatActor>()->GetStatData();
 	SetDamage(playerstat->GetDamage());
+	DamageActor::On();
 	On();
 }
 
 void Sureken::Off()
 {
-	if (SkillEffctor::Inst != nullptr)
+	if (SkillManager::Inst != nullptr)
 	{
-		SkillEffctor::Inst->StartEffect(Transform.GetWorldPosition(), EffectType::HitSureken, Dir);
+		SkillManager::Inst->StartSkill(Transform.GetWorldPosition(), SkillType::HitSureken, Dir);
 	}
 	
 	GameEngineActor::Off();

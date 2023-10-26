@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "StatManager.h"
 #include "StatData.h"
-#include "DamageEffectController.h"
+#include "DamageIndicator.h"
 #include "StatusBar.h"
 #include "Player.h"
 

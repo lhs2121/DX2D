@@ -1,5 +1,6 @@
 #pragma once
 #include "CombatActor.h"
+#include "StatData.h"
 
 enum class PlayerState
 {
@@ -34,6 +35,11 @@ public:
 	float GetDir()
 	{
 		return dir;
+	}
+
+	float GetDamage()
+	{
+		return MyStatData->GetDamage();
 	}
 
 	static Player* MainPlayer;

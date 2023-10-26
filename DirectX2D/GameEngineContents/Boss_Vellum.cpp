@@ -1,6 +1,6 @@
 #include "PreCompile.h"
 #include "Boss_Vellum.h"
-#include "DamageEffectController.h"
+#include "DamageIndicator.h"
 #include "Player.h"
 #include "StatData.h"
 #include "StatManager.h"
@@ -57,10 +57,13 @@ void Boss_Vellum::ChangeState(BossState _State)
 		FireStart();
 		break;
 	case BossState::Dive:
+		DiveStart();
 		break;
 	case BossState::Poison:
+		PoisonStart();
 		break;
 	case BossState::Ult:
+		UltStart();
 		break;
 	default:
 		break;
@@ -79,10 +82,13 @@ void Boss_Vellum::StateUpdate(float _Delta)
 		FireUpdate(_Delta);
 		break;
 	case BossState::Dive:
+		DiveUpdate(_Delta);
 		break;
 	case BossState::Poison:
+		PoisonUpdate(_Delta);
 		break;
 	case BossState::Ult:
+		UltUpdate(_Delta);
 		break;
 	default:
 		break;
@@ -160,7 +166,44 @@ void Boss_Vellum::FireEnd()
 	}
 	else if (Renderer->IsCurAnimation("Body_End"))
 	{
-		ChangeState(BossState::Body);
+		ChangeState(BossState::Poison);
 	}
+}
+
+void Boss_Vellum::PoisonStart()
+{
+	Renderer->ChangeAnimation("Body_Up");
+}
+
+void Boss_Vellum::PoisonUpdate(float _Delta)
+{
+}
+
+void Boss_Vellum::PoisonEnd()
+{
+}
+
+void Boss_Vellum::DiveStart()
+{
+}
+
+void Boss_Vellum::DiveUpdate(float _Delta)
+{
+}
+
+void Boss_Vellum::DiveEnd()
+{
+}
+
+void Boss_Vellum::UltStart()
+{
+}
+
+void Boss_Vellum::UltUpdate(float _Delta)
+{
+}
+
+void Boss_Vellum::UltEnd()
+{
 }
 

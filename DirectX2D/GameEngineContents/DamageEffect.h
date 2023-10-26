@@ -22,7 +22,7 @@ public:
 	{
 		return cool;
 	}
-	void StartEffect();
+	void StartSkill();
 	void EndEffect();
 	int CurOrder;
 protected:

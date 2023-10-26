@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include "SurekenShooter.h"
-#include "SkillEffctor.h"
+#include "SkillManager.h"
 
 void Player::StateUpdate(float _Delta)
 {

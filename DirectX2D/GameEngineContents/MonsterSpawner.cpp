@@ -19,7 +19,8 @@ void MonsterSpawner::Update(float _Delta)
 	SpawnCoolTime -= _Delta;
 	if (SpawnCoolTime < 0.0f)
 	{
-		for (int i = 0; i < SpawnCount; i++)
+
+		for (int i = 0; i < 3; i++)
 		{
 			std::shared_ptr<Monster> NewMonster = GetLevel()->CreateActor<Monster>(ActorOrder::Monster);
 			NewMonster->Setting(CurMonsterString); 

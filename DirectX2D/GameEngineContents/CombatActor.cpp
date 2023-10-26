@@ -3,7 +3,7 @@
 #include "StatData.h"
 #include "DamageActor.h"
 #include "StatManager.h"
-#include "DamageEffectController.h"
+#include "DamageIndicator.h"
 
 CombatActor::CombatActor()
 {
@@ -15,7 +15,7 @@ CombatActor::~CombatActor()
 
 void CombatActor::Start()
 {
-	DamageViewer = GetLevel()->CreateActor<DamageEffectController>();
+	DamageViewer = GetLevel()->CreateActor<DamageIndicator>();
 }
 
 void CombatActor::Update(float _Delta)
@@ -94,7 +94,7 @@ void CombatActor::PlayerColUpdate()
 	Event.Enter = [&](GameEngineCollision*, GameEngineCollision* EnemyCol)
 		{
 			StatManager::Inst->ChangeHp(MyStatData->GetDynamic_Cast_This<PlayerStatData>(), 10);
-			DamageViewer->StartEffect(Transform.GetWorldPosition(), 10, DamageColor::Purple);
+			DamageViewer->StartSkill(Transform.GetWorldPosition(), 10, DamageColor::Purple);
 		};
 	Col->CollisionEvent(CollisionOrder::Monster, Event);
 }
@@ -110,7 +110,7 @@ void CombatActor::MonsterColUpdate()
 			damageActor->Hit();
 			Hit();
 			StatManager::Inst->ChangeHp(MyStatData->GetDynamic_Cast_This<MonsterStatData>(), Damage);
-			DamageViewer->StartEffect(Transform.GetWorldPosition(), Damage, DamageColor::Orange);
+			DamageViewer->StartSkill(Transform.GetWorldPosition(), Damage, DamageColor::Orange);
 		};
 	Col->CollisionEvent(CollisionOrder::PlayerSkill, Event);
 

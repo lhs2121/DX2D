@@ -1,18 +1,18 @@
 #include "PreCompile.h"
-#include "SkillEffctor.h"
+#include "SkillManager.h"
 #include "SkillEffect.h"
 #include "Player.h"
-SkillEffctor* SkillEffctor::Inst = nullptr;
+SkillManager* SkillManager::Inst = nullptr;
 
-SkillEffctor::SkillEffctor()
+SkillManager::SkillManager()
 {
 }
 
-SkillEffctor::~SkillEffctor()
+SkillManager::~SkillManager()
 {
 }
 
-void SkillEffctor::StartEffect(float4 _Pos, EffectType _Type, float _Dir)
+void SkillManager::StartSkill(float4 _Pos, SkillType _Type, float _Dir)
 {
 	std::list<std::shared_ptr<SkillEffect>> list;
 	list = GetLevel()->GetObjectGroupConvert<SkillEffect>(ActorOrder::SkillEffect);
@@ -21,7 +21,7 @@ void SkillEffctor::StartEffect(float4 _Pos, EffectType _Type, float _Dir)
 	NewEffect->On();
 }
 
-void SkillEffctor::Start()
+void SkillManager::Start()
 {
 	for (int i = 0; i < 10; i++)
 	{
@@ -29,7 +29,7 @@ void SkillEffctor::Start()
 	}
 }
 
-std::shared_ptr<SkillEffect> SkillEffctor::GetUsableEffect(std::list<std::shared_ptr<SkillEffect>> _list)
+std::shared_ptr<SkillEffect> SkillManager::GetUsableEffect(std::list<std::shared_ptr<SkillEffect>> _list)
 {
 	std::list<std::shared_ptr<SkillEffect>>::iterator Start = _list.begin();
 	std::list<std::shared_ptr<SkillEffect>>::iterator End = _list.end();

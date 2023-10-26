@@ -143,7 +143,11 @@ void MonsterBase::DieUpdate(float _Delta)
 	}
 	if (Renderer->IsCurAnimationEnd())
 	{
-		StatManager::Inst->ChangeExp(51);
+		std::random_device rnd;
+		GameEngineRandom random = GameEngineRandom();
+		random.SetSeed(rnd());
+		float num = random.RandomFloat(10.0f, 15.0f);
+		StatManager::Inst->ChangeExp(num);
 		Death();
 	}
 }

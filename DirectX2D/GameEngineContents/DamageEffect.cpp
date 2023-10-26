@@ -61,7 +61,7 @@ void DamageEffect::Start()
 	Off();
 }
 
-void DamageEffect::StartEffect()
+void DamageEffect::StartSkill()
 {
 	cool = 1.5f;
 	On();

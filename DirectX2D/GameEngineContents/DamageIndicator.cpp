@@ -1,18 +1,18 @@
 #include "PreCompile.h"
-#include "DamageEffectController.h"
+#include "DamageIndicator.h"
 #include "DamageEffect.h"
 
-DamageEffectController::DamageEffectController()
+DamageIndicator::DamageIndicator()
 {
 }
 
-DamageEffectController::~DamageEffectController()
+DamageIndicator::~DamageIndicator()
 {
 
 }
 
 
-void DamageEffectController::StartEffect(float4 _Pos, float _DamageValue, DamageColor _Color)
+void DamageIndicator::StartSkill(float4 _Pos, float _DamageValue, DamageColor _Color)
 {
 	CountStack();
 
@@ -63,13 +63,13 @@ void DamageEffectController::StartEffect(float4 _Pos, float _DamageValue, Damage
 		}
 	}
 	NewEffect->Transform.AddWorldPosition({ -8.0f * NewArray.size() - 1,0 });
-	NewEffect->StartEffect();
+	NewEffect->StartSkill();
 
 	PrevEffect = NewEffect;
 
 }
 
-void DamageEffectController::CountStack()
+void DamageIndicator::CountStack()
 {
 	if (PrevEffect != nullptr && PrevEffect->GetCoolTime() <= 1.2f)
 	{
@@ -85,7 +85,7 @@ void DamageEffectController::CountStack()
 	}
 }
 
-float4 DamageEffectController::GetSpawnPos(float4 _Pos)
+float4 DamageIndicator::GetSpawnPos(float4 _Pos)
 {
 	float4 StartPos;
 	StartPos = (PrevEffect != nullptr) ? PrevSpawnPos : _Pos;
@@ -95,7 +95,7 @@ float4 DamageEffectController::GetSpawnPos(float4 _Pos)
 	return SpawnPos;
 }
 
-std::vector<int> DamageEffectController::GetIntArray(float _Value)
+std::vector<int> DamageIndicator::GetIntArray(float _Value)
 {
 	std::vector<int> IntArray;
 
@@ -113,7 +113,7 @@ std::vector<int> DamageEffectController::GetIntArray(float _Value)
 	return IntArray;
 }
 
-std::shared_ptr<DamageEffect> DamageEffectController::GetUsableEffect(std::list<std::shared_ptr<DamageEffect>> _list)
+std::shared_ptr<DamageEffect> DamageIndicator::GetUsableEffect(std::list<std::shared_ptr<DamageEffect>> _list)
 {
 	std::list<std::shared_ptr<DamageEffect>>::iterator Start = _list.begin();
 	std::list<std::shared_ptr<DamageEffect>>::iterator End = _list.end();
@@ -135,7 +135,7 @@ std::shared_ptr<DamageEffect> DamageEffectController::GetUsableEffect(std::list<
 	return NewEffect;
 }
 
-void DamageEffectController::Start()
+void DamageIndicator::Start()
 {
 
 

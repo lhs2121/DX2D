@@ -31,5 +31,6 @@ protected:
 	float SpawnCoolTime = 0.0f;
 	float ResetCoolTimeValue = 10.0f;
 	int SpawnCount;
+	int CurMonsterCount = 0;
 };
 

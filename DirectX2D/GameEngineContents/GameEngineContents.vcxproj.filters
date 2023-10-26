@@ -27,12 +27,6 @@
     <ClInclude Include="Portal.h">
       <Filter>Actor\Maps</Filter>
     </ClInclude>
-    <ClInclude Include="SkillEffect.h">
-      <Filter>Actor\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="SkillEffctor.h">
-      <Filter>Actor\Effect</Filter>
-    </ClInclude>
     <ClInclude Include="StatusBar.h">
       <Filter>Actor\UI</Filter>
     </ClInclude>
@@ -44,9 +38,6 @@
     </ClInclude>
     <ClInclude Include="HuntLevel.h">
       <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="DamageEffectController.h">
-      <Filter>Actor\Effect</Filter>
     </ClInclude>
     <ClInclude Include="DamageEffect.h">
       <Filter>Actor\Effect</Filter>
@@ -63,9 +54,6 @@
     </ClInclude>
     <ClInclude Include="MonsterSpawner.h">
       <Filter>Actor\Monster</Filter>
-    </ClInclude>
-    <ClInclude Include="FadeScreen.h">
-      <Filter>Actor\Effect</Filter>
     </ClInclude>
     <ClInclude Include="BossLevel.h">
       <Filter>Level</Filter>
@@ -94,6 +82,16 @@
     <ClInclude Include="Inventory.h">
       <Filter>Actor\UI</Filter>
     </ClInclude>
+    <ClInclude Include="DamageIndicator.h" />
+    <ClInclude Include="FadeScreen.h">
+      <Filter>Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillEffect.h">
+      <Filter>Actor\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillManager.h">
+      <Filter>Actor\Skills</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -119,12 +117,6 @@
     <ClCompile Include="Portal.cpp">
       <Filter>Actor\Maps</Filter>
     </ClCompile>
-    <ClCompile Include="SkillEffect.cpp">
-      <Filter>Actor\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="SkillEffctor.cpp">
-      <Filter>Actor\Effect</Filter>
-    </ClCompile>
     <ClCompile Include="StatusBar.cpp">
       <Filter>Actor\UI</Filter>
     </ClCompile>
@@ -136,9 +128,6 @@
     </ClCompile>
     <ClCompile Include="HuntLevel.cpp">
       <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="DamageEffectController.cpp">
-      <Filter>Actor\Effect</Filter>
     </ClCompile>
     <ClCompile Include="DamageEffect.cpp">
       <Filter>Actor\Effect</Filter>
@@ -161,9 +150,6 @@
     </ClCompile>
     <ClCompile Include="MonsterSpawner.cpp">
       <Filter>Actor\Monster</Filter>
-    </ClCompile>
-    <ClCompile Include="FadeScreen.cpp">
-      <Filter>Actor\Effect</Filter>
     </ClCompile>
     <ClCompile Include="BossLevel.cpp">
       <Filter>Level</Filter>
@@ -194,6 +180,16 @@
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
       <Filter>Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageIndicator.cpp" />
+    <ClCompile Include="FadeScreen.cpp">
+      <Filter>Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillManager.cpp">
+      <Filter>Actor\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillEffect.cpp">
+      <Filter>Actor\Skills</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

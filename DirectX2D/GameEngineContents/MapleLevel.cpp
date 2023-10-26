@@ -5,7 +5,7 @@
 #include "StatusBar.h"
 #include "SurekenShooter.h"
 #include "MapleMap.h"
-#include "SkillEffctor.h"
+#include "SkillManager.h"
 #include "FadeScreen.h"
 #include "Inventory.h"
 
@@ -36,7 +36,7 @@ void MapleLevel::Start()
 	{
 		CurPlayer = CreateActor<Player>(ActorOrder::Player);
 		CurShooter = CreateActor<SurekenShooter>(ActorOrder::Manager);
-		CurSkillEffctor = CreateActor<SkillEffctor>(ActorOrder::Manager);
+		CurSkillManager = CreateActor<SkillManager>(ActorOrder::Manager);
 		CurStatusBar = CreateActor<StatusBar>(ActorOrder::UI);
 		CurFadeScreen = CreateActor<FadeScreen>(ActorOrder::FadeScreen);
 		CurInventory = CreateActor<Inventory>(ActorOrder::UI);
@@ -47,7 +47,7 @@ void MapleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	Player::MainPlayer = CurPlayer.get();
 	SurekenShooter::Inst = CurShooter.get();
-	SkillEffctor::Inst = CurSkillEffctor.get();
+	SkillManager::Inst = CurSkillManager.get();
 	StatusBar::Inst = CurStatusBar.get();
 	MapleMap::CurMap = CurMap.get();
 	Inventory::Inst = CurInventory.get();
