@@ -16,6 +16,7 @@ void Monster::Start()
 
 void Monster::Update(float _Delta)
 {
+	PhysicsActor::Update(_Delta);
 	MonsterBase::Update(_Delta);
 	switch (CurState)
 	{

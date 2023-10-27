@@ -33,7 +33,7 @@ void PlayerBase::Start()
 		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Player);
 		Col->SetCollisionType(ColType::AABBBOX2D);
 		Col->Transform.SetLocalScale({ 45,65 });
-		Col->Transform.AddLocalPosition({ 0,35 });
+		Col->Transform.AddLocalPosition({ 0,33 });
 	}
 	{
 		DamageRenderer = GetLevel()->CreateActor<DamageIndicator>(ActorOrder::Manager);

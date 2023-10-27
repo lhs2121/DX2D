@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "MonsterBase.h"
-
+#include "DamageIndicator.h"
+#include "DamageActor.h"
 
 MonsterBase::MonsterBase()
 {
@@ -40,13 +41,22 @@ void MonsterBase::Start()
 		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Monster);
 		Col->SetCollisionType(ColType::AABBBOX2D);
 	}
-
+	{
+		DamageRenderer = GetLevel()->CreateActor<DamageIndicator>(ActorOrder::Manager);
+	}
 	Off();
 }
 
 void MonsterBase::Update(float _Delta)
 {
-	PhysicsActor::Update(_Delta);
+	if (HitCoolTime > 0)
+	{
+		HitCoolTime -= _Delta;
+	}
+	if (HitCoolTime < 0)
+	{
+		Col->Collision(CollisionOrder::PlayerSkill, std::bind(&MonsterBase::HitByPlayer, this, std::placeholders::_1));
+	}
 }
 
 void MonsterBase::Release()
@@ -54,4 +64,16 @@ void MonsterBase::Release()
 	
 }
 
+void MonsterBase::HitByPlayer(std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
+{
+	for (size_t i = 0; i < _Collision.size(); i++)
+	{
+		std::shared_ptr<DamageActor> DmgActor = _Collision[i]->GetActor()->GetDynamic_Cast_This<DamageActor>();
+		float Damage = DmgActor->GetDamage();
+		Hp -= Damage;
+		DamageRenderer->StartSkill(Transform.GetWorldPosition(), Damage, DamageColor::Orange);
+
+		DmgActor->Off();
+	}
+}
 

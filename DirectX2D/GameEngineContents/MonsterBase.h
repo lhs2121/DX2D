@@ -20,13 +20,16 @@ protected:
 	void Start() override;
 	void Update(float _Delta) override;
 	void Release() override;
+	void HitByPlayer(std::vector<std::shared_ptr<GameEngineCollision>> _Collision);
 
 	std::string DieAniName;
 	std::string HitAniName;
 	std::string IdleAniName;
 	
-	float hp;
+	float Hp;
+	float HitCoolTime;
 	float4 ImageSize;
+	std::shared_ptr<class DamageIndicator> DamageRenderer;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
 	std::shared_ptr<class GameEngineCollision> Col;
 };
