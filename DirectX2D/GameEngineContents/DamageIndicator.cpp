@@ -12,88 +12,42 @@ DamageIndicator::~DamageIndicator()
 }
 
 
-void DamageIndicator::StartSkill(float4 _Pos, float _DamageValue, DamageColor _Color)
+void DamageIndicator::RenderDamage(float4 _Pos, float _DamageValue, int _HitCount, DamageColor _Color)
 {
-	CountStack();
-
-	float4 StartPos;
-	float4 OffsetY = float4(0.0f, 30.0f * CurStack);
-	float RandomOffset = GameEngineRandom::GameEngineRandom().RandomFloat(-5, 5);
-	float4 SpawnPos = _Pos + OffsetY + RandomOffset;
-
-	PrevSpawnPos = _Pos;
+	if (_DamageValue < 0)
+	{
+		return;
+	}
 
 	std::vector<int> NewArray = GetIntArray(_DamageValue);
 
 	std::list<std::shared_ptr<DamageEffect>> list;
-
 	list = GetLevel()->GetObjectGroupConvert<DamageEffect>(ActorOrder::DamageEffect);
 
-	std::shared_ptr<DamageEffect> NewEffect = GetUsableEffect(list);
+	float4 PrevPos = _Pos;
+	int PrevRenderOrder = 0;
 
-	NewEffect->Transform.SetWorldPosition(SpawnPos);
 
-	for (int i = 0; i < NewArray.size(); i++)
+
+	for (int j = 0; j < 5; j++)
 	{
+		std::shared_ptr<DamageEffect> DamageNumber = GetNonUpdateObject(list);
 
-		NewEffect->SetNumber(_Color, i, NewArray[i]);
-
-		float4 RendererOffset;
-
-		if (i % 2 == 0)
+		for (int i = 0; i < NewArray.size(); i++)
 		{
-			RendererOffset = { 20.0f * i, 0.0f };
+			DamageNumber->SetNumber(_Color, i, NewArray[i]);
+			DamageNumber->HorizontalAlign();
+			DamageNumber->VerticalAlign();
 		}
-		else
-		{
-			RendererOffset = { 20.0f * i, -3.0f };
-		}
-
-		NewEffect->MoveRendererPos(i, RendererOffset);
-
-		if (PrevEffect != nullptr)
-		{
-			int order = PrevEffect->CurOrder + 1;
-			NewEffect->SetRenderOrder(i, order);
-		}
-		else
-		{
-			int order = int(RenderOrder::Effect2);
-			NewEffect->SetRenderOrder(i, order);
-		}
+		DamageNumber->Transform.SetWorldPosition(PrevPos + float4(0.0f, 20.0f));
+		PrevPos = DamageNumber->Transform.GetWorldPosition();
+		DamageNumber->RenderOrderAlign(j);
+		DamageNumber->RenderStart();
 	}
-	NewEffect->Transform.AddWorldPosition({ -8.0f * NewArray.size() - 1,0 });
-	NewEffect->StartSkill();
 
-	PrevEffect = NewEffect;
 
-}
 
-void DamageIndicator::CountStack()
-{
-	if (PrevEffect != nullptr)
-	{
-		if(PrevEffect->GetCoolTime() <= 1.2f)
-		CurStack = 1;
-	}
-	else
-	{
-		CurStack += 1;
-		if (CurStack > 8)
-		{
-			CurStack = 0;
-		}
-	}
-}
 
-float4 DamageIndicator::GetSpawnPos(float4 _Pos)
-{
-	float4 StartPos;
-	StartPos = (PrevEffect != nullptr) ? PrevSpawnPos : _Pos;
-	float4 OffsetY = float4(0.0f, 30.0f * CurStack);
-	float RandomOffset = GameEngineRandom::GameEngineRandom().RandomFloat(-5, 5);
-	float4 SpawnPos = StartPos + OffsetY + RandomOffset;
-	return SpawnPos;
 }
 
 std::vector<int> DamageIndicator::GetIntArray(float _Value)
@@ -114,7 +68,7 @@ std::vector<int> DamageIndicator::GetIntArray(float _Value)
 	return IntArray;
 }
 
-std::shared_ptr<DamageEffect> DamageIndicator::GetUsableEffect(std::list<std::shared_ptr<DamageEffect>> _list)
+std::shared_ptr<DamageEffect> DamageIndicator::GetNonUpdateObject(std::list<std::shared_ptr<DamageEffect>> _list)
 {
 	std::list<std::shared_ptr<DamageEffect>>::iterator Start = _list.begin();
 	std::list<std::shared_ptr<DamageEffect>>::iterator End = _list.end();
@@ -131,13 +85,9 @@ std::shared_ptr<DamageEffect> DamageIndicator::GetUsableEffect(std::list<std::sh
 		}
 	}
 
-	std::shared_ptr<DamageEffect> NewEffect;
-	NewEffect = GetLevel()->CreateActor<DamageEffect>(ActorOrder::DamageEffect);
-	return NewEffect;
+	return GetLevel()->CreateActor<DamageEffect>(ActorOrder::DamageEffect);
 }
 
 void DamageIndicator::Start()
 {
-
-
 }

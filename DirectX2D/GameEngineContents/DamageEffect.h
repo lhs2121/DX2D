@@ -15,21 +15,20 @@ public:
 	DamageEffect& operator=(DamageEffect&& _Other) noexcept = delete;
 
 	void SetNumber(DamageColor _Color,int RendererNumber, int _Value);
-	void MoveRendererPos(int RendererNumber, float4 _Pos);
-	void SetRenderOrder(int RendererNumber, int _Order);
-
+	void HorizontalAlign();
+	void VerticalAlign();
+	void RenderOrderAlign(int _Order);
+	void RenderStart();
+	void RenderEnd();
 	float GetCoolTime()
 	{
 		return cool;
 	}
-	void StartSkill();
-	void EndEffect();
 
-	int CurOrder;
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
-
+private:
 	float cool = 1.5f;
 	int RendererSize = 2;
 	std::vector<std::shared_ptr<class GameEngineSpriteRenderer>> RendererGroup;

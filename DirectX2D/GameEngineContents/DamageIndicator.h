@@ -16,19 +16,13 @@ public:
 	DamageIndicator& operator=(const DamageIndicator& _Other) = delete;
 	DamageIndicator& operator=(DamageIndicator&& _Other) noexcept = delete;
 
-	void StartSkill(float4 _Pos, float _DamageValue, DamageColor _Color);
+	void RenderDamage(float4 _Pos, float _DamageValue, int _HitCount, DamageColor _Color);
 
 private:
-	std::shared_ptr<DamageEffect> GetUsableEffect(std::list<std::shared_ptr<DamageEffect>> _list);
-	std::vector<int> GetIntArray(float _Value);
-	float4 GetSpawnPos(float4 _Pos);
-	void CountStack();
 	void Start() override;
+
+	std::shared_ptr<DamageEffect> GetNonUpdateObject(std::list<std::shared_ptr<DamageEffect>> _list);
+	std::vector<int> GetIntArray(float _Value);
 	
-	
-	float4 PrevSpawnPos;
-	std::shared_ptr<DamageEffect> PrevEffect = nullptr;
-	int CurStack = 0;
-	float StackCoolTime = 0.5f;
 };
 

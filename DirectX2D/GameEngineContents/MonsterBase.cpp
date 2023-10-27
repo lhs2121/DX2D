@@ -22,11 +22,10 @@ void MonsterBase::Setting(std::string MonsterName)
 	Renderer->CreateAnimation(HitAniName, HitAniName, 0.2f);
 	Renderer->CreateAnimation(DieAniName, DieAniName, 0.3f);
 	Renderer->ChangeAnimation(IdleAniName);
-	Renderer->AutoSpriteSizeOn();
 
 	ImageSize = Renderer->GetCurSprite().Texture->GetScale();
 	Col->Transform.SetLocalScale(ImageSize);
-	Col->Transform.AddLocalPosition({ 0,ImageSize.hY()});
+	Col->Transform.AddLocalPosition({ 0,ImageSize.hY() });
 
 	On();
 }
@@ -37,6 +36,7 @@ void MonsterBase::Start()
 		Renderer = CreateComponent<GameEngineSpriteRenderer>();
 		Renderer->SetRenderOrder(RenderOrder::Monster);
 		Renderer->SetPivotType(PivotType::Bottom);
+		Renderer->AutoSpriteSizeOn();
 	}
 
 	{
@@ -68,7 +68,7 @@ void MonsterBase::Update(float _Delta)
 
 void MonsterBase::Release()
 {
-	
+
 }
 
 void MonsterBase::HitByPlayer(std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
@@ -78,7 +78,7 @@ void MonsterBase::HitByPlayer(std::vector<std::shared_ptr<GameEngineCollision>> 
 		std::shared_ptr<DamageActor> DmgActor = _Collision[i]->GetActor()->GetDynamic_Cast_This<DamageActor>();
 		float Damage = DmgActor->GetDamage();
 		Hp -= Damage;
-		DamageRenderer->StartSkill(Transform.GetWorldPosition(), Damage, DamageColor::Orange);
+		DamageRenderer->RenderDamage(Transform.GetWorldPosition(), Damage, 5, DamageColor::Orange);
 
 		DmgActor->Off();
 	}
