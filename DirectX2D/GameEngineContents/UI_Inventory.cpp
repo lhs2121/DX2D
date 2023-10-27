@@ -1,17 +1,17 @@
 #include "PreCompile.h"
-#include "Inventory.h"
+#include "UI_Inventory.h"
 
-Inventory* Inventory::Inst = nullptr;
+UI_Inventory* UI_Inventory::Inst = nullptr;
 
-Inventory::Inventory()
+UI_Inventory::UI_Inventory()
 {
 }
 
-Inventory::~Inventory()
+UI_Inventory::~UI_Inventory()
 {
 }
 
-void Inventory::Start()
+void UI_Inventory::Start()
 {
 	Renderer = CreateComponent<GameEngineUIRenderer>();
 	Renderer->SetSprite("Inventory");
@@ -19,7 +19,7 @@ void Inventory::Start()
 	GameEngineInput::AddInputObject(this);
 }
 
-void Inventory::Update(float _Delta)
+void UI_Inventory::Update(float _Delta)
 {
 	if (InputIsDown('I'))
 	{

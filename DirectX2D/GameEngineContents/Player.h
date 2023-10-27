@@ -1,5 +1,5 @@
 #pragma once
-#include "CombatActor.h"
+#include "PlayerBase.h"
 #include "StatData.h"
 
 enum class PlayerState
@@ -19,7 +19,7 @@ enum class PlayerState
 
 class GameEngineSpriteRenderer;
 class GameEngineCollision;
-class Player : public CombatActor
+class Player : public PlayerBase
 {
 public:
 	// constrcuter destructer
@@ -37,11 +37,6 @@ public:
 		return dir;
 	}
 
-	float GetDamage()
-	{
-		return MyStatData->GetDamage();
-	}
-
 	static Player* MainPlayer;
 private:
 	void FlipRenderer();
@@ -53,36 +48,39 @@ private:
 	void MoveUpdate();
 	//basic update
 
-	void RopeStart();
-	void HitStart();
-	void PortalStart();
-	//state start
-
+	void ChangeState(PlayerState _State);
 	void StateUpdate(float _Delta);
+
+	void RopeStart();
+	void RopeUpdate(float _Delta);
+
+	void HitStart();
+	void HitUpdate(float _Delta);
+
+	void PortalStart();
+
 	void IdleUpdate(float _Delta);
 	void WalkUpdate(float _Delta);
 	void JumpUpdate(float _Delta);
-	void RopeUpdate(float _Delta);
 	void DownUpdate(float _Delta);
-	void HitUpdate(float _Delta);
-	//state update
 
 	void FlashJumpStart();
-	void LuckySevenStart();
-	void ShowDownStart();
-	//skill start
-
-	void LuckySevenUpdate(float _Delta);
 	void FlashJumpUpdate(float _Delta);
+
+	void LuckySevenStart();
+	void LuckySevenUpdate(float _Delta);
+
+	void ShowDownStart();
 	void ShowDownUpdate(float _Delta);
-	//skill update
+
+	void ShadowPartnerStart();
+	void ShadowPartnerUpdate(float _Delta);
 
 	void ChangeRandomSwingAnimation();
 	void ChangeDirState(PlayerDirState _State)
 	{
 		CurDirState = _State;
 	}
-	void ChangeState(PlayerState _State);
 
 	void Start() override;
 	void Update(float _Delta) override;
@@ -92,11 +90,10 @@ private:
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 	float Speed = 150.0f;
-	float HitCoolTime = 2.0f;
 	float dir = -1;
 
 	bool CanHit = true;
-	bool CanRope;
+	bool CanRope = false;
 	bool CanFlip = true;
 	bool DirCheck = true;
 	bool DoubleJump = false;
@@ -112,13 +109,8 @@ private:
 	int ShowDownKey = VK_CONTROL;
 
 	float4 RopePos;
-	float4 RP;
 	PlayerState CurState;
 	PlayerDirState CurDirState;
 	std::string PrevLevelName;
-	std::shared_ptr<GameEngineSpriteRenderer> MainSpriteRenderer;
-	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer0;
-	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer1;
-	std::shared_ptr<GameEngineSpriteRenderer> DebugRenderer2;
 };
 

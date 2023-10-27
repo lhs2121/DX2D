@@ -1,19 +1,19 @@
 #include "PreCompile.h"
-#include "StatusBar.h"
+#include "UI_Status.h"
 #include <GameEngineCore\GameEngineUIRenderer.h>
 
 
-StatusBar* StatusBar::Inst = nullptr;
+UI_Status* UI_Status::Inst = nullptr;
 
-StatusBar::StatusBar()
+UI_Status::UI_Status()
 {
 }
 
-StatusBar::~StatusBar()
+UI_Status::~UI_Status()
 {
 }
 
-void StatusBar::ChangeHpGauge(float _Value)
+void UI_Status::ChangeHpGauge(float _Value)
 {
 	HpGauge->AddImageScale({ _Value ,0});
 
@@ -29,20 +29,20 @@ void StatusBar::ChangeHpGauge(float _Value)
 	}
 }
 
-void StatusBar::ResetHpGauge()
+void UI_Status::ResetHpGauge()
 {
 }
 
-void StatusBar::ChangeMpGauge(float _Value)
+void UI_Status::ChangeMpGauge(float _Value)
 {
 	MpGauge->AddImageScale({ _Value,0 });
 }
 
-void StatusBar::ResetMpGauge()
+void UI_Status::ResetMpGauge()
 {
 }
 
-void StatusBar::ChangeExpGauge(float _Value)
+void UI_Status::ChangeExpGauge(float _Value)
 {
 	ExpGauge->AddImageScale({ _Value ,0 });
 
@@ -54,11 +54,11 @@ void StatusBar::ChangeExpGauge(float _Value)
 	}
 }
 
-void StatusBar::ResetExpGauge()
+void UI_Status::ResetExpGauge()
 {
 	ExpGauge->SetImageScale({ 0,10 });
 }
-void StatusBar::LevelUp(int Level)
+void UI_Status::LevelUp(int Level)
 {
 	int digit1, digit2, digit3;
 
@@ -72,7 +72,7 @@ void StatusBar::LevelUp(int Level)
 
 }
 
-void StatusBar::Start()
+void UI_Status::Start()
 {
 	float4 hSize = ContentsCore::GetStartWindowSize().Half();
 	float4 StatusCoverPos;
@@ -173,7 +173,7 @@ void StatusBar::Start()
 	}
 }
 
-void StatusBar::Update(float _Delta)
+void UI_Status::Update(float _Delta)
 {
 
 }

@@ -35,8 +35,7 @@ enum class ActorOrder
 	SkillEffect,
 	DamageEffect,
 	Manager,
-	PlayerStat,
-	MonsterStat,
+	Stat,
 	FadeScreen,
 	UI
 };

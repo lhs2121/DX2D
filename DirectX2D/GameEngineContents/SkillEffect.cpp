@@ -55,7 +55,7 @@ void SkillEffect::EffectSetting(float4 _Pos, SkillType _Type, float _Dir)
 				SkillDamage = Dmg;
 				Dmg->Transform.SetWorldPosition(Player::MainPlayer->Transform.GetWorldPosition() + float4(250 * Player::MainPlayer->GetDir(),0));
 				Dmg->SetCollisionScale({ 400,300 });
-				Dmg->SetDamage(Player::MainPlayer->GetDamage());
+				//Dmg->SetDamage(Player::MainPlayer->GetDamage());
 				Dmg->On();
 			});
 		Renderer->SetFrameEvent("ShowDownChallenge", 12,

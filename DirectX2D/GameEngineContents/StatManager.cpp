@@ -2,7 +2,7 @@
 #include "StatManager.h"
 #include "StatData.h"
 #include "DamageIndicator.h"
-#include "StatusBar.h"
+#include "UI_Status.h"
 #include "Player.h"
 
 StatManager* StatManager::Inst;
@@ -22,9 +22,9 @@ void StatManager::ChangeHp(std::shared_ptr<PlayerStatData> _Stat, float _Damage)
 	_Stat->CurHp -= _Damage;
 
 	float MaxHp = _Stat->MaxHp;
-	float GaugeSizeX = StatusBar::Inst->HpGaugeSize.X;
+	float GaugeSizeX = UI_Status::Inst->HpGaugeSize.X;
 	float ConvertedHp = -_Damage * (GaugeSizeX / MaxHp);
-	StatusBar::Inst->ChangeHpGauge(ConvertedHp);
+	UI_Status::Inst->ChangeHpGauge(ConvertedHp);
 }
 
 void StatManager::ChangeHp(std::shared_ptr<MonsterStatData> _Stat, float _Damage)
@@ -34,22 +34,22 @@ void StatManager::ChangeHp(std::shared_ptr<MonsterStatData> _Stat, float _Damage
 
 void StatManager::ChangeExp(float _Exp)
 {
-	std::shared_ptr<PlayerStatData> stat = Player::MainPlayer->GetStatData()->GetDynamic_Cast_This<PlayerStatData>();
-	stat->CurExp += _Exp;
+	//std::shared_ptr<PlayerStatData> stat = Player::MainPlayer->GetStat()->GetDynamic_Cast_This<PlayerStatData>();
+	//stat->CurExp += _Exp;
 
-	float MaxExp = stat->MaxExp;
-	float GaugeSizeX = ContentsCore::GetStartWindowSize().X;
-	float ConvertedExp = _Exp * (GaugeSizeX / MaxExp);
+	//float MaxExp = stat->MaxExp;
+	//float GaugeSizeX = ContentsCore::GetStartWindowSize().X;
+	//float ConvertedExp = _Exp * (GaugeSizeX / MaxExp);
 
-	StatusBar::Inst->ChangeExpGauge(ConvertedExp);
+	//UI_Status::Inst->ChangeExpGauge(ConvertedExp);
 
-	if (stat->CurExp > stat->MaxExp)
-	{
-		stat->CurExp = 0.0f;
-		stat->CurLevel += 1;
-		StatusBar::Inst->LevelUp(stat->CurLevel);
-	}
-	
+	//if (stat->CurExp > stat->MaxExp)
+	//{
+	//	stat->CurExp = 0.0f;
+	//	stat->CurLevel += 1;
+	//	UI_Status::Inst->LevelUp(stat->CurLevel);
+	//}
+	//
 }
 
 

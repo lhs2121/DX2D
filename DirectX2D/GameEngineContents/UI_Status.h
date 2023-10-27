@@ -2,21 +2,21 @@
 #include <GameEngineCore\GameEngineActor.h>
 
 // Ό³Έν :
-class StatusBar : public GameEngineActor
+class UI_Status : public GameEngineActor
 {
 	friend class StatManager;
 public:
 	// constrcuter destructer
-	StatusBar();
-	~StatusBar();
+	UI_Status();
+	~UI_Status();
 
 	// delete Function
-	StatusBar(const StatusBar& _Other) = delete;
-	StatusBar(StatusBar&& _Other) noexcept = delete;
-	StatusBar& operator=(const StatusBar& _Other) = delete;
-	StatusBar& operator=(StatusBar&& _Other) noexcept = delete;
+	UI_Status(const UI_Status& _Other) = delete;
+	UI_Status(UI_Status&& _Other) noexcept = delete;
+	UI_Status& operator=(const UI_Status& _Other) = delete;
+	UI_Status& operator=(UI_Status&& _Other) noexcept = delete;
 
-	static StatusBar* Inst;
+	static UI_Status* Inst;
 
 	void ChangeHpGauge(float _Value);
 	void ResetHpGauge();

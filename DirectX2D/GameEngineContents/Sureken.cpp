@@ -64,8 +64,8 @@ void Sureken::Update(float _Delta)
 
 void Sureken::StartFire()
 {
-	std::shared_ptr<StatData> playerstat = Player::MainPlayer->GetDynamic_Cast_This<CombatActor>()->GetStatData();
-	SetDamage(playerstat->GetDamage());
+	/*std::shared_ptr<StatData> playerstat = Player::MainPlayer->GetDynamic_Cast_This<HitableActor>()->GetStatData();
+	SetDamage(playerstat->GetDamage());*/
 	DamageActor::On();
 	On();
 }

@@ -19,7 +19,7 @@ public:
 
 	float CurHp = 100.0f;
 	float MaxHp = 100.0f;
-	float DefRate = 50;
+	float DefRate = 0;
 };
 
 class MonsterStatData : public StatData

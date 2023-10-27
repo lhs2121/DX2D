@@ -9,75 +9,17 @@ Player* Player::MainPlayer = nullptr;
 
 Player::Player()
 {
-
 }
 
 Player::~Player()
 {
-
 }
 
 void Player::Start()
 {
-	CombatActor::Start();
-	CreateStatData(StatType::Player);
-	//renderer
-	{
-		MainSpriteRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
-
-		MainSpriteRenderer->CreateAnimation("idle", "idle", 0.2f);
-		MainSpriteRenderer->CreateAnimation("walk", "walk", 0.2f);
-		MainSpriteRenderer->CreateAnimation("jump", "jump");
-		MainSpriteRenderer->CreateAnimation("down", "down");
-		MainSpriteRenderer->CreateAnimation("rope", "rope", 0.2f);
-		MainSpriteRenderer->CreateAnimation("ladder", "ladder", 0.2f);
-		MainSpriteRenderer->CreateAnimation("hit", "hit", 0.3f);
-		MainSpriteRenderer->CreateAnimation("swing1", "swing1", 0.2f, 0, 2, false);
-		MainSpriteRenderer->CreateAnimation("swing2", "swing2", 0.2f, 0, 2, false);
-		MainSpriteRenderer->CreateAnimation("swing3", "swing3", 0.2f, 0, 2, false);
-
-		MainSpriteRenderer->ChangeAnimation("idle");
-		MainSpriteRenderer->SetRenderOrder(RenderOrder::Player);
-		MainSpriteRenderer->SetPivotValue({ 0.5f,0.71f });
-		MainSpriteRenderer->AutoSpriteSizeOn();
-	}
-
-	{
-		DebugRenderer0 = CreateComponent<GameEngineSpriteRenderer>(0);
-		DebugRenderer0->SetRenderOrder(RenderOrder::Debug);
-		DebugRenderer0->SetSprite("etc");
-	}
-
-	{
-		DebugRenderer1 = CreateComponent<GameEngineSpriteRenderer>(0);
-		DebugRenderer1->SetRenderOrder(RenderOrder::Debug);
-		DebugRenderer1->SetSprite("etc", 1);
-		DebugRenderer1->Transform.AddLocalPosition({ 0,1,0 });
-	}
-
-	{
-		DebugRenderer2 = CreateComponent<GameEngineSpriteRenderer>(0);
-		DebugRenderer2->SetRenderOrder(RenderOrder::Debug);
-		DebugRenderer2->SetSprite("etc", 2);
-		DebugRenderer2->Transform.AddLocalPosition({ 0,-1,0 });
-	}
-
-	//collision
-	{
-		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Player);
-		Col->SetCollisionType(ColType::AABBBOX2D);
-		Col->Transform.SetLocalScale({ 45,65 });
-		Col->Transform.AddLocalPosition({ 0,35 });
-	}
-
+	PlayerBase::Start();
 	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
-	Transform.SetLocalPosition({ 500, -900, 0.0f });
-	float4 PlayerPos = Transform.GetWorldPosition();
-	GetLevel()->GetMainCamera()->Transform.SetWorldPosition({ PlayerPos.X, PlayerPos.Y,GetLevel()->GetMainCamera()->Transform.GetWorldPosition().Z });
-
 	GameEngineInput::AddInputObject(this);
-	//	GetLevel()->GetMainCamera()->CameraTargetSetting(Transform, float4::BACKWARD * 500.0f);
-
 	ChangeDirState(PlayerDirState::LEFT);
 	ChangeState(PlayerState::IDLE);
 }
@@ -89,15 +31,15 @@ void Player::FlipRenderer()
 		return;
 	}
 
-	float4 Scale = MainSpriteRenderer->Transform.GetLocalScale();
+	float4 Scale = Renderer->Transform.GetLocalScale();
 
 	if (Scale.X == 1 && NetForce.X > 0)
 	{
-		MainSpriteRenderer->Transform.SetLocalScale({ -1.0f,1.0f,1.0f });
+		Renderer->Transform.SetLocalScale({ -1.0f,1.0f,1.0f });
 	}
 	if (Scale.X == -1 && NetForce.X < 0)
 	{
-		MainSpriteRenderer->Transform.SetLocalScale({ 1.0f,1.0f,1.0f });
+		Renderer->Transform.SetLocalScale({ 1.0f,1.0f,1.0f });
 	}
 
 }
@@ -106,7 +48,7 @@ void Player::ChangeRandomSwingAnimation()
 {
 	int RandomNumber = GameEngineRandom::GameEngineRandom().RandomInt(1, 3);
 	std::string AnimationName = "swing" + std::to_string(RandomNumber);
-	MainSpriteRenderer->ChangeAnimation(AnimationName);
+	Renderer->ChangeAnimation(AnimationName);
 }
 
 void Player::Release()

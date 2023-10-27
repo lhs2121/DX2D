@@ -7,7 +7,6 @@
 void Player::Update(float _Delta)
 {
 	PhysicsActor::Update(_Delta);
-	CombatActor::Update(_Delta);
 	FlipRenderer();
 	CameraFocus();
 	DirUpdate();
@@ -16,22 +15,6 @@ void Player::Update(float _Delta)
 	PortalCheck();
 	MoveUpdate();
 	StateUpdate(_Delta);
-
-	if (InputIsDown('P'))
-	{
-		if (DebugRenderer0->IsUpdate())
-		{
-			DebugRenderer0->Off();
-			DebugRenderer1->Off();
-			DebugRenderer2->Off();
-		}
-		else
-		{
-			DebugRenderer0->On();
-			DebugRenderer1->On();
-			DebugRenderer2->On();
-		}
-	}
 }
 
 void Player::DirUpdate()
@@ -58,12 +41,10 @@ void Player::RopePivotUpdate()
 	if (InputIsPress(VK_UP))
 	{
 		RopePos = Transform.GetWorldPosition() + float4(0, 65);
-		DebugRenderer2->Transform.SetLocalPosition({ 0,65 });
 	}
 	else
 	{
 		RopePos = Transform.GetWorldPosition() + float4(0, -1);
-		DebugRenderer2->Transform.SetLocalPosition({ 0,-1 });
 	}
 }
 

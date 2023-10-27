@@ -53,19 +53,19 @@ void Player::ChangeState(PlayerState _State)
 	switch (CurState)
 	{
 	case PlayerState::IDLE:
-		MainSpriteRenderer->ChangeAnimation("idle");
+		Renderer->ChangeAnimation("idle");
 		break;
 	case PlayerState::WALK:
-		MainSpriteRenderer->ChangeAnimation("walk");
+		Renderer->ChangeAnimation("walk");
 		break;
 	case PlayerState::JUMP:
-		MainSpriteRenderer->ChangeAnimation("jump");
+		Renderer->ChangeAnimation("jump");
 		break;
 	case PlayerState::DOWN:
 		CanFlip = false;
 		ApplyInputLeft = false;
 		ApplyInputRight = false;
-		MainSpriteRenderer->ChangeAnimation("down");
+		Renderer->ChangeAnimation("down");
 		break;
 	case PlayerState::ROPE:
 		RopeStart();
@@ -105,8 +105,8 @@ void Player::RopeStart()
 		Transform.AddWorldPosition({ 0, 5 });
 	}
 
-	MainSpriteRenderer->ChangeAnimation("rope");
-	MainSpriteRenderer->AnimationPauseOn();
+	Renderer->ChangeAnimation("rope");
+	Renderer->AnimationPauseOn();
 }
 
 void Player::HitStart()
@@ -118,7 +118,7 @@ void Player::PortalStart()
 {
 	ApplyInput = false;
 	CanFlip = false;
-	MainSpriteRenderer->ChangeAnimation("idle");
+	Renderer->ChangeAnimation("idle");
 }
 
 void Player::IdleUpdate(float _Delta)
@@ -223,12 +223,12 @@ void Player::RopeUpdate(float _Delta)
 		FlipRenderer();
 	}
 
-	MainSpriteRenderer->AnimationPauseOn();
+	Renderer->AnimationPauseOn();
 
 	if (InputIsPress(VK_UP))
 	{
 		Transform.AddWorldPosition({ 0, Speed * _Delta});
-		MainSpriteRenderer->AnimationPauseOff();
+		Renderer->AnimationPauseOff();
 
 		GameEngineColor TopColor = GetColor(Transform.GetWorldPosition() + float4(0, 65));
 		GameEngineColor BottomColor = GetColor(Transform.GetWorldPosition() + float4(0, -1));
@@ -237,13 +237,13 @@ void Player::RopeUpdate(float _Delta)
 		{
 			ChangeState(PlayerState::IDLE);
 			NetForce.Y = -100.0f;
-			MainSpriteRenderer->AnimationPauseOff();
+			Renderer->AnimationPauseOff();
 		}
 	}
 	else if (InputIsPress(VK_DOWN))
 	{
 		Transform.AddWorldPosition({ 0,-Speed * _Delta, 0 });
-		MainSpriteRenderer->AnimationPauseOff();
+		Renderer->AnimationPauseOff();
 
 		GameEngineColor TopColor = GetColor(Transform.GetWorldPosition() + float4(0, 65));
 		GameEngineColor BottomColor = GetColor(Transform.GetWorldPosition() + float4(0, -1));
@@ -252,7 +252,7 @@ void Player::RopeUpdate(float _Delta)
 		{
 			ChangeState(PlayerState::IDLE);
 			NetForce.Y = -100.0f;
-			MainSpriteRenderer->AnimationPauseOff();
+			Renderer->AnimationPauseOff();
 		}
 	}
 
@@ -260,7 +260,7 @@ void Player::RopeUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::JUMP);
 		NetForce.Y = 250.0f;
-		MainSpriteRenderer->AnimationPauseOff();
+		Renderer->AnimationPauseOff();
 	}
 	if ((InputIsPress(VK_LEFT) || InputIsPress(VK_RIGHT))
 		&& InputIsPress(VK_UP)
@@ -277,7 +277,7 @@ void Player::RopeUpdate(float _Delta)
 
 		ChangeState(PlayerState::JUMP);
 		NetForce.Y = 250.0f;
-		MainSpriteRenderer->AnimationPauseOff();
+		Renderer->AnimationPauseOff();
 	}
 
 }

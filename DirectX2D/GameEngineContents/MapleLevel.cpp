@@ -2,12 +2,12 @@
 #include "MapleLevel.h"
 #include "Player.h"
 #include "Portal.h"
-#include "StatusBar.h"
+#include "UI_Status.h"
 #include "SurekenShooter.h"
 #include "MapleMap.h"
 #include "SkillManager.h"
 #include "FadeScreen.h"
-#include "Inventory.h"
+#include "UI_Inventory.h"
 
 MapleLevel::MapleLevel()
 {
@@ -37,9 +37,9 @@ void MapleLevel::Start()
 		CurPlayer = CreateActor<Player>(ActorOrder::Player);
 		CurShooter = CreateActor<SurekenShooter>(ActorOrder::Manager);
 		CurSkillManager = CreateActor<SkillManager>(ActorOrder::Manager);
-		CurStatusBar = CreateActor<StatusBar>(ActorOrder::UI);
+		CurUI_Status = CreateActor<UI_Status>(ActorOrder::UI);
 		CurFadeScreen = CreateActor<FadeScreen>(ActorOrder::FadeScreen);
-		CurInventory = CreateActor<Inventory>(ActorOrder::UI);
+		CurUI_Inventory = CreateActor<UI_Inventory>(ActorOrder::UI);
 	}
 }
 
@@ -48,9 +48,9 @@ void MapleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	Player::MainPlayer = CurPlayer.get();
 	SurekenShooter::Inst = CurShooter.get();
 	SkillManager::Inst = CurSkillManager.get();
-	StatusBar::Inst = CurStatusBar.get();
+	UI_Status::Inst = CurUI_Status.get();
 	MapleMap::CurMap = CurMap.get();
-	Inventory::Inst = CurInventory.get();
+	UI_Inventory::Inst = CurUI_Inventory.get();
 	CurFadeScreen->SettingAndStart(FadeType::FADEOUT);
 }
 

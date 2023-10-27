@@ -65,12 +65,12 @@ void Player::LuckySevenUpdate(float _Delta)
 		}
 	}
 
-	if (MainSpriteRenderer->GetCurIndex() == 2 && SurekenShooter::Inst->IsUpdate() == false)
+	if (Renderer->GetCurIndex() == 2 && SurekenShooter::Inst->IsUpdate() == false)
 	{
 		SurekenShooter::Inst->On();
 		SkillManager::Inst->StartSkill(Transform.GetWorldPosition(), SkillType::LuckySeven, dir);
 	}
-	if (MainSpriteRenderer->IsCurAnimationEnd() == true)
+	if (Renderer->IsCurAnimationEnd() == true)
 	{
 		if (InputIsFree(VK_LEFT) && InputIsFree(VK_RIGHT))
 		{
@@ -112,7 +112,7 @@ void Player::ShowDownUpdate(float _Delta)
 		}
 	}
 
-	if (MainSpriteRenderer->IsCurAnimationEnd())
+	if (Renderer->IsCurAnimationEnd())
 	{
 		if (InputIsFree(VK_LEFT) && InputIsFree(VK_RIGHT))
 		{

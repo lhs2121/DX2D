@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -187,7 +187,7 @@
     <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="SkillManager.h" />
     <ClInclude Include="SkillEffect.h" />
-    <ClInclude Include="StatusBar.h" />
+    <ClInclude Include="UI_Status.h" />
     <ClInclude Include="StatData.h" />
     <ClInclude Include="StatManager.h" />
     <ClInclude Include="DamageIndicator.h" />
@@ -198,8 +198,8 @@
     <ClInclude Include="BossLevel.h" />
     <ClInclude Include="Map2.h" />
     <ClInclude Include="Boss_Vellum.h" />
-    <ClInclude Include="CombatActor.h" />
-    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="UI_Inventory.h" />
+    <ClInclude Include="PlayerBase.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MapleStoryGUI.cpp" />
@@ -225,7 +225,7 @@
     <ClCompile Include="Map1.cpp" />
     <ClCompile Include="SurekenShooter.cpp" />
     <ClCompile Include="Sureken.cpp" />
-    <ClCompile Include="StatusBar.cpp" />
+    <ClCompile Include="UI_Status.cpp" />
     <ClCompile Include="TitleLevel.cpp" />
     <ClCompile Include="SkillManager.cpp" />
     <ClCompile Include="SkillEffect.cpp" />
@@ -240,8 +240,8 @@
     <ClCompile Include="BossLevel.cpp" />
     <ClCompile Include="Map2.cpp" />
     <ClCompile Include="Boss_Vellum.cpp" />
-    <ClCompile Include="CombatActor.cpp" />
-    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="UI_Inventory.cpp" />
+    <ClCompile Include="PlayerBase.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
