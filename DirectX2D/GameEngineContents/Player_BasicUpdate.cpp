@@ -4,19 +4,6 @@
 #include "StatManager.h"
 #include "FadeScreen.h"
 
-void Player::Update(float _Delta)
-{
-	PhysicsActor::Update(_Delta);
-	FlipRenderer();
-	CameraFocus();
-	DirUpdate();
-	RopePivotUpdate();
-	RopeCheck();
-	PortalCheck();
-	MoveUpdate();
-	StateUpdate(_Delta);
-}
-
 void Player::DirUpdate()
 {
 	if (DirCheck == false)

@@ -71,8 +71,9 @@ void DamageIndicator::StartSkill(float4 _Pos, float _DamageValue, DamageColor _C
 
 void DamageIndicator::CountStack()
 {
-	if (PrevEffect != nullptr && PrevEffect->GetCoolTime() <= 1.2f)
+	if (PrevEffect != nullptr)
 	{
+		if(PrevEffect->GetCoolTime() <= 1.2f)
 		CurStack = 1;
 	}
 	else

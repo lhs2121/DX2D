@@ -24,10 +24,12 @@ public:
 	}
 	void StartSkill();
 	void EndEffect();
+
 	int CurOrder;
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
+
 	float cool = 1.5f;
 	int RendererSize = 2;
 	std::vector<std::shared_ptr<class GameEngineSpriteRenderer>> RendererGroup;

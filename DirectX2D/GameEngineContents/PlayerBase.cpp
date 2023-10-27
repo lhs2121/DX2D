@@ -1,5 +1,6 @@
 #include "PreCompile.h"
 #include "PlayerBase.h"
+#include "DamageIndicator.h"
 
 PlayerBase::PlayerBase()
 {
@@ -34,12 +35,32 @@ void PlayerBase::Start()
 		Col->Transform.SetLocalScale({ 45,65 });
 		Col->Transform.AddLocalPosition({ 0,35 });
 	}
+	{
+		DamageRenderer = GetLevel()->CreateActor<DamageIndicator>(ActorOrder::Manager);
+	}
 }
 
 void PlayerBase::Update(float _Delta)
 {
+	if (HitCoolTime > 0)
+	{
+		HitCoolTime -= _Delta;
+	}
+	if (HitCoolTime < 0)
+	{
+		Col->Collision(CollisionOrder::Monster, std::bind(&PlayerBase::HitByMonster, this, std::placeholders::_1));
+	}
+
 }
 
 void PlayerBase::Release()
 {
+}
+
+void PlayerBase::HitByMonster(std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
+{
+	Hp -= 10.0f;
+	HitCoolTime = 2.0f;
+	DamageRenderer->StartSkill(Transform.GetWorldPosition(), 10.0f, DamageColor::Purple);
+
 }

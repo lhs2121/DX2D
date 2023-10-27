@@ -52,9 +52,6 @@
     <ClInclude Include="Boss_Vellum.h">
       <Filter>Actor\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="DamageActor.h">
-      <Filter>Actor\Combat</Filter>
-    </ClInclude>
     <ClInclude Include="StatData.h">
       <Filter>Actor\Combat</Filter>
     </ClInclude>
@@ -73,13 +70,7 @@
     <ClInclude Include="SkillManager.h">
       <Filter>Actor\Skills</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerBase.h">
-      <Filter>Actor\Combat</Filter>
-    </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Actor\Combat</Filter>
-    </ClInclude>
-    <ClInclude Include="MonsterBase.h">
       <Filter>Actor\Combat</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
@@ -91,8 +82,17 @@
     <ClInclude Include="UI_Status.h">
       <Filter>Actor\UI</Filter>
     </ClInclude>
+    <ClInclude Include="DamageActor.h">
+      <Filter>Actor\Combat\base</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterBase.h">
+      <Filter>Actor\Combat\base</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBase.h">
+      <Filter>Actor\Combat\base</Filter>
+    </ClInclude>
     <ClInclude Include="DamageIndicator.h">
-      <Filter>Actor\Effect</Filter>
+      <Filter>Actor\Combat</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -153,9 +153,6 @@
     <ClCompile Include="Player_SkillUpdate.cpp">
       <Filter>Actor\Player</Filter>
     </ClCompile>
-    <ClCompile Include="DamageActor.cpp">
-      <Filter>Actor\Combat</Filter>
-    </ClCompile>
     <ClCompile Include="StatData.cpp">
       <Filter>Actor\Combat</Filter>
     </ClCompile>
@@ -174,13 +171,7 @@
     <ClCompile Include="SkillEffect.cpp">
       <Filter>Actor\Skills</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerBase.cpp">
-      <Filter>Actor\Combat</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Actor\Combat</Filter>
-    </ClCompile>
-    <ClCompile Include="MonsterBase.cpp">
       <Filter>Actor\Combat</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
@@ -192,8 +183,17 @@
     <ClCompile Include="UI_Status.cpp">
       <Filter>Actor\UI</Filter>
     </ClCompile>
+    <ClCompile Include="DamageActor.cpp">
+      <Filter>Actor\Combat\base</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterBase.cpp">
+      <Filter>Actor\Combat\base</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBase.cpp">
+      <Filter>Actor\Combat\base</Filter>
+    </ClCompile>
     <ClCompile Include="DamageIndicator.cpp">
-      <Filter>Actor\Effect</Filter>
+      <Filter>Actor\Combat</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +232,9 @@
     </Filter>
     <Filter Include="Actor\Combat">
       <UniqueIdentifier>{22f90041-8882-492f-b6e1-7838b0a62a57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Combat\base">
+      <UniqueIdentifier>{66e4ea7b-e377-4b66-9684-42b2936bce52}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

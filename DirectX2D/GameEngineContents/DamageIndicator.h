@@ -27,7 +27,7 @@ private:
 	
 	
 	float4 PrevSpawnPos;
-	std::shared_ptr<DamageEffect> PrevEffect;
+	std::shared_ptr<DamageEffect> PrevEffect = nullptr;
 	int CurStack = 0;
 	float StackCoolTime = 0.5f;
 };

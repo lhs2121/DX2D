@@ -25,6 +25,7 @@ protected:
 	std::string HitAniName;
 	std::string IdleAniName;
 	
+	float hp;
 	float4 ImageSize;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
 	std::shared_ptr<class GameEngineCollision> Col;

@@ -24,31 +24,18 @@ void Player::Start()
 	ChangeState(PlayerState::IDLE);
 }
 
-void Player::FlipRenderer()
+void Player::Update(float _Delta)
 {
-	if (CanFlip == false)
-	{
-		return;
-	}
-
-	float4 Scale = Renderer->Transform.GetLocalScale();
-
-	if (Scale.X == 1 && NetForce.X > 0)
-	{
-		Renderer->Transform.SetLocalScale({ -1.0f,1.0f,1.0f });
-	}
-	if (Scale.X == -1 && NetForce.X < 0)
-	{
-		Renderer->Transform.SetLocalScale({ 1.0f,1.0f,1.0f });
-	}
-
-}
-
-void Player::ChangeRandomSwingAnimation()
-{
-	int RandomNumber = GameEngineRandom::GameEngineRandom().RandomInt(1, 3);
-	std::string AnimationName = "swing" + std::to_string(RandomNumber);
-	Renderer->ChangeAnimation(AnimationName);
+	PhysicsActor::Update(_Delta);
+	PlayerBase::Update(_Delta);
+	FlipRenderer();
+	CameraFocus();
+	DirUpdate();
+	RopePivotUpdate();
+	RopeCheck();
+	PortalCheck();
+	MoveUpdate();
+	StateUpdate(_Delta);
 }
 
 void Player::Release()
@@ -127,4 +114,30 @@ void Player::LevelStart(GameEngineLevel* _PrevLevel)
 	}
 }
 
+void Player::FlipRenderer()
+{
+	if (CanFlip == false)
+	{
+		return;
+	}
+
+	float4 Scale = Renderer->Transform.GetLocalScale();
+
+	if (Scale.X == 1 && NetForce.X > 0)
+	{
+		Renderer->Transform.SetLocalScale({ -1.0f,1.0f,1.0f });
+	}
+	if (Scale.X == -1 && NetForce.X < 0)
+	{
+		Renderer->Transform.SetLocalScale({ 1.0f,1.0f,1.0f });
+	}
+
+}
+
+void Player::ChangeRandomSwingAnimation()
+{
+	int RandomNumber = GameEngineRandom::GameEngineRandom().RandomInt(1, 3);
+	std::string AnimationName = "swing" + std::to_string(RandomNumber);
+	Renderer->ChangeAnimation(AnimationName);
+}
 
