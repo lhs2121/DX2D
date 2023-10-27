@@ -1,6 +1,8 @@
 #include "PreCompile.h"
 #include "PlayerBase.h"
 #include "DamageIndicator.h"
+#include "StatData.h"
+#include "MonsterBase.h"
 
 PlayerBase::PlayerBase()
 {
@@ -29,14 +31,20 @@ void PlayerBase::Start()
 		Renderer->SetPivotValue({ 0.5f,0.71f });
 		Renderer->AutoSpriteSizeOn();
 	}
+
 	{
 		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Player);
 		Col->SetCollisionType(ColType::AABBBOX2D);
 		Col->Transform.SetLocalScale({ 45,65 });
 		Col->Transform.AddLocalPosition({ 0,33 });
 	}
+
 	{
 		DamageRenderer = GetLevel()->CreateActor<DamageIndicator>(ActorOrder::Manager);
+	}
+
+	{
+		Stat = GetLevel()->CreateActor<StatDataPlayer>();
 	}
 }
 
@@ -53,14 +61,26 @@ void PlayerBase::Update(float _Delta)
 
 }
 
+void PlayerBase::LevelStart(GameEngineLevel* _PrevLevel)
+{
+	if (_PrevLevel == nullptr)
+	{
+		return;
+	}
+	std::shared_ptr<PlayerBase> player = _PrevLevel->GetObjectGroupConvert<PlayerBase>(ActorOrder::Player).front();
+	Stat = player->GetStat();
+}
+
 void PlayerBase::Release()
 {
 }
 
 void PlayerBase::HitByMonster(std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
 {
-	Hp -= 10.0f;
+	float Damage = _Collision[0]->GetActor()->GetDynamic_Cast_This<MonsterBase>()->GetStat()->GetDamage();
+	float ApplyDamage = Damage - Stat->DEF;
+	Stat->CurHp -= ApplyDamage;
 	HitCoolTime = 2.0f;
-	DamageRenderer->StartSkill(Transform.GetWorldPosition(), 10.0f, DamageColor::Purple);
+	DamageRenderer->StartSkill(Transform.GetWorldPosition(), ApplyDamage, DamageColor::Purple);
 
 }

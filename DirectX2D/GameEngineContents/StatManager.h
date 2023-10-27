@@ -2,8 +2,8 @@
 #include <GameEngineCore\GameEngineActor.h>
 
 class StatData;
-class PlayerStatData;
-class MonsterStatData;
+class StatDataPlayer;
+class StatDataMonster;
 class StatManager : public GameEngineActor
 {
 public:
@@ -17,8 +17,8 @@ public:
 	StatManager& operator=(const StatManager& _Other) = delete;
 	StatManager& operator=(StatManager&& _Other) noexcept = delete;
 
-	void ChangeHp(std::shared_ptr<PlayerStatData> _Stat, float _Damage);
-	void ChangeHp(std::shared_ptr<MonsterStatData> _Stat, float _Damage);
+	void ChangeHp(std::shared_ptr<StatDataPlayer> _Stat, float _Damage);
+	void ChangeHp(std::shared_ptr<StatDataMonster> _Stat, float _Damage);
 
 	void ChangeExp(float Value);
 

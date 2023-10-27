@@ -17,56 +17,58 @@ public:
 
 	virtual float GetDamage();
 
+	int CurLevel = 100;
+	int MaxLevel = 300;
+
 	float CurHp = 100.0f;
 	float MaxHp = 100.0f;
-	float DefRate = 0;
+
+	float DEF = 10.0f;
 };
 
-class MonsterStatData : public StatData
+class StatDataMonster : public StatData
 {
 	friend class StatManager;
 public:
 	// constrcuter destructer
-	MonsterStatData() {};
-	~MonsterStatData() {};
+	StatDataMonster() {};
+	~StatDataMonster() {};
 
 	// delete Function
-	MonsterStatData(const MonsterStatData& _Other) = delete;
-	MonsterStatData(MonsterStatData&& _Other) noexcept = delete;
-	MonsterStatData& operator=(const MonsterStatData& _Other) = delete;
-	MonsterStatData& operator=(MonsterStatData&& _Other) noexcept = delete;
-
-	float GetDamage() override;
+	StatDataMonster(const StatDataMonster& _Other) = delete;
+	StatDataMonster(StatDataMonster&& _Other) noexcept = delete;
+	StatDataMonster& operator=(const StatDataMonster& _Other) = delete;
+	StatDataMonster& operator=(StatDataMonster&& _Other) noexcept = delete;
 
 private:
-	float Damage = 50.0f;
+	float GetDamage() override;
+
+	float BodyDamage = 50.0f;
+	float DefRate = 10;
 };
 
-class PlayerStatData : public StatData
+class StatDataPlayer : public StatData
 {
 	friend class StatManager;
 public:
 	// constrcuter destructer
-	PlayerStatData() {};
-	~PlayerStatData() {};
+	StatDataPlayer() {};
+	~StatDataPlayer() {};
 
 	// delete Function
-	PlayerStatData(const PlayerStatData& _Other) = delete;
-	PlayerStatData(PlayerStatData&& _Other) noexcept = delete;
-	PlayerStatData& operator=(const PlayerStatData& _Other) = delete;
-	PlayerStatData& operator=(PlayerStatData&& _Other) noexcept = delete;
-
-	float GetDamage() override;
+	StatDataPlayer(const StatDataPlayer& _Other);
+	StatDataPlayer(StatDataPlayer&& _Other) noexcept = delete;
+	StatDataPlayer& operator=(const StatDataPlayer& _Other) = delete;
+	StatDataPlayer& operator=(StatDataPlayer&& _Other) noexcept = delete;
 
 private:
+	float GetDamage() override;
+
 	float CurMp = 100.0f;
 	float MaxMp = 100.0f;
 
 	float CurExp = 0.0f;
 	float MaxExp = 100.0f;
-
-	int CurLevel = 100;
-	int MaxLevel = 300;
 
 	int CurMoney = 0;
 	int MaxMoney = 999999999;

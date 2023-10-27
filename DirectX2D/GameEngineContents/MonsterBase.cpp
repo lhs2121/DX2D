@@ -2,6 +2,7 @@
 #include "MonsterBase.h"
 #include "DamageIndicator.h"
 #include "DamageActor.h"
+#include "StatData.h"
 
 MonsterBase::MonsterBase()
 {
@@ -37,12 +38,18 @@ void MonsterBase::Start()
 		Renderer->SetRenderOrder(RenderOrder::Monster);
 		Renderer->SetPivotType(PivotType::Bottom);
 	}
+
 	{
 		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Monster);
 		Col->SetCollisionType(ColType::AABBBOX2D);
 	}
+
 	{
 		DamageRenderer = GetLevel()->CreateActor<DamageIndicator>(ActorOrder::Manager);
+	}
+
+	{
+		Stat = GetLevel()->CreateActor<StatDataMonster>();
 	}
 	Off();
 }

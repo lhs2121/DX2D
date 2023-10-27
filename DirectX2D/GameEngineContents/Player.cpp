@@ -18,7 +18,6 @@ Player::~Player()
 void Player::Start()
 {
 	PlayerBase::Start();
-	float4 HalfWindowScale = GameEngineCore::MainWindow.GetScale().Half();
 	GameEngineInput::AddInputObject(this);
 	ChangeDirState(PlayerDirState::LEFT);
 	ChangeState(PlayerState::IDLE);
@@ -50,6 +49,7 @@ void Player::LevelEnd(GameEngineLevel* _NextLevel)
 
 void Player::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	PlayerBase::LevelStart(_PrevLevel);
 	IsFadeIn = false;
 	ChangeState(PlayerState::IDLE);
 

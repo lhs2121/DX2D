@@ -17,7 +17,7 @@ StatManager::~StatManager()
 
 }
 
-void StatManager::ChangeHp(std::shared_ptr<PlayerStatData> _Stat, float _Damage)
+void StatManager::ChangeHp(std::shared_ptr<StatDataPlayer> _Stat, float _Damage)
 {
 	_Stat->CurHp -= _Damage;
 
@@ -27,14 +27,14 @@ void StatManager::ChangeHp(std::shared_ptr<PlayerStatData> _Stat, float _Damage)
 	UI_Status::Inst->ChangeHpGauge(ConvertedHp);
 }
 
-void StatManager::ChangeHp(std::shared_ptr<MonsterStatData> _Stat, float _Damage)
+void StatManager::ChangeHp(std::shared_ptr<StatDataMonster> _Stat, float _Damage)
 {
 	_Stat->CurHp -= _Damage;
 }
 
 void StatManager::ChangeExp(float _Exp)
 {
-	//std::shared_ptr<PlayerStatData> stat = Player::MainPlayer->GetStat()->GetDynamic_Cast_This<PlayerStatData>();
+	//std::shared_ptr<StatDataPlayer> stat = Player::MainPlayer->GetStat()->GetDynamic_Cast_This<StatDataPlayer>();
 	//stat->CurExp += _Exp;
 
 	//float MaxExp = stat->MaxExp;
