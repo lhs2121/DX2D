@@ -15,7 +15,6 @@ void DamageEffect::SetNumber(DamageColor _Color, int _RendererNum, int _SpriteNu
 	{
 		std::shared_ptr <GameEngineSpriteRenderer> NewRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
 		RendererGroup.push_back(NewRenderer);
-		RendererSize++;
 	}
 	switch (_Color)
 	{
@@ -38,7 +37,7 @@ void DamageEffect::HorizontalAlign()
 {
 	for (int i = 0; i < RendererGroup.size(); i++)
 	{
-		RendererGroup[i]->Transform.AddLocalPosition({ 10.0f * i, 0.0f });
+		RendererGroup[i]->Transform.AddLocalPosition({ 20.0f * i, 0.0f });
 	}
 }
 
@@ -58,6 +57,7 @@ void DamageEffect::RenderOrderAlign(int _Order)
 	for (int i = 0; i < RendererGroup.size(); i++)
 	{
 		RendererGroup[i]->SetRenderOrder(static_cast<int>(RenderOrder::Effect2) + i + _Order);
+		LastOrder = static_cast<int>(RenderOrder::Effect2) + i + _Order;
 	}
 }
 

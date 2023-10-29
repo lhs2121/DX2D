@@ -3,9 +3,6 @@
   <ItemGroup>
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="ContentsCore.h" />
-    <ClInclude Include="SurekenShooter.h">
-      <Filter>Actor\Skills</Filter>
-    </ClInclude>
     <ClInclude Include="ContentsEnum.h">
       <Filter>Global</Filter>
     </ClInclude>
@@ -36,9 +33,6 @@
     <ClInclude Include="HuntLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="DamageEffect.h">
-      <Filter>Actor\Effect</Filter>
-    </ClInclude>
     <ClInclude Include="MapleStoryGUI.h" />
     <ClInclude Include="MonsterSpawner.h">
       <Filter>Actor\Monster</Filter>
@@ -64,11 +58,11 @@
     <ClInclude Include="FadeScreen.h">
       <Filter>Actor\UI</Filter>
     </ClInclude>
-    <ClInclude Include="SkillEffect.h">
-      <Filter>Actor\Skills</Filter>
+    <ClInclude Include="Skill.h">
+      <Filter>Actor\Combat\Skills</Filter>
     </ClInclude>
     <ClInclude Include="SkillManager.h">
-      <Filter>Actor\Skills</Filter>
+      <Filter>Actor\Combat\Skills</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Actor\Combat</Filter>
@@ -76,14 +70,8 @@
     <ClInclude Include="Monster.h">
       <Filter>Actor\Combat</Filter>
     </ClInclude>
-    <ClInclude Include="Sureken.h">
-      <Filter>Actor\Skills</Filter>
-    </ClInclude>
     <ClInclude Include="UI_Status.h">
       <Filter>Actor\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="DamageActor.h">
-      <Filter>Actor\Combat\base</Filter>
     </ClInclude>
     <ClInclude Include="MonsterBase.h">
       <Filter>Actor\Combat\base</Filter>
@@ -91,16 +79,28 @@
     <ClInclude Include="PlayerBase.h">
       <Filter>Actor\Combat\base</Filter>
     </ClInclude>
+    <ClInclude Include="Skill_LuckySeven.h">
+      <Filter>Actor\Combat\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="Skill_FlashJump.h">
+      <Filter>Actor\Combat\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageEffect.h">
+      <Filter>Actor\Combat\Damage</Filter>
+    </ClInclude>
     <ClInclude Include="DamageIndicator.h">
-      <Filter>Actor\Combat</Filter>
+      <Filter>Actor\Combat\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="Skill_ShowDown.h">
+      <Filter>Actor\Combat\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Actor\Combat\Skills</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
     <ClCompile Include="PreCompile.cpp" />
-    <ClCompile Include="SurekenShooter.cpp">
-      <Filter>Actor\Skills</Filter>
-    </ClCompile>
     <ClCompile Include="PhysicsActor.cpp">
       <Filter>Actor\Physics</Filter>
     </ClCompile>
@@ -127,9 +127,6 @@
     </ClCompile>
     <ClCompile Include="HuntLevel.cpp">
       <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="DamageEffect.cpp">
-      <Filter>Actor\Effect</Filter>
     </ClCompile>
     <ClCompile Include="MapleStoryGUI.cpp" />
     <ClCompile Include="Player_StateUpdate.cpp">
@@ -166,10 +163,10 @@
       <Filter>Actor\UI</Filter>
     </ClCompile>
     <ClCompile Include="SkillManager.cpp">
-      <Filter>Actor\Skills</Filter>
+      <Filter>Actor\Combat\Skills</Filter>
     </ClCompile>
-    <ClCompile Include="SkillEffect.cpp">
-      <Filter>Actor\Skills</Filter>
+    <ClCompile Include="Skill.cpp">
+      <Filter>Actor\Combat\Skills</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Actor\Combat</Filter>
@@ -177,14 +174,8 @@
     <ClCompile Include="Monster.cpp">
       <Filter>Actor\Combat</Filter>
     </ClCompile>
-    <ClCompile Include="Sureken.cpp">
-      <Filter>Actor\Skills</Filter>
-    </ClCompile>
     <ClCompile Include="UI_Status.cpp">
       <Filter>Actor\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="DamageActor.cpp">
-      <Filter>Actor\Combat\base</Filter>
     </ClCompile>
     <ClCompile Include="MonsterBase.cpp">
       <Filter>Actor\Combat\base</Filter>
@@ -192,8 +183,23 @@
     <ClCompile Include="PlayerBase.cpp">
       <Filter>Actor\Combat\base</Filter>
     </ClCompile>
+    <ClCompile Include="Skill_LuckySeven.cpp">
+      <Filter>Actor\Combat\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill_FlashJump.cpp">
+      <Filter>Actor\Combat\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageEffect.cpp">
+      <Filter>Actor\Combat\Damage</Filter>
+    </ClCompile>
     <ClCompile Include="DamageIndicator.cpp">
-      <Filter>Actor\Combat</Filter>
+      <Filter>Actor\Combat\Damage</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill_ShowDown.cpp">
+      <Filter>Actor\Combat\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Actor\Combat\Skills</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -205,12 +211,6 @@
     </Filter>
     <Filter Include="Actor\Maps">
       <UniqueIdentifier>{94bd9443-64fa-4f06-a71d-38a5c678fd3e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Skills">
-      <UniqueIdentifier>{318905c5-b0e4-404b-af05-bd237f99902d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Effect">
-      <UniqueIdentifier>{30f744a1-81e6-44de-a4c1-4533c77f64b1}</UniqueIdentifier>
     </Filter>
     <Filter Include="Level">
       <UniqueIdentifier>{39ef70cb-ba8e-4535-a7e9-9ab07c3f7dda}</UniqueIdentifier>
@@ -235,6 +235,12 @@
     </Filter>
     <Filter Include="Actor\Combat\base">
       <UniqueIdentifier>{66e4ea7b-e377-4b66-9684-42b2936bce52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Combat\Skills">
+      <UniqueIdentifier>{318905c5-b0e4-404b-af05-bd237f99902d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Combat\Damage">
+      <UniqueIdentifier>{4803fa25-f4d5-484d-8a3d-c8629b241c37}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

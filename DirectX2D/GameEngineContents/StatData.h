@@ -16,6 +16,7 @@ public:
 	StatData& operator=(StatData&& _Other) noexcept = delete;
 
 	virtual float GetDamage();
+	virtual std::vector<float> GetDamage(int _HitCount);
 
 	int CurLevel = 100;
 	int MaxLevel = 300;
@@ -63,6 +64,7 @@ public:
 
 private:
 	float GetDamage() override;
+	std::vector<float> GetDamage(int _HitCount) override;
 
 	float CurMp = 100.0f;
 	float MaxMp = 100.0f;

@@ -1,6 +1,5 @@
 #include "PreCompile.h"
 #include "Player.h"
-#include "SurekenShooter.h"
 #include "SkillManager.h"
 
 void Player::StateUpdate(float _Delta)
@@ -135,7 +134,7 @@ void Player::IdleUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::DOWN);
 	}
-	if (InputIsPress(LuckySevenKey) && SurekenShooter::Inst->IsUpdate() == false)
+	if (InputIsPress(LuckySevenKey))
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}
@@ -171,7 +170,7 @@ void Player::WalkUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::ROPE);
 	}
-	if (InputIsDown(LuckySevenKey) && SurekenShooter::Inst->IsUpdate() == false)
+	if (InputIsDown(LuckySevenKey))
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}
@@ -195,7 +194,7 @@ void Player::JumpUpdate(float _Delta)
 		}
 	}
 
-	if (InputIsDown(LuckySevenKey) && SurekenShooter::Inst->IsUpdate() == false)
+	if (InputIsDown(LuckySevenKey))
 	{
 		ChangeState(PlayerState::LUCKYSEVEN);
 	}

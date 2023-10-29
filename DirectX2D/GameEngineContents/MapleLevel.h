@@ -30,10 +30,9 @@ public:
 
 	std::shared_ptr<class Player> CurPlayer;
 	std::shared_ptr<class MapleMap> CurMap;
-	std::shared_ptr<class SurekenShooter> CurShooter;
 	std::shared_ptr<class SkillManager> CurSkillManager;
-	std::shared_ptr<class UI_Status> CurUI_Status;
 	std::shared_ptr<class FadeScreen> CurFadeScreen;
+	std::shared_ptr<class UI_Status> CurUI_Status;
 	std::shared_ptr<class UI_Inventory> CurUI_Inventory;
 
 	std::map<std::string, std::shared_ptr<class Portal>> PortalGroup;

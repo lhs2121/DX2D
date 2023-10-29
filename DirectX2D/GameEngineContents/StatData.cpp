@@ -6,6 +6,11 @@ float StatData::GetDamage()
 	return 0.0f;
 }
 
+std::vector<float> StatData::GetDamage(int _HitCount)
+{
+	return {0.0f};
+}
+
 
 float StatDataPlayer::GetDamage()
 {
@@ -16,6 +21,17 @@ float StatDataPlayer::GetDamage()
 	random.SetSeed(rnd());
 	float num = random.RandomFloat(0.7f, 1.3f);
 	return Damage * num;
+}
+
+std::vector<float> StatDataPlayer::GetDamage(int _HitCount)
+{
+	std::vector<float> DamageGroup;
+	DamageGroup.reserve(_HitCount);
+	for (int i = 0; i < _HitCount; i++)
+	{
+		DamageGroup.push_back(StatDataPlayer::GetDamage());
+	}
+	return DamageGroup;
 }
 
 float StatDataMonster::GetDamage()

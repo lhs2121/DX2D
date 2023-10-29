@@ -14,7 +14,6 @@ enum class PlayerState
 	FLASHJUMP,
 	LUCKYSEVEN,
 	SHOWDOWN
-
 };
 
 class GameEngineSpriteRenderer;
@@ -32,10 +31,8 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
-	float GetDir()
-	{
-		return dir;
-	}
+	float GetDir() { return dir; }
+	PlayerState GetCurState() { return CurState; }
 
 	static Player* MainPlayer;
 private:

@@ -1,6 +1,5 @@
 #include "PreCompile.h"
 #include "Player.h"
-#include "SurekenShooter.h"
 #include "SkillManager.h"
 
 void Player::FlashJumpStart()
@@ -9,7 +8,7 @@ void Player::FlashJumpStart()
 	ApplyInputRight = false;
 	NetForce.X = dir * 700.0f;
 	NetForce.Y += 100.0f;
-	SkillManager::Inst->StartSkill(Transform.GetWorldPosition(), SkillType::FlashJump, dir);
+	SkillManager::Inst->StartSkill(SkillType::FlashJump);
 }
 
 void Player::FlashJumpUpdate(float _Delta)
@@ -28,7 +27,7 @@ void Player::FlashJumpUpdate(float _Delta)
 
 	if (InputIsDown(JumpKey) && DoubleJump == false)
 	{
-		SkillManager::Inst->StartSkill(Transform.GetWorldPosition(), SkillType::FlashJump, dir);
+		SkillManager::Inst->StartSkill(SkillType::FlashJump);
 		NetForce.X = dir * 700.0f;
 		NetForce.Y += 100.0f;
 		DoubleJump = true;
@@ -65,11 +64,6 @@ void Player::LuckySevenUpdate(float _Delta)
 		}
 	}
 
-	if (Renderer->GetCurIndex() == 2 && SurekenShooter::Inst->IsUpdate() == false)
-	{
-		SurekenShooter::Inst->On();
-		SkillManager::Inst->StartSkill(Transform.GetWorldPosition(), SkillType::LuckySeven, dir);
-	}
 	if (Renderer->IsCurAnimationEnd() == true)
 	{
 		if (InputIsFree(VK_LEFT) && InputIsFree(VK_RIGHT))
@@ -88,7 +82,6 @@ void Player::ShowDownStart()
 	ApplyInputJump = false;
 	CanFlip = false;
 	DirCheck = false;
-	SkillManager::Inst->StartSkill(Transform.GetWorldPosition(), SkillType::ShowDown, dir);
 
 	ChangeRandomSwingAnimation();
 }

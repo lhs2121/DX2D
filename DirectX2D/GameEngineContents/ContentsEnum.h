@@ -59,7 +59,6 @@ enum class SkillType
 {
 	FlashJump,
 	LuckySeven,
-	HitSureken,
 	ShowDown,
 };
 

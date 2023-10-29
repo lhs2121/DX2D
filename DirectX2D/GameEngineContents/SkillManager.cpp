@@ -1,7 +1,10 @@
 #include "PreCompile.h"
 #include "SkillManager.h"
-#include "SkillEffect.h"
-#include "Player.h"
+#include "Skill.h"
+#include "Skill_FlashJump.h"
+#include "Skill_LuckySeven.h"
+#include "Skill_ShowDown.h"
+
 SkillManager* SkillManager::Inst = nullptr;
 
 SkillManager::SkillManager()
@@ -12,42 +15,51 @@ SkillManager::~SkillManager()
 {
 }
 
-void SkillManager::StartSkill(float4 _Pos, SkillType _Type, float _Dir)
+
+void SkillManager::StartSkill(SkillType _Type)
 {
-	std::list<std::shared_ptr<SkillEffect>> list;
-	list = GetLevel()->GetObjectGroupConvert<SkillEffect>(ActorOrder::SkillEffect);
-	std::shared_ptr<SkillEffect> NewEffect = GetUsableEffect(list);
-	NewEffect->EffectSetting(_Pos, _Type, _Dir);
-	NewEffect->On();
+	switch (_Type)
+	{
+	case SkillType::FlashJump:
+		FlashJump->StartSkill();
+		break;
+	case SkillType::LuckySeven:
+		LuckySeven->On();
+		break;
+	case SkillType::ShowDown:
+		ShowDown->On();
+		break;
+	default:
+		break;
+	}
+
 }
 
 void SkillManager::Start()
 {
-	for (int i = 0; i < 10; i++)
-	{
-		GetLevel()->CreateActor<SkillEffect>(ActorOrder::SkillEffect);
-	}
+
 }
 
-std::shared_ptr<SkillEffect> SkillManager::GetUsableEffect(std::list<std::shared_ptr<SkillEffect>> _list)
+void SkillManager::Update(float _Delta)
 {
-	std::list<std::shared_ptr<SkillEffect>>::iterator Start = _list.begin();
-	std::list<std::shared_ptr<SkillEffect>>::iterator End = _list.end();
-	
-	for (; Start != End;Start++)
-	{
-		if ((*Start)->IsUpdate() == true)
-		{
-			continue;
-		}
-		else
-		{
-			return (*Start);
-		}
-	}
 
-	std::shared_ptr<SkillEffect> NewEffect;
-	NewEffect = GetLevel()->CreateActor<SkillEffect>(ActorOrder::SkillEffect);
-	return NewEffect;
 }
 
+void SkillManager::LevelStart(GameEngineLevel* _PrevLevel)
+{
+	
+	FlashJump = GetLevel()->CreateActor<Skill_FlashJump>();
+	LuckySeven = GetLevel()->CreateActor<Skill_LuckySeven>();
+	ShowDown = GetLevel()->CreateActor<Skill_ShowDown>();
+}
+
+void SkillManager::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	FlashJump->Death();
+	FlashJump = nullptr;
+	LuckySeven->Death();
+	LuckySeven = nullptr;
+	ShowDown->Death();
+	ShowDown = nullptr;
+
+}

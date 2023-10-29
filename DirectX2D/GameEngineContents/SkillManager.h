@@ -1,7 +1,7 @@
 #pragma once
 #include <GameEngineCore\GameEngineActor.h>
 // Ό³Έν :
-class SkillEffect;
+class Skill;
 class SkillManager : public GameEngineActor
 {
 public:
@@ -15,12 +15,20 @@ public:
 	SkillManager& operator=(const SkillManager& _Other) = delete;
 	SkillManager& operator=(SkillManager&& _Other) noexcept = delete;
 
-	void StartSkill(float4 _Pos, SkillType _Type, float dir);
+	void StartSkill(SkillType _Type);
 
 	static SkillManager* Inst;
 protected:
-	std::shared_ptr<SkillEffect> GetUsableEffect(std::list<std::shared_ptr<SkillEffect>> _list);
 	void Start() override;
+	void Update(float _Delta) override;
+	void LevelStart(GameEngineLevel* _PrevLevel) override;
+	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
+	int FlashJumpKey = VK_MENU;
+	int LuckySevenKey = VK_SHIFT;
+	int ShowDownKey = VK_CONTROL;
+	std::shared_ptr<class Skill> FlashJump;
+	std::shared_ptr<class Skill> LuckySeven;
+	std::shared_ptr<class Skill> ShowDown;
 };
 

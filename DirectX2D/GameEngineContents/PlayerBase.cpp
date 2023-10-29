@@ -81,6 +81,6 @@ void PlayerBase::HitByMonster(std::vector<std::shared_ptr<GameEngineCollision>> 
 	float ApplyDamage = Damage - Stat->DEF;
 	Stat->CurHp -= ApplyDamage;
 	HitCoolTime = 2.0f;
-	DamageRenderer->RenderDamage(Transform.GetWorldPosition(), ApplyDamage, 1, DamageColor::Purple);
+	//DamageRenderer->RenderDamage(Transform.GetWorldPosition(), ApplyDamage, DamageColor::Purple);
 
 }

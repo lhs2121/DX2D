@@ -1,7 +1,6 @@
 #include "PreCompile.h"
 #include "MonsterBase.h"
 #include "DamageIndicator.h"
-#include "DamageActor.h"
 #include "StatData.h"
 
 MonsterBase::MonsterBase()
@@ -73,14 +72,6 @@ void MonsterBase::Release()
 
 void MonsterBase::HitByPlayer(std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
 {
-	for (size_t i = 0; i < _Collision.size(); i++)
-	{
-		std::shared_ptr<DamageActor> DmgActor = _Collision[i]->GetActor()->GetDynamic_Cast_This<DamageActor>();
-		float Damage = DmgActor->GetDamage();
-		Hp -= Damage;
-		DamageRenderer->RenderDamage(Transform.GetWorldPosition(), Damage, 5, DamageColor::Orange);
 
-		DmgActor->Off();
-	}
 }
 

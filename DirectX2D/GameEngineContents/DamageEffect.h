@@ -20,6 +20,12 @@ public:
 	void RenderOrderAlign(int _Order);
 	void RenderStart();
 	void RenderEnd();
+
+	int GetLastRenderOrder()
+	{
+		return LastOrder;
+	}
+
 	float GetCoolTime()
 	{
 		return cool;
@@ -30,6 +36,7 @@ protected:
 	void Update(float _Delta) override;
 private:
 	float cool = 1.5f;
+	int LastOrder;
 	int RendererSize = 2;
 	std::vector<std::shared_ptr<class GameEngineSpriteRenderer>> RendererGroup;
 };

@@ -169,7 +169,6 @@
   <ItemGroup>
     <ClInclude Include="MapleStoryGUI.h" />
     <ClInclude Include="ContentsEnum.h" />
-    <ClInclude Include="DamageActor.h" />
     <ClInclude Include="HuntLevel.h" />
     <ClInclude Include="TownLevel.h" />
     <ClInclude Include="Map0.h" />
@@ -182,11 +181,9 @@
     <ClInclude Include="MapleMap.h" />
     <ClInclude Include="Map1.h" />
     <ClInclude Include="MapleLevel.h" />
-    <ClInclude Include="SurekenShooter.h" />
-    <ClInclude Include="Sureken.h" />
     <ClInclude Include="TitleLevel.h" />
     <ClInclude Include="SkillManager.h" />
-    <ClInclude Include="SkillEffect.h" />
+    <ClInclude Include="Skill.h" />
     <ClInclude Include="UI_Status.h" />
     <ClInclude Include="StatData.h" />
     <ClInclude Include="StatManager.h" />
@@ -200,6 +197,10 @@
     <ClInclude Include="Boss_Vellum.h" />
     <ClInclude Include="UI_Inventory.h" />
     <ClInclude Include="PlayerBase.h" />
+    <ClInclude Include="Skill_LuckySeven.h" />
+    <ClInclude Include="Skill_FlashJump.h" />
+    <ClInclude Include="Skill_ShowDown.h" />
+    <ClInclude Include="Projectile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MapleStoryGUI.cpp" />
@@ -223,17 +224,14 @@
     <ClCompile Include="MonsterBase.cpp" />
     <ClCompile Include="MapleMap.cpp" />
     <ClCompile Include="Map1.cpp" />
-    <ClCompile Include="SurekenShooter.cpp" />
-    <ClCompile Include="Sureken.cpp" />
     <ClCompile Include="UI_Status.cpp" />
     <ClCompile Include="TitleLevel.cpp" />
     <ClCompile Include="SkillManager.cpp" />
-    <ClCompile Include="SkillEffect.cpp" />
+    <ClCompile Include="Skill.cpp" />
     <ClCompile Include="StatData.cpp" />
     <ClCompile Include="StatManager.cpp" />
     <ClCompile Include="DamageIndicator.cpp" />
     <ClCompile Include="DamageEffect.cpp" />
-    <ClCompile Include="DamageActor.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="FadeScreen.cpp" />
     <ClCompile Include="MonsterSpawner.cpp" />
@@ -242,6 +240,10 @@
     <ClCompile Include="Boss_Vellum.cpp" />
     <ClCompile Include="UI_Inventory.cpp" />
     <ClCompile Include="PlayerBase.cpp" />
+    <ClCompile Include="Skill_LuckySeven.cpp" />
+    <ClCompile Include="Skill_FlashJump.cpp" />
+    <ClCompile Include="Skill_ShowDown.cpp" />
+    <ClCompile Include="Projectile.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
