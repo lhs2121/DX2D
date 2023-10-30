@@ -13,10 +13,7 @@ Skill_LuckySeven::~Skill_LuckySeven()
 
 void Skill_LuckySeven::Start()
 {
-	{
-		//Renderer->CreateAnimation("LuckySeven", "LuckySeven", 0.1f, 0, 6, false);
-		//Renderer->ChangeAnimation("LuckySeven");
-	}
+	Skill::Start();
 }
 
 void Skill_LuckySeven::Update(float _Delta)
@@ -42,18 +39,16 @@ void Skill_LuckySeven::StartSkill()
 {
 	float4 Pos = Player::MainPlayer->Transform.GetWorldPosition();
 	float Dir = Player::MainPlayer->GetDir();
+	int ID = GameEngineRandom::GameEngineRandom().RandomInt(0, 99999999);
 
-	CurProjectile = GetNonUpdateProjectile();
-	CurProjectile->Setting(Pos, 500.0f, Dir, 2.0f, 0.4f);
-
-	CurProjectile = GetNonUpdateProjectile();
-	CurProjectile->Setting(Pos, 500.0f, Dir, 2.0f, 0.5f);
-
-	CurProjectile = GetNonUpdateProjectile();
-	CurProjectile->Setting(Pos, 500.0f, Dir, 2.0f, 0.6f);
-
-	CurProjectile = GetNonUpdateProjectile();
-	CurProjectile->Setting(Pos, 500.0f, Dir, 2.0f, 0.7f);
+	for (size_t i = 0; i < 4; i++)
+	{
+		float Delay = 0.4f + 0.1f * i;
+		std::vector<float> Damage = Player::MainPlayer->GetStat()->GetDamage(1, SkillType::LuckySeven);
+		CurProjectile = GetNonUpdateProjectile();
+		CurProjectile->Setting(Pos, 500.0f, Dir, 2.0f, Delay);
+		CurProjectile->SetDamage(Damage, ID);
+	}
 }
 
 std::shared_ptr<class Projectile> Skill_LuckySeven::GetNonUpdateProjectile()

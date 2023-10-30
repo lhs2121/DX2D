@@ -29,7 +29,7 @@ protected:
 	std::string CurMonsterString;
 	std::vector<float4> SpawnPoint;
 	float SpawnCoolTime = 0.0f;
-	float ResetCoolTimeValue = 10.0f;
+	float ResetCoolTimeValue = 7.0f;
 	int SpawnCount;
 	int MaxCount;
 };

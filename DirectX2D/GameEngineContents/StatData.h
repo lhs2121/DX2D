@@ -7,7 +7,7 @@ class StatData : public GameEngineActor
 public:
 	// constrcuter destructer
 	StatData() {};
-	~StatData() 
+	~StatData()
 	{
 
 	};
@@ -18,8 +18,8 @@ public:
 	StatData& operator=(const StatData& _Other) = delete;
 	StatData& operator=(StatData&& _Other) noexcept = delete;
 
-	virtual float GetDamage();
-	virtual std::vector<float> GetDamage(int _HitCount);
+	virtual float GetDamage() { return 0.0f; }
+	virtual std::vector<float> GetDamage(int _HitCount, SkillType _Type) { return { 0.0f }; }
 
 	int CurLevel = 100;
 	int MaxLevel = 300;
@@ -65,9 +65,8 @@ public:
 	StatDataPlayer& operator=(const StatDataPlayer& _Other) = delete;
 	StatDataPlayer& operator=(StatDataPlayer&& _Other) noexcept = delete;
 
-private:
 	float GetDamage() override;
-	std::vector<float> GetDamage(int _HitCount) override;
+	std::vector<float> GetDamage(int _HitCount, SkillType _Type) override;
 
 	float CurMp = 100.0f;
 	float MaxMp = 100.0f;
@@ -84,11 +83,14 @@ private:
 	int LUK = 10;
 
 	int ATK = 10;
-	int AtkRate = 0;
-	int DmgRate = 0;
-	int BossDmgRate = 0;
+	int AtkRate = 10;
+	int DmgRate = 10;
+	int BossDmgRate = 10;
 
-	float CriDmg = 50;
-	float CriRate = 50;
+	float CriDmg = 10;
+	float CriRate = 10;
+
+	float LuckySevenRate = 540.0f;
+	float ShowDownRate = 708.0f;
 
 };

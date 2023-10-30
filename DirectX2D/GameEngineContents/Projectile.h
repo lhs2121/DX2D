@@ -15,6 +15,7 @@ public:
 	Projectile& operator=(Projectile&& _Other) noexcept = delete;
 
 	void Setting(float4 _Pos, float _Speed, float _Dir, float _CoolTime, float StartDelayTime);
+	void SetDamage(std::vector<float> _DamageGroup, int _DamageID);
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
@@ -25,8 +26,10 @@ protected:
 	float CoolTime;
 	float CoolTimeReset;
 	float StartDelayTime;
-	float Damage = 10.0f;
+	int DamageID;
 	bool CanHitMonster = true;
+
+	std::vector<float> DamageGroup;
 	std::shared_ptr<class GameEngineSpriteRenderer> SurekenRenderer;
 	std::shared_ptr<class GameEngineCollision> SurekenCol;
 };

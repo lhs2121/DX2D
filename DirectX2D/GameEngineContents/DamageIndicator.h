@@ -3,7 +3,6 @@
 // Ό³Έν :
 
 class DamageEffect;
-class DamageInfo;
 class DamageIndicator : public GameEngineActor
 {
 public:
@@ -17,13 +16,13 @@ public:
 	DamageIndicator& operator=(const DamageIndicator& _Other) = delete;
 	DamageIndicator& operator=(DamageIndicator&& _Other) noexcept = delete;
 
-	void RenderDamage(float4 _Pos, DamageColor _Color);
-
+	void RenderDamage(float4 _Pos, DamageColor _Color, std::vector<float> _DamageGroup, int _DamageID);
 private:
 	void Start() override;
 
-	int LastRenderOrder = 0;
+	unsigned long long LastRenderOrder = 0;
 	float4 PrevPos;
+	std::shared_ptr<DamageEffect> PrevEffect = nullptr;
 	std::shared_ptr<DamageEffect> GetNonUpdateObject(std::list<std::shared_ptr<DamageEffect>> _list);
 	std::vector<int> GetIntArray(float _Value);
 	

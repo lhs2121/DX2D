@@ -11,8 +11,7 @@ Skill_ShowDown::~Skill_ShowDown()
 
 void Skill_ShowDown::Start()
 {
-	//Skill::Start();
-	//Renderer->CreateAnimation("ShowDownChallenge", "ShowDownChallenge", 0.07f, 0, 24, false);
+	Skill::Start();
 }
 
 void Skill_ShowDown::Update(float _Delta)

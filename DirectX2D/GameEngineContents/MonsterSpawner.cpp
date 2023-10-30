@@ -17,9 +17,9 @@ void MonsterSpawner::Start()
 void MonsterSpawner::Update(float _Delta)
 {
 	SpawnCoolTime -= _Delta;
-	if (SpawnCoolTime < 0.0f)
+	if (SpawnCoolTime <= 0.0f)
 	{
-		if (GetLevel()->GetObjectGroup(200).size() > MaxCount)
+		if (GetLevel()->GetObjectGroup(200).size() >= MaxCount)
 		{
 		     SpawnCoolTime = ResetCoolTimeValue;
 			 return;

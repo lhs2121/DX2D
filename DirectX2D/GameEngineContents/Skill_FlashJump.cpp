@@ -12,7 +12,7 @@ Skill_FlashJump::~Skill_FlashJump()
 
 void Skill_FlashJump::Start()
 {
-
+	Skill::Start();
 }
 
 void Skill_FlashJump::Update(float _Delta)

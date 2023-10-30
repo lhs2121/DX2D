@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "Player.h"
 #include "StatData.h"
+#include "DamageIndicator.h"
 
 Monster::Monster()
 {
@@ -11,13 +12,29 @@ Monster::~Monster()
 {
 }
 
+void Monster::PushDamage(std::vector<float> _DamageGroup, int _DamageID)
+{
+	float4 Pos = Transform.GetWorldPosition() + float4(0.0f, ImageSize.Y);
+	DamageRenderer->RenderDamage(Pos, DamageColor::Orange, _DamageGroup, _DamageID);
+};
+
 void Monster::Start()
 {
 	MonsterBase::Start();
+	{
+		DamageRenderer = GetLevel()->CreateActor<DamageIndicator>(155);
+	}
 }
 
 void Monster::Update(float _Delta)
 {
+	/*GameEngineInput::AddInputObject(this);
+	if (InputIsDown('M'))
+	{
+		std::vector<float> _DamageGroup = { 2223,3223,13123,1215,535645,2323,6143 };
+		DamageRenderer->RenderDamage(Transform.GetWorldPosition(), DamageColor::Orange, _DamageGroup);
+	}*/
+	
 	PhysicsActor::Update(_Delta);
 	switch (CurState)
 	{

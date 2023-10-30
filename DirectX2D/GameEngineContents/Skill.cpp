@@ -24,7 +24,7 @@ void Skill::FlipX(int _dir, std::shared_ptr<class GameEngineSpriteRenderer> _Ren
 
 void Skill::Start()
 {
-
+	SkillId = GameEngineRandom::GameEngineRandom().RandomInt(0, 99999999);
 }
 
 void Skill::Update(float _Delta)

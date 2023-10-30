@@ -9,95 +9,105 @@ DamageEffect::~DamageEffect()
 {
 }
 
-void DamageEffect::SetNumber(DamageColor _Color, int _RendererNum, int _SpriteNum)
-{
-	if (_RendererNum > RendererGroup.size() - 1)
-	{
-		std::shared_ptr <GameEngineSpriteRenderer> NewRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
-		RendererGroup.push_back(NewRenderer);
-	}
-	switch (_Color)
-	{
-	case DamageColor::Orange:
-		RendererGroup[_RendererNum]->SetSprite("AtkDmg", _SpriteNum);
-		break;
-	case DamageColor::Red:
-		RendererGroup[_RendererNum]->SetSprite("CriDmg", _SpriteNum);
-		break;
-	case DamageColor::Purple:
-		RendererGroup[_RendererNum]->SetSprite("HitDmg", _SpriteNum);
-		break;
-	default:
-		break;
-	}
-	RendererGroup[_RendererNum]->On();
-}
-
-void DamageEffect::HorizontalAlign()
-{
-	for (int i = 0; i < RendererGroup.size(); i++)
-	{
-		RendererGroup[i]->Transform.AddLocalPosition({ 20.0f * i, 0.0f });
-	}
-}
-
-void DamageEffect::VerticalAlign()
-{
-	for (int i = 0; i < RendererGroup.size(); i++)
-	{
-		if (i % 2 == 0)
-		{
-			RendererGroup[i]->Transform.AddLocalPosition({ 0.0f, 2.0f });
-		}
-	}
-}
-
-void DamageEffect::RenderOrderAlign(int _Order)
-{
-	for (int i = 0; i < RendererGroup.size(); i++)
-	{
-		RendererGroup[i]->SetRenderOrder(static_cast<int>(RenderOrder::Effect2) + i + _Order);
-		LastOrder = static_cast<int>(RenderOrder::Effect2) + i + _Order;
-	}
-}
-
 void DamageEffect::Start()
 {
-	RendererGroup.reserve(RendererSize);
-	for (size_t i = 0; i < RendererSize; i++)
+	Off();
+}
+
+void DamageEffect::Setting(float4 _Pos, DamageColor _Color, std::vector<int> _NumArray, int _Order, float _StartDelayTime, int _ID)
+{
+	for (int i = RendererGroup.size(); i < _NumArray.size(); i++)
 	{
 		std::shared_ptr <GameEngineSpriteRenderer> NewRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
 		NewRenderer->Off();
 		RendererGroup.push_back(NewRenderer);
 	}
 
-	Off();
-}
-
-void DamageEffect::RenderStart()
-{
-	cool = 1.5f;
-	On();
-}
-
-void DamageEffect::RenderEnd()
-{
-	for (int i = 0; i < RendererGroup.size(); i++)
+	for (int i = 0; i < _NumArray.size(); i++)
 	{
-		RendererGroup[i]->Off();
-		RendererGroup[i]->Transform.SetLocalPosition({ 0.0f,0.0f });
+		switch (_Color)
+		{
+		case DamageColor::Orange:
+			RendererGroup[i]->SetSprite("AtkDmg", _NumArray[i]);
+			break;
+		case DamageColor::Red:
+			RendererGroup[i]->SetSprite("CriDmg", _NumArray[i]);
+			break;
+		case DamageColor::Purple:
+			RendererGroup[i]->SetSprite("HitDmg", _NumArray[i]);
+			break;
+		default:
+			break;
+		}
+
+		RendererGroup[i]->Transform.AddLocalPosition({ 20.0f * i, 0.0f });
+
+		if (i % 2 == 0)
+		{
+			RendererGroup[i]->Transform.AddLocalPosition({ 0.0f, 2.0f });
+		}
+
+		RendererGroup[i]->SetRenderOrder(i + _Order);
 	}
-	Transform.SetLocalPosition({ 0.0f,0.0f });
-	Off();
+
+	float RandomX = GameEngineRandom::GameEngineRandom().RandomInt(-10, 10);
+	Transform.SetWorldPosition(_Pos + float4(RandomX, 0));
+	StartDelayTime = _StartDelayTime;
+	DamageID = _ID;
+	CoolTime = 0.5f;
+	if (StartDelayTime == 0.0f)
+	{
+		RendererOn();
+	}
+	On();
 }
 
 void DamageEffect::Update(float _Delta)
 {
-	cool -= _Delta;
-	if (cool <= 0)
+	if (StartDelayTime > 0.0f)
 	{
-		RenderEnd();
+		StartDelayTime -= _Delta;
+		if (StartDelayTime <= 0.0f)
+		{
+			RendererOn();
+		}
+		return;
 	}
-	Transform.AddLocalPosition(float4::UP * _Delta * 20.0f);
+
+	CoolTime -= _Delta;
+
+	if (CoolTime <= 0.0f)
+	{
+		DamageID = -1;
+		for (std::shared_ptr<GameEngineSpriteRenderer> Renderer : RendererGroup)
+		{
+			Renderer->GetColorData().MulColor.A -= _Delta;
+		}
+	}
+	if (RendererGroup[0]->GetColorData().MulColor.A <= 0.0f)
+	{
+		RendererOff();
+		Off();
+	}
+
+	Transform.AddWorldPosition(float4::UP * _Delta * 20.0f);
 }
 
+void DamageEffect::RendererOn()
+{
+	for (std::shared_ptr<GameEngineSpriteRenderer> Renderer : RendererGroup)
+	{
+		Renderer->On();
+	}
+}
+
+void DamageEffect::RendererOff()
+{
+	for (std::shared_ptr<GameEngineSpriteRenderer> Renderer : RendererGroup)
+	{
+		Renderer->Off();
+		Renderer->Transform.SetLocalPosition({ 0.0f,0.0f });
+		Renderer->SetRenderOrder(0);
+		Renderer->GetColorData().MulColor.A = 1.0f;
+	}
+}

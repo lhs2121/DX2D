@@ -1,17 +1,6 @@
 #include "PreCompile.h"
 #include "StatData.h"
 
-float StatData::GetDamage()
-{
-	return 0.0f;
-}
-
-std::vector<float> StatData::GetDamage(int _HitCount)
-{
-	return {0.0f};
-}
-
-
 float StatDataPlayer::GetDamage()
 {
 	float Damage = (LUK * 4 + DEX) * ATK * ((100.0f + AtkRate) / 100.0f) * ((100.0f + DmgRate + BossDmgRate) / 100.0f);
@@ -23,13 +12,32 @@ float StatDataPlayer::GetDamage()
 	return Damage * num;
 }
 
-std::vector<float> StatDataPlayer::GetDamage(int _HitCount)
+std::vector<float> StatDataPlayer::GetDamage(int _HitCount, SkillType _Type)
 {
+	float SkillDamageRate = 0.0f;
+	switch (_Type)
+	{
+	case SkillType::Body:
+		break;
+	case SkillType::FlashJump:
+		break;
+	case SkillType::LuckySeven:
+		SkillDamageRate = LuckySevenRate;
+		break;
+	case SkillType::ShowDown:
+		SkillDamageRate = ShowDownRate;
+		break;
+	default:
+		break;
+	}
+
+
 	std::vector<float> DamageGroup;
 	DamageGroup.reserve(_HitCount);
 	for (int i = 0; i < _HitCount; i++)
 	{
-		DamageGroup.push_back(StatDataPlayer::GetDamage());
+		float Damage = StatDataPlayer::GetDamage() * SkillDamageRate;
+		DamageGroup.push_back(Damage);
 	}
 	return DamageGroup;
 }
@@ -42,7 +50,6 @@ float StatDataMonster::GetDamage()
 StatDataPlayer::StatDataPlayer(const StatDataPlayer& _Other)
 {
 	CurLevel = _Other.CurLevel;
-	MaxLevel = _Other.MaxLevel;
 	CurHp = _Other.CurHp;
 	MaxHp = _Other.MaxHp;
 	DEF = _Other.DEF;
@@ -51,7 +58,6 @@ StatDataPlayer::StatDataPlayer(const StatDataPlayer& _Other)
 	CurExp = _Other.CurExp;
 	MaxExp = _Other.MaxExp;
 	CurMoney = _Other.CurMoney;
-	MaxMoney = _Other.MaxMoney;
 	STR = _Other.STR;
 	DEX = _Other.DEX;
 	INT = _Other.INT;
@@ -62,5 +68,4 @@ StatDataPlayer::StatDataPlayer(const StatDataPlayer& _Other)
 	BossDmgRate = _Other.BossDmgRate;
 	CriDmg = _Other.CriDmg;
 	CriRate = _Other.CriRate;
-
 }

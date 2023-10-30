@@ -57,6 +57,7 @@ enum class PlayerDirState
 
 enum class SkillType
 {
+	Body,
 	FlashJump,
 	LuckySeven,
 	ShowDown,

@@ -16,7 +16,6 @@ public:
 	MonsterBase& operator=(MonsterBase&& _Other) noexcept = delete;
 
 	void Setting(std::string MonsterName);
-
 	std::shared_ptr<class StatData> GetStat()
 	{
 		return Stat;

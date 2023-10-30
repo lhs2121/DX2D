@@ -11,9 +11,29 @@ DamageIndicator::~DamageIndicator()
 
 }
 
-
-void DamageIndicator::RenderDamage(float4 _Pos, DamageColor _Color)
+void DamageIndicator::RenderDamage(float4 _Pos, DamageColor _Color, std::vector<float> _DamageGroup, int _DamageID)
 {
+	std::list<std::shared_ptr<DamageEffect>> list = GetLevel()->GetObjectGroupConvert<DamageEffect>(ActorOrder::DamageEffect);
+	for (int i = 0; i < _DamageGroup.size(); i++)
+	{
+		std::shared_ptr<DamageEffect> NewEffect = GetNonUpdateObject(list);
+
+		float4 StartPos = _Pos + float4(0.0f, 25.0f * i);
+
+		if (PrevEffect != nullptr && PrevEffect->GetID() == _DamageID)
+		{
+			StartPos = PrevEffect->Transform.GetWorldPosition() + float4(0.0f, 25.0f);
+		}
+
+		std::vector<int> Damage = GetIntArray(_DamageGroup[i]);
+
+		LastRenderOrder += static_cast<unsigned long long>(i) + 7;
+		float StartDelay = 0.1f * i;
+
+		NewEffect->Setting(StartPos, _Color, Damage, LastRenderOrder, StartDelay, _DamageID);
+
+		PrevEffect = NewEffect;
+	}
 }
 
 std::vector<int> DamageIndicator::GetIntArray(float _Value)

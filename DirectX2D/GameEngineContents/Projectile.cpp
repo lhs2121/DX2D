@@ -1,7 +1,8 @@
 #include "PreCompile.h"
 #include "Projectile.h"
-#include "MonsterBase.h"
+#include "Monster.h"
 #include "StatData.h"
+
 
 Projectile::Projectile()
 {
@@ -36,18 +37,24 @@ void Projectile::Setting(float4 _Pos, float _Speed, float _Dir, float _CoolTime,
 	On();
 }
 
+void Projectile::SetDamage(std::vector<float> _DamageGroup, int _DamageID)
+{
+	DamageGroup = _DamageGroup;
+	DamageID = _DamageID;
+}
+
 void Projectile::Start()
 {
 	{
 		SurekenRenderer = CreateComponent<GameEngineSpriteRenderer>();
 		SurekenRenderer->SetRenderOrder(RenderOrder::Effect);
-		SurekenRenderer->CreateAnimation("HitSureken", "HitSureken", 0.1f, 0, 3, false);
-		SurekenRenderer->SetEndEvent("HitSureken",
+		SurekenRenderer->CreateAnimation("Hit_LuckySeven", "Hit_LuckySeven");
+		SurekenRenderer->SetEndEvent("Hit_LuckySeven",
 			[&](GameEngineSpriteRenderer* _Renderer)
 			{
 				Off();
 			});
-		SurekenRenderer->CreateAnimation("Sureken", "Sureken", 0.1f, 2, 3, true);
+		SurekenRenderer->CreateAnimation("Sureken", "Sureken", 0.1f, 0, 1, true);
 		SurekenRenderer->AutoSpriteSizeOn();
 
 	}
@@ -88,14 +95,13 @@ void Projectile::Update(float _Delta)
 	SurekenCol->Collision(CollisionOrder::Monster,
 		[&](std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
 		{
-			if (CanHitMonster = false)
+			if (CanHitMonster == false)
 			{
 				return;
 			}
-			std::shared_ptr<StatData> MonStat = _Collision[0]->GetActor()->GetDynamic_Cast_This<MonsterBase>()->GetStat();
-			MonStat->CurHp -= Damage;
 			CanHitMonster = false;
-			SurekenRenderer->ChangeAnimation("HitSureken");
+			_Collision[0]->GetActor()->GetDynamic_Cast_This<Monster>()->PushDamage(DamageGroup,DamageID);
+			SurekenRenderer->ChangeAnimation("Hit_LuckySeven");
 		});
 }
 
