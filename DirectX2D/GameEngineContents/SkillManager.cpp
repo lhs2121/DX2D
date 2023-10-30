@@ -24,7 +24,7 @@ void SkillManager::StartSkill(SkillType _Type)
 		FlashJump->StartSkill();
 		break;
 	case SkillType::LuckySeven:
-		LuckySeven->On();
+		LuckySeven->StartSkill();
 		break;
 	case SkillType::ShowDown:
 		ShowDown->On();

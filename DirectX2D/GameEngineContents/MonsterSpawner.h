@@ -15,7 +15,7 @@ public:
 	MonsterSpawner& operator=(const MonsterSpawner& _Other) = delete;
 	MonsterSpawner& operator=(MonsterSpawner&& _Other) noexcept = delete;
 
-	void Setting(std::string _MonsterString, float _CoolTime, int _SpawnCount, std::vector<float4> _SpawnPoint)
+	void Setting(std::string _MonsterString, float _CoolTime, int _SpawnCount, int _MaxCount, std::vector<float4> _SpawnPoint)
 	{
 		CurMonsterString = _MonsterString;
 		ResetCoolTimeValue = _CoolTime;
@@ -31,6 +31,6 @@ protected:
 	float SpawnCoolTime = 0.0f;
 	float ResetCoolTimeValue = 10.0f;
 	int SpawnCount;
-	int CurMonsterCount = 0;
+	int MaxCount;
 };
 

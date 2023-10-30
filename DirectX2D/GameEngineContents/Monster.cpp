@@ -1,5 +1,7 @@
 #include "PreCompile.h"
 #include "Monster.h"
+#include "Player.h"
+#include "StatData.h"
 
 Monster::Monster()
 {
@@ -17,7 +19,6 @@ void Monster::Start()
 void Monster::Update(float _Delta)
 {
 	PhysicsActor::Update(_Delta);
-	MonsterBase::Update(_Delta);
 	switch (CurState)
 	{
 	case MonsterState::HIT:
@@ -32,6 +33,11 @@ void Monster::Update(float _Delta)
 	default:
 		break;
 	}
+}
+
+void Monster::Release()
+{
+	MonsterBase::Release();
 }
 
 void Monster::ChangeState(MonsterState _State)
@@ -60,13 +66,19 @@ void Monster::RunStart()
 
 void Monster::RunUpdate(float _Delta)
 {
+	Col->Collision(CollisionOrder::PlayerSkill, [&](std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
+		{
+			float4 dir = Transform.GetWorldPosition() - Player::MainPlayer->Transform.GetWorldPosition();
+			dir.Normalize();
+			NetForce.X = dir.X * 100.0f;
+			HitCoolTime = 0.15f;
+			ChangeState(MonsterState::HIT);
+		});
+
 	DirCycleTime -= _Delta;
 	if (DirCycleTime <= 0)
 	{
-		std::random_device rnd;
-		GameEngineRandom random = GameEngineRandom();
-		random.SetSeed(rnd());
-		dir = random.RandomInt(-1, 1);
+		dir = GameEngineRandom().RandomInt(-1,1);
 		DirCycleTime = 2.0f;
 	}
 
@@ -75,16 +87,28 @@ void Monster::RunUpdate(float _Delta)
 
 void Monster::HitStart()
 {
-	NetForce.X += 200.0f;
-	Renderer->ChangeAnimation(HitAniName);
+	Renderer->SetSprite(HitAniName);
 }
 
 void Monster::HitUpdate(float _Delta)
 {
+	if (Stat->CurHp < 0)
+	{
+		ChangeState(MonsterState::DIE);
+	}
+
+	Col->Collision(CollisionOrder::PlayerSkill, [&](std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
+		{
+			float4 dir = Transform.GetWorldPosition() - Player::MainPlayer->Transform.GetWorldPosition();
+			dir.Normalize();
+			NetForce.X = dir.X * 100.0f;
+			HitCoolTime = 0.15f;
+		});
+
 	HitCoolTime -= _Delta;
 	if (HitCoolTime <= 0)
 	{
-		HitCoolTime = 0.3f;
+		HitCoolTime = 0.15f;
 		ChangeState(MonsterState::RUN);
 	}
 }
@@ -96,13 +120,22 @@ void Monster::DieStart()
 
 void Monster::DieUpdate(float _Delta)
 {
+	Renderer->GetColorData().MulColor.A -= _Delta;
+
 	if (Renderer->GetCurIndex() == 1)
 	{
 		Col->Off();
-
 	}
+	
 	if (Renderer->IsCurAnimationEnd())
 	{
 		Death();
 	}
 }
+
+void Monster::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
+}
+
+

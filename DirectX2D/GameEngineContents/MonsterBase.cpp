@@ -53,25 +53,17 @@ void MonsterBase::Start()
 	Off();
 }
 
-void MonsterBase::Update(float _Delta)
-{
-	if (HitCoolTime > 0)
-	{
-		HitCoolTime -= _Delta;
-	}
-	if (HitCoolTime < 0)
-	{
-		Col->Collision(CollisionOrder::PlayerSkill, std::bind(&MonsterBase::HitByPlayer, this, std::placeholders::_1));
-	}
-}
-
 void MonsterBase::Release()
 {
-
+	Renderer->Death();
+	Renderer = nullptr;
+	Col->Death();
+	Col = nullptr;
+	DamageRenderer->Death();
+	DamageRenderer = nullptr;
+	Stat->Death();
+	Stat = nullptr;
 }
 
-void MonsterBase::HitByPlayer(std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
-{
 
-}
 

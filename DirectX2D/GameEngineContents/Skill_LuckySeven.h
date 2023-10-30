@@ -17,6 +17,10 @@ public:
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
-
+	void Release() override;
+	void StartSkill() override;
+	std::shared_ptr<class Projectile> GetNonUpdateProjectile();
+	std::shared_ptr<class Projectile> CurProjectile;
+	std::list<std::shared_ptr<class Projectile>> ProjectileGroup;
 };
 

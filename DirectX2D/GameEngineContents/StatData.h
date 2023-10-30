@@ -7,7 +7,10 @@ class StatData : public GameEngineActor
 public:
 	// constrcuter destructer
 	StatData() {};
-	~StatData() {};
+	~StatData() 
+	{
+
+	};
 
 	// delete Function
 	StatData(const StatData& _Other) = delete;

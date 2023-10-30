@@ -40,6 +40,7 @@ void Player::FlashJumpUpdate(float _Delta)
 
 void Player::LuckySevenStart()
 {
+	SkillManager::Inst->StartSkill(SkillType::LuckySeven);
 	ApplyInputJump = false;
 	CanFlip = false;
 	DirCheck = false;
@@ -62,6 +63,11 @@ void Player::LuckySevenUpdate(float _Delta)
 		{
 			ApplyInputLeft = false;
 		}
+	}
+
+	if (Renderer->GetCurIndex() == 2)
+	{
+		
 	}
 
 	if (Renderer->IsCurAnimationEnd() == true)

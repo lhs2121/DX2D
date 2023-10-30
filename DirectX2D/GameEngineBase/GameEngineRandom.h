@@ -54,7 +54,8 @@ public:
 protected:
 
 private:
-	std::mt19937_64 MtGen = std::mt19937_64(time(nullptr));
+	std::random_device RandomDevice;
+	std::mt19937_64 MtGen = std::mt19937_64(RandomDevice());
 	// int Seed = 0;
 
 };

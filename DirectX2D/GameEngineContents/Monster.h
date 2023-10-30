@@ -25,6 +25,7 @@ public:
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
+	void Release() override;
 
 	void ChangeState(MonsterState _State);
 	void RunStart();
@@ -36,6 +37,7 @@ protected:
 	void DieStart();
 	void DieUpdate(float _Delta);
 
+	void LevelEnd(GameEngineLevel* _NextLevel) override;
 	MonsterState CurState = MonsterState::RUN;
 	float HitCoolTime = 0.3f;
 	float DirCycleTime = 0.0f;

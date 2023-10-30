@@ -23,9 +23,7 @@ public:
 	}
 protected:
 	void Start() override;
-	void Update(float _Delta) override;
 	void Release() override;
-	void HitByPlayer(std::vector<std::shared_ptr<GameEngineCollision>> _Collision);
 
 	std::string DieAniName;
 	std::string HitAniName;

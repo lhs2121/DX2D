@@ -22,7 +22,7 @@ void HuntLevel::Start()
 		std::vector<float4> SpawnPoint = { {1233,-749},{1389,-749},{1241,-928},{883,-928},{1003,-928},{1297,-928},
 			{1750,-868},{2150,-868},{2553,-868},{2365,-629},{177,-988},{302,-988} };
 
-		CreateActor<MonsterSpawner>(ActorOrder::Manager)->Setting("Octopus", 10.0f, 2, SpawnPoint);
+		CreateActor<MonsterSpawner>(ActorOrder::Manager)->Setting("Octopus", 10.0f, 2, 10, SpawnPoint);
 	}
 }
 

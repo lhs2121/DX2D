@@ -33,7 +33,6 @@ void BossLevel::Update(float _Delta)
 void BossLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	MapleLevel::LevelStart(_PrevLevel);
-
 }
 
 void BossLevel::LevelEnd(GameEngineLevel* _NextLevel)
