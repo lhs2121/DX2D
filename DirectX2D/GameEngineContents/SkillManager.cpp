@@ -2,7 +2,7 @@
 #include "SkillManager.h"
 #include "Skill.h"
 #include "Skill_FlashJump.h"
-#include "Skill_LuckySeven.h"
+#include "Skill_ThorwSureken.h"
 #include "Skill_ShowDown.h"
 
 SkillManager* SkillManager::Inst = nullptr;
@@ -24,7 +24,12 @@ void SkillManager::StartSkill(SkillType _Type)
 		FlashJump->StartSkill();
 		break;
 	case SkillType::LuckySeven:
-		LuckySeven->StartSkill();
+		ThrowSureken->SetThrowCount(2);
+		ThrowSureken->StartSkill();
+		break;
+	case SkillType::QuadrupleThrow:
+		ThrowSureken->SetThrowCount(4);
+		ThrowSureken->StartSkill();
 		break;
 	case SkillType::ShowDown:
 		ShowDown->On();
@@ -47,9 +52,8 @@ void SkillManager::Update(float _Delta)
 
 void SkillManager::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	
 	FlashJump = GetLevel()->CreateActor<Skill_FlashJump>();
-	LuckySeven = GetLevel()->CreateActor<Skill_LuckySeven>();
+	ThrowSureken = GetLevel()->CreateActor<Skill_ThorwSureken>();
 	ShowDown = GetLevel()->CreateActor<Skill_ShowDown>();
 }
 
@@ -57,8 +61,8 @@ void SkillManager::LevelEnd(GameEngineLevel* _NextLevel)
 {
 	FlashJump->Death();
 	FlashJump = nullptr;
-	LuckySeven->Death();
-	LuckySeven = nullptr;
+	ThrowSureken->Death();
+	ThrowSureken = nullptr;
 	ShowDown->Death();
 	ShowDown = nullptr;
 

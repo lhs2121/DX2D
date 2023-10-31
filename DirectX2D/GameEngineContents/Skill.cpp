@@ -10,7 +10,7 @@ Skill::~Skill()
 {
 }
 
-void Skill::FlipX(int _dir, std::shared_ptr<class GameEngineSpriteRenderer> _Renderer)
+void Skill::FlipX(float _dir, std::shared_ptr<class GameEngineSpriteRenderer> _Renderer)
 {
 	if (_dir == 1)
 	{

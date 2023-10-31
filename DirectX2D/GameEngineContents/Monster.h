@@ -8,7 +8,7 @@ enum class MonsterState
 	RUN,
 	DIE,
 };
- 
+
 // Ό³Έν :
 class Monster : public MonsterBase
 {
@@ -24,6 +24,7 @@ public:
 	Monster& operator=(Monster&& _Other) noexcept = delete;
 
 	void PushDamage(std::vector<float> _DamageGroup, int _DamageID);
+	std::shared_ptr<class StatData> GetStat() { return Stat; }
 protected:
 	void Start() override;
 	void Update(float _Delta) override;

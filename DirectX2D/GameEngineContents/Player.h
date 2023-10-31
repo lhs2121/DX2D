@@ -31,53 +31,62 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
-	float GetDir() { return dir; }
+	float GetDir() { return Dir; }
 	PlayerState GetCurState() { return CurState; }
 
 	static Player* MainPlayer;
 private:
-	void FlipRenderer();
-	void CameraFocus();
-	void DirUpdate();
+	// Collision
+	void PushDamage(std::vector<float> _DamageGroup);
+	void MonsterCheck(float _Delta);
 	void PortalCheck();
+
+	// BasicUpdate
+	void CameraFocus();
 	void RopeCheck();
 	void RopePivotUpdate();
 	void MoveUpdate();
-	//basic update
 
+	void ChangeRandomSwingAnimation();
+
+	// StateUpdate
 	void ChangeState(PlayerState _State);
 	void StateUpdate(float _Delta);
 
+	// Rope
 	void RopeStart();
 	void RopeUpdate(float _Delta);
 
-	void HitStart();
-	void HitUpdate(float _Delta);
-
+	// Portal
 	void PortalStart();
 
+	// Idle
 	void IdleUpdate(float _Delta);
+
+	// Walk
 	void WalkUpdate(float _Delta);
+
+	// Jump
 	void JumpUpdate(float _Delta);
+
+	// Down
 	void DownUpdate(float _Delta);
 
+	// FlashJump
 	void FlashJumpStart();
 	void FlashJumpUpdate(float _Delta);
 
+	// LuckySeven
 	void LuckySevenStart();
 	void LuckySevenUpdate(float _Delta);
 
+	// ShowDown
 	void ShowDownStart();
 	void ShowDownUpdate(float _Delta);
 
+	// ShadowPartner
 	void ShadowPartnerStart();
 	void ShadowPartnerUpdate(float _Delta);
-
-	void ChangeRandomSwingAnimation();
-	void ChangeDirState(PlayerDirState _State)
-	{
-		CurDirState = _State;
-	}
 
 	void Start() override;
 	void Update(float _Delta) override;
@@ -87,12 +96,11 @@ private:
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 	float Speed = 150.0f;
-	float dir = -1;
+	float Dir = -1;
+	float HitDelay = 0.0f;
+	float HitDelayReset = 1.0f;
 
-	bool CanHit = true;
 	bool CanRope = false;
-	bool CanFlip = true;
-	bool DirCheck = true;
 	bool DoubleJump = false;
 	bool IsFadeIn = false;
 
@@ -107,7 +115,6 @@ private:
 
 	float4 RopePos;
 	PlayerState CurState;
-	PlayerDirState CurDirState;
 	std::string PrevLevelName;
 };
 

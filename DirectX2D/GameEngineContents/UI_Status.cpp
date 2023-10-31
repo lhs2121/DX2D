@@ -157,12 +157,12 @@ void UI_Status::Start()
 		ExpCover3->SetRenderOrder(UIRenderOrder::PlayerUI3);
 		ExpCover3->SetPivotType(PivotType::Left);
 
-		int a = ContentsCore::GetStartWindowSize().X;
-		std::string SizeX = std::to_string(a);
-		ExpCover->SetSprite(SizeX + "ExpCover.png");
-		ExpCover2->SetSprite(SizeX + "ExpCover2.png");
-		ExpCover3->SetSprite(SizeX + "ExpCover3.png");
-		ExpGauge->SetSprite(SizeX + "ExpGauge.png");
+		int WinSizeX = ContentsCore::GetStartWindowSize().iX();
+		std::string StringX = std::to_string(WinSizeX);
+		ExpCover->SetSprite(StringX + "ExpCover.png");
+		ExpCover2->SetSprite(StringX + "ExpCover2.png");
+		ExpCover3->SetSprite(StringX + "ExpCover3.png");
+		ExpGauge->SetSprite(StringX + "ExpGauge.png");
 
 		ExpCover->Transform.SetLocalPosition(ExpBarPos);
 		ExpCover2->Transform.SetLocalPosition(ExpBarPos);

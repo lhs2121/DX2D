@@ -27,7 +27,7 @@ void DamageIndicator::RenderDamage(float4 _Pos, DamageColor _Color, std::vector<
 
 		std::vector<int> Damage = GetIntArray(_DamageGroup[i]);
 
-		LastRenderOrder += static_cast<unsigned long long>(i) + 7;
+		LastRenderOrder += i + 7;
 		float StartDelay = 0.1f * i;
 
 		NewEffect->Setting(StartPos, _Color, Damage, LastRenderOrder, StartDelay, _DamageID);

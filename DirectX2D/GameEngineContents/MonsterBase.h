@@ -16,10 +16,6 @@ public:
 	MonsterBase& operator=(MonsterBase&& _Other) noexcept = delete;
 
 	void Setting(std::string MonsterName);
-	std::shared_ptr<class StatData> GetStat()
-	{
-		return Stat;
-	}
 protected:
 	void Start() override;
 	void Release() override;
@@ -28,12 +24,12 @@ protected:
 	std::string HitAniName;
 	std::string IdleAniName;
 	
-	float Hp;
 	float HitCoolTime;
 	float4 ImageSize;
 	std::shared_ptr<class DamageIndicator> DamageRenderer;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
-	std::shared_ptr<class GameEngineCollision> Col;
+	std::shared_ptr<class GameEngineCollision> HitCol;
+	std::shared_ptr<class GameEngineCollision> AttackCol;
 	std::shared_ptr<class StatData> Stat;
 };
 

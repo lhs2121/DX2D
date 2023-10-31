@@ -67,7 +67,7 @@
     <ClInclude Include="UI_Status.h">
       <Filter>Actor\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Skill_LuckySeven.h">
+    <ClInclude Include="Skill_ThorwSureken.h">
       <Filter>Actor\Skills</Filter>
     </ClInclude>
     <ClInclude Include="Skill_FlashJump.h">
@@ -171,7 +171,7 @@
     <ClCompile Include="UI_Status.cpp">
       <Filter>Actor\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Skill_LuckySeven.cpp">
+    <ClCompile Include="Skill_ThorwSureken.cpp">
       <Filter>Actor\Skills</Filter>
     </ClCompile>
     <ClCompile Include="Skill_FlashJump.cpp">

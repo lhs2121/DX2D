@@ -16,7 +16,7 @@ public:
 
 	virtual void StartSkill() {};
 protected:
-	void FlipX(int _dir, std::shared_ptr<class GameEngineSpriteRenderer> _Renderer);
+	void FlipX(float _dir, std::shared_ptr<class GameEngineSpriteRenderer> _Renderer);
 	void Start() override;
 	void Update(float _Delta) override;
 

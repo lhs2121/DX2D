@@ -23,8 +23,10 @@ void MonsterBase::Setting(std::string MonsterName)
 	Renderer->ChangeAnimation(IdleAniName);
 
 	ImageSize = Renderer->GetCurSprite().Texture->GetScale();
-	Col->Transform.SetLocalScale(ImageSize);
-	Col->Transform.AddLocalPosition({ 0,ImageSize.hY() });
+	HitCol->Transform.SetLocalScale(ImageSize);
+	HitCol->Transform.AddLocalPosition({ 0,ImageSize.hY() });
+	AttackCol->Transform.SetLocalScale(ImageSize);
+	AttackCol->Transform.AddLocalPosition({ 0,ImageSize.hY() });
 
 	On();
 }
@@ -39,8 +41,11 @@ void MonsterBase::Start()
 	}
 
 	{
-		Col = CreateComponent<GameEngineCollision>(CollisionOrder::Monster);
-		Col->SetCollisionType(ColType::AABBBOX2D);
+		HitCol = CreateComponent<GameEngineCollision>(CollisionOrder::Monster);
+		HitCol->SetCollisionType(ColType::AABBBOX2D);
+
+		AttackCol = CreateComponent<GameEngineCollision>(CollisionOrder::MonsterAttack);
+		AttackCol->SetCollisionType(ColType::AABBBOX2D);
 	}
 
 	{
@@ -60,10 +65,15 @@ void MonsterBase::Release()
 		Renderer->Death();
 		Renderer = nullptr;
 	}
-	if (Col != nullptr)
+	if (HitCol != nullptr)
 	{
-		Col->Death();
-		Col = nullptr;
+		HitCol->Death();
+		HitCol = nullptr;
+	}
+	if (AttackCol != nullptr)
+	{
+		AttackCol->Death();
+		AttackCol = nullptr;
 	}
 	if (DamageRenderer != nullptr)
 	{

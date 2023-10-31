@@ -24,11 +24,8 @@ protected:
 	void LevelStart(GameEngineLevel* _PrevLevel) override;
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
-	int FlashJumpKey = VK_MENU;
-	int LuckySevenKey = VK_SHIFT;
-	int ShowDownKey = VK_CONTROL;
-	std::shared_ptr<class Skill> FlashJump;
-	std::shared_ptr<class Skill> LuckySeven;
-	std::shared_ptr<class Skill> ShowDown;
+	std::shared_ptr<class Skill_FlashJump> FlashJump;
+	std::shared_ptr<class Skill_ThorwSureken> ThrowSureken;
+	std::shared_ptr<class Skill_ShowDown> ShowDown;
 };
 

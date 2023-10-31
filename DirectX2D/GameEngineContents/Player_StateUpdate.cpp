@@ -21,9 +21,6 @@ void Player::StateUpdate(float _Delta)
 	case PlayerState::DOWN:
 		DownUpdate(_Delta);
 		break;
-	case PlayerState::HIT:
-		HitUpdate(_Delta);
-		break;
 	case PlayerState::LUCKYSEVEN:
 		LuckySevenUpdate(_Delta);
 		break;
@@ -41,8 +38,6 @@ void Player::StateUpdate(float _Delta)
 void Player::ChangeState(PlayerState _State)
 {
 	CurState = _State;
-	CanFlip = true;
-	DirCheck = true;
 	ApplyInput = true;
 	ApplyInputLeft = true;
 	ApplyInputRight = true;
@@ -61,16 +56,12 @@ void Player::ChangeState(PlayerState _State)
 		Renderer->ChangeAnimation("jump");
 		break;
 	case PlayerState::DOWN:
-		CanFlip = false;
 		ApplyInputLeft = false;
 		ApplyInputRight = false;
 		Renderer->ChangeAnimation("down");
 		break;
 	case PlayerState::ROPE:
 		RopeStart();
-		break;
-	case PlayerState::HIT:
-		HitStart();
 		break;
 	case PlayerState::PORTAL:
 		PortalStart();
@@ -89,34 +80,10 @@ void Player::ChangeState(PlayerState _State)
 	}
 }
 
-void Player::RopeStart()
-{
-	ApplyInput = false;
-	CanFlip = false;
-	NetForce = 0.0f;
-
-	if (IsGrounded == true && InputIsPress(VK_DOWN))
-	{
-		Transform.AddWorldPosition({ 0, -5 });
-	}
-	else if (IsGrounded == true && InputIsPress(VK_UP))
-	{
-		Transform.AddWorldPosition({ 0, 5 });
-	}
-
-	Renderer->ChangeAnimation("rope");
-	Renderer->AnimationPauseOn();
-}
-
-void Player::HitStart()
-{
-
-}
 
 void Player::PortalStart()
 {
 	ApplyInput = false;
-	CanFlip = false;
 	Renderer->ChangeAnimation("idle");
 }
 
@@ -212,18 +179,28 @@ void Player::JumpUpdate(float _Delta)
 	}
 }
 
-void Player::RopeUpdate(float _Delta)
+void Player::RopeStart()
 {
-	float4 a = Transform.GetWorldPosition();
+	ApplyInput = false;
 	NetForce = 0.0f;
-	if (CurDirState == PlayerDirState::RIGHT)
+
+	if (IsGrounded == true && InputIsPress(VK_DOWN))
 	{
-		ChangeDirState(PlayerDirState::LEFT);
-		FlipRenderer();
+		Transform.AddWorldPosition({ 0, -5 });
+	}
+	else if (IsGrounded == true && InputIsPress(VK_UP))
+	{
+		Transform.AddWorldPosition({ 0, 5 });
 	}
 
+	Renderer->ChangeAnimation("rope");
 	Renderer->AnimationPauseOn();
+}
 
+void Player::RopeUpdate(float _Delta)
+{
+	Renderer->AnimationPauseOn();
+	NetForce = 0.0f;
 	if (InputIsPress(VK_UP))
 	{
 		Transform.AddWorldPosition({ 0, Speed * _Delta});
@@ -301,10 +278,3 @@ void Player::DownUpdate(float _Delta)
 	}
 }
 
-void Player::HitUpdate(float _Delta)
-{
-	if (IsGrounded)
-	{
-		ChangeState(PlayerState::IDLE);
-	}
-}

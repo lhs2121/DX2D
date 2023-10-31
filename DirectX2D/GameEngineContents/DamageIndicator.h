@@ -16,11 +16,11 @@ public:
 	DamageIndicator& operator=(const DamageIndicator& _Other) = delete;
 	DamageIndicator& operator=(DamageIndicator&& _Other) noexcept = delete;
 
-	void RenderDamage(float4 _Pos, DamageColor _Color, std::vector<float> _DamageGroup, int _DamageID);
+	void RenderDamage(float4 _Pos, DamageColor _Color, std::vector<float> _DamageGroup, int _DamageID = 1);
 private:
 	void Start() override;
 
-	unsigned long long LastRenderOrder = 0;
+	int LastRenderOrder = 0;
 	float4 PrevPos;
 	std::shared_ptr<DamageEffect> PrevEffect = nullptr;
 	std::shared_ptr<DamageEffect> GetNonUpdateObject(std::list<std::shared_ptr<DamageEffect>> _list);

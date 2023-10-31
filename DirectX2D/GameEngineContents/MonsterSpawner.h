@@ -21,7 +21,7 @@ public:
 		ResetCoolTimeValue = _CoolTime;
 		SpawnCount = _SpawnCount;
 		SpawnPoint = _SpawnPoint;
-		MaxCount = _SpawnPoint.size();
+		MaxCount = static_cast<int>(_SpawnPoint.size());
 	}
 protected:
 	void Start() override;

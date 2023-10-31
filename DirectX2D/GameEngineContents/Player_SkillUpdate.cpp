@@ -1,12 +1,11 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include "SkillManager.h"
+#include "Skill_ThorwSureken.h"
 
 void Player::FlashJumpStart()
 {
-	ApplyInputLeft = false;
-	ApplyInputRight = false;
-	NetForce.X = dir * 700.0f;
+	NetForce.X = Dir * 700.0f;
 	NetForce.Y += 100.0f;
 	SkillManager::Inst->StartSkill(SkillType::FlashJump);
 }
@@ -20,7 +19,7 @@ void Player::FlashJumpUpdate(float _Delta)
 
 	if (CurColor == GameEngineColor::BLUE)
 	{
-		NetForce.X = dir * 400.0f;
+		NetForce.X = Dir * 400.0f;
 		NetForce.Y = 0;
 		ChangeState(PlayerState::IDLE);
 	}
@@ -28,7 +27,7 @@ void Player::FlashJumpUpdate(float _Delta)
 	if (InputIsDown(JumpKey) && DoubleJump == false)
 	{
 		SkillManager::Inst->StartSkill(SkillType::FlashJump);
-		NetForce.X = dir * 700.0f;
+		NetForce.X = Dir * 700.0f;
 		NetForce.Y += 100.0f;
 		DoubleJump = true;
 	}
@@ -40,10 +39,8 @@ void Player::FlashJumpUpdate(float _Delta)
 
 void Player::LuckySevenStart()
 {
-	SkillManager::Inst->StartSkill(SkillType::LuckySeven);
+	SkillManager::Inst->StartSkill(SkillType::QuadrupleThrow);
 	ApplyInputJump = false;
-	CanFlip = false;
-	DirCheck = false;
 	ChangeRandomSwingAnimation();
 }
 void Player::LuckySevenUpdate(float _Delta)
@@ -55,11 +52,11 @@ void Player::LuckySevenUpdate(float _Delta)
 	}
 	else
 	{
-		if (dir < 0)
+		if (Dir < 0)
 		{
 			ApplyInputRight = false;
 		}
-		else if (dir > 0)
+		else if (Dir > 0)
 		{
 			ApplyInputLeft = false;
 		}
@@ -86,9 +83,6 @@ void Player::LuckySevenUpdate(float _Delta)
 void Player::ShowDownStart()
 {
 	ApplyInputJump = false;
-	CanFlip = false;
-	DirCheck = false;
-
 	ChangeRandomSwingAnimation();
 }
 
@@ -101,11 +95,11 @@ void Player::ShowDownUpdate(float _Delta)
 	}
 	else
 	{
-		if (dir < 0)
+		if (Dir < 0)
 		{
 			ApplyInputRight = false;
 		}
-		else if (dir > 0)
+		else if (Dir > 0)
 		{
 			ApplyInputLeft = false;
 		}

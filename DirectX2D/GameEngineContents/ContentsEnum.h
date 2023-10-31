@@ -27,32 +27,21 @@ enum class ActorOrder
 	Map,
 	Player,
 	Monster,
-	Boss,
-	NPC,
-	MapObject,
-	Skill,
-	Sureken,
-	SkillEffect,
+	Portal,
 	DamageEffect,
 	Manager,
 	Stat,
 	FadeScreen,
-	UI
+	UI,
 };
 
 enum class CollisionOrder
 {
-	Player = 10,
+	Player,
 	Monster,
-	PlayerSkill,
-	MonsterSkill,
+	MonsterAttack,
+	PlayerAttack,
 	Portal
-};
-
-enum class PlayerDirState
-{
-	LEFT,
-	RIGHT,
 };
 
 enum class SkillType
@@ -60,6 +49,7 @@ enum class SkillType
 	Body,
 	FlashJump,
 	LuckySeven,
+	QuadrupleThrow,
 	ShowDown,
 };
 

@@ -95,7 +95,7 @@ void Monster::RunUpdate(float _Delta)
 		DirCycleTime = 2.0f;
 	}
 
-	Transform.AddWorldPosition(float4(1, 0) * dir * Speed * _Delta);
+	Transform.AddWorldPosition(float4(dir * Speed * _Delta, 0) );
 }
 
 void Monster::HitStart()
@@ -120,6 +120,7 @@ void Monster::HitUpdate(float _Delta)
 
 void Monster::DieStart()
 {
+	AttackCol->Off();
 	Renderer->ChangeAnimation(DieAniName);
 }
 
@@ -129,7 +130,7 @@ void Monster::DieUpdate(float _Delta)
 
 	if (Renderer->GetCurIndex() == 1)
 	{
-		Col->Off();
+		HitCol->Off();
 	}
 
 	if (Renderer->IsCurAnimationEnd())

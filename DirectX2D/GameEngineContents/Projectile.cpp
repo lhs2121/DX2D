@@ -60,7 +60,7 @@ void Projectile::Start()
 	}
 
 	{
-		SurekenCol = CreateComponent<GameEngineCollision>(CollisionOrder::PlayerSkill);
+		SurekenCol = CreateComponent<GameEngineCollision>(CollisionOrder::PlayerAttack);
 		SurekenCol->SetCollisionType(ColType::AABBBOX2D);
 		SurekenCol->Transform.SetLocalScale({ 20,20 });
 	}

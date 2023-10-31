@@ -1,27 +1,27 @@
 #include "PreCompile.h"
-#include "Skill_LuckySeven.h"
+#include "Skill_ThorwSureken.h"
 #include "Projectile.h"
 #include "Player.h"
 
-Skill_LuckySeven::Skill_LuckySeven()
+Skill_ThorwSureken::Skill_ThorwSureken()
 {
 }
 
-Skill_LuckySeven::~Skill_LuckySeven()
+Skill_ThorwSureken::~Skill_ThorwSureken()
 {
 }
 
-void Skill_LuckySeven::Start()
+void Skill_ThorwSureken::Start()
 {
 	Skill::Start();
 }
 
-void Skill_LuckySeven::Update(float _Delta)
+void Skill_ThorwSureken::Update(float _Delta)
 {
 
 }
 
-void Skill_LuckySeven::Release()
+void Skill_ThorwSureken::Release()
 {
 	CurProjectile = nullptr;
 
@@ -35,13 +35,13 @@ void Skill_LuckySeven::Release()
 	}
 }
 
-void Skill_LuckySeven::StartSkill()
+void Skill_ThorwSureken::StartSkill()
 {
 	float4 Pos = Player::MainPlayer->Transform.GetWorldPosition();
 	float Dir = Player::MainPlayer->GetDir();
 	int ID = GameEngineRandom::GameEngineRandom().RandomInt(0, 99999999);
 
-	for (size_t i = 0; i < 4; i++)
+	for (size_t i = 0; i < ThrowCount; i++)
 	{
 		float Delay = 0.4f + 0.1f * i;
 		std::vector<float> Damage = Player::MainPlayer->GetStat()->GetDamage(1, SkillType::LuckySeven);
@@ -51,7 +51,7 @@ void Skill_LuckySeven::StartSkill()
 	}
 }
 
-std::shared_ptr<class Projectile> Skill_LuckySeven::GetNonUpdateProjectile()
+std::shared_ptr<class Projectile> Skill_ThorwSureken::GetNonUpdateProjectile()
 {
 	std::list<std::shared_ptr<Projectile>>::iterator Start = ProjectileGroup.begin();
 	std::list<std::shared_ptr<Projectile>>::iterator End = ProjectileGroup.end();

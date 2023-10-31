@@ -64,8 +64,8 @@ std::shared_ptr<class GameEngineSpriteRenderer> Skill_FlashJump::GetNonUpdateRen
 	NewRenderer->ChangeAnimation("FlashJump");
 	NewRenderer->SetRenderOrder(RenderOrder::Effect);
 	NewRenderer->AutoSpriteSizeOn();
-	NewRenderer->SetEndEvent("FlashJump", 
-		[](GameEngineSpriteRenderer* _Renderer) 
+	NewRenderer->SetEndEvent("FlashJump",
+		[](GameEngineSpriteRenderer* _Renderer)
 		{
 			_Renderer->Off();
 		});

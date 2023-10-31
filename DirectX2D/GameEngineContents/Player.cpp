@@ -4,6 +4,8 @@
 #include "MapleLevel.h"
 #include "StatData.h"
 #include "MapleMap.h"
+#include "DamageIndicator.h"
+#include "Monster.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -19,16 +21,16 @@ void Player::Start()
 {
 	PlayerBase::Start();
 	GameEngineInput::AddInputObject(this);
-	ChangeDirState(PlayerDirState::LEFT);
 	ChangeState(PlayerState::IDLE);
 }
 
 void Player::Update(float _Delta)
 {
 	PhysicsActor::Update(_Delta);
-	FlipRenderer();
+	MonsterCheck(_Delta);
+	//FlipRenderer();
 	CameraFocus();
-	DirUpdate();
+	//DirUpdate();
 	RopePivotUpdate();
 	RopeCheck();
 	PortalCheck();
@@ -113,26 +115,6 @@ void Player::LevelStart(GameEngineLevel* _PrevLevel)
 	}
 }
 
-void Player::FlipRenderer()
-{
-	if (CanFlip == false)
-	{
-		return;
-	}
-
-	float4 Scale = Renderer->Transform.GetLocalScale();
-
-	if (Scale.X == 1 && NetForce.X > 0)
-	{
-		Renderer->Transform.SetLocalScale({ -1.0f,1.0f,1.0f });
-	}
-	if (Scale.X == -1 && NetForce.X < 0)
-	{
-		Renderer->Transform.SetLocalScale({ 1.0f,1.0f,1.0f });
-	}
-
-}
-
 void Player::ChangeRandomSwingAnimation()
 {
 	int RandomNumber = GameEngineRandom::GameEngineRandom().RandomInt(1, 3);
@@ -140,3 +122,28 @@ void Player::ChangeRandomSwingAnimation()
 	Renderer->ChangeAnimation(AnimationName);
 }
 
+void Player::PushDamage(std::vector<float> _DamageGroup)
+{
+	for (size_t i = 0; i < _DamageGroup.size(); i++)
+	{
+		Stat->CurHp -= _DamageGroup[i];
+	}
+	float4 Pos = Transform.GetWorldPosition() + float4(0.0f, 68.0f);
+	DamageRenderer->RenderDamage(Pos, DamageColor::Purple, _DamageGroup, GameEngineRandom::GameEngineRandom().RandomInt(0, 999999));
+
+}
+void Player::MonsterCheck(float _Delta)
+{
+	HitDelay -= _Delta;
+	if (HitDelay <= 0.0f)
+	{
+		Col->Collision(CollisionOrder::MonsterAttack, [&](std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
+			{
+				std::shared_ptr<Monster> monster = _Collision[0]->GetActor()->GetDynamic_Cast_This<Monster>();
+				float Damage = monster->GetStat()->GetDamage();
+				std::vector<float> DamageGroup = { Damage };
+				PushDamage(DamageGroup);
+				HitDelay = HitDelayReset;
+			});
+	}
+}

@@ -4,25 +4,6 @@
 #include "StatManager.h"
 #include "FadeScreen.h"
 
-void Player::DirUpdate()
-{
-	if (DirCheck == false)
-	{
-		return;
-	}
-
-	if (InputIsFree(VK_RIGHT) && InputIsPress(VK_LEFT))
-	{
-		ChangeDirState(PlayerDirState::LEFT);
-		dir = -1;
-	}
-	else if (InputIsFree(VK_LEFT) && InputIsPress(VK_RIGHT))
-	{
-		ChangeDirState(PlayerDirState::RIGHT);
-		dir = 1;
-	}
-}
-
 void Player::RopePivotUpdate()
 {
 	if (InputIsPress(VK_UP))
@@ -46,7 +27,16 @@ void Player::MoveUpdate()
 	{
 		if (InputIsPress(VK_LEFT))
 		{
+			if (CurState != PlayerState::FLASHJUMP)
+			{
+
 			NetForce.X = -125.0f;
+			}
+			if (Renderer->Transform.GetLocalScale().X < 0)
+			{
+				Renderer->Transform.SetLocalScale({ 1.0f,1.0f,1.0f });
+				Dir = -1;
+			}
 		}
 	}
 
@@ -54,7 +44,16 @@ void Player::MoveUpdate()
 	{
 		if (InputIsPress(VK_RIGHT))
 		{
-			NetForce.X = 125.0f;
+			if (CurState != PlayerState::FLASHJUMP)
+			{
+
+				NetForce.X = 125.0f;
+			}
+			if (Renderer->Transform.GetLocalScale().X > 0)
+			{
+				Renderer->Transform.SetLocalScale({ -1.0f,1.0f,1.0f });
+				Dir = 1;
+			}
 		}
 	}
 

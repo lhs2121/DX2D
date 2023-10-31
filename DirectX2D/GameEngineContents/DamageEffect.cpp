@@ -16,7 +16,7 @@ void DamageEffect::Start()
 
 void DamageEffect::Setting(float4 _Pos, DamageColor _Color, std::vector<int> _NumArray, int _Order, float _StartDelayTime, int _ID)
 {
-	for (int i = RendererGroup.size(); i < _NumArray.size(); i++)
+	for (size_t i = RendererGroup.size(); i < _NumArray.size(); i++)
 	{
 		std::shared_ptr <GameEngineSpriteRenderer> NewRenderer = CreateComponent<GameEngineSpriteRenderer>(0);
 		NewRenderer->Off();
@@ -66,8 +66,8 @@ void DamageEffect::Setting(float4 _Pos, DamageColor _Color, std::vector<int> _Nu
 		RendererGroup[i]->SetRenderOrder(i + _Order);
 	}
 
-	float RandomX = GameEngineRandom::GameEngineRandom().RandomInt(-10, 10);
-	Transform.SetWorldPosition(_Pos + float4(RandomX, 0));
+	int RandomX = GameEngineRandom::GameEngineRandom().RandomInt(-10, 10);
+	Transform.SetWorldPosition(_Pos + float4(static_cast<float>(RandomX), 0));
 	StartDelayTime = _StartDelayTime;
 	DamageID = _ID;
 	CoolTime = 0.5f;
