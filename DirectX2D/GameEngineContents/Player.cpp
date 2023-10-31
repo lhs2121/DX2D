@@ -26,7 +26,6 @@ void Player::Start()
 void Player::Update(float _Delta)
 {
 	PhysicsActor::Update(_Delta);
-	PlayerBase::Update(_Delta);
 	FlipRenderer();
 	CameraFocus();
 	DirUpdate();

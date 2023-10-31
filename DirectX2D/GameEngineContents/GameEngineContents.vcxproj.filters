@@ -47,10 +47,10 @@
       <Filter>Actor\Boss</Filter>
     </ClInclude>
     <ClInclude Include="StatData.h">
-      <Filter>Actor\Combat</Filter>
+      <Filter>Actor\Stat</Filter>
     </ClInclude>
     <ClInclude Include="StatManager.h">
-      <Filter>Actor\Combat</Filter>
+      <Filter>Actor\Stat</Filter>
     </ClInclude>
     <ClInclude Include="UI_Inventory.h">
       <Filter>Actor\UI</Filter>
@@ -59,43 +59,43 @@
       <Filter>Actor\UI</Filter>
     </ClInclude>
     <ClInclude Include="Skill.h">
-      <Filter>Actor\Combat\Skills</Filter>
+      <Filter>Actor\Skills</Filter>
     </ClInclude>
     <ClInclude Include="SkillManager.h">
-      <Filter>Actor\Combat\Skills</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Actor\Combat</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>Actor\Combat</Filter>
+      <Filter>Actor\Skills</Filter>
     </ClInclude>
     <ClInclude Include="UI_Status.h">
       <Filter>Actor\UI</Filter>
     </ClInclude>
-    <ClInclude Include="MonsterBase.h">
-      <Filter>Actor\Combat\base</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerBase.h">
-      <Filter>Actor\Combat\base</Filter>
-    </ClInclude>
     <ClInclude Include="Skill_LuckySeven.h">
-      <Filter>Actor\Combat\Skills</Filter>
+      <Filter>Actor\Skills</Filter>
     </ClInclude>
     <ClInclude Include="Skill_FlashJump.h">
-      <Filter>Actor\Combat\Skills</Filter>
+      <Filter>Actor\Skills</Filter>
     </ClInclude>
     <ClInclude Include="DamageEffect.h">
-      <Filter>Actor\Combat\Damage</Filter>
+      <Filter>Actor\Damage</Filter>
     </ClInclude>
     <ClInclude Include="DamageIndicator.h">
-      <Filter>Actor\Combat\Damage</Filter>
+      <Filter>Actor\Damage</Filter>
     </ClInclude>
     <ClInclude Include="Skill_ShowDown.h">
-      <Filter>Actor\Combat\Skills</Filter>
+      <Filter>Actor\Skills</Filter>
     </ClInclude>
     <ClInclude Include="Projectile.h">
-      <Filter>Actor\Combat\Skills</Filter>
+      <Filter>Actor\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Actor\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterBase.h">
+      <Filter>Actor\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBase.h">
+      <Filter>Actor\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Actor\Monster</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -151,10 +151,10 @@
       <Filter>Actor\Player</Filter>
     </ClCompile>
     <ClCompile Include="StatData.cpp">
-      <Filter>Actor\Combat</Filter>
+      <Filter>Actor\Stat</Filter>
     </ClCompile>
     <ClCompile Include="StatManager.cpp">
-      <Filter>Actor\Combat</Filter>
+      <Filter>Actor\Stat</Filter>
     </ClCompile>
     <ClCompile Include="UI_Inventory.cpp">
       <Filter>Actor\UI</Filter>
@@ -163,43 +163,43 @@
       <Filter>Actor\UI</Filter>
     </ClCompile>
     <ClCompile Include="SkillManager.cpp">
-      <Filter>Actor\Combat\Skills</Filter>
+      <Filter>Actor\Skills</Filter>
     </ClCompile>
     <ClCompile Include="Skill.cpp">
-      <Filter>Actor\Combat\Skills</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Actor\Combat</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Actor\Combat</Filter>
+      <Filter>Actor\Skills</Filter>
     </ClCompile>
     <ClCompile Include="UI_Status.cpp">
       <Filter>Actor\UI</Filter>
     </ClCompile>
-    <ClCompile Include="MonsterBase.cpp">
-      <Filter>Actor\Combat\base</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerBase.cpp">
-      <Filter>Actor\Combat\base</Filter>
-    </ClCompile>
     <ClCompile Include="Skill_LuckySeven.cpp">
-      <Filter>Actor\Combat\Skills</Filter>
+      <Filter>Actor\Skills</Filter>
     </ClCompile>
     <ClCompile Include="Skill_FlashJump.cpp">
-      <Filter>Actor\Combat\Skills</Filter>
+      <Filter>Actor\Skills</Filter>
     </ClCompile>
     <ClCompile Include="DamageEffect.cpp">
-      <Filter>Actor\Combat\Damage</Filter>
+      <Filter>Actor\Damage</Filter>
     </ClCompile>
     <ClCompile Include="DamageIndicator.cpp">
-      <Filter>Actor\Combat\Damage</Filter>
+      <Filter>Actor\Damage</Filter>
     </ClCompile>
     <ClCompile Include="Skill_ShowDown.cpp">
-      <Filter>Actor\Combat\Skills</Filter>
+      <Filter>Actor\Skills</Filter>
     </ClCompile>
     <ClCompile Include="Projectile.cpp">
-      <Filter>Actor\Combat\Skills</Filter>
+      <Filter>Actor\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterBase.cpp">
+      <Filter>Actor\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBase.cpp">
+      <Filter>Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Actor\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -230,17 +230,14 @@
     <Filter Include="Actor\Boss">
       <UniqueIdentifier>{c17c1fe8-0e8d-4036-a963-b1c8fdd2a3cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Combat">
-      <UniqueIdentifier>{22f90041-8882-492f-b6e1-7838b0a62a57}</UniqueIdentifier>
+    <Filter Include="Actor\Damage">
+      <UniqueIdentifier>{4803fa25-f4d5-484d-8a3d-c8629b241c37}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Combat\base">
-      <UniqueIdentifier>{66e4ea7b-e377-4b66-9684-42b2936bce52}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Combat\Skills">
+    <Filter Include="Actor\Skills">
       <UniqueIdentifier>{318905c5-b0e4-404b-af05-bd237f99902d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Combat\Damage">
-      <UniqueIdentifier>{4803fa25-f4d5-484d-8a3d-c8629b241c37}</UniqueIdentifier>
+    <Filter Include="Actor\Stat">
+      <UniqueIdentifier>{22f90041-8882-492f-b6e1-7838b0a62a57}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

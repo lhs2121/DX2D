@@ -55,14 +55,26 @@ void MonsterBase::Start()
 
 void MonsterBase::Release()
 {
-	Renderer->Death();
-	Renderer = nullptr;
-	Col->Death();
-	Col = nullptr;
-	DamageRenderer->Death();
-	DamageRenderer = nullptr;
-	Stat->Death();
-	Stat = nullptr;
+	if (Renderer != nullptr)
+	{
+		Renderer->Death();
+		Renderer = nullptr;
+	}
+	if (Col != nullptr)
+	{
+		Col->Death();
+		Col = nullptr;
+	}
+	if (DamageRenderer != nullptr)
+	{
+		DamageRenderer->Death();
+		DamageRenderer = nullptr;
+	}
+	if (Stat != nullptr)
+	{
+		Stat->Death();
+		Stat = nullptr;
+	}
 }
 
 

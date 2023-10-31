@@ -48,19 +48,6 @@ void PlayerBase::Start()
 	}
 }
 
-void PlayerBase::Update(float _Delta)
-{
-	if (HitCoolTime > 0)
-	{
-		HitCoolTime -= _Delta;
-	}
-	if (HitCoolTime < 0)
-	{
-		Col->Collision(CollisionOrder::Monster, std::bind(&PlayerBase::HitByMonster, this, std::placeholders::_1));
-	}
-
-}
-
 void PlayerBase::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	if (_PrevLevel == nullptr)
@@ -75,12 +62,4 @@ void PlayerBase::Release()
 {
 }
 
-void PlayerBase::HitByMonster(std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
-{
-	float Damage = _Collision[0]->GetActor()->GetDynamic_Cast_This<MonsterBase>()->GetStat()->GetDamage();
-	float ApplyDamage = Damage - Stat->DEF;
-	Stat->CurHp -= ApplyDamage;
-	HitCoolTime = 2.0f;
-	//DamageRenderer->RenderDamage(Transform.GetWorldPosition(), ApplyDamage, DamageColor::Purple);
 
-}

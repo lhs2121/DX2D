@@ -14,8 +14,20 @@ Monster::~Monster()
 
 void Monster::PushDamage(std::vector<float> _DamageGroup, int _DamageID)
 {
+	for (size_t i = 0; i < _DamageGroup.size(); i++)
+	{
+		Stat->CurHp -= _DamageGroup[i];
+	}
 	float4 Pos = Transform.GetWorldPosition() + float4(0.0f, ImageSize.Y);
-	DamageRenderer->RenderDamage(Pos, DamageColor::Orange, _DamageGroup, _DamageID);
+	DamageRenderer->RenderDamage(Pos, DamageColor::Red, _DamageGroup, _DamageID);
+
+	if (CurState != MonsterState::DIE)
+	{
+		float4 dir = Transform.GetWorldPosition() - Player::MainPlayer->Transform.GetWorldPosition();
+		dir.Normalize();
+		NetForce.X = dir.X * 100.0f;
+		ChangeState(MonsterState::HIT);
+	}
 };
 
 void Monster::Start()
@@ -28,13 +40,6 @@ void Monster::Start()
 
 void Monster::Update(float _Delta)
 {
-	/*GameEngineInput::AddInputObject(this);
-	if (InputIsDown('M'))
-	{
-		std::vector<float> _DamageGroup = { 2223,3223,13123,1215,535645,2323,6143 };
-		DamageRenderer->RenderDamage(Transform.GetWorldPosition(), DamageColor::Orange, _DamageGroup);
-	}*/
-	
 	PhysicsActor::Update(_Delta);
 	switch (CurState)
 	{
@@ -83,19 +88,10 @@ void Monster::RunStart()
 
 void Monster::RunUpdate(float _Delta)
 {
-	Col->Collision(CollisionOrder::PlayerSkill, [&](std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
-		{
-			float4 dir = Transform.GetWorldPosition() - Player::MainPlayer->Transform.GetWorldPosition();
-			dir.Normalize();
-			NetForce.X = dir.X * 100.0f;
-			HitCoolTime = 0.15f;
-			ChangeState(MonsterState::HIT);
-		});
-
 	DirCycleTime -= _Delta;
 	if (DirCycleTime <= 0)
 	{
-		dir = GameEngineRandom().RandomInt(-1,1);
+		dir = GameEngineRandom().RandomInt(-1, 1);
 		DirCycleTime = 2.0f;
 	}
 
@@ -105,6 +101,7 @@ void Monster::RunUpdate(float _Delta)
 void Monster::HitStart()
 {
 	Renderer->SetSprite(HitAniName);
+	HitCoolTime = 0.2f;
 }
 
 void Monster::HitUpdate(float _Delta)
@@ -114,18 +111,9 @@ void Monster::HitUpdate(float _Delta)
 		ChangeState(MonsterState::DIE);
 	}
 
-	Col->Collision(CollisionOrder::PlayerSkill, [&](std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
-		{
-			float4 dir = Transform.GetWorldPosition() - Player::MainPlayer->Transform.GetWorldPosition();
-			dir.Normalize();
-			NetForce.X = dir.X * 100.0f;
-			HitCoolTime = 0.15f;
-		});
-
 	HitCoolTime -= _Delta;
 	if (HitCoolTime <= 0)
 	{
-		HitCoolTime = 0.15f;
 		ChangeState(MonsterState::RUN);
 	}
 }
@@ -143,7 +131,7 @@ void Monster::DieUpdate(float _Delta)
 	{
 		Col->Off();
 	}
-	
+
 	if (Renderer->IsCurAnimationEnd())
 	{
 		Death();

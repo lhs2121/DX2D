@@ -46,6 +46,5 @@ protected:
 	float DirCycleTime = 0.0f;
 	float Speed = 60.0f;
 	int dir = 0;
-	std::shared_ptr<class DamageIndicator> DamageRenderer;
 };
 

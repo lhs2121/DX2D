@@ -15,12 +15,13 @@ public:
 	MonsterSpawner& operator=(const MonsterSpawner& _Other) = delete;
 	MonsterSpawner& operator=(MonsterSpawner&& _Other) noexcept = delete;
 
-	void Setting(std::string _MonsterString, float _CoolTime, int _SpawnCount, int _MaxCount, std::vector<float4> _SpawnPoint)
+	void Setting(std::string _MonsterString, float _CoolTime, int _SpawnCount, std::vector<float4> _SpawnPoint)
 	{
 		CurMonsterString = _MonsterString;
 		ResetCoolTimeValue = _CoolTime;
 		SpawnCount = _SpawnCount;
 		SpawnPoint = _SpawnPoint;
+		MaxCount = _SpawnPoint.size();
 	}
 protected:
 	void Start() override;

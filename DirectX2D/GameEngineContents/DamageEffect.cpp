@@ -28,19 +28,35 @@ void DamageEffect::Setting(float4 _Pos, DamageColor _Color, std::vector<int> _Nu
 		switch (_Color)
 		{
 		case DamageColor::Orange:
-			RendererGroup[i]->SetSprite("AtkDmg", _NumArray[i]);
+			if (i == 0)
+			{
+				RendererGroup[i]->SetSprite("Damage_Orange_Big", _NumArray[i]);
+				break;
+			}
+			RendererGroup[i]->SetSprite("Damage_Orange", _NumArray[i]);
 			break;
 		case DamageColor::Red:
-			RendererGroup[i]->SetSprite("CriDmg", _NumArray[i]);
+			if (i == 0)
+			{
+				RendererGroup[i]->SetSprite("Damage_Red_Big", _NumArray[i]);
+				break;
+			}
+			RendererGroup[i]->SetSprite("Damage_Red", _NumArray[i]);
 			break;
 		case DamageColor::Purple:
-			RendererGroup[i]->SetSprite("HitDmg", _NumArray[i]);
+			if (i == 0)
+			{
+				RendererGroup[i]->SetSprite("Damage_Purple_Big", _NumArray[i]);
+				break;
+			}
+			RendererGroup[i]->SetSprite("Damage_Purple", _NumArray[i]);
 			break;
 		default:
 			break;
 		}
 
-		RendererGroup[i]->Transform.AddLocalPosition({ 20.0f * i, 0.0f });
+		RendererGroup[i]->Transform.AddLocalPosition({ 23.0f * i, 0.0f });
+
 
 		if (i % 2 == 0)
 		{
