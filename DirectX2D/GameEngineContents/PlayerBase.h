@@ -27,6 +27,7 @@ protected:
 	std::shared_ptr<class DamageIndicator> DamageRenderer;
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
 	std::shared_ptr<class GameEngineCollision> Col;
+	std::shared_ptr<class GameEngineCollision> DetectedCol;
 	std::shared_ptr<class StatData> Stat;
 };
 

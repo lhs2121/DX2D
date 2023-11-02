@@ -12,12 +12,21 @@ Monster::~Monster()
 {
 }
 
-void Monster::PushDamage(std::vector<float> _DamageGroup, int _DamageID)
+void Monster::ApplyDamage(std::vector<float> _DamageGroup)
 {
 	for (size_t i = 0; i < _DamageGroup.size(); i++)
 	{
 		Stat->CurHp -= _DamageGroup[i];
 	}
+
+	if (Stat->CurHp < 0)
+	{
+		AttackCol->Off();
+	}
+}
+
+void Monster::RenderDamage(std::vector<float> _DamageGroup, int _DamageID)
+{
 	float4 Pos = Transform.GetWorldPosition() + float4(0.0f, ImageSize.Y);
 	DamageRenderer->RenderDamage(Pos, DamageColor::Red, _DamageGroup, _DamageID);
 
@@ -25,10 +34,19 @@ void Monster::PushDamage(std::vector<float> _DamageGroup, int _DamageID)
 	{
 		float4 dir = Transform.GetWorldPosition() - Player::MainPlayer->Transform.GetWorldPosition();
 		dir.Normalize();
-		NetForce.X = dir.X * 100.0f;
-		ChangeState(MonsterState::HIT);
+		NetForce.X = dir.X * 150.0f;
+		DeathCheck();
 	}
-};
+}
+
+void Monster::DeathCheck()
+{
+	if (Stat->CurHp < 0)
+	{
+		ChangeState(MonsterState::DIE);
+	}
+}
+;
 
 void Monster::Start()
 {
@@ -106,11 +124,6 @@ void Monster::HitStart()
 
 void Monster::HitUpdate(float _Delta)
 {
-	if (Stat->CurHp < 0)
-	{
-		ChangeState(MonsterState::DIE);
-	}
-
 	HitCoolTime -= _Delta;
 	if (HitCoolTime <= 0)
 	{
@@ -120,7 +133,6 @@ void Monster::HitUpdate(float _Delta)
 
 void Monster::DieStart()
 {
-	AttackCol->Off();
 	Renderer->ChangeAnimation(DieAniName);
 }
 

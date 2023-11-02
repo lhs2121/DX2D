@@ -38,7 +38,12 @@ void PlayerBase::Start()
 		Col->Transform.SetLocalScale({ 45,65 });
 		Col->Transform.AddLocalPosition({ 0,33 });
 	}
-
+	{
+		DetectedCol = CreateComponent<GameEngineCollision>(99);
+		DetectedCol->SetCollisionType(ColType::AABBBOX2D);
+		DetectedCol->Transform.SetLocalScale({ 1000,65 });
+		DetectedCol->Transform.AddLocalPosition({ 0,33 });
+	}
 	{
 		DamageRenderer = GetLevel()->CreateActor<DamageIndicator>(ActorOrder::Manager);
 	}
@@ -54,8 +59,9 @@ void PlayerBase::LevelStart(GameEngineLevel* _PrevLevel)
 	{
 		return;
 	}
-	std::shared_ptr<PlayerBase> player = _PrevLevel->GetObjectGroupConvert<PlayerBase>(ActorOrder::Player).front();
-	Stat = player->GetStat();
+	// Ω∫≈» ¿Ã¿¸
+	std::shared_ptr<PlayerBase> PrevPlayer = _PrevLevel->GetObjectGroupConvert<PlayerBase>(ActorOrder::Player).front();
+	Stat = PrevPlayer->GetStat();
 }
 
 void PlayerBase::Release()

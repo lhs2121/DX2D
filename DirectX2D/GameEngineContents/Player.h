@@ -33,6 +33,7 @@ public:
 
 	float GetDir() { return Dir; }
 	PlayerState GetCurState() { return CurState; }
+	std::shared_ptr<class Monster> GetCloseTarget();
 
 	static Player* MainPlayer;
 private:

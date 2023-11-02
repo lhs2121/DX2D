@@ -16,11 +16,14 @@ public:
 
 	void Setting(float4 _Pos, float _Speed, float _Dir, float _CoolTime, float StartDelayTime);
 	void SetDamage(std::vector<float> _DamageGroup, int _DamageID);
+	void SetTarget(std::shared_ptr<class Monster> _Target = nullptr) { Target = _Target; };
+	void SetHitPosOffset(float4 _OffSet) { HitPosOffset = _OffSet; };
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
 	void On() override;
 
+	float4 HitPosOffset;
 	float Speed;
 	float Dir;
 	float CoolTime;
@@ -28,6 +31,7 @@ protected:
 	float StartDelayTime;
 	int DamageID;
 	bool CanHitMonster = true;
+	std::shared_ptr<class Monster> Target = nullptr;
 
 	std::vector<float> DamageGroup;
 	std::shared_ptr<class GameEngineSpriteRenderer> SurekenRenderer;

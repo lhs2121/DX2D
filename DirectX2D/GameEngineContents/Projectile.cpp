@@ -54,7 +54,7 @@ void Projectile::Start()
 			{
 				Off();
 			});
-		SurekenRenderer->CreateAnimation("Sureken", "Sureken", 0.1f, 0, 1, true);
+		SurekenRenderer->CreateAnimation("Sureken", "Sureken", 0.1f, 2, 3, true);
 		SurekenRenderer->AutoSpriteSizeOn();
 
 	}
@@ -81,15 +81,29 @@ void Projectile::Update(float _Delta)
 
 	if (SurekenRenderer->IsCurAnimation("Sureken"))
 	{
-
 		CoolTime -= _Delta;
 		if (CoolTime <= 0.0f)
 		{
-			GameEngineActor::Off();
+			Off();
 		}
 
-		float ForceX = Dir * Speed * _Delta;
-		Transform.AddWorldPosition({ ForceX ,0 });
+		if (Target != nullptr)
+		{
+			float4 TargetPos = Target->Transform.GetWorldPosition() + float4(0.0f, HitPosOffset.Y);
+			float4 TargetDir = TargetPos - Transform.GetWorldPosition();
+			if (TargetDir.ToABS().X <= 1.0f)
+			{
+				SurekenRenderer->ChangeAnimation("Hit_LuckySeven");
+			}
+
+			TargetDir.Normalize();
+			Transform.AddWorldPosition(TargetDir * Speed * _Delta);
+		}
+		else
+		{
+			float ForceX = Dir * Speed * _Delta;
+			Transform.AddWorldPosition({ ForceX ,0 });
+		}
 	}
 
 	SurekenCol->Collision(CollisionOrder::Monster,
@@ -100,8 +114,9 @@ void Projectile::Update(float _Delta)
 				return;
 			}
 			CanHitMonster = false;
-			_Collision[0]->GetActor()->GetDynamic_Cast_This<Monster>()->PushDamage(DamageGroup,DamageID);
+			_Collision[0]->GetActor()->GetDynamic_Cast_This<Monster>()->RenderDamage(DamageGroup, DamageID);
 			SurekenRenderer->ChangeAnimation("Hit_LuckySeven");
+			Target = nullptr;
 		});
 }
 

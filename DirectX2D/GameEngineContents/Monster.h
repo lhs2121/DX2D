@@ -23,7 +23,11 @@ public:
 	Monster& operator=(const Monster& _Other) = delete;
 	Monster& operator=(Monster&& _Other) noexcept = delete;
 
-	void PushDamage(std::vector<float> _DamageGroup, int _DamageID);
+	void RenderDamage(std::vector<float> _DamageGroup, int _DamageID);
+	void ApplyDamage(std::vector<float> _DamageGroup);
+	void DeathCheck();
+
+	float4 GetImageSize() { return ImageSize; };
 	std::shared_ptr<class StatData> GetStat() { return Stat; }
 protected:
 	void Start() override;

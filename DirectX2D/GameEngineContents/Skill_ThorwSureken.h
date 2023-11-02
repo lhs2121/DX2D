@@ -24,6 +24,7 @@ protected:
 	int ThrowCount;
 	std::shared_ptr<class Projectile> GetNonUpdateProjectile();
 	std::shared_ptr<class Projectile> CurProjectile;
+	std::shared_ptr<class GameEngineCollision> MonsterDetector;
 	std::list<std::shared_ptr<class Projectile>> ProjectileGroup;
 };
 

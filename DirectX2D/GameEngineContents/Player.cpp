@@ -147,3 +147,13 @@ void Player::MonsterCheck(float _Delta)
 			});
 	}
 }
+
+std::shared_ptr<Monster> Player::GetCloseTarget()
+{
+	std::shared_ptr<Monster> Target = nullptr;
+	DetectedCol->Collision(CollisionOrder::MonsterAttack, [&](std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
+		{
+			Target = _Collision[0]->GetActor()->GetDynamic_Cast_This<Monster>();
+		});
+	return Target;
+}
