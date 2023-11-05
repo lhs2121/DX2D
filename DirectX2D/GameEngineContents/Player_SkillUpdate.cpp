@@ -82,6 +82,7 @@ void Player::LuckySevenUpdate(float _Delta)
 
 void Player::ShowDownStart()
 {
+	SkillManager::Inst->StartSkill(SkillType::ShowDown);
 	ApplyInputJump = false;
 	ChangeRandomSwingAnimation();
 }

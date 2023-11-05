@@ -11,6 +11,21 @@ PhysicsActor::~PhysicsActor()
 
 }
 
+
+void PhysicsActor::SetModuleEnabled(bool _EnableNetForce, bool _EnableCurColor, bool _EnableJumpCheck, bool _EnableGroundCheck,
+	bool _EnableGravity, bool _EnableBreaking, bool _EnableBluePixelSnap, bool _EnableRedPixelSnap, bool _EnableLimitToMapBounds)
+{
+	EnableNetForce = _EnableNetForce;
+	EnableCurColor = _EnableCurColor;
+	EnableJumpCheck = _EnableJumpCheck;
+	EnableGroundCheck = _EnableGroundCheck;
+	EnableGravity = _EnableGravity;
+	EnableBreaking = _EnableBreaking;
+	EnableBluePixelSnap = _EnableBluePixelSnap;
+	EnableRedPixelSnap = _EnableRedPixelSnap;
+	EnableLimitToMapBounds = _EnableLimitToMapBounds;
+}
+
 GameEngineColor PhysicsActor::GetColor(float4 _Pos)
 {
 	return MapleMap::CurMap->GetColor(_Pos, GameEngineColor::ALAPA);
@@ -162,13 +177,42 @@ void PhysicsActor::BluePixelSnap()
 
 void PhysicsActor::Update(float _Delta)
 {
-	Transform.AddLocalPosition(NetForce * _Delta);
-	SetCurColor();
-	JumpCheck();
-	GroundCheck();
-	Gravity(_Delta);
-	Breaking(_Delta);
-	BluePixelSnap();
-	RedPixelSnap();
-	LimitToMapBounds();
+	// 기본적인 체크들
+	if (EnableLimitToMapBounds)
+	{
+		LimitToMapBounds();
+	}
+	if (EnableCurColor)
+	{
+		SetCurColor();
+	}
+	if (EnableJumpCheck)
+	{
+		JumpCheck();
+	}
+	if (EnableGroundCheck)
+	{
+		GroundCheck();
+	}
+	if (EnableBluePixelSnap)
+	{
+		BluePixelSnap();
+	}
+	if (EnableRedPixelSnap)
+	{
+		RedPixelSnap();
+	}
+	// 좌표이동 시작
+	if (EnableNetForce)
+	{
+		Transform.AddLocalPosition(NetForce * _Delta);
+	}
+	if (EnableBreaking)
+	{
+		Breaking(_Delta);
+	}
+	if (EnableGravity)
+	{
+		Gravity(_Delta);
+	}
 }

@@ -23,7 +23,7 @@ public:
 	Monster& operator=(const Monster& _Other) = delete;
 	Monster& operator=(Monster&& _Other) noexcept = delete;
 
-	void RenderDamage(std::vector<float> _DamageGroup, int _DamageID);
+	void RenderDamage(std::vector<float> _DamageGroup, int _DamageID, int _Order = 0);
 	void ApplyDamage(std::vector<float> _DamageGroup);
 	void DeathCheck();
 
@@ -34,6 +34,7 @@ protected:
 	void Update(float _Delta) override;
 	void Release() override;
 
+	void DropItem();
 	void ChangeState(MonsterState _State);
 	void RunStart();
 	void RunUpdate(float _Delta);

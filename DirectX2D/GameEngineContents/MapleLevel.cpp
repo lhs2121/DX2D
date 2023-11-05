@@ -7,6 +7,7 @@
 #include "SkillManager.h"
 #include "FadeScreen.h"
 #include "UI_Inventory.h"
+#include "MouseActor.h"
 
 MapleLevel::MapleLevel()
 {
@@ -32,6 +33,7 @@ void MapleLevel::Start()
 	GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, -600.0f });
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
 
+	CreateActor<MouseActor>(ActorOrder::UI);
 	{
 		CurPlayer = CreateActor<Player>(ActorOrder::Player);
 		CurSkillManager = CreateActor<SkillManager>(ActorOrder::Manager);

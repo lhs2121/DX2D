@@ -14,7 +14,7 @@ public:
 	Projectile& operator=(const Projectile& _Other) = delete;
 	Projectile& operator=(Projectile&& _Other) noexcept = delete;
 
-	void Setting(float4 _Pos, float _Speed, float _Dir, float _CoolTime, float StartDelayTime);
+	void Setting(float4 _Pos, float _Speed, float4 _Dir, float _CoolTime, float StartDelayTime);
 	void SetDamage(std::vector<float> _DamageGroup, int _DamageID);
 	void SetTarget(std::shared_ptr<class Monster> _Target = nullptr) { Target = _Target; };
 	void SetHitPosOffset(float4 _OffSet) { HitPosOffset = _OffSet; };
@@ -24,8 +24,8 @@ protected:
 	void On() override;
 
 	float4 HitPosOffset;
+	float4 Dir;
 	float Speed;
-	float Dir;
 	float CoolTime;
 	float CoolTimeReset;
 	float StartDelayTime;

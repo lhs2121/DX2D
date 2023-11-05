@@ -32,7 +32,7 @@ void SkillManager::StartSkill(SkillType _Type)
 		ThrowSureken->StartSkill();
 		break;
 	case SkillType::ShowDown:
-		ShowDown->On();
+		ShowDown->StartSkill();
 		break;
 	default:
 		break;
@@ -52,9 +52,9 @@ void SkillManager::Update(float _Delta)
 
 void SkillManager::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	FlashJump = GetLevel()->CreateActor<Skill_FlashJump>();
-	ThrowSureken = GetLevel()->CreateActor<Skill_ThorwSureken>();
-	ShowDown = GetLevel()->CreateActor<Skill_ShowDown>();
+	FlashJump = GetLevel()->CreateActor<Skill_FlashJump>(300);
+	ThrowSureken = GetLevel()->CreateActor<Skill_ThorwSureken>(300);
+	ShowDown = GetLevel()->CreateActor<Skill_ShowDown>(300);
 }
 
 void SkillManager::LevelEnd(GameEngineLevel* _NextLevel)

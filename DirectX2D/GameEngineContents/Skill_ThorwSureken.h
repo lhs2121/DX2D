@@ -14,11 +14,10 @@ public:
 	Skill_ThorwSureken& operator=(const Skill_ThorwSureken& _Other) = delete;
 	Skill_ThorwSureken& operator=(Skill_ThorwSureken&& _Other) noexcept = delete;
 
-	void StartSkill() override;
+	void StartSkill();
 	void SetThrowCount(int _Count) { ThrowCount = _Count; };
 protected:
 	void Start() override;
-	void Update(float _Delta) override;
 	void Release() override;
 
 	int ThrowCount;

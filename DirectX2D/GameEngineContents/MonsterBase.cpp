@@ -13,9 +13,10 @@ MonsterBase::~MonsterBase()
 
 void MonsterBase::Setting(std::string MonsterName)
 {
-	IdleAniName = MonsterName + "Idle";
-	HitAniName = MonsterName + "Hit";
-	DieAniName = MonsterName + "Die";
+	IdleAniName = MonsterName + "_Idle";
+	HitAniName = MonsterName + "_Hit";
+	DieAniName = MonsterName + "_Die";
+	ItemName = MonsterName + "_Item";
 
 	Renderer->CreateAnimation(IdleAniName, IdleAniName, 0.2f);
 	Renderer->CreateAnimation(HitAniName, HitAniName, 0.2f);

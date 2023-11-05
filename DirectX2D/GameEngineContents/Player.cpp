@@ -28,9 +28,8 @@ void Player::Update(float _Delta)
 {
 	PhysicsActor::Update(_Delta);
 	MonsterCheck(_Delta);
-	//FlipRenderer();
+	ItemCheck();
 	CameraFocus();
-	//DirUpdate();
 	RopePivotUpdate();
 	RopeCheck();
 	PortalCheck();

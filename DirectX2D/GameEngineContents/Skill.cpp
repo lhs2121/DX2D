@@ -22,12 +22,3 @@ void Skill::FlipX(float _dir, std::shared_ptr<class GameEngineSpriteRenderer> _R
 	}
 }
 
-void Skill::Start()
-{
-	SkillId = GameEngineRandom::GameEngineRandom().RandomInt(0, 99999999);
-}
-
-void Skill::Update(float _Delta)
-{
-	
-}

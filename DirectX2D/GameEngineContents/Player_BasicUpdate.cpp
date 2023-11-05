@@ -3,6 +3,7 @@
 #include "MapleMap.h"
 #include "StatManager.h"
 #include "FadeScreen.h"
+#include "Item_Drop.h"
 
 void Player::RopePivotUpdate()
 {
@@ -25,15 +26,17 @@ void Player::MoveUpdate()
 
 	if (ApplyInputLeft == true)
 	{
+
 		if (InputIsPress(VK_LEFT))
 		{
 			if (CurState != PlayerState::FLASHJUMP)
 			{
 
-			NetForce.X = -125.0f;
+				NetForce.X = -125.0f;
 			}
 			if (Renderer->Transform.GetLocalScale().X < 0)
 			{
+				DetectedCol->Transform.SetLocalPosition({ -200.0f,33.0f });
 				Renderer->Transform.SetLocalScale({ 1.0f,1.0f,1.0f });
 				Dir = -1;
 			}
@@ -44,13 +47,14 @@ void Player::MoveUpdate()
 	{
 		if (InputIsPress(VK_RIGHT))
 		{
+
 			if (CurState != PlayerState::FLASHJUMP)
 			{
-
 				NetForce.X = 125.0f;
 			}
 			if (Renderer->Transform.GetLocalScale().X > 0)
 			{
+				DetectedCol->Transform.SetLocalPosition({ 200.0f,33.0f });
 				Renderer->Transform.SetLocalScale({ -1.0f,1.0f,1.0f });
 				Dir = 1;
 			}
@@ -61,7 +65,7 @@ void Player::MoveUpdate()
 	{
 		if (InputIsDown(VK_MENU) && IsGrounded == true && CurState != PlayerState::DOWN)
 		{
-			NetForce.Y = 300.0f;
+			NetForce.Y = 350.0f;
 		}
 		else if (InputIsDown(VK_MENU) && CurState == PlayerState::DOWN)
 		{
@@ -112,9 +116,20 @@ void Player::PortalCheck()
 		};
 	Event.Exit = [](GameEngineCollision*, GameEngineCollision* Col)
 		{
-			
+
 		};
 	Col->CollisionEvent(CollisionOrder::Portal, Event);
+}
+
+void Player::ItemCheck()
+{
+	Col->Collision(CollisionOrder::Item, [&](std::vector<std::shared_ptr<GameEngineCollision>> _Col)
+		{
+			if (InputIsDown(VK_UP))
+			{
+				_Col[0]->GetActor()->GetDynamic_Cast_This<Item_Drop>()->AddItem();
+			}
+		});
 }
 
 void Player::CameraFocus()

@@ -14,12 +14,7 @@ public:
 	Skill& operator=(const Skill& _Other) = delete;
 	Skill& operator=(Skill&& _Other) noexcept = delete;
 
-	virtual void StartSkill() {};
 protected:
 	void FlipX(float _dir, std::shared_ptr<class GameEngineSpriteRenderer> _Renderer);
-	void Start() override;
-	void Update(float _Delta) override;
-
-	int SkillId;
 };
 

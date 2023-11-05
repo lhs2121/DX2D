@@ -25,7 +25,7 @@ void MonsterSpawner::Update(float _Delta)
 			 return;
 		}
 
-		for (int i = 0; i < SpawnCount; i++)
+		for (int i = 0; i < SpawnPoint.size(); i++)
 		{
 			std::shared_ptr<Monster> NewMonster = GetLevel()->CreateActor<Monster>(200);
 			NewMonster->Setting(CurMonsterString); 

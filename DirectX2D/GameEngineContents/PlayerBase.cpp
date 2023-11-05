@@ -41,7 +41,7 @@ void PlayerBase::Start()
 	{
 		DetectedCol = CreateComponent<GameEngineCollision>(99);
 		DetectedCol->SetCollisionType(ColType::AABBBOX2D);
-		DetectedCol->Transform.SetLocalScale({ 1000,65 });
+		DetectedCol->Transform.SetLocalScale({ 400,100 });
 		DetectedCol->Transform.AddLocalPosition({ 0,33 });
 	}
 	{

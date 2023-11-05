@@ -41,13 +41,13 @@ private:
 	void PushDamage(std::vector<float> _DamageGroup);
 	void MonsterCheck(float _Delta);
 	void PortalCheck();
+	void ItemCheck();
 
 	// BasicUpdate
 	void CameraFocus();
 	void RopeCheck();
 	void RopePivotUpdate();
 	void MoveUpdate();
-
 	void ChangeRandomSwingAnimation();
 
 	// StateUpdate

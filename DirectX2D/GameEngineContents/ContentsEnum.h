@@ -19,7 +19,7 @@ enum class UIRenderOrder
 	PlayerUI2,
 	PlayerUI3,
 	FadeScreen,
-	DebugUI,
+	Cursor
 };
 
 enum class ActorOrder
@@ -31,6 +31,7 @@ enum class ActorOrder
 	DamageEffect,
 	Manager,
 	Stat,
+	Item,
 	FadeScreen,
 	UI,
 };
@@ -41,7 +42,12 @@ enum class CollisionOrder
 	Monster,
 	MonsterAttack,
 	PlayerAttack,
-	Portal
+	Portal,
+	Item,
+	UI_Drag,
+	UI_Grab,
+	UI_Button,
+	Cursor
 };
 
 enum class SkillType
@@ -65,3 +71,4 @@ enum class DamageColor
 	Red,
 	Purple
 };
+

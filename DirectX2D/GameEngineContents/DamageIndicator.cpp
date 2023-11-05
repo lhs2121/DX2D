@@ -18,11 +18,11 @@ void DamageIndicator::RenderDamage(float4 _Pos, DamageColor _Color, std::vector<
 	{
 		std::shared_ptr<DamageEffect> NewEffect = GetNonUpdateObject(list);
 
-		float4 StartPos = _Pos + float4(0.0f, 25.0f * i);
+		float4 StartPos = _Pos + float4(0.0f, 30.0f * i);
 
 		if (PrevEffect != nullptr && PrevEffect->GetID() == _DamageID)
 		{
-			StartPos = PrevEffect->Transform.GetWorldPosition() + float4(0.0f, 25.0f);
+			StartPos = PrevEffect->Transform.GetWorldPosition() + float4(0.0f, 30.0f);
 		}
 
 		std::vector<int> Damage = GetIntArray(_DamageGroup[i]);

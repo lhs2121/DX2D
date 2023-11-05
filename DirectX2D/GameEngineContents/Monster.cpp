@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "StatData.h"
 #include "DamageIndicator.h"
+#include "Item_Drop.h"
 
 Monster::Monster()
 {
@@ -25,9 +26,10 @@ void Monster::ApplyDamage(std::vector<float> _DamageGroup)
 	}
 }
 
-void Monster::RenderDamage(std::vector<float> _DamageGroup, int _DamageID)
+void Monster::RenderDamage(std::vector<float> _DamageGroup, int _DamageID, int _Order)
 {
 	float4 Pos = Transform.GetWorldPosition() + float4(0.0f, ImageSize.Y);
+	DamageRenderer->PlusRenderOrder(_Order);
 	DamageRenderer->RenderDamage(Pos, DamageColor::Red, _DamageGroup, _DamageID);
 
 	if (CurState != MonsterState::DIE)
@@ -78,6 +80,11 @@ void Monster::Update(float _Delta)
 void Monster::Release()
 {
 	MonsterBase::Release();
+}
+
+void Monster::DropItem()
+{
+	GetLevel()->CreateActor<Item_Drop>(500)->Setting(Transform.GetWorldPosition(), ItemName,30);
 }
 
 void Monster::ChangeState(MonsterState _State)
@@ -147,6 +154,7 @@ void Monster::DieUpdate(float _Delta)
 
 	if (Renderer->IsCurAnimationEnd())
 	{
+		DropItem();
 		Death();
 	}
 }

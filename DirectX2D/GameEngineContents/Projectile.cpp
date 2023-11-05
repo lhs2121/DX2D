@@ -12,10 +12,9 @@ Projectile::~Projectile()
 {
 }
 
-void Projectile::Setting(float4 _Pos, float _Speed, float _Dir, float _CoolTime, float _StartDelayTime)
+void Projectile::Setting(float4 _Pos, float _Speed, float4 _Dir, float _CoolTime, float _StartDelayTime)
 {
-	float4 Offset = { _Dir * 20.0f,33.0f };
-	Transform.SetWorldPosition(_Pos + Offset);
+	Transform.SetWorldPosition(_Pos);
 	Speed = _Speed;
 	Dir = _Dir;
 	CoolTime = _CoolTime;
@@ -81,19 +80,22 @@ void Projectile::Update(float _Delta)
 
 	if (SurekenRenderer->IsCurAnimation("Sureken"))
 	{
-		CoolTime -= _Delta;
-		if (CoolTime <= 0.0f)
-		{
-			Off();
-		}
-
 		if (Target != nullptr)
 		{
 			float4 TargetPos = Target->Transform.GetWorldPosition() + float4(0.0f, HitPosOffset.Y);
 			float4 TargetDir = TargetPos - Transform.GetWorldPosition();
 			if (TargetDir.ToABS().X <= 1.0f)
 			{
+				if (Target->IsDeath() == false)
+				{
+					Target->RenderDamage(DamageGroup, DamageID);
+				}
+				else
+				{
+					int a = 0;
+				}
 				SurekenRenderer->ChangeAnimation("Hit_LuckySeven");
+				Target = nullptr;
 			}
 
 			TargetDir.Normalize();
@@ -101,23 +103,15 @@ void Projectile::Update(float _Delta)
 		}
 		else
 		{
-			float ForceX = Dir * Speed * _Delta;
-			Transform.AddWorldPosition({ ForceX ,0 });
+			CoolTime -= _Delta;
+			if (CoolTime <= 0.0f)
+			{
+				Off();
+			}
+
+			Transform.AddWorldPosition(Dir * Speed * _Delta);
 		}
 	}
-
-	SurekenCol->Collision(CollisionOrder::Monster,
-		[&](std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
-		{
-			if (CanHitMonster == false)
-			{
-				return;
-			}
-			CanHitMonster = false;
-			_Collision[0]->GetActor()->GetDynamic_Cast_This<Monster>()->RenderDamage(DamageGroup, DamageID);
-			SurekenRenderer->ChangeAnimation("Hit_LuckySeven");
-			Target = nullptr;
-		});
 }
 
 void Projectile::On()

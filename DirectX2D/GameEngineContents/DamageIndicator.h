@@ -17,6 +17,7 @@ public:
 	DamageIndicator& operator=(DamageIndicator&& _Other) noexcept = delete;
 
 	void RenderDamage(float4 _Pos, DamageColor _Color, std::vector<float> _DamageGroup, int _DamageID = 1);
+	void PlusRenderOrder(int _Order) { LastRenderOrder += _Order; };
 private:
 	void Start() override;
 

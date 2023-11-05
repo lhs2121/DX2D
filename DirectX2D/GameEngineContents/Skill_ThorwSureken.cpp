@@ -20,11 +20,6 @@ void Skill_ThorwSureken::Start()
 	MonsterDetector->Transform.SetLocalScale({ 100,20 });
 }
 
-void Skill_ThorwSureken::Update(float _Delta)
-{
-
-}
-
 void Skill_ThorwSureken::Release()
 {
 	CurProjectile = nullptr;
@@ -41,8 +36,8 @@ void Skill_ThorwSureken::Release()
 
 void Skill_ThorwSureken::StartSkill()
 {
-	float4 Pos = Player::MainPlayer->Transform.GetWorldPosition();
-	float Dir = Player::MainPlayer->GetDir();
+	float4 Pos = Player::MainPlayer->Transform.GetWorldPosition() + float4(0.0f,33.0f);
+	float PlayerDir = Player::MainPlayer->GetDir();
 	int ID = GameEngineRandom::GameEngineRandom().RandomInt(0, 99999999);
 
 	float4 MonsterSize = float4::ZERO;
@@ -58,13 +53,15 @@ void Skill_ThorwSureken::StartSkill()
 		std::vector<float> Damage = Player::MainPlayer->GetStat()->GetDamage(1, SkillType::LuckySeven);
 		if (Target != nullptr)
 		{
-			Target->ApplyDamage(Damage);
+			Target->ApplyDamage(Damage); // 몬스터의 attackcol이 꺼진다
 		}
-		
 
-		float Delay = 0.4f + 0.1f * i;
+		float4 Dir = float4(PlayerDir, 0);
+		Dir.VectorRotationToDegZ(3 - 1.5f*i);
+
+		float Delay = 0.2f + 0.1f * i;
 		CurProjectile = GetNonUpdateProjectile();
-		CurProjectile->Setting(Pos, 700.0f, Dir, 2.0f, Delay);
+		CurProjectile->Setting(Pos, 700.0f, Dir, 0.5f, Delay);
 		CurProjectile->SetDamage(Damage, ID);
 		CurProjectile->SetTarget(Target);
 		CurProjectile->SetHitPosOffset(MonsterSize - ((MonsterSize/ThrowCount) * i));

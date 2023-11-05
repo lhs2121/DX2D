@@ -1,0 +1,51 @@
+#pragma once
+#include <GameEngineCore/GameEngineActor.h>
+
+// Ό³Έν :
+class ClassName : public GameEngineActor
+{
+public:
+	// constrcuter destructer
+	ClassName();
+	~ClassName();
+
+	// delete Function
+	ClassName(const ClassName& _Other) = delete;
+	ClassName(ClassName&& _Other) noexcept = delete;
+	ClassName& operator=(const ClassName& _Other) = delete;
+	ClassName& operator=(ClassName&& _Other) noexcept = delete;
+
+protected:
+	void Start() override;
+	void Update(float _Delta) override;
+
+	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
+	std::shared_ptr<class GameEngineCollision> Col;
+};
+
+#include "PreCompile.h"
+#include "ClassName.h"
+
+ClassName::ClassName()
+{
+}
+
+ClassName::~ClassName()
+{
+}
+
+void ClassName::Start()
+{
+	Renderer = CreateComponent<GameEngineSpriteRenderer>();
+	Renderer->SetRenderOrder(RenderOrder::Debug);
+	Renderer->CreateAnimation("","");
+	Renderer->ChangeAnimation("");
+
+	Col = CreateComponent<GameEngineCollision>(CollisionOrder::UI_Button);
+	Col->SetCollisionType(ColType::AABBBOX2D);
+	Col->Transform.SetLocalScale();
+}
+
+void ClassName::Update(float _Delta)
+{
+}

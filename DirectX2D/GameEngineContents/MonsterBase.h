@@ -23,6 +23,7 @@ protected:
 	std::string DieAniName;
 	std::string HitAniName;
 	std::string IdleAniName;
+	std::string ItemName;
 	
 	float HitCoolTime;
 	float4 ImageSize;
