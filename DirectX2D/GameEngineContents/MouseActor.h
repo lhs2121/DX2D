@@ -20,6 +20,8 @@ protected:
 	void Update(float _Delta) override;
 	void Release() override;
 
+	void LevelEnd(GameEngineLevel* _NextLevel) override;
+
 	float4 WinSize = ContentsCore::GetStartWindowSize().Half();
 	std::shared_ptr<class GameEngineUIRenderer> Renderer;
 	std::shared_ptr<class GameEngineCollision> Col;

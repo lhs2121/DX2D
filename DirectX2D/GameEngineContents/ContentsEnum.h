@@ -34,6 +34,8 @@ enum class ActorOrder
 	Item,
 	FadeScreen,
 	UI,
+	UI_Inventory,
+	UI_Item,
 };
 
 enum class CollisionOrder

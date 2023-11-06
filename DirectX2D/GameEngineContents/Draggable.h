@@ -15,10 +15,14 @@ public:
 	Draggable& operator=(Draggable&& _Other) noexcept = delete;
 
 	void SetDragColScale(float4 _Scale);
+	static Draggable* CurDragUI;
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
-
+	virtual void OnStartDrag(std::shared_ptr<class GameEngineCollision> _MouseCol);
+	virtual void OnDrag(std::shared_ptr<class GameEngineCollision> _MouseCol);
+	virtual void OnEndDrag();
 	std::shared_ptr<class GameEngineCollision> DragCol;
+	std::shared_ptr<class GameEngineCollision> MouseCol;
 };
 

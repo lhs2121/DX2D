@@ -29,7 +29,7 @@ void Player::Update(float _Delta)
 	PhysicsActor::Update(_Delta);
 	MonsterCheck(_Delta);
 	ItemCheck();
-	CameraFocus();
+	//CameraFocus();
 	RopePivotUpdate();
 	RopeCheck();
 	PortalCheck();
@@ -39,17 +39,16 @@ void Player::Update(float _Delta)
 
 void Player::Release()
 {
-
+	PlayerBase::Release();
 }
 
 void Player::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	Death();
 }
 
 void Player::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	PlayerBase::LevelStart(_PrevLevel);
 	IsFadeIn = false;
 	ChangeState(PlayerState::IDLE);
 
@@ -125,7 +124,7 @@ void Player::PushDamage(std::vector<float> _DamageGroup)
 {
 	for (size_t i = 0; i < _DamageGroup.size(); i++)
 	{
-		Stat->CurHp -= _DamageGroup[i];
+		StatDataPlayer::Inst->CurHp -= _DamageGroup[i];
 	}
 	float4 Pos = Transform.GetWorldPosition() + float4(0.0f, 68.0f);
 	DamageRenderer->RenderDamage(Pos, DamageColor::Purple, _DamageGroup, GameEngineRandom::GameEngineRandom().RandomInt(0, 999999));

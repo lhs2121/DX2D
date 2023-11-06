@@ -1,6 +1,8 @@
 #include "PreCompile.h"
 #include "Draggable.h"
 
+Draggable* Draggable::CurDragUI = nullptr;
+
 Draggable::Draggable()
 {
 }
@@ -25,11 +27,43 @@ void Draggable::Start()
 
 void Draggable::Update(float _Delta)
 {
-	if (InputIsPress(VK_LBUTTON))
+	if (InputIsDown(VK_LBUTTON))
 	{
 		DragCol->Collision(CollisionOrder::Cursor, [&](std::vector<std::shared_ptr<GameEngineCollision>> _Col)
 			{
-				Transform.SetWorldPosition(_Col[0]->Transform.GetWorldPosition());
+				CurDragUI = this;
+				MouseCol = _Col[0];
+				OnStartDrag(MouseCol);
 			});
 	}
+
+	if (CurDragUI != this)
+	{
+		return;
+	}
+
+	if (InputIsPress(VK_LBUTTON))
+	{
+		OnDrag(MouseCol);
+	}
+
+	if (InputIsUp(VK_LBUTTON))
+	{
+		OnEndDrag();
+		CurDragUI = nullptr;
+		MouseCol = nullptr;
+	}
+
+}
+
+void Draggable::OnStartDrag(std::shared_ptr<class GameEngineCollision> _MouseCol)
+{
+}
+
+void Draggable::OnDrag(std::shared_ptr<class GameEngineCollision> _MouseCol)
+{
+}
+
+void Draggable::OnEndDrag()
+{
 }

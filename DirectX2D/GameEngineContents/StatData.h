@@ -65,6 +65,8 @@ public:
 	StatDataPlayer& operator=(const StatDataPlayer& _Other) = delete;
 	StatDataPlayer& operator=(StatDataPlayer&& _Other) noexcept = delete;
 
+	static std::shared_ptr<StatDataPlayer> Inst;
+	
 	float GetDamage() override;
 	std::vector<float> GetDamage(int _HitCount, SkillType _Type) override;
 

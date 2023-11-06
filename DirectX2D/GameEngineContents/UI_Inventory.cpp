@@ -18,9 +18,9 @@ void UI_Inventory::Start()
 	Renderer->SetRenderOrder(UIRenderOrder::PlayerUI);
 	Renderer->SetSprite("InvenPanel");
 	Renderer->Off();
-
 	Draggable::Start();
-	SetDragColScale(Renderer->GetImageTransform().GetLocalScale());
+	DragCol->Transform.SetLocalScale({ Renderer->GetImageTransform().GetLocalScale().X, 10.0f });
+	DragCol->Transform.SetLocalPosition({ 0.0f,Renderer->GetImageTransform().GetLocalScale().hY()});
 
 	for (int y = 0; y < SlotSizeY; y++)
 	{
@@ -29,9 +29,12 @@ void UI_Inventory::Start()
 			static int num = 0;
 			std::shared_ptr<UI_Slot> NewSlot = GetLevel()->CreateActor<UI_Slot>();
 			NewSlot->Transform.SetWorldPosition(Transform.GetWorldPosition());
-			NewSlot->Transform.AddWorldPosition(float4(35.0f * x, 0.0f));
-			NewSlot->Transform.AddWorldPosition(float4(-60.0f, 100.0f - 35.0f * y));
+			NewSlot->Transform.AddLocalPosition(float4(35.0f * x, 0.0f));
+			NewSlot->Transform.AddLocalPosition(float4(-60.0f, 100.0f - 35.0f * y));
+
+			float4 a = NewSlot->Transform.GetWorldPosition();
 			NewSlot->SetParent(this, num);
+			NewSlot->Setting();
 			num++;
 			Slots[y][x] = NewSlot;
 		}
@@ -99,4 +102,15 @@ void UI_Inventory::AddItem(ItemInfo Info)
 
 void UI_Inventory::RemoveItem(int SlotNum)
 {
+}
+
+void UI_Inventory::OnStartDrag(std::shared_ptr<class GameEngineCollision> _MouseCol)
+{
+	OffSet = Transform.GetWorldPosition() - _MouseCol->Transform.GetWorldPosition();
+}
+
+void UI_Inventory::OnDrag(std::shared_ptr<class GameEngineCollision> _MouseCol)
+{
+	Transform.SetWorldPosition(_MouseCol->Transform.GetWorldPosition());
+	Transform.AddWorldPosition(OffSet);
 }

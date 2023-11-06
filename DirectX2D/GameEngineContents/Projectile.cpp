@@ -60,7 +60,7 @@ void Projectile::Start()
 
 	{
 		SurekenCol = CreateComponent<GameEngineCollision>(CollisionOrder::PlayerAttack);
-		SurekenCol->SetCollisionType(ColType::AABBBOX2D);
+		SurekenCol->SetCollisionType(ColType::SPHERE2D);
 		SurekenCol->Transform.SetLocalScale({ 20,20 });
 	}
 
@@ -84,7 +84,7 @@ void Projectile::Update(float _Delta)
 		{
 			float4 TargetPos = Target->Transform.GetWorldPosition() + float4(0.0f, HitPosOffset.Y);
 			float4 TargetDir = TargetPos - Transform.GetWorldPosition();
-			if (TargetDir.ToABS().X <= 1.0f)
+			if (TargetDir.ToABS().X <= 2.0f)
 			{
 				if (Target->IsDeath() == false)
 				{

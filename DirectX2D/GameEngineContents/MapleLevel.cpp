@@ -29,28 +29,31 @@ std::shared_ptr<Portal> MapleLevel::CreatePortal(std::string _NextLevel, float4 
 void MapleLevel::Start()
 {
     GameEngineInput::AddInputObject(this);
-
 	GetMainCamera()->Transform.SetLocalPosition({ 0.0f, 0.0f, -600.0f });
 	GetMainCamera()->SetProjectionType(EPROJECTIONTYPE::Orthographic);
+}
 
+void MapleLevel::LevelStart(GameEngineLevel* _PrevLevel)
+{
 	CreateActor<MouseActor>(ActorOrder::UI);
+
 	{
 		CurPlayer = CreateActor<Player>(ActorOrder::Player);
 		CurSkillManager = CreateActor<SkillManager>(ActorOrder::Manager);
 		CurFadeScreen = CreateActor<FadeScreen>(ActorOrder::FadeScreen);
 		CurUI_Status = CreateActor<UI_Status>(ActorOrder::UI);
-		CurUI_Inventory = CreateActor<UI_Inventory>(ActorOrder::UI);
+		CurUI_Inventory = CreateActor<UI_Inventory>(ActorOrder::UI_Inventory);
 	}
-}
 
-void MapleLevel::LevelStart(GameEngineLevel* _PrevLevel)
-{
-	Player::MainPlayer = CurPlayer.get();
-	SkillManager::Inst = CurSkillManager.get();
-	MapleMap::CurMap = CurMap.get();
-	UI_Status::Inst = CurUI_Status.get();
-	UI_Inventory::Inst = CurUI_Inventory.get();
-	CurFadeScreen->SettingAndStart(FadeType::FADEOUT);
+	{
+		Player::MainPlayer = CurPlayer.get();
+		SkillManager::Inst = CurSkillManager.get();
+		MapleMap::CurMap = CurMap.get();
+		UI_Status::Inst = CurUI_Status.get();
+		UI_Inventory::Inst = CurUI_Inventory.get();
+	}
+		CurFadeScreen->SettingAndStart(FadeType::FADEOUT);
+
 }
 
 void MapleLevel::LevelEnd(GameEngineLevel* _NextLevel)

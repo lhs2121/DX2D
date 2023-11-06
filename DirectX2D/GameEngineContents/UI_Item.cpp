@@ -9,7 +9,7 @@ UI_Item::~UI_Item()
 {
 }
 
-void UI_Item::SetCollisionScale(float4 _Scale)
+void UI_Item::Setting(float4 _Scale)
 {
 	SetDragColScale(_Scale);
 }
@@ -26,6 +26,21 @@ void UI_Item::Start()
 void UI_Item::Update(float _Delta)
 {
 	Draggable::Update(_Delta);
+}
+
+void UI_Item::OnStartDrag(std::shared_ptr<class GameEngineCollision> _MouseCol)
+{ 
+}
+
+void UI_Item::OnDrag(std::shared_ptr<class GameEngineCollision> _MouseCol)
+{
+	Transform.SetWorldPosition(_MouseCol->Transform.GetWorldPosition());
+}
+
+
+void UI_Item::OnEndDrag()
+{
+	Transform.SetLocalPosition({0.0f,0.0f});
 }
 
 void UI_Item::UseItem()

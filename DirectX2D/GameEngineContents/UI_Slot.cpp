@@ -33,6 +33,11 @@ bool UI_Slot::IsSameItem(ItemInfo _Info)
 	return false;
 }
 
+void UI_Slot::Setting()
+{
+	ItemActor->Setting(SlotRenderer->GetImageTransform().GetLocalScale());
+}
+
 bool UI_Slot::IsFull()
 {
 	if (Info.ItemCount >= Info.MaxCount)
@@ -49,9 +54,9 @@ void UI_Slot::Start()
 	SlotRenderer->SetRenderOrder(UIRenderOrder::PlayerUI2);
 	SlotRenderer->SetSprite("Slot");
 	
-	ItemActor = GetLevel()->CreateActor<UI_Item>();
+	ItemActor = GetLevel()->CreateActor<UI_Item>(ActorOrder::UI_Item);
+	ItemActor->Transform.SetWorldPosition(Transform.GetWorldPosition());
 	ItemActor->SetParent(this, 0);
-	ItemActor->SetCollisionScale(SlotRenderer->GetImageTransform().GetLocalScale());
 	Off();
 }
 

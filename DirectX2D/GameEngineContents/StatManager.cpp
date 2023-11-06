@@ -5,16 +5,14 @@
 #include "UI_Status.h"
 #include "Player.h"
 
-StatManager* StatManager::Inst;
+std::shared_ptr<StatManager> StatManager::Inst;
 
 StatManager::StatManager()
 {
-	Inst = this;
 }
 
 StatManager::~StatManager()
 {
-
 }
 
 void StatManager::ChangeHp(std::shared_ptr<StatDataPlayer> _Stat, float _Damage)

@@ -20,6 +20,7 @@ public:
 	bool IsFull();
 	bool IsSameItem(ItemInfo _Info);
     
+	void Setting();
 	void SetSlotNumber(int _Num) { SlotNum = _Num; }
 	int GetSlotNumber() { return SlotNum; }
 	void AddItem(ItemInfo _Info);

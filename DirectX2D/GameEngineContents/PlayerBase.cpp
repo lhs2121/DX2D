@@ -47,25 +47,33 @@ void PlayerBase::Start()
 	{
 		DamageRenderer = GetLevel()->CreateActor<DamageIndicator>(ActorOrder::Manager);
 	}
-
-	{
-		Stat = GetLevel()->CreateActor<StatDataPlayer>();
-	}
-}
-
-void PlayerBase::LevelStart(GameEngineLevel* _PrevLevel)
-{
-	if (_PrevLevel == nullptr)
-	{
-		return;
-	}
-	// Ω∫≈» ¿Ã¿¸
-	std::shared_ptr<PlayerBase> PrevPlayer = _PrevLevel->GetObjectGroupConvert<PlayerBase>(ActorOrder::Player).front();
-	Stat = PrevPlayer->GetStat();
 }
 
 void PlayerBase::Release()
 {
+	if (Renderer != nullptr)
+	{
+		Renderer->Death();
+		Renderer = nullptr;
+	}
+
+	if (Col != nullptr)
+	{
+		Col->Death();
+		Col = nullptr;
+	}
+
+	if (DetectedCol != nullptr)
+	{
+		DetectedCol->Death();
+		DetectedCol = nullptr;
+	}
+
+	if (DamageRenderer != nullptr)
+	{
+		DamageRenderer->Death();
+		DamageRenderer = nullptr;
+	}
 }
 
 

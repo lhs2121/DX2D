@@ -63,7 +63,8 @@ void TitleLevel::Start()
 	GameEngineSprite::CreateSingle("MainBossUI.png");
 
 	{
-		CreateActor<StatManager>(ActorOrder::Manager);
+		StatDataPlayer::Inst = CreateActor<StatDataPlayer>(ActorOrder::Stat);
+		StatManager::Inst =	CreateActor<StatManager>(ActorOrder::Manager);
 	}
 	
 }

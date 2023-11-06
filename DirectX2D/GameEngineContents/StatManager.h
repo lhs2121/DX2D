@@ -22,5 +22,5 @@ public:
 
 	void ChangeExp(float Value);
 
-	static StatManager* Inst;
+	static std::shared_ptr<StatManager> Inst;
 };

@@ -22,16 +22,19 @@ public:
 	UI_Inventory& operator=(const UI_Inventory& _Other) = delete;
 	UI_Inventory& operator=(UI_Inventory&& _Other) noexcept = delete;
 
-	void AddItem(ItemInfo Info);
 	static UI_Inventory* Inst;
+
+	void AddItem(ItemInfo Info);
 private:
 	void Start() override;
 	void Update(float _Delta) override;
-
 	void RemoveItem(int SlotNum);
+	void OnStartDrag(std::shared_ptr<class GameEngineCollision> _MouseCol) override;
+	void OnDrag(std::shared_ptr<class GameEngineCollision> _MouseCol) override;
 
 	int SlotSizeX = 4;
 	int SlotSizeY = 6;
+	float4 OffSet;
 	std::shared_ptr<class GameEngineUIRenderer> Renderer;
 	std::shared_ptr<class UI_Slot> Slots[6][4];
 };

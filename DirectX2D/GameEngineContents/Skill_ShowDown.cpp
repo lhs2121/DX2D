@@ -30,7 +30,7 @@ void Skill_ShowDown::Update(float _Delta)
 				{
 					break; // 5명까지 때린다
 				}
-				std::vector<float> Damage =  Player::MainPlayer->GetStat()->GetDamage(6,SkillType::ShowDown);
+				std::vector<float> Damage = StatDataPlayer::Inst->GetDamage(6,SkillType::ShowDown);
 				int id = GameEngineRandom::GameEngineRandom().RandomInt(0, 999999);
 
 				std::shared_ptr<Monster> Target = _Collision[i]->GetActor()->GetDynamic_Cast_This<Monster>();

@@ -48,7 +48,7 @@ void Item_Drop::Start()
 	Renderer->CreateAnimation("Meso_Bundle", "Meso_Bundle", 0.1f);
 
 	Col = CreateComponent<GameEngineCollision>(CollisionOrder::Item);
-	Col->SetCollisionType(ColType::AABBBOX2D);
+	Col->SetCollisionType(ColType::SPHERE2D);
 	Col->Transform.SetLocalScale({ 20,20 });
 }
 

@@ -1,6 +1,8 @@
 #include "PreCompile.h"
 #include "StatData.h"
 
+std::shared_ptr<StatDataPlayer> StatDataPlayer::Inst = nullptr;
+
 float StatDataPlayer::GetDamage()
 {
 	float Damage = (LUK * 4 + DEX) * ATK * ((100.0f + AtkRate) / 100.0f) * ((100.0f + DmgRate + BossDmgRate) / 100.0f);

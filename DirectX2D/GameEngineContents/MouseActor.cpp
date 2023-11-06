@@ -17,7 +17,7 @@ void MouseActor::Start()
 	Renderer->SetRenderOrder(UIRenderOrder::Cursor);
 	Renderer->AutoSpriteSizeOn();
 	Col = CreateComponent<GameEngineCollision>(CollisionOrder::Cursor);
-	Col->Transform.SetLocalScale({ 20,20 }); 
+	Col->Transform.SetLocalScale({ 1,1 }); 
 
 	
 }
@@ -32,4 +32,19 @@ void MouseActor::Update(float _Delta)
 }
 void MouseActor::Release()
 {
+	if (Renderer != nullptr)
+	{
+		Renderer->Death();
+		Renderer = nullptr;
+	}
+	if (Col != nullptr)
+	{
+		Col->Death();
+		Col = nullptr;
+	}
+}
+
+void MouseActor::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	Death();
 }

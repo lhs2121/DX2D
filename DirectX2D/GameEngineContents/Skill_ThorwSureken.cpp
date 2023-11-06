@@ -50,7 +50,7 @@ void Skill_ThorwSureken::StartSkill()
 	for (int i = 0; i < ThrowCount; i++)
 	{
 		// 일단 타겟에게 데미지를 적용한다
-		std::vector<float> Damage = Player::MainPlayer->GetStat()->GetDamage(1, SkillType::LuckySeven);
+		std::vector<float> Damage = StatDataPlayer::Inst->GetDamage(1, SkillType::LuckySeven);
 		if (Target != nullptr)
 		{
 			Target->ApplyDamage(Damage); // 몬스터의 attackcol이 꺼진다

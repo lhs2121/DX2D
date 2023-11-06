@@ -17,19 +17,25 @@ public:
 	UI_Item& operator=(const UI_Item& _Other) = delete;
 	UI_Item& operator=(UI_Item&& _Other) noexcept = delete;
 
-	void SetCollisionScale(float4 _Scale);
+	void Setting(float4 _Scale);
+
 	void UseItem();
 	void AddItem(ItemInfo _Info);
 	void ClearItem();
+
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
 
+	void OnDrag(std::shared_ptr<class GameEngineCollision> _MouseCol) override;
+	void OnStartDrag(std::shared_ptr<class GameEngineCollision> _MouseCol) override;
+	void OnEndDrag() override;
 
 	int ItemCount = 0;
 	int MaxCount = 1;
 	int SlotNum;
-
+	float4 StartPos;
+	float4 OffSet;
 	std::shared_ptr<class GameEngineUIRenderer> CountRenderer0;
 	std::shared_ptr<class GameEngineUIRenderer> CountRenderer1;
 	std::shared_ptr<class GameEngineUIRenderer> CountRenderer2;
