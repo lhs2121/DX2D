@@ -14,7 +14,6 @@ public:
 	static const GameEngineColor AQUA;
 	static const GameEngineColor BLACK;
 	static const GameEngineColor WHITE;
-	static const GameEngineColor ALAPA;
 
 	unsigned char R = 0;
 	unsigned char G = 0;
@@ -100,6 +99,9 @@ public:
 	void VSSetting(UINT _Slot);
 	void PSSetting(UINT _Slot);
 
+	void VSReset(UINT _Slot);
+	void PSReset(UINT _Slot);
+
 	GameEngineColor GetColor(float4 _Pos, GameEngineColor _DefaultColor)
 	{
 		return GetColor(_Pos.iX(), _Pos.iY(), _DefaultColor);
@@ -127,8 +129,8 @@ private:
 	ID3D11Texture2D* Texture2D = nullptr;
 
 	ID3D11RenderTargetView* RTV = nullptr; // 이 텍스처를 수정대상으로 삼거나 수정할수 있는 권한.
-	ID3D11ShaderResourceView* SRV = nullptr; // 쉐이더에 세팅해줄수 있는 권한다.
-	ID3D11DepthStencilView* DSV = nullptr; // 쉐이더에 세팅해줄수 있는 권한다.
+	ID3D11ShaderResourceView* SRV = nullptr; // 쉐이더에 세팅해줄수 있는 권한이다.
+	ID3D11DepthStencilView* DSV = nullptr; // 깊이버퍼를 세팅해줄수 있는 권한이다.
 
 	DirectX::TexMetadata Data;
 	DirectX::ScratchImage Image;

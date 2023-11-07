@@ -16,7 +16,6 @@ const GameEngineColor GameEngineColor::YELLOW = { 255, 255, 0, 255 };
 const GameEngineColor GameEngineColor::AQUA = { 0, 255, 255, 255 };
 const GameEngineColor GameEngineColor::BLACK = { 0, 0, 0, 255 };
 const GameEngineColor GameEngineColor::WHITE = { 255, 255, 255, 255 };
-const GameEngineColor GameEngineColor::ALAPA = { 0, 0, 0, 0 };
 
 GameEngineTexture::GameEngineTexture() 
 {
@@ -184,6 +183,17 @@ void GameEngineTexture::VSSetting(UINT _Slot)
 void GameEngineTexture::PSSetting(UINT _Slot)
 {
 	GameEngineCore::GetContext()->PSSetShaderResources(_Slot, 1, &SRV);
+}
+
+void GameEngineTexture::VSReset(UINT _Slot)
+{
+	ID3D11ShaderResourceView* ResetRes = nullptr;
+	GameEngineCore::GetContext()->VSSetShaderResources(_Slot, 1, &ResetRes);
+}
+void GameEngineTexture::PSReset(UINT _Slot)
+{
+	ID3D11ShaderResourceView* ResetRes = nullptr;
+	GameEngineCore::GetContext()->PSSetShaderResources(_Slot, 1, &ResetRes);
 }
 
 void GameEngineTexture::ResCreate(ID3D11Texture2D* _Res)

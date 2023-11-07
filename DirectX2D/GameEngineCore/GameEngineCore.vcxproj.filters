@@ -140,6 +140,15 @@
     <ClCompile Include="GameEngineGUI.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
+    <ClCompile Include="AStartPathFinder.cpp">
+      <Filter>PathFind</Filter>
+    </ClCompile>
+    <ClCompile Include="FadePostEffect.cpp">
+      <Filter>Rendering\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineFont.cpp">
+      <Filter>Rendering\Font</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineCore.h" />
@@ -290,6 +299,18 @@
     <ClInclude Include="imstb_truetype.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="AStartPathFinder.h">
+      <Filter>PathFind</Filter>
+    </ClInclude>
+    <ClInclude Include="FadePostEffect.h">
+      <Filter>Rendering\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineFont.h">
+      <Filter>Rendering\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\FW1FontWrapper\inc\FW1FontWrapper.h">
+      <Filter>ThirdParty\inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="PreCompile">
@@ -358,6 +379,15 @@
     <Filter Include="GUI">
       <UniqueIdentifier>{431c02ef-98ae-47c2-925b-62ec908c8966}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PathFind">
+      <UniqueIdentifier>{dc2b785a-ed6c-4c0f-b89a-8eb79195b18d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\PostEffect">
+      <UniqueIdentifier>{63ba9b10-1902-4f24-aca2-dd104bc04241}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Rendering\Font">
+      <UniqueIdentifier>{e468f4a5-9007-4c96-833b-a94457b783ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ThirdParty\DirectXTex\inc\DirectXTex.inl">
@@ -377,5 +407,19 @@
     <Library Include="ThirdParty\DirectXTex\lib\Debug\DirectXTex.pdb">
       <Filter>ThirdParty\Debug</Filter>
     </Library>
+    <Library Include="ThirdParty\FW1FontWrapper\lib\Debug\FW1FontWrapper.lib">
+      <Filter>ThirdParty\Debug</Filter>
+    </Library>
+    <Library Include="ThirdParty\FW1FontWrapper\lib\Release\FW1FontWrapper.lib">
+      <Filter>ThirdParty\Release</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="ThirdParty\FW1FontWrapper\lib\Debug\FW1FontWrapper.dll">
+      <Filter>ThirdParty\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\FW1FontWrapper\lib\Release\FW1FontWrapper.dll">
+      <Filter>ThirdParty\Release</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@
 #include "MapleMap.h"
 #include "StatManager.h"
 #include "FadeScreen.h"
-#include "Item_Drop.h"
+#include "ItemActor.h"
 
 void Player::RopePivotUpdate()
 {
@@ -31,7 +31,6 @@ void Player::MoveUpdate()
 		{
 			if (CurState != PlayerState::FLASHJUMP)
 			{
-
 				NetForce.X = -125.0f;
 			}
 			if (Renderer->Transform.GetLocalScale().X < 0)
@@ -47,7 +46,6 @@ void Player::MoveUpdate()
 	{
 		if (InputIsPress(VK_RIGHT))
 		{
-
 			if (CurState != PlayerState::FLASHJUMP)
 			{
 				NetForce.X = 125.0f;
@@ -63,11 +61,11 @@ void Player::MoveUpdate()
 
 	if (ApplyInputJump == true)
 	{
-		if (InputIsDown(VK_MENU) && IsGrounded == true && CurState != PlayerState::DOWN)
+		if (InputIsDown(JumpKey) && IsGrounded == true && CurState != PlayerState::DOWN)
 		{
 			NetForce.Y = 350.0f;
 		}
-		else if (InputIsDown(VK_MENU) && CurState == PlayerState::DOWN)
+		else if (InputIsDown(JumpKey) && CurState == PlayerState::DOWN)
 		{
 			if (GetColor(Transform.GetWorldPosition() + float4(0, -5)) == GameEngineColor::RED)
 			{
@@ -80,7 +78,7 @@ void Player::MoveUpdate()
 
 void Player::RopeCheck()
 {
-	GameEngineColor Color = MapleMap::CurMap->GetColor(RopePos, GameEngineColor::ALAPA);
+	GameEngineColor Color = MapleMap::CurMap->GetColor(RopePos, GameEngineColor::MAGENTA);
 
 	if (GameEngineColor::GREEN == Color)
 	{
@@ -108,9 +106,8 @@ void Player::PortalCheck()
 				std::string Level = Col->GetName();
 				PrevLevelName = Level;
 
-				std::list<std::shared_ptr<FadeScreen>> list = GetLevel()->GetObjectGroupConvert<FadeScreen>(ActorOrder::FadeScreen);
-				std::list<std::shared_ptr<FadeScreen>>::iterator Start = list.begin();
-				(*Start)->SettingAndStart(FadeType::FADEIN, Level);
+				std::vector<std::shared_ptr<FadeScreen>> list = GetLevel()->GetObjectGroupConvert<FadeScreen>(ActorOrder::FadeScreen);
+				list.front()->SettingAndStart(FadeType::FADEIN, Level);
 				IsFadeIn = true;
 			}
 		};
@@ -125,9 +122,9 @@ void Player::ItemCheck()
 {
 	Col->Collision(CollisionOrder::Item, [&](std::vector<std::shared_ptr<GameEngineCollision>> _Col)
 		{
-			if (InputIsDown(VK_UP))
+			if (InputIsDown(PickUpKey))
 			{
-				_Col[0]->GetActor()->GetDynamic_Cast_This<Item_Drop>()->AddItem();
+				_Col[0]->GetActor()->GetDynamic_Cast_This<ItemActor>()->AddItem();
 			}
 		});
 }

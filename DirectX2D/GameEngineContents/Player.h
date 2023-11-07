@@ -110,9 +110,11 @@ private:
 	bool ApplyInputRight = true;
 	bool ApplyInputJump = true;
 
-	int JumpKey = VK_MENU;
+	int JumpKey = VK_SPACE;
+	int PickUpKey = 'Z';
 	int LuckySevenKey = VK_SHIFT;
 	int ShowDownKey = VK_CONTROL;
+
 
 	float4 RopePos;
 	PlayerState CurState;

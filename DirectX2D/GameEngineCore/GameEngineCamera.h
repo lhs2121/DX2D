@@ -9,6 +9,7 @@
 // Ό³Έν :
 class GameEngineCamera : public GameEngineActor
 {
+
 	friend class GameEngineRenderer;
 	friend class GameEngineActor;
 	friend class GameEngineLevel;
@@ -70,9 +71,31 @@ public:
 	float4 GetScreenMouseDir() { return ScreenMouseDir; }
 	float4 GetScreenMouseDirNormal() { return ScreenMouseDirNormal; }
 
+	template<typename EnumType>
+	void SetZSort(EnumType _SortOrder)
+	{
+		ZSortMap.insert(static_cast<int>(_SortOrder));
+	}
+
 	void SetZSort(int _SortOrder) 
 	{
 		ZSortMap.insert(_SortOrder);
+	}
+
+	template<typename EnumType>
+	void SetYSort(EnumType _SortOrder)
+	{
+		YSortMap.insert(static_cast<int>(_SortOrder));
+	}
+
+	void SetYSort(int _SortOrder)
+	{
+		YSortMap.insert(_SortOrder);
+	}
+
+	std::shared_ptr<class GameEngineRenderTarget> GetCameraAllRenderTarget()
+	{
+		return AllRenderTarget;
 	}
 
 protected:
@@ -85,7 +108,7 @@ protected:
 	void AllReleaseCheck() override;
 
 	
-
+	
 
 private:
 	float4 Pivot = float4::ZERO;
@@ -111,6 +134,9 @@ private:
 	TransformData OriginData;
 
 	std::set<int> ZSortMap;
+	std::set<int> YSortMap;
+
+	std::shared_ptr<class GameEngineRenderTarget> AllRenderTarget;
 
 	void CameraUpdate(float _DeltaTime);
 };

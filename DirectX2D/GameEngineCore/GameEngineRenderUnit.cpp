@@ -9,6 +9,7 @@
 #include "GameEnginePixelShader.h"
 #include "GameEngineRenderer.H"
 
+
 GameEngineRenderUnit::GameEngineRenderUnit() 
 {
 }
@@ -17,9 +18,52 @@ GameEngineRenderUnit::~GameEngineRenderUnit()
 {
 }
 
+void GameEngineRenderUnit::SetText(const std::string& _Font, const std::string& _Text, float _Scale, float4 _Color, FW1_TEXT_FLAG Flag)
+{
+	Font = GameEngineFont::Find(_Font);
+
+	if (nullptr == Font)
+	{
+		MsgBoxAssert("로드하지 않는 폰트를 사용하려고 했습니다.");
+	}
+	
+
+	FontText = _Text;
+	FontScale = _Scale;
+	FontColor = _Color;
+	FontFlag = Flag;
+}
+
+void GameEngineRenderUnit::SetTextColor(const float4& _Color /*= float4::RED*/)
+{
+	if (nullptr == Font)
+	{
+		MsgBoxAssert("존재하지 않는 폰트를 참조하려 했습니다.");
+		return;
+	}
+
+	FontColor = _Color;
+}
+
+void GameEngineRenderUnit::SetTextAlpha(float _AlphaValue /*= 0.0f*/)
+{
+	if (nullptr == Font)
+	{
+		MsgBoxAssert("존재하지 않는 폰트를 참조하려 했습니다.");
+		return;
+	}
+
+	FontColor.A = _AlphaValue;
+}
+
 
 void GameEngineRenderUnit::ResSetting()
 {
+	if (nullptr != Font)
+	{
+		return;
+	}
+
 	Mesh->InputAssembler1();
 	Material->VertexShader();
 	LayOut->Setting();
@@ -30,21 +74,31 @@ void GameEngineRenderUnit::ResSetting()
 	Material->DepthStencil();
 
 	ShaderResHelper.AllShaderResourcesSetting();
-
-	// 애는 솔직히 랜더 타겟이 가져가야 합니다.
-	D3D11_VIEWPORT ViewPort = {};
-	ViewPort.Width = GameEngineCore::MainWindow.GetScale().X;
-	ViewPort.Height = GameEngineCore::MainWindow.GetScale().Y;
-	ViewPort.MinDepth = 0.0f;
-	ViewPort.MaxDepth = 1.0f;
-	ViewPort.TopLeftX = 0.0f;
-	ViewPort.TopLeftY = 0.0f;
-	GameEngineCore::GetContext()->RSSetViewports(1, &ViewPort);
 }
+
 
 
 void GameEngineRenderUnit::Draw()
 {
+	if (nullptr != Font)
+	{
+		float4x4 ViewPort;
+
+		float4 ScreenPos = ParentRenderer->Transform.GetWorldPosition();
+		float4 Scale = GameEngineCore::MainWindow.GetScale();
+		ViewPort.ViewPort(Scale.X, Scale.Y, 0, 0);
+
+		ScreenPos *= ParentRenderer->Transform.GetConstTransformDataRef().ViewMatrix;
+		ScreenPos *= ParentRenderer->Transform.GetConstTransformDataRef().ProjectionMatrix;
+		ScreenPos *= ViewPort;
+		// WindowPos
+		Font->FontDraw(FontText, FontScale, ScreenPos, FontColor, FontFlag);
+
+		GameEngineCore::GetContext()->GSSetShader(nullptr, nullptr, 0);
+
+		return;
+	}
+
 	Mesh->Draw();
 }
 
@@ -107,4 +161,10 @@ void GameEngineRenderUnit::SetMaterial(std::string_view _Name)
 //	//	Buffer->Setting(0);
 //	//}
 
+}
+
+void GameEngineRenderUnit::Render()
+{
+	ResSetting();
+	Draw();
 }

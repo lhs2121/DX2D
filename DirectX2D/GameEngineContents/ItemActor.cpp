@@ -1,16 +1,16 @@
 #include "PreCompile.h"
-#include "Item_Drop.h"
+#include "ItemActor.h"
 #include "UI_Inventory.h"
 
-Item_Drop::Item_Drop()
+ItemActor::ItemActor()
 {
 }
 
-Item_Drop::~Item_Drop()
+ItemActor::~ItemActor()
 {
 }
 
-void Item_Drop::Setting(float4 _Pos, std::string _SpriteName, int _DropRate)
+void ItemActor::Setting(float4 _Pos, std::string _SpriteName, int _DropRate)
 {
 	Transform.SetWorldPosition(_Pos);
 
@@ -30,15 +30,14 @@ void Item_Drop::Setting(float4 _Pos, std::string _SpriteName, int _DropRate)
 	}
 }
 
-void Item_Drop::AddItem()
+void ItemActor::AddItem()
 {
 	UI_Inventory::Inst->AddItem(Info);
 	Death();
 }
 
-void Item_Drop::Start()
+void ItemActor::Start()
 {
-	SetModuleEnabled(1, 1, 1, 1, 1, 1, 0, 1, 1);
 	Renderer = CreateComponent<GameEngineSpriteRenderer>();
 	Renderer->AutoSpriteSizeOn();
 	Renderer->SetRenderOrder(RenderOrder::Effect2);
@@ -52,7 +51,7 @@ void Item_Drop::Start()
 	Col->Transform.SetLocalScale({ 20,20 });
 }
 
-void Item_Drop::Update(float _Delta)
+void ItemActor::Update(float _Delta)
 {
 	if (abs(Renderer->Transform.GetLocalPosition().Y) > 5.0f)
 	{

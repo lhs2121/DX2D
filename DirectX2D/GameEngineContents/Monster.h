@@ -35,6 +35,7 @@ protected:
 	void Release() override;
 
 	void DropItem();
+
 	void ChangeState(MonsterState _State);
 	void RunStart();
 	void RunUpdate(float _Delta);

@@ -115,14 +115,6 @@ LRESULT CALLBACK GameEngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wPara
 
 	switch (message)
 	{
-	case WM_SYSKEYDOWN:
-	{
-		// 무시하여 Alt 키를 눌러도 메뉴로 이동하지 않도록 처리
-		if (wParam == VK_MENU)
-			return 0;
-		// 다른 시스템 키 다운 이벤트 처리
-		// 예: Alt + 다른 키를 처리할 코드 추가
-	}
 	case WM_SETFOCUS:
 	{
 		IsFocusValue = true;

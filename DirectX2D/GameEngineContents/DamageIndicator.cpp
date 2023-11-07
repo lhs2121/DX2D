@@ -13,7 +13,7 @@ DamageIndicator::~DamageIndicator()
 
 void DamageIndicator::RenderDamage(float4 _Pos, DamageColor _Color, std::vector<float> _DamageGroup, int _DamageID)
 {
-	std::list<std::shared_ptr<DamageEffect>> list = GetLevel()->GetObjectGroupConvert<DamageEffect>(ActorOrder::DamageEffect);
+	std::list<std::shared_ptr<GameEngineObject>> list = GetLevel()->GetObjectGroup(ActorOrder::DamageEffect);
 	for (int i = 0; i < _DamageGroup.size(); i++)
 	{
 		std::shared_ptr<DamageEffect> NewEffect = GetNonUpdateObject(list);
@@ -54,10 +54,10 @@ std::vector<int> DamageIndicator::GetIntArray(float _Value)
 	return IntArray;
 }
 
-std::shared_ptr<DamageEffect> DamageIndicator::GetNonUpdateObject(std::list<std::shared_ptr<DamageEffect>> _list)
+std::shared_ptr<DamageEffect> DamageIndicator::GetNonUpdateObject(std::list<std::shared_ptr<GameEngineObject>> _list)
 {
-	std::list<std::shared_ptr<DamageEffect>>::iterator Start = _list.begin();
-	std::list<std::shared_ptr<DamageEffect>>::iterator End = _list.end();
+	std::list<std::shared_ptr<GameEngineObject>>::iterator Start = _list.begin();
+	std::list<std::shared_ptr<GameEngineObject>>::iterator End = _list.end();
 
 	for (; Start != End; Start++)
 	{
@@ -67,7 +67,7 @@ std::shared_ptr<DamageEffect> DamageIndicator::GetNonUpdateObject(std::list<std:
 		}
 		else
 		{
-			return (*Start);
+			return (*Start)->GetDynamic_Cast_This<DamageEffect>();
 		}
 	}
 

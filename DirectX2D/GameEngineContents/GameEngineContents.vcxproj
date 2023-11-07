@@ -204,7 +204,7 @@
     <ClInclude Include="Draggable.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="MouseActor.h" />
-    <ClInclude Include="Item_Drop.h" />
+    <ClInclude Include="ItemActor.h" />
     <ClInclude Include="UI_Slot.h" />
     <ClInclude Include="UI_Item.h" />
   </ItemGroup>
@@ -253,7 +253,7 @@
     <ClCompile Include="Draggable.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="MouseActor.cpp" />
-    <ClCompile Include="Item_Drop.cpp" />
+    <ClCompile Include="ItemActor.cpp" />
     <ClCompile Include="UI_Slot.cpp" />
     <ClCompile Include="UI_Item.cpp" />
   </ItemGroup>

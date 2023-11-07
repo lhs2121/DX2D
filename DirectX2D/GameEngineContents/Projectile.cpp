@@ -84,7 +84,7 @@ void Projectile::Update(float _Delta)
 		{
 			float4 TargetPos = Target->Transform.GetWorldPosition() + float4(0.0f, HitPosOffset.Y);
 			float4 TargetDir = TargetPos - Transform.GetWorldPosition();
-			if (TargetDir.ToABS().X <= 2.0f)
+			if (TargetDir.ToABS().X <= 20.0f)
 			{
 				if (Target->IsDeath() == false)
 				{
@@ -92,7 +92,7 @@ void Projectile::Update(float _Delta)
 				}
 				else
 				{
-					int a = 0;
+					Off();
 				}
 				SurekenRenderer->ChangeAnimation("Hit_LuckySeven");
 				Target = nullptr;

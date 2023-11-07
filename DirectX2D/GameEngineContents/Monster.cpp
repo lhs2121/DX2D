@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "StatData.h"
 #include "DamageIndicator.h"
-#include "Item_Drop.h"
+#include "ItemActor.h"
 
 Monster::Monster()
 {
@@ -84,7 +84,23 @@ void Monster::Release()
 
 void Monster::DropItem()
 {
-	GetLevel()->CreateActor<Item_Drop>(500)->Setting(Transform.GetWorldPosition(), ItemName,30);
+	float4 SpawnPos;
+
+	while (true)
+	{
+		if (GameEngineColor::RED != GetColor(Transform.GetWorldPosition()))
+		{
+			Transform.AddWorldPosition(float4::DOWN);
+			continue;
+		}
+		else
+		{
+			SpawnPos = Transform.GetWorldPosition();
+			break;
+		}
+	}
+
+	GetLevel()->CreateActor<ItemActor>(500)->Setting(SpawnPos, ItemName, 30);
 }
 
 void Monster::ChangeState(MonsterState _State)

@@ -28,7 +28,7 @@ void PhysicsActor::SetModuleEnabled(bool _EnableNetForce, bool _EnableCurColor, 
 
 GameEngineColor PhysicsActor::GetColor(float4 _Pos)
 {
-	return MapleMap::CurMap->GetColor(_Pos, GameEngineColor::ALAPA);
+	return MapleMap::CurMap->GetColor(_Pos, GameEngineColor::MAGENTA);
 }
 
 void PhysicsActor::SetCurColor()

@@ -1,19 +1,19 @@
 #pragma once
-#include "PhysicsActor.h"
+#include <GameEngineCore\GameEngineActor.h>
 #include "UI_Inventory.h"
 
-class Item_Drop : public PhysicsActor
+class ItemActor : public GameEngineActor
 {
 public:
 	// constrcuter destructer
-	Item_Drop();
-	~Item_Drop();
+	ItemActor();
+	~ItemActor();
 
 	// delete Function
-	Item_Drop(const Item_Drop& _Other) = delete;
-	Item_Drop(Item_Drop&& _Other) noexcept = delete;
-	Item_Drop& operator=(const Item_Drop& _Other) = delete;
-	Item_Drop& operator=(Item_Drop&& _Other) noexcept = delete;
+	ItemActor(const ItemActor& _Other) = delete;
+	ItemActor(ItemActor&& _Other) noexcept = delete;
+	ItemActor& operator=(const ItemActor& _Other) = delete;
+	ItemActor& operator=(ItemActor&& _Other) noexcept = delete;
 
 	void Setting(float4 _Pos, std::string _SpriteName, int _DropRate);
 	void AddItem();

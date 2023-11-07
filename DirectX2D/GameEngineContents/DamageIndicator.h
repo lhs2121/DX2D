@@ -24,7 +24,7 @@ private:
 	int LastRenderOrder = 0;
 	float4 PrevPos;
 	std::shared_ptr<DamageEffect> PrevEffect = nullptr;
-	std::shared_ptr<DamageEffect> GetNonUpdateObject(std::list<std::shared_ptr<DamageEffect>> _list);
+	std::shared_ptr<DamageEffect> GetNonUpdateObject(std::list<std::shared_ptr<GameEngineObject>> _list);
 	std::vector<int> GetIntArray(float _Value);
 	
 };

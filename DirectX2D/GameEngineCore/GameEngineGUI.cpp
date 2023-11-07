@@ -73,6 +73,16 @@ void GameEngineGUI::Release()
     ImGui::DestroyContext();
 }
 
+void GameEngineGUI::WindowInit(GameEngineGUIWindow* _NewWindow)
+{
+    if (nullptr == _NewWindow)
+    {
+        MsgBoxAssert("윈도우 생성에 실패햇습니다.");
+    }
+
+    _NewWindow->Start();
+}
+
 void GameEngineGUI::GUIRender(GameEngineLevel* _Level, float _DeltaTime)
 {
     // Start the Dear ImGui frame
@@ -93,6 +103,11 @@ void GameEngineGUI::GUIRender(GameEngineLevel* _Level, float _DeltaTime)
 
     for (std::pair<const std::string, std::shared_ptr<GameEngineGUIWindow>> Pair : GUIWindows)
     {
+        if (false == Pair.second->IsUpdate())
+        {
+            continue;
+        }
+
         Pair.second->Begin();
         Pair.second->OnGUI(_Level, _DeltaTime);
         Pair.second->End();
