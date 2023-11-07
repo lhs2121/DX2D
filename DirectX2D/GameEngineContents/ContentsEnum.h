@@ -49,6 +49,8 @@ enum class CollisionOrder
 	UI_Drag,
 	UI_Grab,
 	UI_Button,
+	UI_Slot,
+	UI_Item,
 	Cursor
 };
 

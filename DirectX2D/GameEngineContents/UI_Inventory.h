@@ -3,10 +3,10 @@
 // Ό³Έν :
 struct ItemInfo
 {
-	std::string ItemName;
-	std::string ItemSpriteName;
+	std::string ItemName = "";
+	std::string ItemSpriteName = "";
 	int ItemCount = 1;
-	int MaxCount = 1;
+	int MaxCount = 2;
 };
 
 class UI_Inventory : public Draggable
@@ -25,6 +25,9 @@ public:
 	static UI_Inventory* Inst;
 
 	void AddItem(ItemInfo Info);
+	void SwapItem(std::shared_ptr<class UI_Slot> _Left, std::shared_ptr<class UI_Slot> _Right);
+	void On() override;
+	void Off() override;
 private:
 	void Start() override;
 	void Update(float _Delta) override;
@@ -35,7 +38,7 @@ private:
 	int SlotSizeX = 4;
 	int SlotSizeY = 6;
 	float4 OffSet;
+	std::vector<std::shared_ptr<class UI_Slot>> SlotGroup;
 	std::shared_ptr<class GameEngineUIRenderer> Renderer;
-	std::shared_ptr<class UI_Slot> Slots[6][4];
 };
 

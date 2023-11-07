@@ -19,11 +19,11 @@ public:
 	bool IsEmpty();
 	bool IsFull();
 	bool IsSameItem(ItemInfo _Info);
-    
-	void Setting();
-	void SetSlotNumber(int _Num) { SlotNum = _Num; }
-	int GetSlotNumber() { return SlotNum; }
+	ItemInfo GetItemInfo() { return Info; }
+
 	void AddItem(ItemInfo _Info);
+	void ReplaceItem(ItemInfo _Info);
+	void SetCountImage(int CurItemCount);
 
 protected:
 	void Start() override;
@@ -32,9 +32,9 @@ protected:
 	void ClearItem();
 
 	ItemInfo Info;
-	int SlotNum;
 
 	std::shared_ptr<class UI_Item> ItemActor;
-	std::shared_ptr<class GameEngineUIRenderer> SlotRenderer;
 	std::shared_ptr<class GameEngineCollision> Col;
+	std::shared_ptr<class GameEngineUIRenderer> SlotRenderer;
+	std::vector<std::shared_ptr<class GameEngineUIRenderer>> CountRenderers;
 };

@@ -41,16 +41,16 @@ void MapleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		CurPlayer = CreateActor<Player>(ActorOrder::Player);
 		CurSkillManager = CreateActor<SkillManager>(ActorOrder::Manager);
 		CurFadeScreen = CreateActor<FadeScreen>(ActorOrder::FadeScreen);
-		CurUI_Status = CreateActor<UI_Status>(ActorOrder::UI);
-		CurUI_Inventory = CreateActor<UI_Inventory>(ActorOrder::UI_Inventory);
+		CurStatus = CreateActor<UI_Status>(ActorOrder::UI);
+		CurInventory = CreateActor<UI_Inventory>(ActorOrder::UI_Inventory);
 	}
 
 	{
 		Player::MainPlayer = CurPlayer.get();
 		SkillManager::Inst = CurSkillManager.get();
 		MapleMap::CurMap = CurMap.get();
-		UI_Status::Inst = CurUI_Status.get();
-		UI_Inventory::Inst = CurUI_Inventory.get();
+		UI_Status::Inst = CurStatus.get();
+		UI_Inventory::Inst = CurInventory.get();
 	}
 		CurFadeScreen->SettingAndStart(FadeType::FADEOUT);
 
@@ -87,6 +87,17 @@ void MapleLevel::Update(float _Delta)
 	if (InputIsDown('P'))
 	{
 		MapleMap::CurMap->SwitchDebugRender();
+	}
+	if (InputIsDown('I'))
+	{
+		if (CurInventory->IsUpdate())
+		{
+			CurInventory->Off();
+		}
+		else
+		{
+			CurInventory->On();
+		}
 	}
 }
 

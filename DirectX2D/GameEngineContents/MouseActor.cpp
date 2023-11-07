@@ -14,6 +14,7 @@ void MouseActor::Start()
 	Renderer = CreateComponent<GameEngineUIRenderer>();
 	Renderer->CreateAnimation("Cursor_Default", "Cursor_Default");
 	Renderer->ChangeAnimation("Cursor_Default");
+	Renderer->Transform.SetLocalPosition({ 10.0f,-10.0f });
 	Renderer->SetRenderOrder(UIRenderOrder::Cursor);
 	Renderer->AutoSpriteSizeOn();
 	Col = CreateComponent<GameEngineCollision>(CollisionOrder::Cursor);
