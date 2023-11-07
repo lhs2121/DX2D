@@ -28,7 +28,6 @@ void TownLevel::Update(float _Delta)
 void TownLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	MapleLevel::LevelStart(_PrevLevel);
-	
 }
 
 void TownLevel::LevelEnd(GameEngineLevel* _NextLevel)

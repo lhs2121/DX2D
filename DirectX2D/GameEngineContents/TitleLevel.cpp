@@ -64,7 +64,7 @@ void TitleLevel::Start()
 
 	{
 		StatDataPlayer::Inst = CreateActor<StatDataPlayer>(ActorOrder::Stat);
-		StatManager::Inst =	CreateActor<StatManager>(ActorOrder::Manager);
+		StatManager::Inst = CreateActor<StatManager>(ActorOrder::Manager);
 	}
 	
 }

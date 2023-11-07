@@ -31,7 +31,8 @@ public:
 private:
 	void Start() override;
 	void Update(float _Delta) override;
-	void RemoveItem(int SlotNum);
+	void LevelEnd(GameEngineLevel* _NextLevel) override;
+
 	void OnStartDrag(std::shared_ptr<class GameEngineCollision> _MouseCol) override;
 	void OnDrag(std::shared_ptr<class GameEngineCollision> _MouseCol) override;
 

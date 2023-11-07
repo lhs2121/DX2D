@@ -52,8 +52,8 @@ void MapleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		UI_Status::Inst = CurStatus.get();
 		UI_Inventory::Inst = CurInventory.get();
 	}
-		CurFadeScreen->SettingAndStart(FadeType::FADEOUT);
 
+	CurFadeScreen->SettingAndStart(FadeType::FADEOUT);
 }
 
 void MapleLevel::LevelEnd(GameEngineLevel* _NextLevel)

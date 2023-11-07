@@ -47,6 +47,12 @@ void UI_Inventory::Update(float _Delta)
 	Draggable::Update(_Delta);
 }
 
+void UI_Inventory::LevelEnd(GameEngineLevel* _NextLevel)
+{
+
+	Death();
+}
+
 void UI_Inventory::On()
 {
 	GameEngineActor::On();
@@ -95,10 +101,6 @@ void UI_Inventory::SwapItem(std::shared_ptr<class UI_Slot> Caller, std::shared_p
 	Temp = Caller->GetItemInfo();
 	Caller->ReplaceItem(Callee->GetItemInfo());
 	Callee->ReplaceItem(Temp);
-}
-
-void UI_Inventory::RemoveItem(int SlotNum)
-{
 }
 
 void UI_Inventory::OnStartDrag(std::shared_ptr<class GameEngineCollision> _MouseCol)

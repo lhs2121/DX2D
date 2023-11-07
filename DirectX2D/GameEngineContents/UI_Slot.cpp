@@ -5,10 +5,6 @@
 
 UI_Slot::UI_Slot()
 {
-	Info.ItemName = "";
-	Info.ItemSpriteName = "";
-	Info.ItemCount = 0;
-	Info.MaxCount = 1;
 }
 
 UI_Slot::~UI_Slot()
@@ -54,7 +50,7 @@ void UI_Slot::Start()
 	ItemActor->SetParent(this, 0);
 
 	Col = CreateComponent<GameEngineCollision>(CollisionOrder::UI_Slot);
-	Col->Transform.SetLocalScale(SlotRenderer->GetImageTransform().GetLocalScale());
+	Col->Transform.SetLocalScale({20,20});
 	Col->SetCollisionType(ColType::AABBBOX2D);
 
 
@@ -106,6 +102,7 @@ void UI_Slot::AddItem(ItemInfo _Info)
 void UI_Slot::ReplaceItem(ItemInfo _Info)
 {
 	Info = _Info;
+
 	if (_Info.ItemName == "")
 	{
 		ClearItem();
@@ -114,6 +111,7 @@ void UI_Slot::ReplaceItem(ItemInfo _Info)
 
 	SetCountImage(Info.ItemCount);
 	ItemActor->SetItemImage(Info.ItemSpriteName);
+
 	if (!ItemActor->IsUpdate())
 		ItemActor->On();
 }
@@ -123,7 +121,7 @@ void UI_Slot::ClearItem()
 	Info.ItemName = "";
 	Info.ItemSpriteName = "";
 	Info.ItemCount = 0;
-	Info.MaxCount = 1;
+	Info.MaxCount = 0;
 	for (size_t i = 0; i < CountRenderers.size(); i++)
 	{
 		CountRenderers[i]->SetSprite("null");
