@@ -3,6 +3,7 @@
 
 enum class BossState
 {
+	Move,
 	Body,
 	Fire,
 	Dive,
@@ -30,34 +31,50 @@ protected:
 
 	void StateUpdate(float _Delta);
 	void ChangeState(BossState _State);
+	void SetNextState();
+	void SetDir();
+
+	void MoveStart();
+	void MoveUpdate(float _Delta);
+	void MoveEnd();
 
 	void BodyStart();
 	void BodyUpdate(float _Delta);
 	void BodyEnd();
-	//Body
 
 	void FireStart();
 	void FireUpdate(float _Delta);
 	void FireEnd();
-	//Fire
 
 	void PoisonStart();
 	void PoisonUpdate(float _Delta);
 	void PoisonEnd();
-	//Poison
 
 	void DiveStart();
 	void DiveUpdate(float _Delta);
 	void DiveEnd();
-	//Dive
 
 	void UltStart();
 	void UltUpdate(float _Delta);
 	void UltEnd();
-	//Ult
 
-	float Speed = 150.0f;
+	BossState PrevState;
 	BossState CurState;
+	BossState NextState;
+
+	float MoveDuration;
+
+	int BodyProb = 20;
+	int FireProb = 20;
+	int	DiveProb = 40;
+	int	PoisonProb = 20;
+	int	UltProb = 0;
+
+	int CurHp = 50000;
+	int MaxHp = 50000;
+	int PoisonAttackCount = 0;
+	float Speed = 100.0f;
+
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
 	std::vector<std::shared_ptr<class GameEngineCollision>> PoisonDownCol;
 	std::vector<std::shared_ptr<class GameEngineCollision>> PoisonAreaCol;

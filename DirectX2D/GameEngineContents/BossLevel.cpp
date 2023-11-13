@@ -18,7 +18,7 @@ void BossLevel::Start()
 		CurMap = CreateActor<Map2>(ActorOrder::Map);
 		SetName(std::string("BossLevel"));
 		CreatePortal("KerningCity", { 140, -723 });
-		CreateActor<Boss_Vellum>(177,"Vellum");
+		CreateActor<Boss_Vellum>(400,"Vellum");
 	}
 	{
 		//CreateActor<MonsterSpawner>(ActorOrder::Manager)->Setting("Octopus", 10.0f, 10);

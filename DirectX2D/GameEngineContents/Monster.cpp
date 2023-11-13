@@ -85,21 +85,7 @@ void Monster::Release()
 void Monster::DropItem()
 {
 	float4 SpawnPos;
-
-	while (true)
-	{
-		if (GameEngineColor::RED != GetColor(Transform.GetWorldPosition()))
-		{
-			Transform.AddWorldPosition(float4::DOWN);
-			continue;
-		}
-		else
-		{
-			SpawnPos = Transform.GetWorldPosition();
-			break;
-		}
-	}
-
+	SpawnPos = Transform.GetWorldPosition();
 	GetLevel()->CreateActor<ItemActor>(500)->Setting(SpawnPos, ItemName, 30);
 }
 

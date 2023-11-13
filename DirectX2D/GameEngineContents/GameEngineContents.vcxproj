@@ -202,7 +202,6 @@
     <ClInclude Include="Skill_ShowDown.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Draggable.h" />
-    <ClInclude Include="Button.h" />
     <ClInclude Include="MouseActor.h" />
     <ClInclude Include="ItemActor.h" />
     <ClInclude Include="UI_Slot.h" />
@@ -251,7 +250,6 @@
     <ClCompile Include="Skill_ShowDown.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="Draggable.cpp" />
-    <ClCompile Include="Button.cpp" />
     <ClCompile Include="MouseActor.cpp" />
     <ClCompile Include="ItemActor.cpp" />
     <ClCompile Include="UI_Slot.cpp" />

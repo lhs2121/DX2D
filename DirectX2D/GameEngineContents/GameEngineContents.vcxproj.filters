@@ -106,9 +106,6 @@
     <ClInclude Include="UI_Item.h">
       <Filter>Actor\UI\Inventory</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>Actor\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Draggable.h">
       <Filter>Actor\UI</Filter>
     </ClInclude>
@@ -225,9 +222,6 @@
     </ClCompile>
     <ClCompile Include="UI_Item.cpp">
       <Filter>Actor\UI\Inventory</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>Actor\UI</Filter>
     </ClCompile>
     <ClCompile Include="Draggable.cpp">
       <Filter>Actor\UI</Filter>
