@@ -110,6 +110,30 @@
       <Filter>Actor\UI</Filter>
     </ClInclude>
     <ClInclude Include="ItemActor.h" />
+    <ClInclude Include="PoisonArea.h">
+      <Filter>Actor\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Boss_HpBar.h">
+      <Filter>Actor\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Death.h">
+      <Filter>Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelUpEffect.h">
+      <Filter>Actor\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Skill_Booster.h">
+      <Filter>Actor\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="Skill_Haste.h">
+      <Filter>Actor\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Buff.h">
+      <Filter>Actor\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_BuffIcon.h">
+      <Filter>Actor\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp" />
@@ -227,6 +251,30 @@
       <Filter>Actor\UI</Filter>
     </ClCompile>
     <ClCompile Include="ItemActor.cpp" />
+    <ClCompile Include="PoisonArea.cpp">
+      <Filter>Actor\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Boss_HpBar.cpp">
+      <Filter>Actor\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Death.cpp">
+      <Filter>Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelUpEffect.cpp">
+      <Filter>Actor\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill_Booster.cpp">
+      <Filter>Actor\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill_Haste.cpp">
+      <Filter>Actor\Skills</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Buff.cpp">
+      <Filter>Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_BuffIcon.cpp">
+      <Filter>Actor\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Actor">

@@ -1,57 +1,7 @@
 #pragma once
 #include <GameEngineCore\GameEngineActor.h>
 
-class StatData : public GameEngineActor
-{
-	friend class StatManager;
-public:
-	// constrcuter destructer
-	StatData() {};
-	~StatData()
-	{
-
-	};
-
-	// delete Function
-	StatData(const StatData& _Other) = delete;
-	StatData(StatData&& _Other) noexcept = delete;
-	StatData& operator=(const StatData& _Other) = delete;
-	StatData& operator=(StatData&& _Other) noexcept = delete;
-
-	virtual float GetDamage() { return 0.0f; }
-	virtual std::vector<float> GetDamage(int _HitCount, SkillType _Type) { return { 0.0f }; }
-
-	int CurLevel = 100;
-	int MaxLevel = 300;
-
-	float CurHp = 100.0f;
-	float MaxHp = 100.0f;
-
-	float DEF = 10.0f;
-};
-
-class StatDataMonster : public StatData
-{
-	friend class StatManager;
-public:
-	// constrcuter destructer
-	StatDataMonster() {};
-	~StatDataMonster() {};
-
-	// delete Function
-	StatDataMonster(const StatDataMonster& _Other) = delete;
-	StatDataMonster(StatDataMonster&& _Other) noexcept = delete;
-	StatDataMonster& operator=(const StatDataMonster& _Other) = delete;
-	StatDataMonster& operator=(StatDataMonster&& _Other) noexcept = delete;
-
-private:
-	float GetDamage() override;
-
-	float BodyDamage = 50.0f;
-	float DefRate = 10;
-};
-
-class StatDataPlayer : public StatData
+class StatDataPlayer : public GameEngineActor
 {
 	friend class StatManager;
 public:
@@ -65,10 +15,12 @@ public:
 	StatDataPlayer& operator=(const StatDataPlayer& _Other) = delete;
 	StatDataPlayer& operator=(StatDataPlayer&& _Other) noexcept = delete;
 
-	static std::shared_ptr<StatDataPlayer> Inst;
-	
-	float GetDamage() override;
-	std::vector<float> GetDamage(int _HitCount, SkillType _Type) override;
+	int CurLevel = 100;
+	int MaxLevel = 300;
+	float DEF = 10.0f;
+
+	float CurHp = 100000.0f;
+	float MaxHp = 100000.0f;
 
 	float CurMp = 100.0f;
 	float MaxMp = 100.0f;

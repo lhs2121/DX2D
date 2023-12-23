@@ -1,6 +1,8 @@
 #include "PreCompile.h"
 #include "Player.h"
 #include "SkillManager.h"
+#include "UI_Death.h"
+#include "DamageIndicator.h"
 
 void Player::StateUpdate(float _Delta)
 {
@@ -20,6 +22,9 @@ void Player::StateUpdate(float _Delta)
 		break;
 	case PlayerState::DOWN:
 		DownUpdate(_Delta);
+		break;
+	case PlayerState::DIE:
+		DieUpdate(_Delta);
 		break;
 	case PlayerState::LUCKYSEVEN:
 		LuckySevenUpdate(_Delta);
@@ -66,11 +71,20 @@ void Player::ChangeState(PlayerState _State)
 	case PlayerState::PORTAL:
 		PortalStart();
 		break;
+	case PlayerState::DIE:
+		DieStart();
+		break;
 	case PlayerState::FLASHJUMP:
 		FlashJumpStart();
 		break;
 	case PlayerState::LUCKYSEVEN:
 		LuckySevenStart();
+		break;
+	case PlayerState::BOOSTER:
+	    BoosterStart();
+		break;
+	case PlayerState::HASTE:
+		HasteStart();
 		break;
 	case PlayerState::SHOWDOWN:
 		ShowDownStart();
@@ -108,6 +122,14 @@ void Player::IdleUpdate(float _Delta)
 	if (InputIsPress(ShowDownKey))
 	{
 		ChangeState(PlayerState::SHOWDOWN);
+	}
+	if (InputIsDown(HasteKey))
+	{
+		ChangeState(PlayerState::HASTE);
+	}
+	if (InputIsDown(BoosterKey))
+	{
+		ChangeState(PlayerState::BOOSTER);
 	}
 	if (IsGrounded == false && NetForce.Y != 0)
 	{
@@ -276,5 +298,25 @@ void Player::DownUpdate(float _Delta)
 	{
 		ChangeState(PlayerState::JUMP);
 	}
+}
+
+void Player::DieStart()
+{
+	ApplyInput = false;
+	NetForce = 0.0f;
+	Renderer->SetSprite("death");
+	Renderer->Transform.SetLocalPosition({ 0,10 });
+	Col->Off();
+	DetectedCol->Off();
+	DamageRenderer->Off();
+	GetLevel()->CreateActor<UI_Death>();
+}
+
+void Player::DieUpdate(float _Delta)
+{
+}
+
+void Player::DieEnd()
+{
 }
 

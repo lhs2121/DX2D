@@ -16,8 +16,6 @@ public:
 	UI_Status& operator=(const UI_Status& _Other) = delete;
 	UI_Status& operator=(UI_Status&& _Other) noexcept = delete;
 
-	static UI_Status* Inst;
-
 	void ChangeHpGauge(float _Value);
 	void ResetHpGauge();
 

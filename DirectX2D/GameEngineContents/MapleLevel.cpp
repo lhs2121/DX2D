@@ -8,6 +8,8 @@
 #include "FadeScreen.h"
 #include "UI_Inventory.h"
 #include "MouseActor.h"
+#include "StatManager.h"
+#include "UI_Buff.h"
 
 MapleLevel::MapleLevel()
 {
@@ -43,14 +45,15 @@ void MapleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		CurFadeScreen = CreateActor<FadeScreen>(ActorOrder::FadeScreen);
 		CurStatus = CreateActor<UI_Status>(ActorOrder::UI);
 		CurInventory = CreateActor<UI_Inventory>(ActorOrder::UI_Inventory);
+		UI_Buff::Inst = CreateActor<UI_Buff>(ActorOrder::UI_Inventory);
 	}
 
 	{
 		Player::MainPlayer = CurPlayer.get();
 		SkillManager::Inst = CurSkillManager.get();
 		MapleMap::CurMap = CurMap.get();
-		UI_Status::Inst = CurStatus.get();
 		UI_Inventory::Inst = CurInventory.get();
+		StatManager::Inst->AddPlayerStatus(CurStatus);
 	}
 
 	CurFadeScreen->SettingAndStart(FadeType::FADEOUT);

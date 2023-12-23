@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "Player.h"
 #include "StatData.h"
+#include "StatManager.h"
 #include "DamageIndicator.h"
 #include "ItemActor.h"
 
@@ -17,10 +18,11 @@ void Monster::ApplyDamage(std::vector<float> _DamageGroup)
 {
 	for (size_t i = 0; i < _DamageGroup.size(); i++)
 	{
-		Stat->CurHp -= _DamageGroup[i];
+		float Damage = -_DamageGroup[i];
+		CurHp -= _DamageGroup[i];
 	}
 
-	if (Stat->CurHp < 0)
+	if (CurHp < 0)
 	{
 		AttackCol->Off();
 	}
@@ -43,7 +45,7 @@ void Monster::RenderDamage(std::vector<float> _DamageGroup, int _DamageID, int _
 
 void Monster::DeathCheck()
 {
-	if (Stat->CurHp < 0)
+	if (CurHp < 0)
 	{
 		ChangeState(MonsterState::DIE);
 	}
@@ -156,6 +158,7 @@ void Monster::DieUpdate(float _Delta)
 
 	if (Renderer->IsCurAnimationEnd())
 	{
+		StatManager::Inst->ChangeExp(50);
 		DropItem();
 		Death();
 	}

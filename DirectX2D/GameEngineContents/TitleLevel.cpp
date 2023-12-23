@@ -54,17 +54,19 @@ void TitleLevel::Start()
 	GameEngineSprite::CreateSingle("1366ExpGauge.png");
 	GameEngineSprite::CreateSingle("1366ExpEffect.png");
 
-	GameEngineSprite::CreateSingle("1920ExpCover.png");
-	GameEngineSprite::CreateSingle("1920ExpCover2.png");
-	GameEngineSprite::CreateSingle("1920ExpCover3.png");
-	GameEngineSprite::CreateSingle("1920ExpGauge.png");
-	GameEngineSprite::CreateSingle("1920ExpEffect.png");
+	GameEngineSprite::CreateSingle("UI_Boss_Vellum_Mark.png");
+	GameEngineSprite::CreateSingle("UI_Boss_Vellum_HpGaugeCover.png");
+	GameEngineSprite::CreateSingle("UI_Boss_Vellum_HpGaugeBG.png");
+	GameEngineSprite::CreateSingle("UI_Boss_Vellum_HpGauge.png");
 
 	GameEngineSprite::CreateSingle("MainBossUI.png");
 
+	GameEngineSprite::CreateSingle("BoosterIcon.png");
+	GameEngineSprite::CreateSingle("HasteIcon.png");
+
 	{
-		StatDataPlayer::Inst = CreateActor<StatDataPlayer>(ActorOrder::Stat);
 		StatManager::Inst = CreateActor<StatManager>(ActorOrder::Manager);
+		StatManager::Inst->AddPlayerStat(CreateActor<StatDataPlayer>(ActorOrder::Stat));
 	}
 	
 }

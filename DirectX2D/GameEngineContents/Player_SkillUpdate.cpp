@@ -119,3 +119,23 @@ void Player::ShowDownUpdate(float _Delta)
 	}
 
 }
+
+void Player::BoosterStart()
+{
+	SkillManager::Inst->StartSkill(SkillType::SurekenBooster);
+	ChangeState(PlayerState::WALK);
+}
+
+void Player::BoosterUpdate(float _Delta)
+{
+}
+
+void Player::HasteStart()
+{
+	SkillManager::Inst->StartSkill(SkillType::Haste);
+	ChangeState(PlayerState::WALK);
+}
+
+void Player::HasteUpdate(float _Delta)
+{
+}

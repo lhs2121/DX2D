@@ -1,9 +1,6 @@
 #pragma once
 #include <GameEngineCore\GameEngineActor.h>
 
-class StatData;
-class StatDataPlayer;
-class StatDataMonster;
 class StatManager : public GameEngineActor
 {
 public:
@@ -17,10 +14,21 @@ public:
 	StatManager& operator=(const StatManager& _Other) = delete;
 	StatManager& operator=(StatManager&& _Other) noexcept = delete;
 
-	void ChangeHp(std::shared_ptr<StatDataPlayer> _Stat, float _Damage);
-	void ChangeHp(std::shared_ptr<StatDataMonster> _Stat, float _Damage);
+	static std::shared_ptr<StatManager> Inst;
+
+	void AddPlayerStat(std::shared_ptr<class StatDataPlayer> _Stat) { PlayerStat = _Stat; };
+	void AddPlayerStatus(std::shared_ptr<class UI_Status> _Status) { PlayerStatus = _Status; };
+
+	void ApplyDamage(float _Damage);
+
+	void ResetHp();
+	float GetDamage();
+	std::vector<float> GetDamage(int _HitCount, SkillType _Type);
+
+	bool IsDeath();
 
 	void ChangeExp(float Value);
 
-	static std::shared_ptr<StatManager> Inst;
+	std::shared_ptr<class StatDataPlayer> PlayerStat;
+	std::shared_ptr<class UI_Status> PlayerStatus;
 };

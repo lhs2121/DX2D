@@ -2,7 +2,8 @@
 #include "Skill_ShowDown.h"
 #include "Player.h"
 #include "Monster.h"
-#include "StatData.h"
+#include "StatManager.h"
+#include "Boss_Vellum.h"
 
 Skill_ShowDown::Skill_ShowDown()
 {
@@ -14,7 +15,7 @@ Skill_ShowDown::~Skill_ShowDown()
 
 void Skill_ShowDown::Start()
 {
-	SkillCol = CreateComponent<GameEngineCollision>();
+	SkillCol = CreateComponent<GameEngineCollision>(CollisionOrder::PlayerAttack);
 	SkillCol->SetCollisionType(ColType::AABBBOX2D);
 	SkillCol->Transform.SetLocalScale({ 450,300 });
 	SkillCol->Off();
@@ -30,13 +31,25 @@ void Skill_ShowDown::Update(float _Delta)
 				{
 					break; // 5명까지 때린다
 				}
-				std::vector<float> Damage = StatDataPlayer::Inst->GetDamage(6,SkillType::ShowDown);
+				std::vector<float> Damage = StatManager::Inst->GetDamage(6,SkillType::ShowDown);
 				int id = GameEngineRandom::GameEngineRandom().RandomInt(0, 999999);
 
 				std::shared_ptr<Monster> Target = _Collision[i]->GetActor()->GetDynamic_Cast_This<Monster>();
 				Target->ApplyDamage(Damage);
 				Target->RenderDamage(Damage, id, i*10);
 			}
+			SkillCol->Off();
+		});
+
+	SkillCol->Collision(CollisionOrder::Boss, [&](std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
+		{
+
+			std::vector<float> Damage = StatManager::Inst->GetDamage(6, SkillType::ShowDown);
+			int id = GameEngineRandom::GameEngineRandom().RandomInt(0, 999999);
+			std::shared_ptr<Boss_Vellum> Target = _Collision[0]->GetActor()->GetDynamic_Cast_This<Boss_Vellum>();
+			Target->ApplyDamage(Damage);
+			Target->RenderDamage(Damage, id);
+
 			SkillCol->Off();
 		});
 }

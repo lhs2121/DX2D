@@ -27,5 +27,7 @@ protected:
 	std::shared_ptr<class Skill_FlashJump> FlashJump;
 	std::shared_ptr<class Skill_ThorwSureken> ThrowSureken;
 	std::shared_ptr<class Skill_ShowDown> ShowDown;
+	std::shared_ptr<class Skill_Haste> Haste;
+	std::shared_ptr<class Skill_Booster> Booster;
 };
 

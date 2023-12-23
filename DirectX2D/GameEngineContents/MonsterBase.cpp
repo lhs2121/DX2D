@@ -53,9 +53,6 @@ void MonsterBase::Start()
 		DamageRenderer = GetLevel()->CreateActor<DamageIndicator>(ActorOrder::Manager);
 	}
 
-	{
-		Stat = GetLevel()->CreateActor<StatDataMonster>();
-	}
 	Off();
 }
 
@@ -81,11 +78,7 @@ void MonsterBase::Release()
 		DamageRenderer->Death();
 		DamageRenderer = nullptr;
 	}
-	if (Stat != nullptr)
-	{
-		Stat->Death();
-		Stat = nullptr;
-	}
+
 }
 
 

@@ -30,7 +30,7 @@ void ContentsCore::Start()
 	GameEngineCore::CreateLevel<TownLevel>("TownLevel");
 	GameEngineCore::CreateLevel<HuntLevel>("HuntLevel");
 	GameEngineCore::CreateLevel<BossLevel>("BossLevel");
-	GameEngineCore::ChangeLevel("TownLevel");
+	GameEngineCore::ChangeLevel("BossLevel");
 }
 
 void ContentsCore::Update(float _Delta)

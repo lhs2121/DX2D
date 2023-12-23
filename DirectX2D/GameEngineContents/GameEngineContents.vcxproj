@@ -206,6 +206,14 @@
     <ClInclude Include="ItemActor.h" />
     <ClInclude Include="UI_Slot.h" />
     <ClInclude Include="UI_Item.h" />
+    <ClInclude Include="PoisonArea.h" />
+    <ClInclude Include="UI_Boss_HpBar.h" />
+    <ClInclude Include="UI_Death.h" />
+    <ClInclude Include="LevelUpEffect.h" />
+    <ClInclude Include="Skill_Booster.h" />
+    <ClInclude Include="Skill_Haste.h" />
+    <ClInclude Include="UI_Buff.h" />
+    <ClInclude Include="UI_BuffIcon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MapleStoryGUI.cpp" />
@@ -254,6 +262,14 @@
     <ClCompile Include="ItemActor.cpp" />
     <ClCompile Include="UI_Slot.cpp" />
     <ClCompile Include="UI_Item.cpp" />
+    <ClCompile Include="PoisonArea.cpp" />
+    <ClCompile Include="UI_Boss_HpBar.cpp" />
+    <ClCompile Include="UI_Death.cpp" />
+    <ClCompile Include="LevelUpEffect.cpp" />
+    <ClCompile Include="Skill_Booster.cpp" />
+    <ClCompile Include="Skill_Haste.cpp" />
+    <ClCompile Include="UI_Buff.cpp" />
+    <ClCompile Include="UI_BuffIcon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Actor.txt" />

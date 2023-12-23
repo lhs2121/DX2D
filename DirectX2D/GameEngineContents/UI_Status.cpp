@@ -1,9 +1,7 @@
 #include "PreCompile.h"
 #include "UI_Status.h"
+#include "LevelUpEffect.h"
 #include <GameEngineCore\GameEngineUIRenderer.h>
-
-
-UI_Status* UI_Status::Inst = nullptr;
 
 UI_Status::UI_Status()
 {
@@ -31,6 +29,7 @@ void UI_Status::ChangeHpGauge(float _Value)
 
 void UI_Status::ResetHpGauge()
 {
+	HpGauge->Transform.SetLocalScale(HpGaugeSize);
 }
 
 void UI_Status::ChangeMpGauge(float _Value)
@@ -50,6 +49,7 @@ void UI_Status::ChangeExpGauge(float _Value)
 
 	if (data.Scale.X > ContentsCore::GetStartWindowSize().X)
 	{
+		GetLevel()->CreateActor<LevelUpEffect>();
 		ResetExpGauge();
 	}
 }
@@ -78,12 +78,13 @@ void UI_Status::Start()
 	float4 StatusCoverPos;
 	float4 LvTextPos;
 	{
+	
 		StatusCover = CreateComponent<GameEngineUIRenderer>(0);
-		StatusCover->Transform.SetLocalPosition({ 0,70 - hSize.Y });
 		StatusCover->SetSprite("StatusCover.png");
+		float4 scale = StatusCover->GetImageTransform().GetLocalScale();
 		StatusCover->SetRenderOrder(UIRenderOrder::PlayerUI2);
 		StatusCover->SetPivotType(PivotType::Left);
-		//StatusCover->Off();
+		StatusCover->Transform.SetLocalPosition({ -scale.hX(),70 - hSize.Y });
 		StatusCoverPos = StatusCover->Transform.GetLocalPosition();
 	}
 

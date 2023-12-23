@@ -31,6 +31,5 @@ protected:
 	std::shared_ptr<class GameEngineSpriteRenderer> Renderer;
 	std::shared_ptr<class GameEngineCollision> HitCol;
 	std::shared_ptr<class GameEngineCollision> AttackCol;
-	std::shared_ptr<class StatData> Stat;
 };
 

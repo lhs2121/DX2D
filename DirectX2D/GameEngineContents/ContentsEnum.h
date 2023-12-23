@@ -43,6 +43,8 @@ enum class CollisionOrder
 	Player,
 	Monster,
 	MonsterAttack,
+	Boss,
+	BossAttack,
 	PlayerAttack,
 	Portal,
 	Item,
@@ -61,6 +63,8 @@ enum class SkillType
 	LuckySeven,
 	QuadrupleThrow,
 	ShowDown,
+	SurekenBooster,
+	Haste
 };
 
 enum class FadeType

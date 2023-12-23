@@ -40,6 +40,8 @@ void UI_Inventory::Start()
 	}
 
 	GameEngineInput::AddInputObject(this);
+
+	Off();
 }
 
 void UI_Inventory::Update(float _Delta)
@@ -49,7 +51,6 @@ void UI_Inventory::Update(float _Delta)
 
 void UI_Inventory::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
 	Death();
 }
 

@@ -15,39 +15,91 @@ StatManager::~StatManager()
 {
 }
 
-void StatManager::ChangeHp(std::shared_ptr<StatDataPlayer> _Stat, float _Damage)
+void StatManager::ApplyDamage(float _Damage)
 {
-	_Stat->CurHp -= _Damage;
+	PlayerStat->CurHp -= _Damage;
 
-	float MaxHp = _Stat->MaxHp;
-	float GaugeSizeX = UI_Status::Inst->HpGaugeSize.X;
+	float MaxHp = PlayerStat->MaxHp;
+	float GaugeSizeX = PlayerStatus->HpGaugeSize.X;
 	float ConvertedHp = -_Damage * (GaugeSizeX / MaxHp);
-	UI_Status::Inst->ChangeHpGauge(ConvertedHp);
+	PlayerStatus->ChangeHpGauge(ConvertedHp);
 }
 
-void StatManager::ChangeHp(std::shared_ptr<StatDataMonster> _Stat, float _Damage)
+void StatManager::ResetHp()
 {
-	_Stat->CurHp -= _Damage;
+	PlayerStat->CurHp = PlayerStat->MaxHp;
+}
+
+float StatManager::GetDamage()
+{
+	float Damage = (PlayerStat->LUK * 4 + PlayerStat->DEX) * PlayerStat->ATK * ((100.0f + PlayerStat->AtkRate) / 100.0f) * 
+		((100.0f + PlayerStat->DmgRate + PlayerStat->BossDmgRate) / 100.0f);
+
+	std::random_device rnd;
+	GameEngineRandom random = GameEngineRandom();
+	random.SetSeed(rnd());
+	float num = random.RandomFloat(0.7f, 1.3f);
+	return Damage * num;
+}
+
+std::vector<float> StatManager::GetDamage(int _HitCount, SkillType _Type)
+{
+	float SkillDamageRate = 0.0f;
+	switch (_Type)
+	{
+	case SkillType::Body:
+		break;
+	case SkillType::FlashJump:
+		break;
+	case SkillType::LuckySeven:
+		SkillDamageRate = PlayerStat->LuckySevenRate;
+		break;
+	case SkillType::ShowDown:
+		SkillDamageRate = PlayerStat->ShowDownRate;
+		break;
+	default:
+		break;
+	}
+
+	std::vector<float> DamageGroup;
+	DamageGroup.reserve(_HitCount);
+	for (int i = 0; i < _HitCount; i++)
+	{
+		float Damage = StatManager::GetDamage() * SkillDamageRate;
+		DamageGroup.push_back(Damage);
+	}
+	return DamageGroup;
+}
+
+bool StatManager::IsDeath()
+{
+	if (PlayerStat->CurHp <= 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void StatManager::ChangeExp(float _Exp)
 {
-	//std::shared_ptr<StatDataPlayer> stat = Player::MainPlayer->GetStat()->GetDynamic_Cast_This<StatDataPlayer>();
-	//stat->CurExp += _Exp;
+	PlayerStat->CurExp += _Exp;
 
-	//float MaxExp = stat->MaxExp;
-	//float GaugeSizeX = ContentsCore::GetStartWindowSize().X;
-	//float ConvertedExp = _Exp * (GaugeSizeX / MaxExp);
+	float MaxExp = PlayerStat->MaxExp;
+	float GaugeSizeX = ContentsCore::GetStartWindowSize().X;
+	float ConvertedExp = _Exp * (GaugeSizeX / MaxExp);
 
-	//UI_Status::Inst->ChangeExpGauge(ConvertedExp);
+	PlayerStatus->ChangeExpGauge(ConvertedExp);
 
-	//if (stat->CurExp > stat->MaxExp)
-	//{
-	//	stat->CurExp = 0.0f;
-	//	stat->CurLevel += 1;
-	//	UI_Status::Inst->LevelUp(stat->CurLevel);
-	//}
-	//
+	if (PlayerStat->CurExp >= PlayerStat->MaxExp)
+	{
+		PlayerStat->CurExp = 0.0f;
+		PlayerStat->CurLevel += 1;
+		PlayerStat->MaxExp += 100.0f;
+		PlayerStatus->LevelUp(PlayerStat->CurLevel);
+	}
 }
 
 

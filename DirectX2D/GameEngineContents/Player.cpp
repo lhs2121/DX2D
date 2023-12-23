@@ -2,10 +2,10 @@
 #include "Player.h"
 #include "Portal.h"
 #include "MapleLevel.h"
-#include "StatData.h"
 #include "MapleMap.h"
 #include "DamageIndicator.h"
 #include "Monster.h"
+#include "StatManager.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -124,10 +124,16 @@ void Player::PushDamage(std::vector<float> _DamageGroup)
 {
 	for (size_t i = 0; i < _DamageGroup.size(); i++)
 	{
-		StatDataPlayer::Inst->CurHp -= _DamageGroup[i];
+		float Damage = _DamageGroup[i];
+		StatManager::Inst->ApplyDamage(Damage);
 	}
 	float4 Pos = Transform.GetWorldPosition() + float4(0.0f, 68.0f);
 	DamageRenderer->RenderDamage(Pos, DamageColor::Purple, _DamageGroup, GameEngineRandom::GameEngineRandom().RandomInt(0, 999999));
+
+	if (StatManager::Inst->IsDeath() == true)
+	{
+		ChangeState(PlayerState::DIE);
+	}
 
 }
 void Player::MonsterCheck(float _Delta)
@@ -137,10 +143,17 @@ void Player::MonsterCheck(float _Delta)
 	{
 		Col->Collision(CollisionOrder::MonsterAttack, [&](std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
 			{
+				float rd = GameEngineRandom::GameEngineRandom().RandomFloat(0.7f, 1.2f);
 				std::shared_ptr<Monster> monster = _Collision[0]->GetActor()->GetDynamic_Cast_This<Monster>();
-				float Damage = monster->GetStat()->GetDamage();
-				std::vector<float> DamageGroup = { Damage };
-				PushDamage(DamageGroup);
+				float Damage = monster->GetDamage();
+				PushDamage({ Damage * rd });
+				HitDelay = HitDelayReset;
+			});
+
+		Col->Collision(CollisionOrder::BossAttack, [&](std::vector<std::shared_ptr<GameEngineCollision>> _Collision)
+			{
+				float rd = GameEngineRandom::GameEngineRandom().RandomFloat(0.7f, 1.2f);
+				PushDamage({5000 * rd });
 				HitDelay = HitDelayReset;
 			});
 	}

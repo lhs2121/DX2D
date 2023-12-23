@@ -26,9 +26,9 @@ public:
 	void RenderDamage(std::vector<float> _DamageGroup, int _DamageID, int _Order = 0);
 	void ApplyDamage(std::vector<float> _DamageGroup);
 	void DeathCheck();
-
+	float GetDamage() { return BodyDamage; };
 	float4 GetImageSize() { return ImageSize; };
-	std::shared_ptr<class StatData> GetStat() { return Stat; }
+
 protected:
 	void Start() override;
 	void Update(float _Delta) override;
@@ -52,6 +52,9 @@ protected:
 	float HitCoolTime = 0.3f;
 	float DirCycleTime = 0.0f;
 	float Speed = 60.0f;
+	float CurHp = 100.0f;
+	float MaxHp = 100.0f;
+	float BodyDamage = 500.0f;
 	int dir = 0;
 };
 

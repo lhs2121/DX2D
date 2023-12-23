@@ -10,10 +10,13 @@ enum class PlayerState
 	DOWN,
 	ROPE,
 	HIT,
+	DIE,
 	PORTAL,
 	FLASHJUMP,
 	LUCKYSEVEN,
-	SHOWDOWN
+	SHOWDOWN,
+	BOOSTER,
+	HASTE
 };
 
 class GameEngineSpriteRenderer;
@@ -36,9 +39,9 @@ public:
 	std::shared_ptr<class Monster> GetCloseTarget();
 
 	static Player* MainPlayer;
+	void PushDamage(std::vector<float> _DamageGroup);
 private:
 	// Collision
-	void PushDamage(std::vector<float> _DamageGroup);
 	void MonsterCheck(float _Delta);
 	void PortalCheck();
 	void ItemCheck();
@@ -73,6 +76,11 @@ private:
 	// Down
 	void DownUpdate(float _Delta);
 
+	// Die
+	void DieStart();
+	void DieUpdate(float _Delta);
+	void DieEnd();
+
 	// FlashJump
 	void FlashJumpStart();
 	void FlashJumpUpdate(float _Delta);
@@ -85,9 +93,13 @@ private:
 	void ShowDownStart();
 	void ShowDownUpdate(float _Delta);
 
-	// ShadowPartner
-	void ShadowPartnerStart();
-	void ShadowPartnerUpdate(float _Delta);
+	// Booster
+	void BoosterStart();
+	void BoosterUpdate(float _Delta);
+
+	// Haste
+	void HasteStart();
+	void HasteUpdate(float _Delta);
 
 	void Start() override;
 	void Update(float _Delta) override;
@@ -114,6 +126,8 @@ private:
 	int PickUpKey = 'Z';
 	int LuckySevenKey = VK_SHIFT;
 	int ShowDownKey = VK_CONTROL;
+	int BoosterKey = VK_F1;
+	int HasteKey = VK_F2;
 
 
 	float4 RopePos;
